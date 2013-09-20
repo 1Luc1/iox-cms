@@ -1,0 +1,9 @@
+"Main Copy":
+  content: "this is test content for right page"
+  type: "text"
+  css_classes: "main-copy text"
+
+"Image Gallery":
+  content: ""
+  type: "gallery"
+  css_classes: "gallery receive"

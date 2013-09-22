@@ -22,13 +22,17 @@ module Ion
         copy_file "app-styles.js", "app/assets/javascripts/ion/app-styles.js"
         copy_file "app-templates.js", "app/assets/javascripts/ion/app-templates.js"
 
-        directory "webfonts", "public/"
+        directory "webfonts", "public/webfonts"
         directory "javascripts", "public/javascripts/3rdparty/"
 
         copy_file "application.html.erb", "app/views/layouts/application.html.erb"
         copy_file "application.css.scss", "app/assets/stylesheets/application.css.scss"
         remove_file "/app/assets/stylesheets/application.css"
-        copy_file "stylesheets/ion-overrides.css.scss", "app/assets/stylesheets/ion/overrides.css.scss"
+
+        copy_file "ion_quota.yml", "config/ion_quota.yml"
+        copy_file "deploy.rb", "config/deploy.rb"
+        copy_file "whenever_schedule.rb", "config/schedule.rb"
+        create_file "app/assets/stylesheets/ion/overrides.css.scss"
 
         # gem 'paperclip', '~> 3.0'
         # gem 'rails-i18n', '~> 0.7.4'
@@ -36,6 +40,10 @@ module Ion
         # gem 'rvm-capistrano', group: :development
         # gem 'therubyracer', group: :production, platform: :ruby
         # gem 'select2-rails', '3.4.8'
+        # gem 'jquery-rails'
+        # gem 'rails_warden'
+        # gem 'bcrypt-ruby'
+        # gem 'whenever', :require => false
 
       end
 
@@ -45,7 +53,7 @@ module Ion
         domain_name = app_name.include?('.') ? app_name : app_name+'.site'
         application do
           "\n"+
-          "    # --- ion auto generated configuration - please adapt to your needs --- \n"+
+          "    # ION Defaults \n"+
           "    config.ion.site_title = '#{app_name}'\n"+
           "    config.ion.deny_apps = ['contacts']\n"+
           "    config.ion.domain_name = '#{domain_name}'\n"+
@@ -60,6 +68,11 @@ module Ion
           "\n"+
           "    config.ion.default_read_apps = ['dashboard']\n"+
           "    config.ion.default_write_apps = ['dashboard']\n"+
+          "\n"+
+          "    config.ion.brand_logo = 'ion/logo_transp_150x150.png'\n"+
+          "\n"+
+          "    config.ion.max_quota_mb = 500\n"+
+          "    config.ion.session_timeout_min = 60\n"+
           "\n"+
           "    config.i18n.default_locale = :de\n"+
           "    config.time_zone = 'Vienna'\n"+

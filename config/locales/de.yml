@@ -1,2 +1,287 @@
 de:
-  hello: "Hello"
+  today: "Heute"
+  change_password: "Passwort ändern"
+  view_profile: "Profil anzeigen"
+  data_usage_quota: "Quota / Datenverbrauch"
+  activities: "Aktivitäten"
+  loading_activities: "Lade Aktivitäten"
+  this_week: "Diese Woche"
+  last_modified: "Letzte Änderung"
+  created_at: "Angelegt am"
+  updated_at: "Letzte Änderung"
+  created: "&raquo;%{name}&laquo; wurde erfolgreich erstellt"
+  creation_failed: "Objekt konnte nicht erzeugt werden"
+  saved: "Änderungen an &raquo;%{name}&laquo; wurden gespeichert"
+  close: "Schließen"
+  delete: "Löschen"
+  back: "Zurück"
+  next: "Weiter"
+  previous: "Zurück"
+  preview: "Vorschau"
+  finish: "Abschließen"
+  notice: "Hinweis"
+  today: "Heute"
+  type: "Typ"
+  status: "Status"
+  statistics: "Statistik"
+  search: "Suchen"
+  processing_data: "Kommunikation mit dem Server"
+  no_matches: "Keine Ergebnisse"
+  only_mine: "Nur meine Einträge anzeigen"
+  remove_col: "Spalte entfernen"
+  only_unpublished: "Nur unveröffentlichte"
+  published: "Veröffentlicht"
+  settings: "Einstellungen"
+  keep_open: "Dieses Fenster offen halten"
+
+  loading_quota: "Quota wird geladen"
+
+  # language syntax
+  or: "oder"
+  and: "und"
+  by: "von"
+  ago: "vor"
+  of: "von"
+
+  yes: "Ja"
+  no: "Nein"
+  ok: "Ok"
+
+  new: "Neu"
+  add: "Hinzufügen"
+
+  is_equal_to: "gleich"
+  is_not_equal_to: "nicht gleich"
+  after: "nach"
+  before: "vor"
+  starts_with: "beginnt mit"
+  contains: "enthält"
+  view: "Ansehen"
+  aborted: "Vorgang Abgebrochen"
+
+  filter: "Filtern"
+  add_filter: "Filter hinzufügen"
+  language: "Sprache"
+
+  tags: "Stichworte"
+  name: "Name"
+  country: "Land"
+  street: "Straße"
+  url: "URL"
+  website: "Website"
+  city: "Stadt"
+  zip: "PLZ"
+  zip_city: "PLZ / Stadt"
+  description: "Beschreibung"
+  copyright: "Copyright"
+  firstname: "Vorname"
+  lastname: "Nachname"
+  owner: "Besitzer"
+
+  entries:
+    zero: "Kein Eintrag"
+    one: "1 Eintrag"
+    other: "%{count} Einträge"
+
+
+  select_files: "Wählen Sie Dateien aus oder ziehen Sie sie hier her"
+
+  not_found: "Das angeforderte Objekt wurde nicht gefunden"
+  # error messages
+  error:
+    object_not_found: "Das angeforderte Objekt wurde nicht gefunden"
+    insufficient_rights: "Sie verfügen nicht über ausreichen Rechte um diese Aktion auszuführen"
+
+  # form specific
+  cancel: "Abbrechen"
+  save_changes: "Änderungen speichern"
+  create: "Erstellen"
+  save: "Speichern"
+  save_and_back: "Speichern und zurück"
+  changes_have_been_saved: "Änderungen wurden gespeichert"
+  changes_failed_to_save: "Änderungen konnten nicht gespeichert werden"
+  prohibited_to_save:
+    one: "Aufgrund eines Fehlers konnte das Formular nicht gespeichert werden"
+    other: "Aufgrund %{count} Fehler konnte das Formular nicht gespeichert werden"
+
+  # notifications
+  new_notifications:
+    one: "Eine neue Systemmeldung"
+    other: "%{count} neue Systemmeldungen"
+
+  langs:
+    de: "Deutsch"
+    en: "English"
+
+  auth:
+    register: "Registrieren"
+    login: "Anmelden"
+    logout: "Abmelden"
+    you_have_been_logged_out: "Sie sind jetzt vom System abgemeldet"
+    login_required: "Anmeldung erforderlich"
+    login_failed: "Anmeldung fehlgeschlagen"
+    email_not_recognized: "Diese Email Adresse ist uns nicht bekannt"
+    instructions_have_been_sent: "Anweisungen zum weiteren Vorgehen wurden an die angegebene Emailadresse versandt"
+    forgot_password_request: "Passwort vergessen?"
+    forgot_password_head: "Sie können ein neues Passwort anfordern, wenn Sie Ihre Email Adresse angeben"
+    password: "Passwort"
+    new_password: "Neues Passwort"
+    password_confirmation: "Passwort wiederholen"
+    send_instructions: "Anweisungen senden"
+    key_could_not_be_generated: "Fehler beim erzeugen des Schlüssels"
+    forgot_password_instructions: "Sie können Ihr Passwort unter folgendem Link neu setzen:"
+    forgot_password_instructions_tail: "Falls Sie diese Anforderung nicht gesendet haben, bleibt alles beim Alten. Sie müssen nichts tun. Falls Sie öfter von diesen Anforderungen belästigt werden, senden Sie bitte eine Email an %{support_mail}"
+    login_failures:
+      one: "Ein fehlgeschlagener Anmeldeversuch seit letzter Sitzung"
+      other: "%{count} fehlgeschlagene Anmeldeversuche seit letzter Sitzung"
+
+  dashboard:
+    no_new_messages: "Keine neuen Nachrichten"
+    personal_info: "Persönliche Informationen"
+    settings: "Einstellungen"
+    billing: "Verrechnung"
+    export_data: "Daten exportieren"
+    report_bug: "Einen Fehler melden"
+
+    page_views: "Seitenaufrufe"
+    unique_visitors: "Eindeutige Besucher"
+
+    # addon config
+    title: "Home"
+
+  user:
+    change_picture: "Bild ändern"
+    my_account: "Mein Konto"
+    account_of: "Konto von %{name}"
+    suggest_password: "Passwort vorschlagen"
+    suggest_password_desc: "Sie können ein Passwort vom System vorschlagen lassen. Drücken Sie so lange den Knopf bis Ihnen ein Vorschlag zusagt."
+    gen_pwd_is: "Das Passwort lautet"
+
+    settings: "Kontoeinstellungen"
+    save_restore_settings: "Einstellungen sichern oder wiederherstellen"
+    save_restore_settings_desc: "Sie können Ihre Einstellungen als Datei abspeichern und zu einem späteren Zeitpunkt wiederherstellen"
+    import_settings_file: "Einstellungsdatei importieren"
+    export_settings_file: "Einstellungsdatei herunterladen"
+    can_read_apps: "Apps (lesen)"
+    can_write_apps: "Apps (schreiben)"
+
+    new: "Neues Benutzerkonto anlegen"
+    send_welcome_msg: "Einladung an Emailadresse senden"
+
+    username: "Benutzername"
+    firstname: "Vorname"
+    lastname: "Nachname"
+    email: "Email"
+    phone: "Telefon"
+    last_seen: "Letztes Mal gesehen"
+    registered_at: "Registriert am"
+    timezone: "Zeitzone"
+    role: "Rolle"
+    password: "Passwort"
+    confirm_password: "Passwort wiederholen"
+    lang: "Systemsprache"
+    password_policy: "Achten Sie beim Vergeben des Passwortes darauf, ein starkes Passwort mit mind. einem Großbuchstaben und einer Ziffer zu verwenden"
+    define_at_least_one_role: "Definieren Sie mindestens eine Rolle"
+
+    created: "Benutzer &raquo;%{name}&laquo; wurde erstellt"
+
+    you_are_admin_and_can_edit: "Sie verfügen über Administratorrechte und können dieses Profil bearbeiten. Seien Sie vorsichtig!"
+
+    mailer:
+      welcome: "Willkommen"
+      has_created_an_account: "%{name} hat ein Konto für Sie angelegt. Ihre Kontodaten lauten:"
+      login_and_start: "Melden Sie sich unter dem Link %{url} an um mit %{site_title} zu arbeiten"
+      goodbye: "Auf Wiedersehen"
+
+  auto_generated: "Diese Email wurde automatisch erstellt. Bei Fragen und Problemen wenden Sie sich bitte an %{support_email}"
+
+  users:
+    title: "Benutzer"
+    list:
+      title: "Alle Konten"
+    new:
+      title: "Neues Konto"
+    click_here_to_filter: "Klicken Sie hier um Benutzerkonten zu filtern"
+    only_where: "Nur Benutzer wo"
+    type_a_users_name: "Tippen Sie den Beginn eines Benutzernamens"
+
+  webpage:
+    name: "Name"
+    published: "Veröffentlicht"
+    not_published: "Nicht veröffentlicht"
+    publish: "Klicken um diese Webseite veröffentlichen"
+    unpublish: "Klicken um die Veröffentlichung dieser Webseite zurückziehen"
+    has_been_published: "Webseite &raquo;%{name}&laquo; wurde veröffentlicht"
+    has_been_unpublished: "Veröffentlichung von Webseite &raquo;%{name}&laquo; wurde zurückgezogen"
+    delete: "Webseite löschen"
+    deleted: "Webseite &raquo;%{name}&laquo; wurde gelöscht <a href='/iox/webpages/%{id}/restore' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>Wiederherstellen</a>"
+    reordering_failed: "Foglende Webseiten konnten nicht korrekt sortiert werden: %{names}"
+    reordering_saved: "Sortierung gespeichert"
+    failed_to_delete: "Webseite &raquo;%{name}&laquo; konnte nicht gelöscht werden"
+    restored: "'%{name}' wurde wiederhergestellt"
+    failed_to_restore: "'%{name}' konnte nicht wiederhergestellt werden"
+    edit: "Diese Webseite bearbeiten"
+    views: "Seitenaufrufe"
+    tags_desc: "Führen Sie Stichworte an, die diese Seite kategorisieren bzw. eine Suche erleichtern"
+    template: "Vorlage"
+    content: "Text"
+    created_at: "Erstellt am"
+    updated_at: "Aktualisiert am"
+    last_seen: "Zuletzt gesehen"
+    really_delete: "Möchten Sie die Webseite >>%{name}<< wirklich löschen?"
+    lang_desc: "Leer == keine Sprachunterstützung für diese Seite"
+    general: "Allgemein"
+    description: "Kurzbeschreibung"
+    please_click_a_container_first: "Bitte klicken Sie zuerst auf den Bereich den Sie bearbeiten möchten"
+    enter_your_text_here: "Bitte geben Sie Ihren Text hier ein"
+    image_browser: "Bildmanager"
+    text_editor: "Texteditor"
+    structure: "Struktur"
+    new_below: "Neue Webseite unterhalb"
+    templates:
+      default: "Standard"
+      frontpage: "Frontpage"
+    errors:
+      oups_not_found: "Oups! Die angeforderte Seite wurde nicht gefunden!"
+      create_webpage: "Seite neu erstellen"
+
+
+  webpages:
+    title: "Webseiten"
+    type_a_webpages_name: "Schreiben Sie ein paar Buchstaben einer Webseite"
+    click_here_to_filter: "Filter anwenden"
+    back: "Zurück zur Liste"
+    new: "Neue Webseite"
+    list:
+      title: "Alle Webseiten"
+    num:
+      one: "Eine Seite"
+      zero: "Keine Seite"
+      other: "%{count} Seiten"
+    match_filter: "treffen zu"
+
+  contacts:
+    title: "Kontakte"
+    list:
+      title: "Alle Kontakte"
+    new:
+      title: "Neuer Kontakt"
+
+  langs:
+    en: "Englisch"
+    de: "Deutsch"
+
+  activerecord:
+    errors:
+      models:
+        "iox/user":
+          attributes:
+            password:
+              confirmation: "Die Passwortwiederholung stimmt nicht überein"
+              blank: "Bitte wiederholen Sie das Passwort"
+            password_confirmation:
+              confirmation: "Die Passwortwiederholung stimmt nicht überein"
+              blank: "Bitte wiederholen Sie das Passwort"
+            email:
+              invalid: "Die Emailadresse ist ungültig"
+              blank: "Bitte geben Sie eine Emailadresse an"

@@ -1,0 +1,17 @@
+/* -------------------------------------------------------- BLOCK UI */
+
+.blockUI{
+  padding: 0;
+  margin: 0;
+  top: 40%;
+  left: 35%;
+  color: #333;
+  overflow: hidden;
+}
+.blockUI.blockOverlay{
+  background-color: #fff;
+  cursor: wait;
+  opacity: 0.9;
+}
+.blockUI.blockMsg{
+}

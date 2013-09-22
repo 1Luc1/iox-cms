@@ -1,0 +1,4 @@
+<span class="mini-desc"><%= t('data_usage_quota') %>: <%= number_to_human_size(@quota_cur) %> <%= t('of') %> <%= number_to_human_size(@quota_max * 1024 * 1024) %></span>
+<div class="progress">
+  <div class="bar" style="width: <%= @quota_cur / ((@quota_max*1024*1024) * 0.01) %>%;"></div>
+</div>

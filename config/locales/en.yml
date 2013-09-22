@@ -1,2 +1,234 @@
 en:
-  hello: Hello
+  change_password: "Change password"
+  view_profile: "View profile"
+  activities: "Activities"
+  loading_activities: "Loading activities"
+  data_usage_quota: "Quota / Usage"
+  today: "Today"
+  this_week: "This week"
+  last_modified: "Last change"
+  created_at: "created at"
+  created: "&raquo;%{name}&laquo; has been created successfully"
+  saved: "&raquo;%{name}&laquo; has been saved"
+  close: "Close"
+  delete: "Delete"
+  back: "Back"
+  keep_open: "Keep this window open"
+
+  loading_quota: "loading quota"
+
+  # language syntax
+  or: "or"
+  and: "and"
+  by: "by"
+  of: "of"
+
+  yes: "Yes"
+  no: "No"
+
+  new: "New"
+  add: "Add"
+
+  is_equal_to: "equal to"
+  is_not_equal_to: "not equal"
+  after: "after"
+  before: "before"
+  starts_with: "starts with"
+  contains: "contains"
+  view: "View"
+
+  filter: "Filter"
+  add_filter: "Add Filter"
+  language: "Language"
+
+  tags: "Tags"
+  name: "Name"
+  country: "Country"
+  street: "Street"
+  url: "URL"
+  city: "City"
+  zip: "ZIP"
+  zip_city: "Zip / City"
+  description: "Description"
+  firstname: "Firstname"
+  lastname: "Lastname"
+
+  select_files: "Select files or move them from your file manager over here"
+
+  # error messages
+  error:
+    object_not_found: "Requested object was not found"
+    insufficient_rights: "You do not have enough privileges to perform this action"
+
+  # form specific
+  cancel: "Cancel"
+  save_changes: "Save changes"
+  create: "Create"
+  save: "Save"
+  changes_have_been_saved: "Changes have been saved"
+  changes_failed_to_save: "Failed to save changes"
+  prohibited_to_save:
+    one: "Because of an error the form could not be saved"
+    other: "Because of %{count} errors the form could not be saved"
+
+  # notifications
+  new_notifications:
+    one: "One new system message"
+    other: "%{count} new system messages"
+
+  langs:
+    de: "Deutsch"
+    en: "English"
+
+  auth:
+    login: "Login"
+    logout: "Logout"
+    you_have_been_logged_out: "You are now logged of from the system"
+    login_required: "Login required"
+    login_failed: "Login failed"
+    email_not_recognized: "This email address is not known to us"
+    instructions_have_been_sent: "Instructions for continuing the procedure have been sent to the given email address"
+    forgot_password_request: "Lost password?"
+    forgot_password_head: "You can request a new password by providing your email address"
+    password: "Password"
+    new_password: "New password"
+    password_confirmation: "Repeat password"
+    send_instructions: "Send Instructions"
+    login_failures:
+      one: "one failed login since your last session"
+      other: "%{count} failed logins since your last session"
+
+
+  dashboard:
+    no_new_messages: "No new messages"
+    personal_info: "Personal information"
+    settings: "Settings"
+    billing: "Billing"
+    export_data: "Export data"
+    report_bug: "Report a bug"
+
+    page_views: "Page views"
+    unique_visitors: "Unique visitors"
+
+    title: "Home"
+
+  user:
+    change_picture: "Cange picture"
+    my_account: "Mein Konto"
+    account_of: "Konto von %{name}"
+
+    settings: "Kontoeinstellungen"
+    save_restore_settings: "Einstellungen sichern oder wiederherstellen"
+    save_restore_settings_desc: "Sie können Ihre Einstellungen als Datei abspeichern und zu einem späteren Zeitpunkt wiederherstellen"
+    import_settings_file: "Einstellungsdatei importieren"
+    export_settings_file: "Einstellungsdatei herunterladen"
+
+    new: "Neues Benutzerkonto anlegen"
+
+    username: "Benutzername"
+    firstname: "Vorname"
+    lastname: "Nachname"
+    email: "Email"
+    last_seen: "Letztes Mal gesehen"
+    registered_at: "Registriert am"
+    timezone: "Zeitzone"
+    role: "Rolle"
+    password: "Passwort"
+    confirm_password: "Passwort wiederholen"
+    lang: "Systemsprache"
+    password_policy: "Achten Sie beim Vergeben des Passwortes darauf, ein starkes Passwort mit mind. einem Großbuchstaben und einer Ziffer zu verwenden"
+    define_at_least_one_role: "Definieren Sie mindestens eine Rolle"
+
+    created: "Benutzer &raquo;%{name}&laquo; wurde erstellt"
+
+    you_are_admin_and_can_edit: "Sie verfügen über Administratorrechte und können dieses Profil bearbeiten. <br> Seien Sie vorsichtig!"
+
+    mailer:
+      welcome: "Willkommen"
+
+  users:
+    title: "Accounts"
+    list:
+      title: "All Accounts"
+    new:
+      title: "New Account"
+    click_here_to_filter: "Click here to filter user accounts"
+    only_where: "Only users who"
+    type_a_users_name: "Type your search here"
+
+  webpage:
+    name: "Name"
+    published: "published"
+    not_published: "not published"
+    publish: "click to publish this webpage"
+    unpublish: "click to unpublish this webpage"
+    has_been_published: "&raquo;%{name}&laquo; has been published"
+    has_been_unpublished: "&raquo;%{name}&laquo; has been unpublished"
+    delete: "Remove this Webpage"
+    deleted: "&raquo;%{name}&laquo; removed <a href='/iox/webpages/%{id}/restore' class='btn btn-mini' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>restore</a>"
+    failed_to_delete: "&raquo;%{name}&laquo; could not be removed"
+    restored: "'%{name}' has been restored"
+    reordering_failed: "Following pages failed to save: %{names}"
+    reordering_saved: "New order has been saved"
+    failed_to_restore: "'%{name}' failed to restore"
+    edit: "Edit webpage"
+    new: "New webpage"
+    views: "Views"
+    tags_desc: "Enter keywords to help users find this webpage"
+    template: "Template"
+    content: "Text"
+    created_at: "Created at"
+    updated_at: "Updated at"
+    last_seen: "Last seen"
+    really_delete: "Really delete >>%{name}<<?"
+    lang_desc: "Empty == no language support"
+    general: "General"
+    description: "Short description"
+    please_click_a_container_first: "First click on the content you want to edit"
+    enter_your_text_here: "Enter your text here"
+    image_browser: "Image Manager"
+    text_editor: "Text Editor"
+    new_below: "New Webpage below"
+    templates:
+      default: "Default"
+      frontpage: "Frontpage"
+
+  webpages:
+    title: "Webpages"
+    type_a_webpages_name: "Type your search here"
+    click_here_to_filter: "Apply filter"
+    back: "back to list"
+    list:
+      title: "All Webpages"
+    new: "New Webpage"
+    num:
+      one: "One page"
+      zero: "No page"
+      other: "%{count} pages"
+    match_filter: "matching"
+
+  contacts:
+    title: "Contacts"
+    list:
+      title: "All Contacts"
+    new:
+      title: "New Contact"
+
+  langs:
+    en: "Englisch"
+    de: "Deutsch"
+
+  activerecord:
+    errors:
+      models:
+        "iox/user":
+          attributes:
+            password:
+              confirmation: "Die Passwortwiederholung stimmt nicht überein"
+              blank: "Bitte wiederholen Sie das Passwort"
+            password_confirmation:
+              confirmation: "Die Passwortwiederholung stimmt nicht überein"
+              blank: "Bitte wiederholen Sie das Passwort"
+            email:
+              invalid: "Die Emailadresse ist ungültig"
+              blank: "Bitte geben Sie eine Emailadresse an"

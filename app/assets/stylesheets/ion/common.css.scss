@@ -1,0 +1,23 @@
+@mixin gradient( $color1, $color2 ){
+  background: $color1; /* old browsers */
+  background: -moz-linear-gradient(top, $color1 0%, $color2 100%); /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color1), color-stop(100%,$color2)); /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color1', endColorstr='$color2',GradientType=0 );
+}
+
+body{
+  font-family: 'Open Sans', 'OpenSans', sans;
+}
+input[type=text],
+input[type=password],
+textarea{
+  border: 1px solid #ccc;
+  text-indent: 2px;
+  padding: 3px 0;
+  border-radius: 1px;
+}
+
+.mini-desc{
+  font-size: 0.8em;
+  color: #777;
+}

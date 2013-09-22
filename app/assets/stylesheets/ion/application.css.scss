@@ -1,0 +1,50 @@
+/*
+ *= require 3rdparty/bootstrap
+ *= require 3rdparty/font-awesome
+ *= require 3rdparty/jquery.blockui
+
+ *= require ion/ion-win
+ *= require ion/flash
+
+ *= require_self
+ */
+
+@import "common";
+@import "auth";
+
+html,body{
+  height: 100%;
+  width: 100%;
+}
+
+/* main container wrapper at full height
+ */
+.ion-mcw{
+
+  /*@include gradient( #eee, #ddd );*/
+  background: #fafafa;
+  height: 100%;
+  width: 100%;
+
+}
+
+.indicator-icon{
+  margin-right: 5px;
+}
+
+.ion-loader{
+  background-image: image-url('ion/loader.gif');
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+
+.ion-loader-horizontal{
+  background-image: image-url('ion/loader-horizontal.gif');
+  width: 16px;
+  height: 11px;
+  display: inline-block;
+}
+
+@import "top_nav";
+@import "app_nav";

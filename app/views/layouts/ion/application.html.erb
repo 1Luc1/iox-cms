@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= Rails.configuration.ion.site_title %> | <%= controller.controller_name %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%= stylesheet_link_tag    "ion/application", media: "all" %>
+    <%= javascript_include_tag "ion/application" %>
+    <%= yield :add_to_head %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!-- ion main container wrapper -->
+<div class="ion-mcw">
+
+  <div class="ion-top-nav clearfix">
+    <%= render partial: 'common/top_nav' %>
+    <div class="ion-flash-container"></div>
+    <%= flash_with_javascript %>
+
+    <%= image_tag Rails.configuration.ion.brand_logo, class: 'logo' %>
+  </div>
+
+  <div class="ion-app-nav">
+    <%= render partial: 'common/app_nav' %>
+  </div>
+
+  <div class="ion-mcc">
+    <%= yield %>
+  </div>
+
+</div><!-- ion main container wrapper -->
+
+</body>
+</html>

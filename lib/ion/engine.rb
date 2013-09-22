@@ -3,13 +3,22 @@ module Ion
 
     isolate_namespace Ion
 
-    initializer "assets_initializers.initialize_rails", :group => :assets do |app|
-      require "#{Rails.root}/config/initializers/load_config.rb"
-    end
+    #initializer "assets_initializers.initialize_rails", :group => :assets do |app|
+    #  require "#{Rails.root}/config/initializers/load_config.rb"
+    #end
 
     initializer :assets do |config|
-      Rails.application.config.assets.precompile << %w( ion/application.js ion/application.css ion/webpages.js ion/webpages.css )
-      Rails.application.config.assets.precompile << %w( 3rdparty/password-generator.min.js )
+      Rails.application.config.assets.precompile << %w(
+        ion/application.js
+        ion/application.css
+        ion/webpages.js
+        ion/webpages.css
+        3rdparty/password-generator.min.js
+        ion/avatar/original/missing.png
+        ion/avatar/thumb/missing.png
+        ion/loader.gif
+        ion/loader-horizontal.gif
+      )
     end
 
     initializer :append_migrations do |app|

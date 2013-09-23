@@ -3,7 +3,9 @@
  *= require 3rdparty/font-awesome
  *= require 3rdparty/jquery.blockui
 
- *= require ion/ion-win
+ *= require ion/ion_win
+ *= require ion/ion_tree
+
  *= require ion/flash
 
  *= require_self
@@ -28,6 +30,11 @@ html,body{
 
 }
 
+.ion-mcc{
+  overflow: hidden;
+  margin-left: 50px;
+}
+
 .indicator-icon{
   margin-right: 5px;
 }
@@ -48,3 +55,4 @@ html,body{
 
 @import "top_nav";
 @import "app_nav";
+@import "sidebar";

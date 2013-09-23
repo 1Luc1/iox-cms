@@ -1,41 +1,30 @@
-
-    <a class="trigger" href="#" data-toggle="dropdown">
-      <i class="icon-warning-sign"></i>
-      <span class="count">8</span>
-      <span class="caret"></span>
-    </a>
-    <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-      <div class="pointer right">
-        <div class="arrow"></div>
-        <div class="arrow_border"></div>
-      </div>
-      <div class="body">
-          <a class="close-icon" href="#"><i class="icon-remove-sign"></i></a>
-          <div class="notifications">
-              <h3>You have 6 new notifications</h3>
-              <a class="item" href="#">
-                  <i class="icon-signin"></i> New user registration
-                  <span class="time"><i class="icon-time"></i> 13 min.</span>
-              </a>
-              <a class="item" href="#">
-                  <i class="icon-signin"></i> New user registration
-                  <span class="time"><i class="icon-time"></i> 18 min.</span>
-              </a>
-              <a class="item" href="#">
-                  <i class="icon-envelope-alt"></i> New message from Alejandra
-                  <span class="time"><i class="icon-time"></i> 28 min.</span>
-              </a>
-              <a class="item" href="#">
-                  <i class="icon-signin"></i> New user registration
-                  <span class="time"><i class="icon-time"></i> 49 min.</span>
-              </a>
-              <a class="item" href="#">
-                  <i class="icon-download-alt"></i> New order placed
-                  <span class="time"><i class="icon-time"></i> 1 day.</span>
-              </a>
-              <div class="footer">
-                  <a class="logout" href="#">View all notifications</a>
-              </div>
-          </div>
-      </div>
+<a class="trigger" href="#" data-toggle="dropdown">
+  <i class="icon-warning-sign"></i>
+  <% if @activities.size > 0 %>
+    <span class="count"><%= @activities.size %></span>
+  <% end %>
+  <span class="caret"></span>
+</a>
+<div class="dropdown-menu activities-list" role="menu" aria-labelledby="dLabel">
+  <div class="pointer right">
+    <div class="arrow"></div>
+    <div class="arrow_border"></div>
+  </div>
+  <div class="body">
+    <div class="notifications">
+      <span class="title"><%= t('activities.you_have', count: @activities.size ) %></span>
+      <% @activities.each do |activity| %>
+        <a class="item" href="#">
+          <% if activity.icon_class %>
+            <i class="<%= activity.icon_class %>"></i>
+          <% end %>
+          <%= raw t("activity.#{activity.action}", ( activity.obj_name ? link_to( activity.obj_name, activity.obj_path ) : '' ) ) %>
+          <span class="time"><i class="icon-time"></i> <%= time_ago_in_words(activity.created_at) %></span>
+        </a>
+      <% end %>
     </div>
+  </div>
+  <div class="footer">
+    <%= link_to t('activities.view_all'), activities_path, class: 'btn' %>
+  </div>
+</div>

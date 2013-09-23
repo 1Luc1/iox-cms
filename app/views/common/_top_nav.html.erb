@@ -14,7 +14,7 @@
         <br style="margin-bottom: 1.8em" />
         <%= link_to t('change_password'), change_password_path( current_user ), :'data-xhr-win' => true %>
         &mdash;
-        <%= link_to t('activities'), '#' %>
+        <%= link_to t('activities.activities'), activities_path %>
         <br />
         <button class="btn"><%= t('view_profile') %></button>
       </div>
@@ -24,6 +24,6 @@
       </div>
     </div>
   </li>
-  <li class="activities-dropdown dropdown hidden-phone" data-xhr-url="<%= activities_summary_path %>" data-xhr-wait-title="<%= t('loading_activities') %>">
+  <li class="activities-dropdown dropdown hidden-phone" data-xhr-url="<%= activities_summary_path %>" data-xhr-wait-title="<%= t('activities.loading') %>" title="<%= t('activities.activities') %>">
   </li>
 </ul>

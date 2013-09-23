@@ -81,6 +81,28 @@
     float: left;
     margin: 8px 10px 0;
   }
+  .activities-dropdown{
+    right: 0;
+    left: auto;
+    margin: 0;
+    min-width: 400px;
+    padding: 0;
+  }
+  .activities-list{
+    min-width: 400px;
+    .footer{
+      padding: 5px 10px;
+      border-top: 1px solid #eee;
+      margin-top: 5px;
+    }
+    .body{
+      padding: 10px;
+      .title{
+        font-size: 1em;
+        color: #999;
+      }
+    }
+  }
   .activities-dropdown .trigger{
     font-size: 18px;
     padding: 8px;

@@ -22,8 +22,8 @@ module Ion
 
           camefrom = session[:came_from]
 
-          if( current_user.login_failures > 0 )
-            flash.notice = I18n.t('auth.login_failures', count: current_user.login_failures )
+          if( current_user.login_failures && current_user.login_failures > 0 )
+            flash.notice = I18n.t('auth.login_failures', at: current_user.last_login_failure, count: I18n.l(current_user.login_failures, format: :short) )
           end
 
           current_user.update!( last_request_at: Time.now,
@@ -33,8 +33,7 @@ module Ion
                                 last_login_at: Time.now )
           redirect_to ( (camefrom && camefrom != "/login") ? session[:came_from] : Rails.configuration.ion.redirect_after_login )
         end
-      else
-        flash.now.alert = warden.message ? I18n.t(warden.message) : nil
+
       end
 
     end

@@ -1,0 +1,145 @@
+<div class="container-fluid">
+
+
+    <div class="settings-wrapper" id="pad-wrapper">
+        <!-- avatar column -->
+        <div class="span3 avatar-box">
+            <div class="personal-image">
+              <%= image_tag @user.avatar.url(:thumb), class: 'avatar img-circle', :"data-user-id" => @user.id %>
+              <p><%= t('user.change_picture') %></p>
+              <%= file_field_tag "user[avatar]", "data-url" => upload_avatar_user_path(@user), :multiple => false %>
+            </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="span7 personal-info">
+
+
+            <div class="span7 flash-container">
+              <% if @user.errors.any? %>
+                <div class="alert alert-error">
+                  <i class="icon-remove-sign"></i>
+                  <h4><%= t('prohibited_to_save', count: @user.errors.count) %></h4>
+                  <ul>
+                    <% @user.errors.messages.each_pair do |key, msg| %>
+                      <% msg.each do |m| %>
+                        <li><%= m %></li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+
+            <h5 class="personal-title">
+              <% if current_user.id == @user.id %>
+                <%= t('user.my_account') %>
+              <% else %>
+                <%= t('user.account_of', name: @user.full_name) %>
+              <% end %>
+            </h5>
+
+            <%= form_for @user do |f| %>
+                <div class="field-box">
+                  <%= f.label :firstname, t('user.firstname') %>
+                  <%= f.text_field :firstname, :class => 'span5 inline-input' %>
+                </div>
+                <div class="field-box">
+                  <%= f.label :lastname, t('user.lastname') %>
+                  <%= f.text_field :lastname, :class => 'span5 inline-input' %>
+                </div>
+                <div class="field-box">
+                  <%= f.label :email, t('user.email') %>
+                  <%= f.text_field :email, :class => 'span5 inline-input' %>
+                </div>
+
+                <div class="field-box">
+                  <%= f.label :lang, t('user.lang') %>
+                  <div class="ui-select span2">
+                    <%= f.select( :lang, Rails.configuration.iox.available_langs.map{ |lang| [ t("langs.#{lang}"), lang ] } ) %>
+                  </div>
+                </div>
+
+                <% if current_user.is_admin? %>
+                  <div class="field-box">
+
+                    <%= f.label :roles, t('user.role') %>
+
+                    <%= f.select( :roles, Rails.configuration.iox.user_roles.map{ |role| [ role, role ] }, {}, 
+                        {class: 'select2', style: 'width: 250px', multiple: true} ) %>
+
+                  </div>
+
+                  <div class="field-box">
+
+                    <%= f.label :can_read_apps, t('user.can_read_apps') %>
+
+                    <%= f.select( :can_read_apps, Iox::addons.map{ |addon| [ addon[:name], addon[:name] ] }, {}, 
+                        {class: 'select2', style: 'width: 250px', multiple: true} ) %>
+
+                  </div>
+
+                  <div class="field-box">
+
+                    <%= f.label :can_write_apps, t('user.can_write_apps') %>
+
+                    <%= f.select( :can_write_apps, Iox::addons.map{ |addon| [ addon[:name], addon[:name] ] }, {}, 
+                        {class: 'select2', style: 'width: 250px', multiple: true} ) %>
+
+                  </div>
+
+                <% end %>
+
+                <div class="field-box">
+                  <%= f.label :username, t('user.username') %>
+                  <%= f.text_field :username, :class => 'span5 inline-input' %>
+                </div>
+                <div class="field-box">
+                  <%= f.label :password, t('user.password') %>
+                  <%= f.password_field :password, :class => 'span5 inline-input' %>
+                </div>
+                <div class="field-box">
+                  <%= f.label :password_confirmation, t('user.password') %>
+                  <%= f.password_field :password_confirmation, :class => 'span5 inline-input' %>
+                </div>
+
+                <% if current_user.is_admin? || current_user.id == @user.id %>
+                  <div class="span6 field-box actions">
+                    <%= f.submit t('save_changes'), :class => 'btn-glow primary' %>
+                    <span><%= t('or') %></span>
+                    <input type="reset" value="<%= t('cancel') %>" class="reset">
+                  </div>
+                <% end %>
+
+            <% end %>
+
+        </div>
+    </div>
+</div>
+
+<%= content_for :after_scripts do %>
+
+  <script type="text/javascript">
+    $('#user_avatar').fileupload({
+      dataType: 'json',
+      formData: {
+        "authenticity_token": $('input[name="authenticity_token"]:first').val()
+      },
+      done: function (e, data) {
+        var avatar = data._response.result[0];
+        $('.avatar[data-user-id=<%= @user.id %>]').attr('src', avatar.thumbnail_url);
+      }
+    });
+
+    $(".select2").select2({
+      placeholder: "<%= t('user.define_at_least_one_role') %>",
+      tokenSeparators: [",", " "]
+    });
+
+    <% if !current_user.is_admin? && current_user.id != @user.id %>
+      $('.personal-info input').attr('disabled', true);
+      $(".select2").select2('readonly', true);
+    <% end %>
+  </script>
+
+<% end %>

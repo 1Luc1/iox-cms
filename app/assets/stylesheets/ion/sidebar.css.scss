@@ -1,0 +1,30 @@
+/**
+ * sidebar
+ */
+.ion-sidebar{
+  width: 25%;
+  height: 100%;
+  position: relative;
+}
+.ion-sidebar-frame{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 0;
+  bottom: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+.ion-sidebar-arrow{
+  border-color: transparent #f5f5f5 transparent transparent;
+  border-style: solid;
+  border-width: 11px;
+  font-size: 0;
+  left: -11px;
+  line-height: 0;
+  position: absolute;
+  top: 15px;
+  width: 0;
+  z-index: 2;
+}

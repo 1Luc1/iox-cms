@@ -14,6 +14,7 @@ Ion::Engine.routes.draw do
   get '/dashboard', to: 'dashboard#index', as: 'dashboard'
   get '/dashboard/quota', to: 'dashboard#quota'
   get '/activities/summary', to: 'activities#summary'
+  get '/activities', to: 'activities#index'
 
   resources :users do
     member do

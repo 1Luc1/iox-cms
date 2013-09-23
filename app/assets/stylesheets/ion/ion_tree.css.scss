@@ -1,0 +1,123 @@
+
+.ion-tree{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  ul{
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 10px;
+  }
+  .ui-sortable-placeholder {
+    visibility: visible !important;
+    outline: 1px dashed #4183C4;
+  }
+  li{
+    margin: 2px;
+    a{
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      color: #333;
+      text-decoration: none;
+      max-width: 200px;
+      &.title{
+        font-weight: 100;
+        font-size: 1.2em;
+        float: left;
+      }
+    }
+    .icon-home{
+      float: left;
+      margin: 2px 5px 0 0;
+      font-size: 1.2em;
+      color: #999;
+    }
+    .folder-spacer{
+      padding: 3px 5px 3px 7px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      border-radius: 2px;
+      float: left;
+      line-height: 1em;
+      &.open{
+        padding: 4px 5px 4px 5px;
+      }
+      &:hover.open-folder{
+        background-color: #fafafa;
+        border-color: #ddd;
+      }
+    }
+    .actions{
+      float: right;
+      margin-right: 2px;
+      .action-icon{
+        padding: 1px 4px 1px 4px;
+        border-radius: 2px;
+        &.default-hide{
+          opacity: 0;
+        }
+        &:hover{
+          background-color: #333;
+          color: white;
+        }
+        &.publish-action{
+          opacity: 0.5;
+          cursor: pointer;
+        }
+        .icon-ok-sign{
+          color: #81AD53;
+        }
+      }
+    }
+    .item{
+      padding: 7px 5px;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+      &:hover{
+        background-color: #dce6ef;
+        .actions .action-icon{
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+.ion-tree-control{
+  margin: 2px;
+}
+.ion-tree-control form{
+  display: inline;
+  margin: 0;
+  position: relative;
+  padding: 5px;
+}
+.ion-tree-control input[type=submit]{
+  background: image-url('3rdparty/lens.png') no-repeat scroll center center transparent;
+  border: medium none;
+  bottom: 0;
+  display: block !important;
+  height: 27px;
+  width: 27px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  right: 10px;
+  text-indent: 100%;
+  white-space: nowrap;
+  z-index: 2;
+}
+.ion-tree-control input[type=text]{
+  -moz-box-sizing: border-box;
+  background: none repeat scroll 0 0 #FCFCFC;
+  border-radius: 1px;
+  font-size: 13px;
+  line-height: 28px;
+  padding: 5px 6px;
+  color: #555555;
+  line-height: 20px;
+}
+.ion-tree-control .btn{
+  padding: 3px 10px;
+}

@@ -3,8 +3,6 @@ de:
   change_password: "Passwort ändern"
   view_profile: "Profil anzeigen"
   data_usage_quota: "Quota / Datenverbrauch"
-  activities: "Aktivitäten"
-  loading_activities: "Lade Aktivitäten"
   this_week: "Diese Woche"
   last_modified: "Letzte Änderung"
   created_at: "Angelegt am"
@@ -84,6 +82,14 @@ de:
     other: "%{count} Einträge"
 
 
+  activities:
+    you_have:
+      zero: "Keine neuen Ereignisse"
+      other: "%{count} neue Ereignisse"
+    activities: "Ereignisse"
+    loading: "Lade Ereignisse"
+    view_all: "Alle Ereignisse anzeigen"
+
   select_files: "Wählen Sie Dateien aus oder ziehen Sie sie hier her"
 
   not_found: "Das angeforderte Objekt wurde nicht gefunden"
@@ -132,8 +138,9 @@ de:
     forgot_password_instructions: "Sie können Ihr Passwort unter folgendem Link neu setzen:"
     forgot_password_instructions_tail: "Falls Sie diese Anforderung nicht gesendet haben, bleibt alles beim Alten. Sie müssen nichts tun. Falls Sie öfter von diesen Anforderungen belästigt werden, senden Sie bitte eine Email an %{support_mail}"
     login_failures:
-      one: "Ein fehlgeschlagener Anmeldeversuch seit letzter Sitzung"
-      other: "%{count} fehlgeschlagene Anmeldeversuche seit letzter Sitzung"
+      one: "Ein fehlgeschlagener Anmeldeversuch seit letzter Sitzung (am %{at})"
+      other: "%{count} fehlgeschlagene Anmeldeversuche seit letzter Sitzung (am %{at})"
+    session_timeout: "Sitzung ist abgelaufen (Max: %{timeout} Minuten)"
 
   dashboard:
     no_new_messages: "Keine neuen Nachrichten"

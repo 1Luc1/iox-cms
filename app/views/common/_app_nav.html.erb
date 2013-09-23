@@ -1,7 +1,7 @@
 <ul class="app-nav-list">
   <% get_ordered_plugins.each do |plugin| %>
     <li data-plugin-name="<%= plugin.name %>"<%= " class=active" if plugin.name == controller.controller_name %>>
-      <a href="<%= plugin.path %>">
+      <a href="<%= plugin.path %>" title="<%= t("#{plugin.name}.title") %>">
         <span class="plugin-text"><%= t("#{plugin.name}.title") %></span>
         <i class="<%= plugin.icon || "icon-#{plugin.name}" %>"></i>
       </a>

@@ -1,0 +1,56 @@
+<div class="ion-sidebar">
+  <div class="ion-sidebar-arrow"></div>
+  <div class="ion-sidebar-frame">
+
+    <div class="ion-user-header ion-tree-control">
+      <form>
+        <input type="text" name="query" />
+        <input type="submit" value="<%= t('search') %>" />
+      </form>
+      <button class="btn"><i class="icon-refresh"></i></button>
+      <button class="btn"><i class="icon-plus"></i></button>
+    </div>
+
+    <ul id="ion-users-list"></ul>
+
+  </div>
+
+</div>
+
+<script id="ion-tree-item-template" type="text/html">
+  <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }" class="ui-nestedSortable-no-nesting">
+    <div class="item clearfix">
+      <div class="actions">
+        <a class="action-icon default-hide" data-bind=" attr: { 'href': '/ion/users/'+id },  click: removeItem" title="<%= t('delete') %>"><span class="icon-remove"></span></a>
+      </div>
+      <a class="title" data-bind=" attr: { 'href': '/u/'+username, title: full_name }, text: full_name"></a>
+    </div>
+  </li>
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready( function(){
+
+    $('#ion-users-list').ionTree({
+      url: '/ion/users',
+      creationURL: '/ion/users/new',
+      observe: [ 'suspended' ],
+      events: {
+        suspendUser: function publishWebpage( item, e ){
+          item.suspended( !item.suspended() );
+          $.ajax({ url: '/ion/users/'+item.id,
+            data: { user: { suspend: item.suspend()} },
+            type: 'put'
+          }).done( function(response){
+            if( !response.success )
+              item.suspended( !item.suspended() );
+            ion.flash( response.flash );
+          });
+        }
+      }
+    });
+
+  });
+
+</script>

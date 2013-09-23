@@ -1,8 +1,6 @@
 en:
   change_password: "Change password"
   view_profile: "View profile"
-  activities: "Activities"
-  loading_activities: "Loading activities"
   data_usage_quota: "Quota / Usage"
   today: "Today"
   this_week: "This week"
@@ -55,6 +53,14 @@ en:
 
   select_files: "Select files or move them from your file manager over here"
 
+  activities:
+    you_have:
+      zero: "No new notifictations"
+      other: "%{count} new notifications"
+    activities: "Activities"
+    loading: "Loading activities"
+    view_all: "View all activities"
+
   # error messages
   error:
     object_not_found: "Requested object was not found"
@@ -95,8 +101,9 @@ en:
     password_confirmation: "Repeat password"
     send_instructions: "Send Instructions"
     login_failures:
-      one: "one failed login since your last session"
-      other: "%{count} failed logins since your last session"
+      one: "one failed login since your last session (at %{at})"
+      other: "%{count} failed logins since your last session (at %{at})"
+    session_timeout: "Your session has expired (Max: %{timeout} min)"
 
 
   dashboard:

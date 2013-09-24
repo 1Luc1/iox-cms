@@ -6,10 +6,6 @@
   <%= javascript_include_tag 'iox/webpages_ext' %>
 <% end %>
 
-<div class="flash-container" data-close-tooltip="<%= t('close') %>">
-  <%= render '/layouts/iox/flash_messages' %>
-</div>
-
 <%= render partial: "iox/webpages/templates/#{@webpage.template}" %>
 
 <%= javascript_tag do %>

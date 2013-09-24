@@ -79,12 +79,18 @@
     $('#iox-webpages-list').ioxTree({
       url: '/iox/webpages',
       creationURL: '/iox/webpages/new',
-      observe: ['published'],
+      observe: ['published','translation'],
       control: $('.iox-tree-control'),
       i18n:{
         noEntriesFound: '<%= t('filter_no_entries_found') %>'
       },
       events: {
+
+        afterRemove: function afterRemove( item ){
+          $('.iox-details-placeholder').show();
+          $('.iox-content-frame').hide();
+        },
+
         item: {
 
           /*
@@ -170,7 +176,13 @@
            * switch to a different translation
            */
           switchTranslation: function switchTranslation( item, e ){
-
+            $.getJSON( '/iox/webpages/'+item.id+'/translations/'+$(e.target).text(),
+              function( jsonResponse ){
+                if( jsonResponse )
+                  item.translation( jsonResponse );
+                else
+                  iox.flash.alert('failed to retreive translation');
+            });
           }
 
         },

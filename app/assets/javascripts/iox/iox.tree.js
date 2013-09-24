@@ -277,12 +277,16 @@
    *
    */
   TreeItem.prototype.removeItem = function removeItem( item, e ){
-    var self = this
-      , url = (this._master.options.deletionURL || this._master.options.url)+'/'+item.id;
+    var url = (item._master.options.deletionURL || item._master.options.url)+'/'+item.id;
     $.ajax({ url: url, type: 'delete', dataType: 'json' }).done( function( response ){
+      console.log( item, item._master.items );
       if( response.success )
-        self._master.items.remove(item);
-      iox.flash( response.flash );
+        item._master.items.remove(item);
+      if( iox )
+        iox.flash.rails( response.flash );
+      if( item._master.options.events && typeof(item._master.options.events.afterRemove) === 'function' )
+        item._master.options.events.afterRemove( item );
+
     });
   }
 

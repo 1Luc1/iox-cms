@@ -29,6 +29,9 @@ Iox::Engine.routes.draw do
   end
 
   resources :webpages do
+
+    resources :translations
+
     collection do
       get 'images'
       get 'by_slug'

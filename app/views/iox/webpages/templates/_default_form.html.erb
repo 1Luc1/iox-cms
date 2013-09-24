@@ -3,17 +3,18 @@
   <div class="webpage-head-control">
     <div class="iox-simple-select">
       <span class="iox-simple-select-trigger"
-        <span class="current-select" data-bind="text: translation.locale"></span>
+        <span class="current-select" data-bind="text: translation().locale"></span>
         <span class="icon-caret-down"></span>
       </span>
       <ul class="iox-simple-select-list">
         <% Rails.configuration.iox.available_langs.each do |lang| %>
-          <li data-bind="click: switchTranslation, css: { hide: '<%= lang %>' === translation.locale } "><%= lang %></li>
+          <li data-bind="click: switchTranslation, css: { hide: '<%= lang %>' === translation().locale } "><%= lang %></li>
         <% end %>
       </ul>
     </div>
 
     <a class="btn" data-bind=" attr: { href: '/p/'+slug }" target="_blank"><i class="icon-eye-open icon"></i><%= t('webpage.view') %></a>
+
   </div>
 
   <h3 class="title" data-bind="text: name"></h3>
@@ -48,12 +49,12 @@
 
       <div class="field-box">
         <label for="webpage_meta_keywords"><%= t('webpage.meta_keywords') %></label>
-        <input type="text" class="webpage_meta_keywords" name="webpage[webpage_translation][meta_keywords]" data-bind="value: translation.meta_keywords" />
+        <input type="text" class="webpage_meta_keywords" name="webpage[webpage_translation][meta_keywords]" data-bind="value: translation().meta_keywords" />
       </div>
 
       <div class="field-box">
         <label for="webpage_meta_description"><%= t('webpage.meta_description') %></label>
-        <textarea name="webpage[webpage_translation][meta_description]" maxlength="255" data-bind="value: translation.meta_description" />
+        <textarea name="webpage[webpage_translation][meta_description]" maxlength="255" data-bind="value: translation().meta_description" />
         <br />
         <span class="label-offset mini-desc"><%= t('max_255') %></span>
       </div>
@@ -61,7 +62,7 @@
     </div>
 
     <div class="scrollable-content-footer">
-      <a data-bind="attr: { href: '/iox/webpages/'+id }" data-method="delete" data-remote="true" class="btn"><%= t('delete') %></a>
+      <a data-bind="attr: { href: '/iox/webpages/'+id }, click: removeItem" class="btn"><%= t('delete') %></a>
       <button type="submit" class="pull-right btn-primary btn"><%= t('save') %></button>
     </div>
 

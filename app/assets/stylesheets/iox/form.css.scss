@@ -99,11 +99,17 @@ textarea.error{
     padding: 0;
     margin: 0;
     li{
-      padding: 2px;
+      padding: 2px 5px;
       border-bottom: 1px solid #eee;
       margin: 2px 0;
+      cursor: pointer;
       &:last-child{
         border: none;
+        margin-bottom: 0;
+      }
+      &:hover{
+        background: #333;
+        color: #fff;
       }
     }
   }

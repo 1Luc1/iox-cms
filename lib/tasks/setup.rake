@@ -1,21 +1,21 @@
 require File::expand_path '../rake-colors', __FILE__
 
-namespace :ion do
+namespace :iox do
 
   desc "setup admin account"
   task :setup => :environment do
 
     include Colors
 
-    email = "admin@#{Rails.configuration.ion.domain_name}"
+    email = "manager@#{Rails.configuration.iox.domain_name}"
     password = "mgr"
-    puts "[ion] email #{green email} pass #{green password}"
+    puts "[iox] email #{green email} pass #{green password}"
 
-    @user = Ion::User.new username: 'manager', email: email, roles: 'admin,editor,user', password: password, password_confirmation: password
+    @user = Iox::User.new username: 'manager', email: email, roles: 'admin,editor,user', password: password, password_confirmation: password
     if @user.valid? && @user.save
-      puts "[ion] successfully created user manager"
+      puts "[iox] successfully created user manager"
     else
-      puts "[ion]#{red " ERROR"} user #{red @user.username} already exists"
+      puts "[iox]#{red " ERROR"} user #{red @user.username} already exists"
     end
 
   end

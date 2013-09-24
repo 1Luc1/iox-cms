@@ -1,0 +1,48 @@
+/**
+ * ion.win.css
+ *
+ */
+.iox-win-overlay{
+  background: rgba( 255, 255, 255, 0.8 );
+  position: absolute;
+  z-index: 1100;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+.iox-win{
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  z-index: 1101;
+}
+.iox-win-header{
+  padding: 15px;
+  height: 10px;
+  border-bottom: 1px solid #e9e9e9;
+}
+.iox-win-title{
+  margin: 0 5px;
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #777;
+}
+.iox-win-header .close-btn{
+  color: #999;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 16px;
+  border: none;
+  background: none;
+}
+.iox-win-header .close-btn:hover{
+  color: #333;
+}
+.iox-win-footer{
+  padding: 5px;
+  border-top: 1px solid #e9e9e9;
+  margin-top: 5px;
+}

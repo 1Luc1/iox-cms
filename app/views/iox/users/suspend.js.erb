@@ -1,0 +1,7 @@
+$('.iox-content-frame').unblock();
+<% if flash.notice %>
+  var item = ko.dataFor( $('#iox-users-list li[data-id=<%= @user.id %>]').get(0) );
+  item.suspended( <%= @user.suspended %> );
+<% end %>
+iox.flash.rails( <%= raw flash.to_json %> );
+iox.Win.closeAll();

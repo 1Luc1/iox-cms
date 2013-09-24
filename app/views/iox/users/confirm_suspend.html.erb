@@ -1,0 +1,15 @@
+<span data-iox-win-title="true"><%= t('user.suspend_user', name: @user.username) %></span>
+<%= form_for @user, url: suspend_user_path( @user ), remote: true, :authenticity_token => true, html: { class: 'iox-win-auth-form'} do |f| %>
+
+  <div class="content-padding">
+
+    <div class="field-box"><%= raw t('user.suspend_user_text', name: @user.username) %></div>
+
+  </div>
+
+  <div class="iox-win-footer">
+    <button type="submit" class="btn btn-warning"><%= t('user.suspend_user_yes') %></button>
+    <button class="btn" data-close-win="true"><%= t('cancel') %></button>
+  </div>
+
+<% end %>

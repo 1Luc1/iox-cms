@@ -1,0 +1,11 @@
+$('.iox-win').unblock();
+iox.flash.rails( <%= raw flash.to_json %> );
+<% if flash.notice %>
+  var item = ko.dataFor( $('#iox-users-list li[data-id=<%= @user.id %>]').get(0) );
+  item._master.items.remove( item );
+  iox.Win.closeAll();
+  $('.iox-details-placeholder').show();
+  $('.iox-content-frame').hide();
+<% else %>
+  $('.iox-win-title').html($('.iox-flash-container').html());
+<% end %>

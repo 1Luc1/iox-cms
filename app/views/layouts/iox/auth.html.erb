@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= Rails.configuration.iox.site_title %> | login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%= stylesheet_link_tag    "iox/application", media: "all" %>
+    <%= javascript_include_tag "iox/application" %>
+
+    <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+<!-- ion main container wrapper -->
+<div class="iox-mcw">
+
+  <div class="iox-mcc">
+    <div class="iox-auth-container">
+      <%= image_tag 'iox/logo_transp_150x150.png', class: 'logo' %>
+      <%= yield %>
+      <div class="auth-flash-container<%= ' error' if flash.alert  %>">
+        <% if flash.notice || flash.alert %>
+          <div class="flash-item">
+            <%= flash.alert || flash.notice %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div><!-- ion main container wrapper -->
+
+</body>
+</html>

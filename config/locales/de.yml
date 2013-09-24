@@ -34,6 +34,7 @@ de:
   keep_open: "Dieses Fenster offen halten"
   refresh: "Aktualisieren"
   filter_results: "Ergebnisse filtern"
+  filter_no_entries_found: "Für die angegebene Suche wurden keine Ergebnisse gefunden"
   please_fill_out_all_fields: "Bitte alle Felder ausfüllen"
 
   loading_quota: "Quota wird geladen"
@@ -102,13 +103,13 @@ de:
     created: "%{user} hat %{icon} %{name} angelegt"
     deleted: "%{user} hat %{icon} %{name} gelöscht"
 
-  select_files: "Wählen Sie Dateien aus oder ziehen Sie sie hier her"
+  select_files: "Wähle Dateien aus oder ziehe sie hier her"
 
   not_found: "Das angeforderte Objekt wurde nicht gefunden"
   # error messages
   error:
     object_not_found: "Das angeforderte Objekt wurde nicht gefunden"
-    insufficient_rights: "Sie verfügen nicht über ausreichen Rechte um diese Aktion auszuführen"
+    insufficient_rights: "Du verfügst nicht über ausreichen Rechte um diese Aktion auszuführen"
 
   # form specific
   cancel: "Abbrechen"
@@ -135,7 +136,7 @@ de:
     register: "Registrieren"
     login: "Anmelden"
     logout: "Abmelden"
-    you_have_been_logged_out: "Sie sind jetzt vom System abgemeldet"
+    you_have_been_logged_out: "Du bist jetzt vom System abgemeldet"
     login_required: "Anmeldung erforderlich"
     login_failed: "Anmeldung fehlgeschlagen"
     email_not_recognized: "Diese Email Adresse ist uns nicht bekannt"
@@ -184,7 +185,7 @@ de:
     my_account: "Mein Konto"
     account_of: "Konto von %{name}"
     suggest_password: "Passwort vorschlagen"
-    suggest_password_desc: "Sie können ein Passwort vom System vorschlagen lassen. Drücken Sie so lange den Knopf bis Ihnen ein Vorschlag zusagt."
+    suggest_password_desc: "Du kannst ein Passwort vom System vorschlagen lassen. Drück so lange den Knopf bis Ihnen ein Vorschlag zusagt."
     gen_pwd_is: "Das Passwort lautet"
     contact_info: "Kontaktinformationen"
     administration: "Administratives"
@@ -227,7 +228,7 @@ de:
 
     settings: "Kontoeinstellungen"
     save_restore_settings: "Einstellungen sichern oder wiederherstellen"
-    save_restore_settings_desc: "Sie können Ihre Einstellungen als Datei abspeichern und zu einem späteren Zeitpunkt wiederherstellen"
+    save_restore_settings_desc: "Du kannst deine Einstellungen als Datei abspeichern und zu einem späteren Zeitpunkt wiederherstellen"
     import_settings_file: "Einstellungsdatei importieren"
     export_settings_file: "Einstellungsdatei herunterladen"
     can_read_apps: "Apps (lesen)"
@@ -244,13 +245,13 @@ de:
     password: "Passwort"
     confirm_password: "Passwort wiederholen"
     lang: "Systemsprache"
-    password_policy: "Achten Sie beim Vergeben des Passwortes darauf, ein starkes Passwort mit mind. einem Großbuchstaben und einer Ziffer zu verwenden"
-    define_at_least_one_role: "Definieren Sie mindestens eine Rolle"
+    password_policy: "Achte beim Vergeben des Passwortes darauf, ein starkes Passwort mit mind. einem Großbuchstaben und einer Ziffer zu verwenden"
+    define_at_least_one_role: "Definiere mindestens eine Rolle"
 
     created: "Benutzer &raquo;%{name}&laquo; wurde erstellt"
     created_and_mail_sent: "Benutzer &raquo;%{name}&laquo; wurde erstellt und eine Email wurde versandt"
 
-    you_are_admin_and_can_edit: "Sie verfügen über Administratorrechte und können dieses Profil bearbeiten. Seien Sie vorsichtig!"
+    you_are_admin_and_can_edit: "Du verfügst über Administratorrechte und kannst dieses Profil bearbeiten. Sei vorsichtig!"
 
     mailer:
       welcome: "Willkommen"
@@ -258,7 +259,7 @@ de:
       login_and_start: "Melde dich unter dem Link %{url} an und folge den Anweisungen"
       goodbye: "frohes Schaffen"
 
-  auto_generated: "Diese Email wurde automatisch erstellt. Bei Fragen und Problemen wenden Sie sich bitte an %{support_email}"
+  auto_generated: "Diese Email wurde automatisch erstellt. Bei Fragen und Problemen wende dich bitte an %{support_email}"
 
   users:
     title: "Benutzer"
@@ -267,7 +268,7 @@ de:
     new:
       title: "Neues Konto"
     only_where: "Nur Benutzer wo"
-    type_a_users_name: "Tippen Sie den Beginn eines Benutzernamens"
+    type_a_users_name: "Tippe den Beginn eines Benutzernamens"
     click_on_user_to_show_details: "Klick auf einen Benutzer zeigt Details"
 
   webpage:
@@ -279,7 +280,7 @@ de:
     has_been_published: "Webseite &raquo;%{name}&laquo; wurde veröffentlicht"
     has_been_unpublished: "Veröffentlichung von Webseite &raquo;%{name}&laquo; wurde zurückgezogen"
     delete: "Webseite löschen"
-    deleted: "Webseite &raquo;%{name}&laquo; wurde gelöscht <a href='/ion/webpages/%{id}/restore' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>Wiederherstellen</a>"
+    deleted: "Webseite &raquo;%{name}&laquo; wurde gelöscht <a href='/iox/webpages/%{id}/restore' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>Wiederherstellen</a>"
     reordering_failed: "Foglende Webseiten konnten nicht korrekt sortiert werden: %{names}"
     reordering_saved: "Sortierung gespeichert"
     failed_to_delete: "Webseite &raquo;%{name}&laquo; konnte nicht gelöscht werden"
@@ -287,18 +288,18 @@ de:
     failed_to_restore: "'%{name}' konnte nicht wiederhergestellt werden"
     edit: "Diese Webseite bearbeiten"
     views: "Seitenaufrufe"
-    tags_desc: "Führen Sie Stichworte an, die diese Seite kategorisieren bzw. eine Suche erleichtern"
+    tags_desc: "Führe Stichworte an, die diese Seite kategorisieren bzw. eine Suche erleichtern"
     template: "Vorlage"
     content: "Text"
     created_at: "Erstellt am"
     updated_at: "Aktualisiert am"
     last_seen: "Zuletzt gesehen"
-    really_delete: "Möchten Sie die Webseite >>%{name}<< wirklich löschen?"
+    really_delete: "Möchtest du die Webseite >>%{name}<< wirklich löschen?"
     lang_desc: "Leer == keine Sprachunterstützung für diese Seite"
     general: "Allgemein"
     description: "Kurzbeschreibung"
-    please_click_a_container_first: "Bitte klicken Sie zuerst auf den Bereich den Sie bearbeiten möchten"
-    enter_your_text_here: "Bitte geben Sie Ihren Text hier ein"
+    please_click_a_container_first: "Bitte klicke zuerst auf den Bereich den du bearbeiten möchtest"
+    enter_your_text_here: "Bitte gib deinen Text hier ein"
     image_browser: "Bildmanager"
     text_editor: "Texteditor"
     structure: "Struktur"
@@ -313,7 +314,7 @@ de:
 
   webpages:
     title: "Webseiten"
-    type_a_webpages_name: "Schreiben Sie ein paar Buchstaben einer Webseite"
+    type_a_webpages_name: "Schreib ein paar Buchstaben einer Webseite"
     click_here_to_filter: "Filter anwenden"
     back: "Zurück zur Liste"
     new: "Neue Webseite"
@@ -339,16 +340,16 @@ de:
   activerecord:
     errors:
       models:
-        "ion/user":
+        "iox/user":
           attributes:
             password:
               confirmation: "Die Passwortwiederholung stimmt nicht überein"
-              blank: "Bitte wiederholen Sie das Passwort"
+              blank: "Bitte wiederhole das Passwort"
             password_confirmation:
               confirmation: "Die Passwortwiederholung stimmt nicht überein"
-              blank: "Bitte wiederholen Sie das Passwort"
+              blank: "Bitte wiederhole das Passwort"
             email:
               invalid: "Die Emailadresse ist ungültig"
-              blank: "Bitte geben Sie eine Emailadresse an"
+              blank: "Bitte gib eine Emailadresse an"
             username:
               taken: "Dieser Benutzername ist bereits vergeben"

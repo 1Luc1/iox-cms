@@ -1,0 +1,5 @@
+$('.iox-win').unblock();
+<% if flash.notice %>
+  iox.Win.closeAll();
+<% end %>
+iox.flash.rails( <%= raw flash.to_json %> );

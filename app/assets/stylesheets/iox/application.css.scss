@@ -1,0 +1,132 @@
+/*
+ *= require 3rdparty/bootstrap
+ *= require 3rdparty/font-awesome
+ *= require 3rdparty/jquery.blockui
+
+ *= require 3rdparty/kendoui/kendo.common.min
+ *= require 3rdparty/kendoui/kendo.silver.min
+
+ *= require iox/iox_win
+ *= require iox/iox_tree
+
+ *= require iox/flash
+
+ *= require_self
+ */
+
+@import "common";
+@import "auth";
+@import "form";
+
+html,body{
+  height: 100%;
+  width: 100%;
+}
+
+/* main container wrapper at full height
+ */
+.iox-mcw{
+
+  /*@include gradient( #eee, #ddd );*/
+  background: #fafafa;
+  height: 100%;
+  width: 100%;
+
+}
+
+.iox-mcc{
+  overflow: hidden;
+  margin-left: 50px;
+}
+
+.indicator-icon{
+  margin-right: 5px;
+}
+
+.iox-loader{
+  background-image: image-url('iox/loader.gif');
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+
+.iox-loader-horizontal{
+  background-image: image-url('iox/loader-horizontal.gif');
+  width: 16px;
+  height: 11px;
+  display: inline-block;
+}
+
+.iox-content{
+  height: 100%;
+  position: relative;
+}
+.iox-content.offset-sidebar{
+  margin-left: 25%;
+}
+.iox-content-frame{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+.iox-content.offset-sidebar .iox-content-frame{
+  left: 20px;
+}
+.iox-content-frame.auto-overflow{
+  overflow: auto;
+}
+.iox-content-arrow{
+  border-color: transparent #f5f5f5 transparent transparent;
+  border-style: solid;
+  border-width: 11px;
+  font-size: 0;
+  left: -22px;
+  line-height: 0;
+  position: absolute;
+  top: 45%;
+  width: 0;
+  z-index: 2;
+}
+.iox-details-placeholder{
+  text-align: center;
+  padding: 20%;
+  font-size: 20px;
+  color: #bbb;
+  line-height: 30px;
+}
+.scrollable-content{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  &.w-header{
+    top: 50px;
+  }
+  &.w-footer{
+    bottom: 50px;
+  }
+}
+.scrollable-content-header{
+  height: 50px;
+}
+.scrollable-content-footer{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31px;
+  border-top: 1px solid #ccc;
+  padding: 5px;
+  background-color: #fafafa;
+}
+
+@import "top_nav";
+@import "app_nav";
+@import "sidebar";

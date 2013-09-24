@@ -1,4 +1,4 @@
-Ion::Engine.routes.draw do
+Iox::Engine.routes.draw do
 
   get '/login', to: 'auth#login'
   get '/login', to: 'auth#unauthenticated'

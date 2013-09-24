@@ -1,0 +1,22 @@
+<span data-iox-win-title="true"><%= raw t('user.delete_user', name: @user.username) %></span>
+<%= form_for @user, url: user_path(@user), method: :delete, html: { remote: true, class: 'iox-win-auth-form', onsubmit: "if( $('.iox-win-auth-form input[name=username]').val() === '#{@user.username}' ) return true; $('.iox-win-auth-form input[name=username]').addClass('error').select(); return false;" } do |f| %>
+
+  <div class="content-padding">
+
+    <div class="field-box"><%= raw t('user.delete_user_text', name: @user.username) %></div>
+
+    <div class="field-box">
+      <label for="username"><%= raw t('user.enter_username_to_delete', name: @user.username) %></label><br />
+      <input type="text" name="username" class="js-get-focus" /><br />
+      <%= check_box_tag :delete_contents, 1 %>
+      <label for="delete_contents"><%= t('user.delete_contents') %></label>
+    </div>
+
+  </div>
+
+  <div class="iox-win-footer">
+    <button type="submit" class="btn btn-warning"><%= t('user.delete_user_yes') %></button>
+    <button class="btn" data-close-win="true"><%= t('cancel') %></button>
+  </div>
+
+<% end %>

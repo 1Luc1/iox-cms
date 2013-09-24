@@ -15,6 +15,7 @@ en:
   keep_open: "Keep this window open"
   refresh: "Refresh"
   filter_results: "Filter results"
+  filter_no_entries_found: "No results found for given query"
   please_fill_out_all_fields: "Please fill out all fields"
 
   loading_quota: "loading quota"
@@ -230,7 +231,7 @@ en:
     has_been_published: "&raquo;%{name}&laquo; has been published"
     has_been_unpublished: "&raquo;%{name}&laquo; has been unpublished"
     delete: "Remove this Webpage"
-    deleted: "&raquo;%{name}&laquo; removed <a href='/ion/webpages/%{id}/restore' class='btn btn-mini' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>restore</a>"
+    deleted: "&raquo;%{name}&laquo; removed <a href='/iox/webpages/%{id}/restore' class='btn btn-mini' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>restore</a>"
     failed_to_delete: "&raquo;%{name}&laquo; could not be removed"
     restored: "'%{name}' has been restored"
     reordering_failed: "Following pages failed to save: %{names}"
@@ -286,7 +287,7 @@ en:
   activerecord:
     errors:
       models:
-        "ion/user":
+        "iox/user":
           attributes:
             password:
               confirmation: "Die Passwortwiederholung stimmt nicht überein"

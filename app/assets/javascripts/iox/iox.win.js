@@ -47,7 +47,11 @@
     height: null,
 
     // width of the window
-    width: null
+    width: null,
+
+    i18n: {
+      ok: 'OK'
+    }
 
   }
 

@@ -1,0 +1,26 @@
+<script id="iox-webpage-form-template" type="text/html">
+
+  <h3 class="title" data-bind="text: name"></h3>
+
+  <form data-bind="submit: saveWebpageForm)">
+
+    <div class="scrollable-content w-header w-footer">
+
+      <div class="fields-header"><%= t('webpage.general') %></div>
+
+      <div class="field-box required">
+        <label for="name"><%= t('name') %></label>
+        <input type="text" name="webpage[webpage]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
+      </div>
+
+    </div>
+
+    <div class="scrollable-content-footer">
+      <button type="submit" class="pull-right btn-primary btn" data-bind="text: ( id ? '<%= t('save') %>' : '<%= t('create') %>' )"></button>
+    </div>
+
+    <input type="submit" class="hide" value="submit" />
+
+  </form>
+
+</script>

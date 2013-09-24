@@ -33,7 +33,10 @@ module Iox
         else
           query = "parent_id = '#{params[:parent]}'"
         end
-        @webpages = Webpage.where( query ).limit( limit ).offset( offset ).order(:position).load
+        @webpages = Webpage.where( query ).limit( limit ).offset( offset ).order(:position).load.map{ |webpage|
+          webpage.translation = webpage.translations.where( locale: params[:locale] || I18n.default_locale ).first
+          webpage
+        }
         render json: { items: @webpages }
       else
         @webpage = Webpage.new template: 'default'
@@ -48,7 +51,7 @@ module Iox
       @webpage = Webpage.new template: 'default'
       @webpage.parent_id = params[:parent] unless params[:parent].blank?
       @parent = @webpage.parent if( @webpage.parent_id )
-      @webpage.translation = @webpage.translations.build( locale: I18n.default_locale )
+      render json: @webpage
     end
 
     #
@@ -176,15 +179,21 @@ module Iox
       @webpage = Webpage.new webpage_params
       return if !redirect_if_no_rights
       @webpage.set_creator_and_updater( current_user )
+      @webpage.translation = @webpage.translations.build( locale: I18n.default_locale )
       if @webpage.save
-        if set_and_save_webpage_translation
-          flash.notice = I18n.t('created', name: @webpage.name)
-        else
-          flash.alert = 'translation could not be saved!'
-        end
+
+        Iox::Activity.create! user_id: current_user.id, obj_name: @webpage.name, action: 'created', icon_class: 'icon-globe', obj_id: @webpage.id, obj_type: @webpage.class.name
+
+        flash.notice = I18n.t('created', name: @webpage.name)
       else
         flash.alert = I18n.t('creation_failed') + ": " + @webpage.errors.full_messages.inspect
       end
+
+      render json: { item: @webpage,
+                      errors: @webpage.errors.full_messages,
+                      success: @webpage.persisted?,
+                      flash: flash }
+
     end
 
     #

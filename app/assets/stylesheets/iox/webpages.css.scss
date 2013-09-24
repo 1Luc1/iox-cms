@@ -1,0 +1,35 @@
+/**
+ * webpage.css.scss
+ */
+
+#iox-webpages-list{
+  overflow: auto;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  .icon{
+    color: #999;
+    margin: 2px;
+  }
+  .icon-webpage{
+    float: left;
+    margin-right: 5px;
+  }
+  .item{
+    cursor: pointer;
+  }
+}
+
+#iox-webpage-details .scrollable-content{
+  padding: 20px;
+}
+
+#iox-webpage-details .publishing-status{
+  .icon-ok-sign{ color: #81AD53; }
+  .icon{ margin-right: 5px; }
+  .label{ cursor: pointer; margin-left: 20px; }
+  .icon-question-sign{ margin-left: 10px; color: #999; cursor: pointer; }
+  .icon-question-sign:hover{ color: #333 }
+}

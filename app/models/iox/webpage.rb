@@ -3,7 +3,7 @@ module Iox
   class UniqueTemplateValidator < ActiveModel::Validator
     def validate(record)
       return true if record.new_record?
-      tmpl_filename = File.join( Rails.root, 'config', 'ion_webpage_templates', "#{record.template}_data.yml" )
+      tmpl_filename = File.join( Rails.root, 'config', 'iox_webpage_fixtures', "#{record.template}_data.yml" )
       if File.exists? tmpl_filename
         tmpl_data = YAML::load_file( tmpl_filename )
         if( tmpl_data["unique"] ) && Iox::Webpage.where("template='#{record.template}' AND id != #{record.id}" ).count > 0
@@ -54,12 +54,13 @@ module Iox
     after_create       :init_webbits
 
     def tmpl_filename
-      File.join( Rails.root, 'config', 'ion_webpage_templates', "#{template}_data.yml" )
+      File.join( Rails.root, 'config', 'iox_webpage_fixtures', "#{template}_data.yml" )
     end
 
     def as_json(options = { })
       h = super(options)
       h[:num_children] = children.count
+      h[:translation] = translation
       h
     end
 

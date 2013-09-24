@@ -6,3 +6,65 @@ input.error,
 textarea.error{
   outline: 1px solid #e33;
 }
+
+
+.iox-form .title{
+  font-size: 2em;
+  font-weight: 100;
+  color: #999;
+  margin: 0;
+  padding: 10px;
+}
+
+.iox-form input[type=text],
+.iox-form input[type=password],
+.iox-form textarea{
+  font-size: 1.1em;
+  padding: 8px 0;
+  text-indent: 5px;
+  width: 400px;
+  box-shadow: none;
+}
+
+.iox-form input[type=text].k-invalid,
+.iox-form input[type=password].k-invalid,
+.iox-form textarea.k-invalid{
+  outline: 1px solid #e33;
+}
+
+.iox-form .fields-header{
+  border-bottom: 1px solid #ddd;
+  margin: 20px 0;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.iox-form .field-box{
+  margin: 12px 0;
+}
+
+.iox-form .required label:after{
+  color: #e32;
+  content: ' *';
+  display:inline;
+}
+
+.iox-form .field-box .desc{
+  margin: 10px 0;
+  max-width: 400px;
+}
+
+.iox-form .field-box label{
+  color: #777777;
+  display: block;
+  float: left;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin: 10px 0 0;
+  width: 120px;
+}
+
+.iox-form .field-box .label-offset{
+  margin-left: 120px;
+}

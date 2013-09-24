@@ -80,6 +80,9 @@
           opacity: 1;
         }
       }
+      &.selected{
+        background-color: #FaF7d5;
+      }
     }
   }
 }

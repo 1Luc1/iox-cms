@@ -69,70 +69,10 @@
   }
 }
 
-.user-details input[type=text],
-.user-details input[type=password],
-.user-details textarea{
-  font-size: 1.1em;
-  padding: 5px 0;
-  text-indent: 5px;
-  width: 400px;
-  box-shadow: none;
-}
-
-.user-details input[type=text].k-invalid,
-.user-details input[type=password].k-invalid,
-.user-details textarea.k-invalid{
-  outline: 1px solid #e33;
-}
-
 .user-details .select-roles{
   width: 400px;
 }
 
-.user-details .title{
-  font-size: 2em;
-  font-weight: 100;
-  color: #999;
-  margin: 0;
-  padding: 10px;
-}
-
-.user-details .fields-header{
-  border-bottom: 1px solid #ddd;
-  margin: 20px 0;
-  font-size: 0.9em;
-  text-transform: uppercase;
-  color: #aaa;
-}
-
-.user-details .field-box{
-  margin: 10px 0;
-}
-
-.user-details .required label:after{
-  color: #e32;
-  content: ' *';
-  display:inline;
-}
-
-.user-details .field-box .desc{
-  margin: 10px 0;
-  max-width: 400px;
-}
-
-.user-details .field-box label{
-  width: 100px;
-  float: left;
-  display: block;
-  font-weight: 600;
-  font-size: 0.8em;
-  color: #777;
-  margin: 5px 0;
-}
-
-.user-details .field-box .label-offset{
-  margin-left: 100px;
-}
 
 /**
  * show a user

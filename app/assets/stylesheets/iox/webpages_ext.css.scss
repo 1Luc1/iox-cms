@@ -1,0 +1,105 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+
+ *= require select2
+
+ *= require 3rdparty/bootstrap/bootstrap
+ *= require 3rdparty/bootstrap/bootstrap-responsive
+ *= require 3rdparty/bootstrap/bootstrap-overrides
+
+ *= require 3rdparty/lib/jquery-ui-1.10.2.custom
+ *= require 3rdparty/lib/font-awesome
+
+ *= require 3rdparty/layout
+ *= require 3rdparty/elements
+ *= require 3rdparty/icons
+
+ *= require 3rdparty/compiled/index
+
+ *= require_self
+ */
+
+$sidebar-color: #f9f9f9;
+$sidebar-shadow: -2px -2px 5px rgba(0,0,0,0.3);
+
+.webpage-sidebar .dropdown-backdrop{ display: none; }
+
+.webpage-sidebar{ position: absolute; z-index: 1005; top: 5px; left: 5px; bottom: 5px; width: 280px; background-color: $sidebar-color; padding: 10px; border-radius: 1px; border: 1px solid #eee; box-shadow: $sidebar-shadow; overflow: auto; }
+.webpage-sidebar input[type=text]{ width: 280px; padding: 4px 0; text-indent: 6px; border-style: none none solid; border-width: 0 0 1px; border-color: #DEE3EA; background: transparent; border-radius: 0; transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s; box-shadow: none; margin-bottom: 0; }
+.webpage-sidebar .default{ margin: 50px 0; text-align: center; }
+.webpage-sidebar input[type=text]:hover,
+.webpage-sidebar input[type=text]:focus{ outline: none; box-shadow: none; border-color: #000; }
+.webpage-sidebar textarea{ width: 280px; height: 10em; padding: 4px 0; text-indent: 6px; }
+.webpage-sidebar label{ margin-bottom: 0; margin-top: 10px; }
+
+.webpage-sidebar .btn-group{ text-align: right; margin: 0 0 10px 0; width: 100%; }
+.webpage-sidebar h1{ font-size: 1.2em; text-transform: uppercase; font-weight: 600; margin: 20px 0;}
+.webpage-sidebar .bottom-control{ margin-top: 20px; height: 40px; }
+.webpage-sidebar .iox-logo, .webpage-mini-sidebar .iox-logo{ cursor: move }
+
+.webpage-mini-sidebar{ position: absolute; top: 5px; left: 5px; width: 200px; height: 30px; background-color: $sidebar-color; border: 1px solid #ddd; border-radius: 1px; box-shadow: $sidebar-shadow; padding: 10px; z-index: 1005; }
+
+.webbit-list ul{ list-style: none; padding: 0; margin: 0; max-height: 300px; overflow: auto; }
+.webbit-list li{ border: 1px solid #eee;
+  margin: 5px;
+  padding: 5px;
+  &.active{ background: #0088CC; color: #fff; a{ color: #fff } }
+  &:hover{ background: #eee; cursor: pointer; color: #333; a{ color: #333; } }
+}
+.webbit-list a{ text-decoration: none; color: #333; }
+
+.webbit-plugin-control{ display: none; }
+
+
+.webbit:hover{ outline: 2px dotted #ccc; }
+.webbit.active{ outline: 2px solid #d00; }
+
+body .cke_chrome{ box-shadow: none; }
+body .cke_top{ background: none; border: none; box-shadow: none; }
+
+ul.image-browser{ margin: 0; list-style: none; }
+ul.image-browser li, .select-files{ position: relative; margin: 3px; border: 3px solid #fff; box-shadow: 0 0 3px #ccc; width: 50px; height: 50px; float: left; }
+ul.image-browser .action-icon.remove{ position: absolute; top: 10px; left: 32px; }
+ul.image-browser .overlay{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.5); z-index: 3; }
+ul.image-browser li{
+  cursor: pointer;
+  position: relative;
+  .action-icon{
+    font-size: 16px;
+    font-weight: 600;
+    display: none;
+    z-index: 4;
+    opacity: 0.7
+  }
+  .remove-image{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    bottom: 0;
+    left: 0;
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 0 0 5px black;
+  }
+}
+ul.image-browser li:hover .action-icon{ display: block; }
+ul.image-browser li:hover .action-icon:hover{ display: block; opacity: 1 }
+ul.image-browser li:hover .overlay{ display: block; }
+ul.image-browser li .overlay{ display: none;  }
+
+.select-files .icon-plus{ font-size: 40px; color: #f0f0f0; position: absolute; top: 6px; left: 0; right: 0; margin: auto; display: block; z-index: 0; text-align: center; }
+
+.select-files-list{ list-style: none; padding: 0; margin: 0; }
+.select-files{ border: 1px solid #eee; color: #777; float: none; }
+.select-files .drop-here{ background: #08c; color: #fff; }
+.select-files input[type=file]{ opacity: 0; position: absolute; top: 0; left: 0; width: 50px; height: 50px; z-index: 3; cursor: pointer; }
+
+.flash-container{ position: fixed; top: 20px; }
+.flash-container .icon-remove{ cursor: pointer; margin-right: 0; }

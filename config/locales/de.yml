@@ -36,8 +36,11 @@ de:
   filter_results: "Ergebnisse filtern"
   filter_no_entries_found: "Für die angegebene Suche wurden keine Ergebnisse gefunden"
   please_fill_out_all_fields: "Bitte alle Felder ausfüllen"
+  max_255: "Maximal 255 Zeichen"
 
   loading_quota: "Quota wird geladen"
+
+  whats_this: "Was ist das"
 
   # language syntax
   or: "oder"
@@ -273,10 +276,18 @@ de:
 
   webpage:
     name: "Name"
+    publishing_status: "Veröffentlichung"
     published: "Veröffentlicht"
     not_published: "Nicht veröffentlicht"
-    publish: "Klicken um diese Webseite veröffentlichen"
-    unpublish: "Klicken um die Veröffentlichung dieser Webseite zurückziehen"
+    your_webpage_currently_is: "Diese Webseite ist"
+    click_on_webpage_to_show_details: "Klick auf eine Webseite um Details anzuzeigen"
+    publish_desc: >
+      Eine veröffentlichte Webseite kann von jedem gesehen werden und wird - <br />
+      abhängig von der Bekanntheit des Internetauftritts - innerhalb weniger<br />
+      Tage auch auf den Suchmaschinen gelistet. Eine unveröffentlichte Webseite<br />
+      kann von allen RedakteurInnen eingesehen und bearbeitet werden"
+    publish: "Klick hier um diese Webseite veröffentlichen"
+    unpublish: "Klick hier um die Veröffentlichung dieser Webseite zurückziehen"
     has_been_published: "Webseite &raquo;%{name}&laquo; wurde veröffentlicht"
     has_been_unpublished: "Veröffentlichung von Webseite &raquo;%{name}&laquo; wurde zurückgezogen"
     delete: "Webseite löschen"
@@ -291,19 +302,24 @@ de:
     tags_desc: "Führe Stichworte an, die diese Seite kategorisieren bzw. eine Suche erleichtern"
     template: "Vorlage"
     content: "Text"
+    name_required: "Bitte gib einen Namen an"
     created_at: "Erstellt am"
     updated_at: "Aktualisiert am"
     last_seen: "Zuletzt gesehen"
     really_delete: "Möchtest du die Webseite >>%{name}<< wirklich löschen?"
     lang_desc: "Leer == keine Sprachunterstützung für diese Seite"
     general: "Allgemein"
-    description: "Kurzbeschreibung"
+    description: "Beschreibung"
     please_click_a_container_first: "Bitte klicke zuerst auf den Bereich den du bearbeiten möchtest"
     enter_your_text_here: "Bitte gib deinen Text hier ein"
     image_browser: "Bildmanager"
     text_editor: "Texteditor"
     structure: "Struktur"
+    new: "Neue Webseite"
     new_below: "Neue Webseite unterhalb"
+    meta_information: "META Informationen"
+    meta_keywords: "Schlüsselwörter"
+    meta_description: "Beschreibung"
     templates:
       default: "Standard"
       frontpage: "Frontpage"
@@ -317,7 +333,6 @@ de:
     type_a_webpages_name: "Schreib ein paar Buchstaben einer Webseite"
     click_here_to_filter: "Filter anwenden"
     back: "Zurück zur Liste"
-    new: "Neue Webseite"
     list:
       title: "Alle Webseiten"
     num:

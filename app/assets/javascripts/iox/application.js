@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require select2
 
 //= require 3rdparty/jquery.center
 //= require 3rdparty/jquery-ui-1.10.3.custom
@@ -27,8 +28,9 @@ $(function(){
   $('.iox-app-nav a').tooltip({
     placement: 'right'
   });
-  $('[rel=tooltip]').tooltip({
-    placement: 'bottom'
+  $('body').tooltip({
+    placement: 'bottom',
+    selector: '[rel=tooltip]'
   });
 
   $.blockUI.defaults.css = {};
@@ -37,7 +39,7 @@ $(function(){
 
   $('.iox-mcc').css( 'height', ( $(window).height() - $('.iox-top-nav').height() - 1 ) );
   if( $('.iox-sidebar').length ){
-    $('.iox-sidebar-arrow').css('top', $('.iox-app-nav li.active').offset().top+12);
+    $('.iox-sidebar-arrow').css('top', $('.iox-app-nav li.active a').offset().top-40);
   }
 
   // data-xhr-url indicates a snippet to be loaded
@@ -84,6 +86,11 @@ $(function(){
       $(self).unblock();
       new iox.Win({ content: htmlRes });
     });
+  });
+
+  $(document).on('click', '[data-confirmation-win]', function(e){
+    e.preventDefault();
+    new iox.Win({ content: '<div class="content-padding">'+$(this).attr('data-confirmation-txt')+'</div><div class="iox-win-footer"><button class="btn" data-close-win="true">'+iox.Win.defaults.i18n.ok+'</button></div>' });
   });
 
 });

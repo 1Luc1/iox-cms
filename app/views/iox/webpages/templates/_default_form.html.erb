@@ -1,0 +1,65 @@
+<script id="iox-webpage-form-template-<%= template %>" type="text/html">
+
+  <h3 class="title" data-bind="text: name"></h3>
+
+  <form data-bind="submit: saveWebpageForm">
+
+    <div class="scrollable-content w-header w-footer">
+
+      <div class="fields-header"><%= t('webpage.general') %></div>
+
+      <div class="field-box required">
+        <label for="name"><%= t('name') %></label>
+        <input type="text" name="webpage[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
+      </div>
+
+      <div class="fields-header"><%= t('webpage.publishing_status') %></div>
+
+      <div class="field-box required">
+        <div class="label-offset publishing-status">
+          <%= t('webpage.your_webpage_currently_is') %>
+          <!-- ko if: published -->
+          <span class="label label-success" data-bind="click: publishWebpage" rel="tooltip" title="<%= t 'webpage.unpublish' %>"><i class="icon icon-ok-sign"></i><%= t('webpage.published') %></span>
+          <!-- /ko -->
+          <!-- ko ifnot: published -->
+          <span class="label" data-bind="click: publishWebpage" rel="tooltip" title="<%= t 'webpage.publish' %>"><i class="icon icon-ban-circle"></i><%= t('webpage.not_published') %></span>
+          <!-- /ko -->
+          <i class="icon-question-sign" title="<%= t('whats_this') %>?" rel="tooltip" data-confirmation-win="true" data-confirmation-txt="<%= t('webpage.publish_desc') %>"></i>
+        </div>
+      </div>
+
+      <div class="fields-header"><%= t('webpage.meta_information') %></div>
+
+      <div class="field-box">
+        <label for="webpage_meta_keywords"><%= t('webpage.meta_keywords') %></label>
+        <input type="text" class="webpage_meta_keywords" name="webpage[webpage_translation][meta_keywords]" data-bind="value: translation.meta_keywords" />
+      </div>
+
+      <div class="field-box">
+        <label for="webpage_meta_description"><%= t('webpage.meta_description') %></label>
+        <textarea name="webpage[webpage_translation][meta_description]" maxlength="255" data-bind="value: translation.meta_description" />
+        <br />
+        <span class="label-offset mini-desc"><%= t('max_255') %></span>
+      </div>
+
+    </div>
+
+    <div class="scrollable-content-footer">
+      <button type="submit" class="pull-right btn-primary btn"><%= t('save') %></button>
+    </div>
+
+    <input type="submit" class="hide" value="submit" />
+
+  </form>
+
+</script>
+
+<script type="text/javascript">
+
+$(function(){
+  iox.webpageTmpl['<%= template %>'] = function defaultTmplSetup( item ){
+    $('.webpage_meta_keywords').select2({ tokenSeparators: [',', ' '], tags: [], width: '400px' })
+  }
+});
+
+</script>

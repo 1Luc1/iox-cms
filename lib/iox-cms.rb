@@ -25,3 +25,4 @@ require 'iox/controller_helpers'
 
 # require all gem files
 require 'paperclip'
+require 'select2-rails'

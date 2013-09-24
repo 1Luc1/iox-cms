@@ -1,28 +1,37 @@
-<div id="new-webpage-block" class="block-modal new-object">
-  <div class="block-header">
-    <span class="pull-right close-block close-block-trigger"><i class="icon-remove"></i></span>
-    <span class="title"><%= t('webpages.new') %><%= " (#{@parent.name})" if @parent %></span>
-  </div>
-  <div class="block-body">
-    <%= form_for @webpage, remote: true do |f| %>
-      <p>
-        <%= f.label :name, t('webpage.name') %>
-        <%= f.text_field :name %>
-      </p>
-      <p>
-        <%= f.label :template, t('webpage.template') %>
-        <%= f.hidden_field :parent_id %>
-        <%= f.select :template, options_for_select( available_webpage_templates(:translate) ), class: 'select2' %>
-        <%= f.fields_for @webpage.translation do |trans| %>
-          <%= trans.hidden_field :locale %>
-        <% end %>
-        <%= f.submit '', style: 'display:none' %>
-      </p>
-    <% end %>
-  </div>
-  <div class="block-footer">
-    <input type="checkbox" name="continue-creating" style="margin: -1px 3px 0 0" value="true" /><%= t('keep_open') %>
-    <a class="btn close-block-trigger"><%= t('close') %></a>
-    <a class="btn btn-primary" onclick="$(this).closest('.block-modal').find('form').submit();"><%= t('create') %></a>
-  </div>
-</div>
+<script id="iox-new-webpage-form-template" type="text/html">
+
+  <h3 class="title" data-bind="html: (id ? name() : '<%= t('webpage.new') %>')+(_parent() ? ' in <strong>&raquo;'+_parent().name()+'&laquo;</strong>' : '')"></h3>
+
+  <form data-bind="submit: (id ? saveWebpageForm : createWebpageForm)">
+
+    <div class="scrollable-content w-header w-footer">
+
+      <div class="fields-header"><%= t('webpage.general') %></div>
+
+      <div class="field-box required">
+        <label for="name"><%= t('name') %></label>
+        <input type="text" name="webpage[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
+      </div>
+
+      <div class="field-box required">
+        <label for="name"><%= t('webpage.template') %></label>
+        <select name="webpage[template]" class="webpage-template">
+          <% available_webpage_templates(:translate).each do |tmpl| %>
+            <option value="<%= tmpl[1] %>" data-bind="attr: { selected: ('<%= tmpl[1] %>' === template) }"><%= tmpl[0] %></option>
+          <% end %>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="scrollable-content-footer">
+      <button type="submit" class="pull-right btn-primary btn" data-bind="text: ( id ? '<%= t('save') %>' : '<%= t('create') %>' )"></button>
+    </div>
+
+
+    <input type="hidden" name="webpage[parent_id]" data-bind="value: (_parent() ? _parent().id : '')" />
+    <input type="submit" class="hide" value="submit" />
+
+  </form>
+
+</script>

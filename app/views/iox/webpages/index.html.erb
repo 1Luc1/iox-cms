@@ -1,58 +1,142 @@
-<div class="container-fluid">
+<%= content_for :add_js do %>
+  <%= javascript_include_tag "iox/webpages" %>
+<% end %>
 
-  <div class="pad-wrapper users-list with-filter">
-    <div class="row-fluid header">
+<%= content_for :add_css do %>
+  <%= stylesheet_link_tag "iox/webpages", media: "all" %>
+<% end %>
 
-      <div class="left-subcontainer">
+<div class="iox-sidebar">
+  <div class="iox-sidebar-arrow"></div>
+  <div class="iox-sidebar-frame">
 
-        <div class="iox-tree-control clearfix">
-          <%= link_to t('webpages.new'), new_webpage_path, id: 'trigger-new-webpage-block', class: 'btn btn-flat success pull-right', remote: true %>
-        </div>
+    <div class="iox-webpage-header iox-tree-control">
+      <form>
+        <input type="text" name="query" placeholder="<%= t('filter_results') %> " />
+        <input type="submit" value="<%= t('search') %>" />
+      </form>
+      <button class="btn" data-tree-role="refresh" rel="tooltip" title="<%= t('refresh') %>"><i class="icon-refresh"></i></button>
+      <button class="btn" data-tree-role="new" rel="tooltip" title="<%= t('webpage.new') %>"><i class="icon-plus"></i></button>
+    </div>
 
-        <ul id="webpages-list" class="children"></ul>
+    <ul id="iox-webpages-list"></ul>
 
-      </div>
+  </div>
 
+</div>
+
+<div class="iox-content offset-sidebar">
+  <div class="iox-content-frame hide">
+    <div id="iox-webpage-details" class="iox-form" data-bind="template: { name: (id ? 'iox-webpage-form-template-'+template : 'iox-new-webpage-form-template') }">
+    </div>
+    <div class="iox-content-arrow"></div>
+  </div>
+  <div class="iox-details-placeholder">
+    <i class="icon-info-sign"></i>
+    <%= t('webpages.click_on_webpage_to_show_details') %>
   </div>
 </div>
 
+<%= render partial: 'new_form' %>
+<%#
+  # render all webpage templates
+  # found in the /iox/webpages/templates dir
+  #
+%>
+<% available_webpage_form_templates.each do |tmpl| %>
+  <p>TMPLNM:<%= tmpl[:name] %></p>
+  <%= render partial: tmpl[:file], locals: { template: tmpl[:name] } %>
+<% end %>
+
 <script id="iox-tree-item-template" type="text/html">
-  <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }">
-    <div class="item clearfix">
+  <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }, click: markItem">
+    <div class="item clearfix" data-bind=" css: { selected: _selected, hide: _hide }">
       <!-- ko if: hasChildren -->
         <i class="icon-angle-right folder-spacer open-folder" data-bind="click: showChildren"></i>
       <!-- /ko -->
       <!-- ko ifnot: hasChildren -->
-        <i class="folder-spacer">&nbsp;</i>
+        <i class="folder-spacer" data-bind="click: showChildren">&nbsp;</i>
       <!-- /ko -->
       <div class="actions">
-        <a class="action-icon default-hide" data-bind=" attr: { 'href': '/iox/webpages/new?parent='+id }, click: newItemBelow" title="<%= t('webpage.new_below') %>"><span class="icon-plus-sign-alt"></span></a>
-        <a class="action-icon default-hide" data-bind=" attr: { 'href': '/iox/webpages/'+id },  click: removeItem" title="<%= t('webpage.delete') %>"><span class="icon-remove"></span></a>
         <a class="action-icon publish-action" data-bind="click: publishWebpage">
           <i class="icon-ban-circle success published-status" data-bind="css: { 'hide': published() }" title="<%= t('webpage.publish') %>"></i>
           <i class="icon-ok-sign published-status" data-bind="css: { 'hide': !published() }" title="<%= t('webpage.unpublish') %>"></i>
         </a>
+        <!-- ko if: template === 'frontpage' -->
+        <span class="icon-home"></span>
+        <!-- /ko -->
       </div>
-      <!-- ko if: template === 'frontpage' -->
-      <span class="icon-home"></span>
-      <!-- /ko -->
-      <a class="title" data-bind=" attr: { 'href': '/p/'+slug, title: name }, text: name"></a>
+      <a class="title" data-bind="click: showWebpageForm, attr: { title: name }, text: name"></a>
     </div>
     <ul class="children hide" data-bind="template: { name: 'iox-tree-item-template', foreach: children }"></ul>
   </li>
 </script>
 
-<%= content_for :after_scripts do %>
+<script type="text/javascript">
 
-  <%= javascript_tag do %>
+  $(document).ready( function(){
 
-    $(document).ready( function(){
-
-      $('#webpages-list').ioxTree({
-        url: '/iox/webpages',
-        creationURL: '/iox/webpages/new',
-        observe: ['published'],
-        events: {
+    $('#iox-webpages-list').ioxTree({
+      url: '/iox/webpages',
+      creationURL: '/iox/webpages/new',
+      observe: ['published'],
+      control: $('.iox-tree-control'),
+      i18n:{
+        noEntriesFound: '<%= t('filter_no_entries_found') %>'
+      },
+      events: {
+        item: {
+          showWebpageForm: function showWebpageForm( item, e ){
+            $('.iox-details-placeholder').hide();
+            $('.iox-content-frame').show();
+            setupWebpageForm( item );
+          },
+          saveWebpageForm: function saveWebpageForm( form ){
+            var self = this;
+            if( this._validator.validate() ){
+              $('.iox-content-frame').block();
+              $.ajax({ url: this._master.options.url+'/'+self.id, data: $(form).serializeArray(), dataType: 'json', type: 'put' }).done( function( json ){
+                self.admin( json.item.admin );
+                self.full_name( json.item.full_name );
+                $('.iox-content-frame').unblock();
+                iox.flash.rails( json.flash );
+              });
+            } else {
+              iox.flash.notice('<%= t('please_fill_out_all_fields') %>');
+              return false;
+            }
+          },
+          createWebpageForm: function createWebpageForm( form ){
+            var TreeItem = this.constructor;
+            var self = this;
+            if( this._validator.validate() ){
+              $('.iox-content-frame').block();
+              $.ajax({ url: this._master.options.url, data: $(form).serializeArray(), dataType: 'json', type: 'post' }).done( function( json ){
+                $('.iox-content-frame').unblock();
+                if( json.success ){
+                  var item = new TreeItem( json.item, self._master );
+                  if( item.parent_id ){
+                    var $parentLi = $(self._master.obj).find('li[data-id='+item.parent_id+']');
+                    var parent = ko.dataFor($parentLi.get(0));
+                    if( $parentLi.find('.open-folder').length ){
+                      if( $parentLi.find('.open-folder').length && $parentLi.find('.open-folder').hasClass('open') )
+                        parent.children.push( item );
+                      else
+                        $parentLi.find('.open-folder').click();
+                    } else{
+                      $parentLi.find('.folder-spacer').addClass('open-folder').click();
+                    }
+                  } else
+                    self._master.items.push( item );
+                  setupWebpageForm( item );
+                }
+                iox.flash.rails( json.flash );
+              });
+            } else {
+              iox.flash.notice('<%= t('please_fill_out_all_fields') %>');
+              return false;
+            }
+          },
           publishWebpage: function publishWebpage( item, e ){
             item.published( !item.published() );
             $.ajax({ url: '/iox/webpages/'+item.id+'/publish',
@@ -61,39 +145,46 @@
             }).done( function(response){
               if( !response.success )
                 item.published( !item.published() );
-              iox.flash( response.flash );
+              iox.flash.rails( response.flash );
+            });
+          }
+        },
+        tree: {
+          newItemForm: function newItem( e, tree, TreeItem ){
+            var self = this;
+            $('.iox-details-placeholder').show().block();
+            $('.iox-content-frame').hide();
+            $(this).block({ message: iox.loaderHorizontal });
+            $.getJSON( '/iox/webpages/new' ).done( function( json ){
+              $('.iox-details-placeholder').unblock().hide();
+              $('.iox-content-frame').show();
+              var item = new TreeItem(json, tree);
+              if( tree._selectedItem )
+                item._parent( tree._selectedItem );
+              setupWebpageForm( item );
+              $('#iox-webpage-details input[type=text]:first').focus();
+              $(self).unblock();
             });
           }
         }
-      });
-
-      $('#trigger-new-webpage-block').on('click', function(e){
-        e.preventDefault();
-        $.blockUI({ message: $('#new-webpage-block') });
-      });
-
-      $('.change-publish-state').on('click', function(){
-
-        var self = this;
-
-        $.ajax({ url: $(this).closest('td').attr('data-publish-path'),
-                 type: 'put',
-                 dataType: 'json',
-                 data: { publish: $(this).hasClass('unpublished-icon') },
-                 success: function( data ){
-                    iox.flash( data );
-                    if( $(self).hasClass('unpublished-icon') )
-                      $(self).closest('td').find('.published-icon').show();
-                    else
-                      $(self).closest('td').find('.unpublished-icon').show()
-                    $(self).hide();
-                 }
-        });
-
-      })
-
+      }
     });
 
-  <% end %>
 
-<% end %>
+    function setupWebpageForm( item ){
+      ko.cleanNode($('#iox-webpage-details').get(0));
+      $('#iox-webpage-details').html('');
+      ko.applyBindings( item, $('#iox-webpage-details').get(0) );
+      $('.webpage-template').kendoDropDownList();
+      item._validator = $("#iox-webpage-details").kendoValidator().data("kendoValidator");
+
+      if( typeof(iox.webpageTmpl[item.template]) === 'function' )
+        iox.webpageTmpl[item.template]( item );
+
+      if( item.id ){
+        // if webpage exists
+      }
+
+    }
+  });
+</script>

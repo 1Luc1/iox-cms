@@ -17,8 +17,10 @@ en:
   filter_results: "Filter results"
   filter_no_entries_found: "No results found for given query"
   please_fill_out_all_fields: "Please fill out all fields"
+  max_255: "Maximum of 255 characters"
 
   loading_quota: "loading quota"
+  whats_this: "What's this"
 
   # language syntax
   or: "or"
@@ -224,10 +226,18 @@ en:
 
   webpage:
     name: "Name"
+    publishing_status: "Publish"
+    your_webpage_currently_is: "This webpage is"
+    click_on_webpage_to_show_details: "Click on a webpage to show details"
     published: "published"
     not_published: "not published"
     publish: "click to publish this webpage"
     unpublish: "click to unpublish this webpage"
+    publish_desc: >
+      A published webpage can be seen by anyone and will be listed<br />
+      on search engines - depending on the popularity of your site in <br />
+      general - within a couple of days. An unpublished webpage can<br />
+      still be seen and edited by users with 'editor' role."
     has_been_published: "&raquo;%{name}&laquo; has been published"
     has_been_unpublished: "&raquo;%{name}&laquo; has been unpublished"
     delete: "Remove this Webpage"
@@ -254,7 +264,11 @@ en:
     enter_your_text_here: "Enter your text here"
     image_browser: "Image Manager"
     text_editor: "Text Editor"
+    new: "New Webpage"
     new_below: "New Webpage below"
+    meta_information: "META Informationen"
+    meta_keywords: "Tags/Keywords"
+    meta_description: "Short description"
     templates:
       default: "Default"
       frontpage: "Frontpage"
@@ -266,7 +280,6 @@ en:
     back: "back to list"
     list:
       title: "All Webpages"
-    new: "New Webpage"
     num:
       one: "One page"
       zero: "No page"

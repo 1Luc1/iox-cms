@@ -186,19 +186,20 @@
     }
   }
 
-  Tree.prototype.filterItems = function filerItems( filter ){
+  Tree.prototype.filterItems = function filerItems( filter, items ){
     var self = this;
-    ko.utils.arrayForEach(self.items(), function(item) {
+    items = items || self.items();
+    ko.utils.arrayForEach(items, function(item) {
       var name = item[ self.options.queryFieldName || 'name' ];
       name = ( typeof(name) === 'function' ? name() : name );
       if( filter === '' || name.toLowerCase().indexOf(filter) >= 0 ){
         item._hide( false );
-        if( item.children() && item.children().length > 0 )
-          self.filterItems( filter );
       }
       else{
         item._hide( true );
       }
+      if( item.children() && item.children().length > 0 )
+        self.filterItems( filter, item.children() );
     });
   }
 
@@ -248,6 +249,8 @@
     this._master = master;
     this.children = ko.observableArray();
     this._hide = ko.observable(false);
+    this._selected = ko.observable(false);
+    this._parent = ko.observable();
     for( var i in item )
       if( i.match(/name|position/) || ( this._master.options.observe && this._master.options.observe.indexOf(i) >= 0 ) )
         this[i] = ko.observable( item[i] );
@@ -288,6 +291,8 @@
    *
    */
   TreeItem.prototype.showChildren = function showChildren( item, e ){
+    if( !$(e.target).hasClass('open-folder') )
+      return;
     var self = this;
     if( $(e.target).hasClass('open') )
       return $(e.target).removeClass('icon-angle-down').removeClass('open').addClass('icon-angle-right').removeClass('open').closest('li').find('ul').slideUp(200);
@@ -301,6 +306,23 @@
         self._master.setupEventListeners();
       }
     });
+  }
+
+  /**
+   * highlight and mark this item
+   */
+  TreeItem.prototype.markItem = function markItem( item, e ){
+    if( e )
+      e.stopPropagation();
+    if( item._selected() ){
+      item._selected( false );
+      item._master._selectedItem = null;
+      return;
+    }
+    item._selected( true );
+    if( item._master._selectedItem )
+        item._master._selectedItem._selected( false );
+    item._master._selectedItem = item;
   }
 
   /**

@@ -7,6 +7,7 @@
 //= require 3rdparty/jquery.nested-sortable.min
 //= require 3rdparty/bootstrap
 //= require 3rdparty/knockout
+//= require 3rdparty/moment-2.0.0.min
 //= require 3rdparty/jquery.blockui
 
 //= require 3rdparty/kendoui/kendo.web.min

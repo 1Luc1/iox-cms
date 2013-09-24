@@ -2,11 +2,11 @@ module Iox
 
   class UniqueTemplateValidator < ActiveModel::Validator
     def validate(record)
-      return true if record.new_record?
       tmpl_filename = File.join( Rails.root, 'config', 'iox_webpage_fixtures', "#{record.template}_data.yml" )
       if File.exists? tmpl_filename
-        tmpl_data = YAML::load_file( tmpl_filename )
-        if( tmpl_data["unique"] ) && Iox::Webpage.where("template='#{record.template}' AND id != #{record.id}" ).count > 0
+        tmpl_data = HashWithIndifferentAccess.new(YAML::load_file( tmpl_filename ))
+        puts "not found #{tmpl_data}"
+        if( tmpl_data[:unique] ) && Iox::Webpage.unscoped.where("template='#{record.template}'#{" AND id != #{record.id}" unless record.new_record?}" ).count > 0
           record.errors[:template] << 'A webpage with that template already exists. Only one is allowed!'
         end
       end
@@ -51,7 +51,9 @@ module Iox
     validates :name, presence: true
 
     before_save        :create_slug
+    before_create      :publish_if_frontpage
     after_create       :init_webbits
+
 
     def tmpl_filename
       File.join( Rails.root, 'config', 'iox_webpage_fixtures', "#{template}_data.yml" )
@@ -119,6 +121,10 @@ module Iox
     end
 
     private
+
+    def publish_if_frontpage
+      published = true if template === 'frontpage'
+    end
 
     def init_webbits
       if File.exists? tmpl_filename

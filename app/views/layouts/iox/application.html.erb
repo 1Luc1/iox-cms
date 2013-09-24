@@ -38,5 +38,17 @@
 
 </div><!-- ion main container wrapper -->
 
+  <script type="text/javascript">
+    $(function(){
+
+      moment.lang('<%= I18n.locale %>');
+      iox.Win.defaults.i18n = {
+        ok: '<%= t('ok') %>',
+        yes: '<%= t('yes') %>',
+        no: '<%= t('no') %>'
+      }
+
+    })
+  </script>
 </body>
 </html>

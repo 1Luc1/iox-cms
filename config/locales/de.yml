@@ -105,6 +105,7 @@ de:
   activity:
     created: "%{user} hat %{icon} %{name} angelegt"
     deleted: "%{user} hat %{icon} %{name} gelöscht"
+    edited: "%{user} hat %{icon} %{name} bearbeitet"
 
   select_files: "Wähle Dateien aus oder ziehe sie hier her"
 
@@ -321,6 +322,7 @@ de:
     meta_information: "META Informationen"
     meta_keywords: "Schlüsselwörter"
     meta_description: "Beschreibung"
+    translation_does_not_exist_create: "Eine Version dieser Sprache existiert noch nicht. Möchtest du eine erstellen?"
     templates:
       default: "Standard"
       frontpage: "Frontpage"

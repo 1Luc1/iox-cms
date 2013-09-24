@@ -1,0 +1,31 @@
+<div class="webpage-head-control">
+
+  <div class="iox-simple-select select-lang">
+    <span class="iox-simple-select-trigger"
+      <span class="current-select" data-bind="text: translation().locale"></span>
+      <span class="icon-caret-down"></span>
+    </span>
+    <ul class="iox-simple-select-list">
+      <% Rails.configuration.iox.available_langs.each do |lang| %>
+        <li data-bind="click: switchTranslation, css: { hide: '<%= lang %>' === translation().locale } "><%= lang %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="iox-simple-select select-template">
+    <span class="iox-simple-select-trigger"
+      <span class="current-select" data-bind="text: template"></span>
+      <span class="icon-caret-down"></span>
+    </span>
+    <ul class="iox-simple-select-list">
+      <% available_webpage_templates.each do |tmpl| %>
+        <li data-bind="click: switchTemplate, css: { hide: '<%= tmpl[0] %>' === template } "><%= tmpl[0] %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <a class="btn" data-bind=" attr: { href: '/iox/webpages/'+id }" target="_blank"><i class="icon-eye-open icon"></i><%= t('webpage.view') %></a>
+
+</div>
+
+<h3 class="title" data-bind="text: name"></h3>

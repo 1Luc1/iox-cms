@@ -75,8 +75,9 @@ en:
     view_all: "View all activities"
 
   activity:
-    created: "created"
-    deleted: "deleted"
+    created: "%{user} has created %{icon} %{name}"
+    deleted: "%{user} hat deleted %{icon} %{name}"
+    edited: "%{user} hat edited %{icon} %{name}"
 
   # error messages
   error:
@@ -272,6 +273,7 @@ en:
     meta_keywords: "Tags/Keywords"
     meta_description: "Short description"
     name_required: "Name is requried"
+    translation_does_not_exist_create: "A version of this language does not exist yet. Would you like to create one?"
     templates:
       default: "Default"
       frontpage: "Frontpage"

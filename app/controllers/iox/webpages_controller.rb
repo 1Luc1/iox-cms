@@ -3,6 +3,8 @@ require_dependency "iox/application_controller"
 module Iox
   class WebpagesController < ApplicationController
 
+    include Iox::WebpagesHelper
+
     before_filter :authenticate!, except: [ :frontpage, :show, :by_slug ]
 
     #
@@ -215,11 +217,14 @@ module Iox
       @webpage = Webpage.where( id: params[:id] ).first
       return if !redirect_if_no_webpage
       return if !redirect_if_no_rights
-      set_and_save_webpage_translation
-      save_webbits
-      save_translations
+      set_and_save_webpage_translation if params[:webpage] && params[:webpage][:translation]
+      save_webbits if params[:webbit]
+      save_translations if params[:translation]
       @webpage.set_creator_and_updater( current_user )
       if @webpage.update webpage_params
+
+        Iox::Activity.create! user_id: current_user.id, obj_name: @webpage.name, action: 'edited', icon_class: 'icon-globe', obj_id: @webpage.id, obj_type: @webpage.class.name
+
         flash.now.notice = I18n.t('saved', name: @webpage.name)
       else
         flash.now.alert = t('saving_failed', name: @webpage)
@@ -254,7 +259,7 @@ module Iox
       @webpage = Webpage.where( id: params[:id] ).first
       return if !redirect_if_no_webpage
       return if !redirect_if_no_rights
-      if @webpage.destroy
+      if @webpage.delete
         @webpage.children.each{ |c| c.delete }
         flash.now.notice = t('webpage.deleted', name: @webpage.name, id: @webpage.id)
       else
@@ -268,18 +273,13 @@ module Iox
     end
 
     def restore
-      @webpage = Webpage.where( id: params[:id] ).first
+      @webpage = Webpage.unscoped.where( id: params[:id] ).first
       return if !redirect_if_no_webpage
       return if !redirect_if_no_rights
-      if @webpage.delete
+      if @webpage.restore
         flash.now.notice = t('webpage.restored', name: @webpage.name)
       else
         flash.now.alert = t('webpage.failed_to_restore', name: @webpage.name)
-      end
-      if request.xhr?
-        render json: { flash: flash, success: flash[:alert].blank? }
-      else
-        redirect_to webpages_path
       end
     end
 
@@ -287,33 +287,6 @@ module Iox
 
     def webpage_params
       params.require(:webpage).permit(:name, :template, :parent_id, :webpage_translation => [ :locale, :meta_keywords, :content ])
-    end
-
-    def redirect_if_no_webpage
-      if !@webpage
-        if authenticated?
-          flash.alert = I18n.t('error.object_not_found')
-          redirect_to webpages_path
-          return false
-        else
-          render template: "iox/webpages/error_404", layout: 'application', status: 404
-          return false
-        end
-      end
-      if !@webpage.published? and !authenticated?
-        render template: "iox/webpages/error_404", layout: 'application', status: 404
-        return false
-      end
-      true
-    end
-
-    def redirect_if_no_rights
-      if !current_user.can_manage?( :webpages ) && !current_user.is_admin?
-        flash.alert = I18n.t('error.insufficient_rights')
-        redirect_to webpages_path
-        return false
-      end
-      true
     end
 
     def set_and_save_webpage_translation
@@ -343,8 +316,6 @@ module Iox
     def save_translations
       translation_params.each_pair do |id,t|
         translation = Translation.where(id: id).first
-        puts "found translation"
-        puts t.inspect
         unless translation.update t
           flash.alert = "could not update webbit #{translation.id} #{translation.locale}"
         end

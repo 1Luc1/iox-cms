@@ -279,9 +279,16 @@
   TreeItem.prototype.removeItem = function removeItem( item, e ){
     var url = (item._master.options.deletionURL || item._master.options.url)+'/'+item.id;
     $.ajax({ url: url, type: 'delete', dataType: 'json' }).done( function( response ){
-      console.log( item, item._master.items );
-      if( response.success )
-        item._master.items.remove(item);
+      if( response.success ){
+        item._master._selectedItem = null;
+        var $parent = $(item._master.obj).find('[data-id='+item.id+']').parent().closest('li');
+        if( $parent.length ){
+          var parent = ko.dataFor( $parent.get(0) );
+          parent.children.remove( item );
+        } else{
+          item._master.items.remove( item );
+        }
+      }
       if( iox )
         iox.flash.rails( response.flash );
       if( item._master.options.events && typeof(item._master.options.events.afterRemove) === 'function' )

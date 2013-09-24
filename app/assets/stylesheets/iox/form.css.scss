@@ -72,14 +72,16 @@ textarea.error{
 .iox-simple-select{
   display: inline-block;
   text-align: right;
-  padding: 3px 5px;
+  padding: 3px 10px;
   position: relative;
-  min-width: 40px;
   font-weight: 600;
   cursor: pointer;
-  &.toggled{
-    border: 1px solid #ddd;
+  border: 1px solid transparent;
+  &.toggled,&:hover{
+    border-color: #ddd;
     background-color: #fafafa;
+  }
+  &.toggled{
     border-bottom: none;
   }
   .icon-caret{

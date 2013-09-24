@@ -50,7 +50,9 @@
     width: null,
 
     i18n: {
-      ok: 'OK'
+      ok: 'OK',
+      yes: 'Yes',
+      no: 'No'
     }
 
   }
@@ -81,6 +83,10 @@
     this.options = window.iox.Win.defaults;
     for( var i in _options )
       this.options[i] = _options[i];
+
+    if( this.options.yesNoQuestion ){
+      this.options.content = '<div class="content-padding">'+this.options.yesNoQuestion+'</div><div class="iox-win-footer"><button class="btn btn-danger answer-no">'+this.options.i18n.no+'</button><button class="btn btn-success answer-yes pull-right" data-close-win="true">'+this.options.i18n.yes+'</button></div>';
+    }
 
     this.options.content = $('<div>'+this.options.content+'</div>');
 
@@ -114,6 +120,19 @@
       $win.block();
     });
 
+    if( this.options.yesNoQuestion ){
+      var self = this;
+      $win.find('.answer-yes').on('click', function(e){
+        $win.find('[data-close-win]:first').click();
+        if( typeof(self.options.onYes) === 'function' )
+          self.options.onYes( e );
+      });
+      $win.find('.answer-no').on('click', function(e){
+        $win.find('[data-close-win]:first').click();
+        if( typeof(self.options.onNo) === 'function' )
+          self.options.onYes( e );
+      });
+    }
     if( this.options.completed && typeof(this.options.completed) === 'function' )
       this.options.completed( $win );
 

@@ -1,6 +1,36 @@
 module Iox
   module WebpagesHelper
 
+    ## helpers for controller
+    def redirect_if_no_webpage
+      if !@webpage
+        if authenticated?
+          flash.alert = I18n.t('error.object_not_found')
+          redirect_to webpages_path
+          return false
+        else
+          render template: "iox/webpages/error_404", layout: 'application', status: 404
+          return false
+        end
+      end
+      if !@webpage.published? and !authenticated?
+        render template: "iox/webpages/error_404", layout: 'application', status: 404
+        return false
+      end
+      true
+    end
+
+    def redirect_if_no_rights
+      if !current_user.can_manage?( :webpages ) && !current_user.is_admin?
+        flash.alert = I18n.t('error.insufficient_rights')
+        redirect_to webpages_path
+        return false
+      end
+      true
+    end
+
+    ## end controller helpers
+
     def get_page_views_today
       views = 0
       Iox::WebpageStat.where( day: Time.now.to_date ).each do |page|

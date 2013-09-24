@@ -7,8 +7,39 @@
 
 <script type="text/javascript">
 
+$(function(){
+
+  $.fn.ioxImageGallery = function ioxImageGallery( options ){
+
+    var self = this;
+
+    $(this).droppable({
+      accept: '.image-browser > li',
+      activeClass: 'ui-state-highlight',
+      drop: function( e, ui ){
+        if( !$(this).find('ul').length )
+          $(this).append('<ul></ul>')
+        var $ul = $(this).find('ul');
+        var $item = $('<img/>').attr('src', $(ui.draggable).find('img').attr('data-orig-path'));
+        $item.find('.action-icon').remove().end().find('.overlay').remove();
+        var $li = $('<li/>').append($item);
+
+        $ul.append($li);
+
+        // update
+        $('.translation-content-'+$(self).attr('id').replace('wb_','')).val( $(self).html() );
+
+      }
+    });
+
+    $(this).on('click', 'li', function(e){
+      $(this).remove();
+    })
+  }
+
   $('[data-plugin-name=gallery]').each( function(){
     $(this).ioxImageGallery();
   });
+});
 
 </script>

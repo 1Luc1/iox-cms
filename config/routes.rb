@@ -42,6 +42,9 @@ Iox::Engine.routes.draw do
       get 'frontpage'
       post 'restore'
       post 'reorder'
+      post 'upload_to'
+      get 'images'
+      delete 'delete_webbit_from'
     end
   end
 

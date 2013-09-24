@@ -1,8 +1,9 @@
-//= require jquery
 //= require select2
 
+//= require 3rdparty/ckeditor/ckeditor
 //= require 3rdparty/jquery-ui-1.10.3.custom
 //= require 3rdparty/bootstrap
+//= require 3rdparty/moment-2.0.0.min
 
 //= require 3rdparty/knockout
 
@@ -11,8 +12,8 @@
 //= require 3rdparty/jquery.iframe-transport
 //= require 3rdparty/jquery.fileupload
 
-//= require app-styles
-//= require app-templates
+//= require iox/app-styles
+//= require iox/app-templates
 
 //=require_self
 
@@ -156,34 +157,3 @@ $(document).ready( function(){
   });
 
 });
-
-
-$.fn.ioxImageGallery = function ioxImageGallery( options ){
-
-  var self = this;
-
-  $(this).droppable({
-    accept: '.image-browser > li',
-    activeClass: 'ui-state-highlight',
-    drop: function( e, ui ){
-      if( !$(this).find('ul').length )
-        $(this).append('<ul></ul>')
-      var $ul = $(this).find('ul');
-      var $item = $('<img/>').attr('src', $(ui.draggable).find('img').attr('data-orig-path'));
-      $item.find('.action-icon').remove().end().find('.overlay').remove();
-      var $li = $('<li/>').append($item);
-
-      $ul.append($li);
-
-      // update
-      $('.translation-content-'+$(self).attr('id').replace('wb_','')).val( $(self).html() );
-
-    }
-  });
-
-  $(this).on('click', 'li', function(e){
-    $(this).remove();
-  })
-
-
-}

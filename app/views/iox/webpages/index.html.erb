@@ -27,7 +27,7 @@
 
 <div class="iox-content offset-sidebar">
   <div class="iox-content-frame hide">
-    <div id="iox-webpage-details" class="iox-form" data-bind="template: { name: (id ? 'iox-webpage-form-template-'+template : 'iox-new-webpage-form-template') }">
+    <div id="iox-webpage-details" class="iox-form" data-bind="template: { name: (id ? 'iox-webpage-form-template-'+template() : 'iox-new-webpage-form-template') }">
     </div>
     <div class="iox-content-arrow"></div>
   </div>
@@ -44,7 +44,6 @@
   #
 %>
 <% available_webpage_form_templates.each do |tmpl| %>
-  <p>TMPLNM:<%= tmpl[:name] %></p>
   <%= render partial: tmpl[:file], locals: { template: tmpl[:name] } %>
 <% end %>
 
@@ -62,7 +61,7 @@
           <i class="icon-ban-circle success published-status" data-bind="css: { 'hide': published() }" rel="tooltip" title="<%= t('webpage.publish') %>"></i>
           <i class="icon-ok-sign published-status" data-bind="css: { 'hide': !published() }" rel="tooltip" title="<%= t('webpage.unpublish') %>"></i>
         </a>
-        <!-- ko if: template === 'frontpage' -->
+        <!-- ko if: template() === 'frontpage' -->
         <span class="icon-home"></span>
         <!-- /ko -->
       </div>
@@ -79,7 +78,7 @@
     $('#iox-webpages-list').ioxTree({
       url: '/iox/webpages',
       creationURL: '/iox/webpages/new',
-      observe: ['published','translation'],
+      observe: ['published','translation','template'],
       control: $('.iox-tree-control'),
       i18n:{
         noEntriesFound: '<%= t('filter_no_entries_found') %>'
@@ -111,10 +110,8 @@
             if( this._validator.validate() ){
               $('.iox-content-frame').block();
               $.ajax({ url: this._master.options.url+'/'+self.id, data: $(form).serializeArray(), dataType: 'json', type: 'put' }).done( function( json ){
-                self.admin( json.item.admin );
-                self.full_name( json.item.full_name );
-                $('.iox-content-frame').unblock();
-                iox.flash.rails( json.flash );
+                  $('.iox-content-frame').unblock();
+                  iox.flash.rails( json.flash );
               });
             } else {
               iox.flash.notice('<%= t('please_fill_out_all_fields') %>');
@@ -178,11 +175,44 @@
           switchTranslation: function switchTranslation( item, e ){
             $.getJSON( '/iox/webpages/'+item.id+'/translations/'+$(e.target).text(),
               function( jsonResponse ){
-                if( jsonResponse )
+                if( jsonResponse ){
                   item.translation( jsonResponse );
+                  if( typeof(iox.webpageTmpl[item.template()]) === 'function' )
+                    iox.webpageTmpl[item.template()]( item );
+                }
                 else
-                  iox.flash.alert('failed to retreive translation');
+                  new iox.Win({
+                    yesNoQuestion: '<%= t('webpage.translation_does_not_exist_create') %>',
+                    onYes: function onYes($win){
+                      $.ajax({ url: '/iox/webpages/'+item.id+'/translations',
+                               data: { locale: $(e.target).text() },
+                               dataType: 'json',
+                               type: 'post'
+                      }).done( function( jsonResponse ){
+                        if( jsonResponse.success ){
+                          item.translation( jsonResponse.item );
+                          if( typeof(iox.webpageTmpl[item.template()]) === 'function' )
+                            iox.webpageTmpl[item.template()]( item );
+                        }
+                        iox.flash.rails( jsonResponse.flash );
+                      });
+                    }
+                  })
             });
+            $(e.target).closest('.iox-simple-select')
+              .find('.iox-simple-select-list').slideUp(100)
+              .toggleClass('toggled');
+          },
+
+          /**
+           * switch to a different template
+           */
+          switchTemplate: function switchTemplate( item, e ){
+            item.template( $(e.target).text() );
+            $('li[data-id='+item.id+']').click();
+            $(e.target).closest('.iox-simple-select')
+              .find('.iox-simple-select-list').slideUp(100)
+              .toggleClass('toggled');
           }
 
         },
@@ -222,8 +252,8 @@
       $('.webpage-template').kendoDropDownList();
       item._validator = $("#iox-webpage-details").kendoValidator().data("kendoValidator");
 
-      if( typeof(iox.webpageTmpl[item.template]) === 'function' )
-        iox.webpageTmpl[item.template]( item );
+      if( typeof(iox.webpageTmpl[item.template()]) === 'function' )
+        iox.webpageTmpl[item.template()]( item );
 
       if( item.id ){
         // if webpage exists

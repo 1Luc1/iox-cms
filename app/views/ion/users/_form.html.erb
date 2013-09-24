@@ -1,161 +1,109 @@
-<%= javascript_include_tag '3rdparty/password-generator.min.js' %>
-
-<div class="container-fluid">
-  <div class="pad-wrapper new-user">
-    <div class="row-fluid header">
-        <h3><%= @user.new_record? ? t('user.new') : @user.full_name %></h3>
+<script id="ion-user-form-template" type="text/html">
+  <div class="pull-left">
+    <div class="user-avatar">
+      <img data-bind="attr: { src: avatar, 'data-user-id': id }" class="avatar" />
+      <!-- ko if: id -->
+      <div class="user-upload-avatar-txt">
+        <%= t('user.change_picture') %>
+      </div>
+      <input type="file" class="user-upload-avatar" name="user[avatar]" data-bind=" attr: { 'data-url': '/ion/users/'+id+'/upload_avatar' }" />
+      <!-- /ko -->
     </div>
+  </div>
+  <div class="user-details">
 
-    <div class="row-fluid form-wrapper">
-      <!-- left column -->
-      <div class="span9 with-sidebar">
-        <div class="container">
+    <h3 class="title" data-bind="text: (id ? username() : '<%= t('user.new') %>')"></h3>
 
-          <div class="span7 flash-container">
-            <% if @user.errors.any? %>
-              <div class="alert alert-error">
-                <i class="icon-remove-sign pull-left"></i>
-                <h4><%= t('prohibited_to_save', count: @user.errors.count) %></h4>
-                <ul>
-                  <% @user.errors.messages.each_pair do |key, msg| %>
-                    <% msg.each do |m| %>
-                      <li><%= m %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
-              </div>
-            <% end %>
+    <form data-bind="submit: (id ? saveUserForm : createUserForm)">
+
+      <div class="scrollable-content w-header w-footer">
+
+        <div class="fields-header"><%= t('user.general') %></div>
+
+        <div class="field-box required">
+          <label for="username"><%= t('user.username') %></label>
+          <input type="text" name="user[username]" data-bind="value: username" required validationMessage="<%= t('user.username_required') %>" />
+        </div>
+
+        <div class="field-box">
+          <label for="firstname"><%= t('firstname') %></label>
+          <input type="text" name="user[firstname]" data-bind="value: firstname" />
+        </div>
+
+        <div class="field-box">
+          <label for="firstname"><%= t('lastname') %></label>
+          <input type="text" name="user[lastname]" data-bind="value: lastname" />
+        </div>
+
+        <div class="fields-header"><%= t('user.contact_info') %></div>
+        <div class="field-box required">
+          <label for="email"><%= t('email') %></label>
+          <input type="text" name="user[email]" data-bind="value: email" required validationMessage="<%= t('user.email_required') %>" />
+        </div>
+
+        <% if !Rails.configuration.ion.skip_user_fields || !Rails.configuration.ion.skip_user_fields.include?(:phone) %>
+          <div class="field-box">
+            <label for="firstname"><%= t('phone') %></label>
+            <input type="text" name="user[phone]" data-bind="value: phone" />
+          </div>
+        <% end %>
+
+        <% if current_user.is_admin? %>
+
+          <div class="fields-header"><%= t('user.roles') %></div>
+
+          <div class="field-box">
+            <select name="roles[]" multiple class="select-roles label-offset">
+              <% Rails.configuration.ion.user_roles.each do |role| %>
+                <option value="<%= role %>" data-bind="attr: { selected: (roles().indexOf('<%= role %>') >= 0) }"><%= role %></option>
+              <% end %>
+            </select>
           </div>
 
-          <%= form_for @user, html: { class: 'new_user_form inline-input'} do |f| %>
+        <% end %>
 
-            <div class="span12 field-box">
-              <%= f.label :username, t('user.username') %>
-              <%= f.text_field :username, :class => 'span9 inline-input' %>
-            </div>
-            <div class="span12 field-box">
-              <%= f.label :firstname, t('user.firstname') %>
-              <%= f.text_field :firstname, :class => 'span9 inline-input' %>
-            </div>
-            <div class="span12 field-box">
-              <%= f.label :lastname, t('user.lastname') %>
-              <%= f.text_field :lastname, :class => 'span9 inline-input' %>
-            </div>
-            <div class="span12 field-box">
-              <%= f.label :email, t('user.email') %>
-              <%= f.text_field :email, :class => 'span9 inline-input' %>
-              <% if @user.errors and @user.errors.messages.has_key?(:email) %>
-                <% @user.errors.messages[:email].each do |msg| %>
-                  <div class="offset1 field_with_errors alert-msg"><i class="icon-remove-sign"></i><%= msg %></div>
-                <% end %>
-              <% end %>
-            </div>
-            <div class="span12 field-box">
-              <%= f.label :lang, t('user.lang') %>
-              <div class="ui-select span2">
-                <%= f.select( :lang, Rails.configuration.iox.available_langs.map{ |lang| [ t("langs.#{lang}"), lang ] } ) %>
-              </div>
-              <%= f.label :roles, t('user.role'), style: 'margin-left: 30px' %>
+          <!-- ko if: id -->
 
-              <%= f.text_field :roles, class: 'select-roles', style: 'width: 250px' %>
+          <% if current_user.is_admin? %>
 
-            </div>
-            
+            <div class="fields-header"><%= t('user.suspend') %></div>
 
             <div class="field-box">
+              <div class="label-offset desc"><%= t('user.suspend_desc') %></div>
 
-              <%= f.label :can_read_apps, t('user.can_read_apps') %>
-
-              <%= f.text_field :can_read_apps, class: 'select-apps', style: 'width: 250px' %>
-
-            </div>
-
-            <div class="field-box">
-
-              <%= f.label :can_write_apps, t('user.can_write_apps') %>
-
-              <%= f.text_field :can_write_apps, class: 'select-apps', style: 'width: 250px' %>
-
-            </div>
-
-            <div class="span9 offset1 alert">
-              <strong><%= t('notice') %></strong>
-              <span><%= t('user.suggest_password_desc') %></span>
-            </div>
-
-            <div class="field-box" style="text-align:right">
-              <a href="#" class="btn" id="suggest-pwd"><i class="icon-lightbulb pull-left" style="margin: 3px 10px 0 0"></i><%= t('user.suggest_password') %></a>
-              <br/>
-            </div>
-
-            <div class="span5 offset7 alert gen-pwd-is hide">
-              <span><%= t('user.gen_pwd_is') %>:</span>
-              <strong id="gen-pwd-cleartext"></strong>
-            </div>
-
-            <div class="span12 field-box">
-              <%= f.label :password, t('user.password') %>
-              <%= f.password_field :password, :class => 'span9 inline-input' %><br />
-              <span class="span9 offset1 alert-msg">
-                <i class="icon-info-sign"></i>
-                <%= t('user.password_policy') %>
-              </span>
-            </div>
-            <div class="span12 field-box">
-              <%= f.label :password_confirmation, t('user.password') %>
-              <%= f.password_field :password_confirmation, :class => 'span9 inline-input' %>
-            </div>
-
-            <div class="span6 field-box actions">
-              <%= f.check_box :send_welcome_msg %>
-              <span><%= t('user.send_welcome_msg') %></span>
-              <span style="margin: 0 10px">&nbsp;</span>
-              <%= f.submit t('create'), :class => 'btn-glow primary' %>
-              <span><%= t('or') %></span>
-              <input type="reset" value="<%= t('cancel') %>" class="reset">
+              <!-- ko ifnot: suspended -->
+              <a href="#" class="btn btn-warning label-offset" data-xhr-win="true" data-bind="attr: { 'data-xhr-href': '/ion/users/'+id+'/confirm_suspend' }"><%= t('user.suspend_this_user') %></a>
+              <!-- /ko -->
+              <!-- ko if: suspended -->
+              <a data-bind="attr: { href: '/ion/users/'+id+'/unsuspend' }" class="btn btn-primary label-offset" data-method="patch" data-remote="true"><%= t('user.unsuspend_this_user') %></a>
+              <!-- /ko -->
             </div>
 
           <% end %>
 
-        </div>
+          <div class="fields-header"><%= t('user.delete') %></div>
+
+          <div class="field-box">
+            <div class="label-offset desc"><%= t('user.delete_desc') %></div>
+
+            <a href="#" class="btn btn-danger label-offset" data-xhr-win="true" data-bind=" attr: { 'data-xhr-href': '/ion/users/'+id+'/confirm_delete' } "><%= t('user.delete_this_user') %></a>
+          </div>
+
+          <!-- /ko -->
+
+
       </div>
 
-      <!-- side right column -->
-      <div class="span3 form-sidebar pull-right">                      
-          <h6>Sidebar text for instructions</h6>
-          <p>Add multiple users at once</p>
-          <p>Choose one of the following file types:</p>
-          <ul>
-              <li><a href="#">Upload a vCard file</a></li>
-              <li><a href="#">Import from a CSV file</a></li>
-              <li><a href="#">Import from an Excel file</a></li>
-          </ul>
+      <div class="scrollable-content-footer">
+        <button type="submit" class="pull-right btn-primary btn" data-bind="text: ( id ? '<%= t('save') %>' : '<%= t('create') %>' )"></button>
+        <span class="send-welcome-msg">
+          <input type="checkbox" name="send_welcome_msg" data-bind="attr: {checked: !id}" /><%= t('user.send_welcome_msg') %>
+        </span>
       </div>
-    </div>
+
+      <input type="submit" class="hide" value="submit" />
+
+    </form>
+
   </div>
-</div>
-
-<%= content_for :after_scripts do %>
-  <script type="text/javascript">
-    $('.select-roles').select2({
-      tags: <%= raw Rails.configuration.iox.user_roles.to_json %>,
-      tokenSeparators: [',', ' ']
-    });
-    $('.select-apps').select2({
-      tags: <%= raw Iox::addons.map{ |addon| addon[:name] }.to_json %>,
-      tokenSeparators: [',', ' ']
-    });
-    $(".select2").select2({
-      placeholder: "<%= t('user.define_at_least_one_role') %>",
-      tokenSeparators: [",", " "]
-    });
-    $('#suggest-pwd').on('click', function(e){
-      e.preventDefault();
-      var pwd = generatePassword(8);
-      $('.gen-pwd-is').removeClass('hide');
-      $('#gen-pwd-cleartext').text( pwd );
-      $('#user_password').val( pwd );
-      $('#user_password_confirmation').val( pwd );
-    })
-  </script>
-<% end %>
+</script>

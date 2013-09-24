@@ -13,6 +13,7 @@ de:
   close: "Schließen"
   delete: "Löschen"
   back: "Zurück"
+  back_to_startpage: "Zurück zur Startseite"
   next: "Weiter"
   previous: "Zurück"
   preview: "Vorschau"
@@ -31,6 +32,9 @@ de:
   published: "Veröffentlicht"
   settings: "Einstellungen"
   keep_open: "Dieses Fenster offen halten"
+  refresh: "Aktualisieren"
+  filter_results: "Ergebnisse filtern"
+  please_fill_out_all_fields: "Bitte alle Felder ausfüllen"
 
   loading_quota: "Quota wird geladen"
 
@@ -63,6 +67,8 @@ de:
 
   tags: "Stichworte"
   name: "Name"
+  full_name: "Voller Name"
+  email: "Email"
   country: "Land"
   street: "Straße"
   url: "URL"
@@ -72,6 +78,7 @@ de:
   zip_city: "PLZ / Stadt"
   description: "Beschreibung"
   copyright: "Copyright"
+  phone: "Telefon"
   firstname: "Vorname"
   lastname: "Nachname"
   owner: "Besitzer"
@@ -84,11 +91,16 @@ de:
 
   activities:
     you_have:
+      one: "Ein neues Ereignis"
       zero: "Keine neuen Ereignisse"
       other: "%{count} neue Ereignisse"
     activities: "Ereignisse"
     loading: "Lade Ereignisse"
     view_all: "Alle Ereignisse anzeigen"
+
+  activity:
+    created: "%{user} hat %{icon} %{name} angelegt"
+    deleted: "%{user} hat %{icon} %{name} gelöscht"
 
   select_files: "Wählen Sie Dateien aus oder ziehen Sie sie hier her"
 
@@ -129,14 +141,25 @@ de:
     email_not_recognized: "Diese Email Adresse ist uns nicht bekannt"
     instructions_have_been_sent: "Anweisungen zum weiteren Vorgehen wurden an die angegebene Emailadresse versandt"
     forgot_password_request: "Passwort vergessen?"
-    forgot_password_head: "Sie können ein neues Passwort anfordern, wenn Sie Ihre Email Adresse angeben"
+    forgot_password_head: "Du kannst ein neues Passwort anfordern, wenn Du deine Email Adresse angibst"
+    request_password: "Passwort zurücksetzen"
     password: "Passwort"
     new_password: "Neues Passwort"
     password_confirmation: "Passwort wiederholen"
+    password_changed: "Passwort wurde gespeichert"
     send_instructions: "Anweisungen senden"
+    new_password: "Dein neues Passwort"
+    save_password: "Neues Passwort speichern"
+    invalid_key: "Ungültige Schlüssel/Email-Kombination"
+    new_password_saved: "Neues Passwort wurde gespeichert"
+    passwords_missmatch: "Die Passwörter stimmen nicht überein"
+    confirm_password: "Bestätige dein Passwort"
+    reset_password_txt: "Passwort zurücksetzen"
+    set_password_txt: "Bevor du startest, setze bitte ein Passwort"
+    welcome: "Willkommen!"
     key_could_not_be_generated: "Fehler beim erzeugen des Schlüssels"
-    forgot_password_instructions: "Sie können Ihr Passwort unter folgendem Link neu setzen:"
-    forgot_password_instructions_tail: "Falls Sie diese Anforderung nicht gesendet haben, bleibt alles beim Alten. Sie müssen nichts tun. Falls Sie öfter von diesen Anforderungen belästigt werden, senden Sie bitte eine Email an %{support_mail}"
+    forgot_password_instructions: "Du kannst dein Passwort unter folgendem Link neu setzen:"
+    forgot_password_instructions_tail: "Falls du diese Anforderung nicht gesendet hast, bleibt alles beim Alten. Du brauchst nichts tun. Falls du öfter von diesen Anforderungen belästigt wirst, sende bitte eine Email an %{support_email}"
     login_failures:
       one: "Ein fehlgeschlagener Anmeldeversuch seit letzter Sitzung (am %{at})"
       other: "%{count} fehlgeschlagene Anmeldeversuche seit letzter Sitzung (am %{at})"
@@ -163,6 +186,44 @@ de:
     suggest_password: "Passwort vorschlagen"
     suggest_password_desc: "Sie können ein Passwort vom System vorschlagen lassen. Drücken Sie so lange den Knopf bis Ihnen ein Vorschlag zusagt."
     gen_pwd_is: "Das Passwort lautet"
+    contact_info: "Kontaktinformationen"
+    administration: "Administratives"
+    suspend: "Deaktivieren"
+    suspend_desc: "Deaktiviere Benutzer können sich nicht mehr anmelden und erhalten keine Email-Benachrichtigungen mehr"
+    suspend_this_user: "Benutzerkonto deaktivieren"
+    unsuspend_this_user: "Benutzerkonto wieder aktivieren"
+    cannot_suspend_yourself: "Eigenes Benutzerkonto kann nicht deaktiviert werden"
+    suspending_ok: "Account %{name} wurde deaktiviert"
+    suspending_failed: "Account %{name} konnte nicht deaktiviert werden"
+    unsuspending_ok: "Account %{name} wurde wieder aktiviert"
+    unsuspending_failed: "Account %{name} konnte nicht aktiviert werden"
+
+    saved: "Einstellungen für %{name} wurden gespeichert"
+    creation_failed: "Benutzerkonto konnte nicht erstellt werden"
+
+    suspend_user: "Benutzerkonto %{name} deaktivieren"
+    suspend_user_text: "Konto von <strong>%{name}</strong> deaktivieren? <br />Diese Aktion sperrt den Benutzer vom System aus. Das Konto wird nicht gelöscht."
+    suspend_user_yes: "Ja, deaktivieren"
+
+    username_required: "Benutzername muss angegeben werden"
+    email_required: "Emailadresse muss angegeben werden"
+
+    delete: "Benutzerkonto löschen"
+    delete_user: "Benutzerkonto von &raquo;%{name}&laquo; löschen"
+    delete_desc: "Löscht das Konto dieses Benutzers inklusiver aller Nachrichten. Inhalte, die der Benutzer verfasst hat, werden nicht gelöscht, solange nicht explizit angefordert. Diese Aktion kann nicht rückgängig gemacht werden"
+    delete_this_user: "Dieses Benutzerkonto löschen"
+    delete_contents: "erstellte Inhalte auch löschen"
+    delete_user_text: "Du bist im Begriff das Benutzerkonto endgültig zu löschen.<br /> Diese Aktion hat folgen auf die Nachrichten/Kommentare, die %{name} verfasst hat.<br /> Sie kann nicht rückgängig gemacht werden!"
+    enter_username_to_delete: "Gib den Benutzernamen <strong>%{name}</strong> im Textfeld ein, damit wir<br /> sicher gehen können, dass du weißt, was du tust"
+    delete_user_yes: "Ja, Benutzerkonto für immer löschen"
+    delete_entered_username_missmatch: "Der angegebene Benutzername stimmt nicht mit <strong>%{name}</strong> überein"
+    deletion_ok: "Benutzerkonto &raquo;%{name}&laquo; wurde gelöscht"
+    deletion_failed: "Benutzerkonto konnte nicht gelöscht werden"
+    deletion_and_content_ok: "Benutzerkonto &raquo;%{name}&laquo; und verlinkte Inhalte wurden entfernt"
+
+    edit: "Profil bearbeiten"
+
+    roles: "Rollen"
 
     settings: "Kontoeinstellungen"
     save_restore_settings: "Einstellungen sichern oder wiederherstellen"
@@ -176,11 +237,7 @@ de:
     send_welcome_msg: "Einladung an Emailadresse senden"
 
     username: "Benutzername"
-    firstname: "Vorname"
-    lastname: "Nachname"
-    email: "Email"
-    phone: "Telefon"
-    last_seen: "Letztes Mal gesehen"
+    last_time_online: "Letztes Mal online"
     registered_at: "Registriert am"
     timezone: "Zeitzone"
     role: "Rolle"
@@ -191,14 +248,15 @@ de:
     define_at_least_one_role: "Definieren Sie mindestens eine Rolle"
 
     created: "Benutzer &raquo;%{name}&laquo; wurde erstellt"
+    created_and_mail_sent: "Benutzer &raquo;%{name}&laquo; wurde erstellt und eine Email wurde versandt"
 
     you_are_admin_and_can_edit: "Sie verfügen über Administratorrechte und können dieses Profil bearbeiten. Seien Sie vorsichtig!"
 
     mailer:
       welcome: "Willkommen"
-      has_created_an_account: "%{name} hat ein Konto für Sie angelegt. Ihre Kontodaten lauten:"
-      login_and_start: "Melden Sie sich unter dem Link %{url} an um mit %{site_title} zu arbeiten"
-      goodbye: "Auf Wiedersehen"
+      has_created_an_account: "%{name} hat ein Konto für dich angelegt. Du kannst gleich loslegen und dein Passwort setzen:"
+      login_and_start: "Melde dich unter dem Link %{url} an und folge den Anweisungen"
+      goodbye: "frohes Schaffen"
 
   auto_generated: "Diese Email wurde automatisch erstellt. Bei Fragen und Problemen wenden Sie sich bitte an %{support_email}"
 
@@ -208,9 +266,9 @@ de:
       title: "Alle Konten"
     new:
       title: "Neues Konto"
-    click_here_to_filter: "Klicken Sie hier um Benutzerkonten zu filtern"
     only_where: "Nur Benutzer wo"
     type_a_users_name: "Tippen Sie den Beginn eines Benutzernamens"
+    click_on_user_to_show_details: "Klick auf einen Benutzer zeigt Details"
 
   webpage:
     name: "Name"
@@ -221,7 +279,7 @@ de:
     has_been_published: "Webseite &raquo;%{name}&laquo; wurde veröffentlicht"
     has_been_unpublished: "Veröffentlichung von Webseite &raquo;%{name}&laquo; wurde zurückgezogen"
     delete: "Webseite löschen"
-    deleted: "Webseite &raquo;%{name}&laquo; wurde gelöscht <a href='/iox/webpages/%{id}/restore' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>Wiederherstellen</a>"
+    deleted: "Webseite &raquo;%{name}&laquo; wurde gelöscht <a href='/ion/webpages/%{id}/restore' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>Wiederherstellen</a>"
     reordering_failed: "Foglende Webseiten konnten nicht korrekt sortiert werden: %{names}"
     reordering_saved: "Sortierung gespeichert"
     failed_to_delete: "Webseite &raquo;%{name}&laquo; konnte nicht gelöscht werden"
@@ -281,7 +339,7 @@ de:
   activerecord:
     errors:
       models:
-        "iox/user":
+        "ion/user":
           attributes:
             password:
               confirmation: "Die Passwortwiederholung stimmt nicht überein"
@@ -292,3 +350,5 @@ de:
             email:
               invalid: "Die Emailadresse ist ungültig"
               blank: "Bitte geben Sie eine Emailadresse an"
+            username:
+              taken: "Dieser Benutzername ist bereits vergeben"

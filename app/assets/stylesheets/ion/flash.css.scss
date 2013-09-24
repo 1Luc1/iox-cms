@@ -11,8 +11,16 @@
   font-weight: 600;
   padding: 3px 20px;
 }
-.auth-flash-container.error{
-  color: #d00;
+.auth-flash-container .flash-item{
+  background: none repeat scroll 0 0 #FFE866;
+  border: 1px solid #C5BD47;
+  color: #4C4C4C;
+  font-size: 0.8em;
+}
+.auth-flash-container.error .flash-item{
+  border-color: #a00;
+  color: #fee;
+  background-color: #d44;
 }
 .ion-flash-container .flash-item.alert{
   border-color: #a00;

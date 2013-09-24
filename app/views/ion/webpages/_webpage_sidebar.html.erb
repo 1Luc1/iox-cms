@@ -1,0 +1,199 @@
+<!-- side right column -->
+<div class="webpage-sidebar">
+
+    <!-- save and other actions -->
+    <div class="btn-group settings pull-right" style="width:auto">
+      <button class="btn" title="<%= t('webpages.back') %>" data-href="<%= webpages_path %>"><i class="icon-chevron-sign-left"></i></button>
+      <button class="btn" type="submit" title="<%= t('save') %>"><i class="icon-save"></i></button>
+      <button class="btn" title="<%= t('view') %>" data-href="<%= webpage_path(@webpage) %>"><i class="icon-eye-open"></i></button>
+      <button data-toggle="dropdown" class="btn dropdown-toggle">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+          <li><a href="<%= webpages_path %>"><%= t('webpages.back') %></a></li>
+          <li><a href="<%= webpage_path(@webpage) %>" target='_blank'><%= t('view') %></a></li>
+          <li><%= link_to t('delete'), @webpage, method: :delete, data: { confirm: t('webpage.really_delete', name: @webpage.name) } %></li>
+      </ul>
+    </div>
+
+  <%= image_tag 'iox/logo-box_80x29.png', class: 'iox-logo' %>
+
+  <!-- Tabs control -->
+  <div class="btn-group webpage-tabs-control">
+    <button class="btn-flat btn active white" data-to-id="general" style="padding: 6px 10px 7px;"><%= t('webpage.general') %></button>
+    <button class="btn-flat btn white" data-to-id="meta" style="padding: 7px 10px 6px"><i class="icon-cog"></i></button>
+    <button class="btn-flat btn white" data-to-id="images" style="padding: 7px 10px 6px"><i class="icon-picture"></i></button>
+    <button class="btn-flat btn white" data-to-id="webbit" style="padding: 7px 10px 6px"><i class="icon-sitemap"></i></button>
+  </div>
+
+  <div id="webpage-tab-general" class="webpage-tab active">
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
+
+    <%= f.fields_for @webpage.translation do |tr| %>
+
+      <%= tr.hidden_field :id %>
+
+
+      <div class="slider-frame <%= @webpage.published? ? 'success' : '' %> pull-right">
+        <span class="publish-button slider-button<%= ' on' if @webpage.published? %>" data-href="<%= publish_webpage_path(@webpage) %>" data-off-text="NO" data-on-text="YES"><%= @webpage.published? ? 'YES' : 'NO' %></span>
+      </div>
+
+      <%= f.label :template, t('webpage.published') %>
+
+      <p>
+        <%= f.label :template, t('webpage.template') %>
+
+        <%= f.select( :template, options_for_select( available_webpage_templates( :translate ), @webpage.template ), {},
+            {class: 'select2', style: 'width: 280px', multiple: false} ) %>
+      </p>
+
+      <p>
+        <%= tr.label :locale, t('language') %>
+
+        <%= tr.select( :locale, available_webpage_langs( :translate ), { include_blank: true},
+            {class: 'select2', style: 'width: 280px', multiple: false} ) %>
+
+        <%= t('webpage.lang_desc') %>
+      </p>
+
+    <% end %>
+  </div>
+
+  <div id="webpage-tab-meta" class="webpage-tab">
+
+    <%= f.fields_for @webpage.translation do |tr| %>
+
+      <p><%= tr.label :meta_keywords, t('tags') %></p>
+
+      <%= tr.text_field( :meta_keywords, class: 'select2tags', style: 'width: 280px' ) %>
+
+      <p><%= t('webpage.tags_desc') %></p>
+
+      <p>
+        <%= tr.label :meta_description, t('webpage.description') %>
+        <%= tr.text_area :meta_description %>
+      </p>
+
+    <% end %>
+
+  </div>
+
+  <div id="webpage-tab-images" class="webpage-tab">
+
+    <h1><%= t('webpage.image_browser') %></h1>
+
+    <p class="select-files-text"><%= t('select_files') %></p>
+
+    <ul class="clearfix image-browser" id="image-browser" data-bind="template: { name: 'image-template', foreach: images }"></ul>
+
+    <ul class="clearfix select-files-list">
+      <li class="select-files">
+        <span class="icon-plus"></span>
+        <input type="file" id="upload" name="file" multiple="true" />
+      </li>
+    </ul>
+
+    <script type="text/javascript">
+
+      $('#upload').fileupload({
+        url: '<%= upload_to_webpage_path(@webpage) %>',
+        dataType: 'json',
+        formData: {
+          "authenticity_token": $('input[name="authenticity_token"]:first').val()
+        },
+        dragover: function( e ){
+          $(this).addClass('drop-here');
+        },
+        done: function (e, data) {
+          var file = data._response.result;
+          if( file.content_type.indexOf( 'image' ) >= 0 ){
+            imagesData.images.push( { orig_url: file.url, thumb_url: file.thumbnail_url, id: file.id } );
+            setTimeout( setupImageGalleryDraggable, 50 );
+          }
+        }
+      });
+
+    </script>
+
+  </div>
+
+  <div id="webpage-tab-webbit" class="webpage-tab">
+
+    <div class="webbit-list">
+      <h1><%= t('webpage.structure') %></h1>
+      <ul>
+        <% @webpage.webbits.each do |wb| %>
+          <li data-webbit-id="wb_<%= wb.id %>"><span class="pull-right">[<%= wb.plugin_type %>]</span>
+          <a class="pull-right" style="margin-right: 5px" href="<%= delete_webbit_from_webpage_path( @webpage ) %>?webbit_id=<%= wb.id %>" data-method="delete" data-remote="true" data-confirm="Really delete this webbit?"><i class="icon-trash"></i></a><a href="#"><%= wb.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <% get_required_webbits.each do |webbit| %>
+      <%= render partial: "iox/webpages/webbits/#{webbit}", locals: {f: f} %>
+    <% end %>
+
+  </div>
+
+  <div class="bottom-control">
+
+    <button class="btn btn-primary pull-right" title="<%= t('save') %>" type="submit" onclick="$('.webpage-form .stay-on-page').val('false');">
+      <i class="icon-save"></i>&nbsp; &plus;
+      <%= t('back') %>
+    </button>
+
+    <span class="pull-right">&nbsp;</span>
+
+    <button class="btn btn-primary pull-right" title="<%= t('save') %>" type="submit" onclick="$('.webpage-form .stay-on-page').val('true');">
+      <i class="icon-save"></i>
+      <%= t('save') %>
+    </button>
+
+  </div>
+
+  <%= hidden_field_tag :stay_on_page, false, class: 'stay-on-page' %>
+</div>
+
+
+<script type="text/html" id="image-template">
+  <li data-bind="attr: { 'data-id': id } ">
+    <img data-bind='attr: { src: thumb_url, "data-orig-path": orig_url }' />
+    <div class="overlay"></div>
+    <a data-bind='attr: { href: "/iox/webfiles/"+id }' class="action-icon remove" data-method="delete" data-remote="true">
+      <i class="icon-remove"></i>
+    </a>
+  </li>
+</script>
+
+<script type="text/javascript">
+
+function setupImageGalleryDraggable(){
+
+  $('.image-browser li').each( function(){
+    if( $(this).data('draggable') )
+      $(this).draggable('destroy');
+  });
+
+  $('.image-browser li').draggable({
+    delay: 300,
+    appendTo: 'body',
+    revert: 'invalid',
+    cursor: 'move',
+    helper: 'clone',
+    zIndex: 10000
+ });
+
+}
+  $.getJSON( '<%= images_webpage_path( @webpage ) %>', function( json ){
+    json.forEach( function( img ){
+      imagesData.images.push( img );
+    });
+    ko.applyBindings( imagesData, $('#image-browser').get(0) );
+    setTimeout( setupImageGalleryDraggable, 100);
+
+  });
+
+</script>

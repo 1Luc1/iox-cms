@@ -1,0 +1,27 @@
+/**
+ * activities.css
+ */
+
+.activities-details{
+  margin: 20px 0;
+}
+.activities-details ul{
+  list-style: none;
+  padding: 0;
+}
+.activities-details li{
+  margin: 5px 0;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  &:last-child{ border: none; }
+}
+.activities-details li .time{
+  font-size: 0.9em;
+  color: #777;
+  .icon-time{ color: #999; }
+}
+.activities-details .title{
+  font-size: 2em;
+  font-weight: 100;
+  margin-bottom: 1.5em;
+}

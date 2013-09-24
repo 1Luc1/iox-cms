@@ -1,0 +1,26 @@
+<%= content_for :add_css do %>
+  <%= stylesheet_link_tag "ion/activities", media: "all" %>
+<% end %>
+
+<div class="ion-content">
+  <div class="ion-content-frame auto-overflow">
+
+    <div class="activities-details">
+      <div class="title"><%= t('activities.you_have', count: @activities.size ) %></div>
+      <ul>
+        <% @activities.each do |activity| %>
+
+          <li>
+            <div class="time">
+              <i class="icon-time"></i>
+              <%= l activity.created_at %>
+            </div>
+            <%= raw t("activity.#{activity.action}", name: ( activity.obj_name ? link_to( activity.obj_name, activity.obj_path ) : '' ), user: link_to(activity.user.username,activity.user), icon: ( activity.icon_class ? "<i class='#{activity.icon_class}'></i>" : '' ) ) %>
+          </li>
+
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>

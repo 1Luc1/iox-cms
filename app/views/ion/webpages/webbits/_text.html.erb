@@ -1,0 +1,61 @@
+<div class="webbit-text-plugin webbit-plugin-control">
+	<%= f.fields_for @webpage.translation do |tr| %>
+		<%= tr.hidden_field :content %>
+	<% end %>
+  <h1><%= t('webpage.text_editor') %></h1>
+	<div id="ckeditor-top"></div>
+	<div id="ckeditor-bottom"></div>
+</div>
+
+<script type="text/javascript">
+ for(name in CKEDITOR.instances)
+   CKEDITOR.instances[name].destroy();
+
+  CKEDITOR.disableAutoInline = true;
+  CKEDITOR.basePath = '/javascripts/3rdparty/ckeditor/';
+
+  iox.ck_config = {
+    extraPlugins: 'sharedspace,youtube',
+    removePlugins: 'floatingspace,resize',
+    allowedContent: true,
+    sharedSpaces: {
+      top: 'ckeditor-top',
+      bottom: 'ckeditor-bottom'
+    },
+    language: '<%= I18n.locale %>',
+    toolbar: [
+      [ "Sourcedialog", "Undo", "Redo" ], [ "Styles", "Templates", "Format" ],
+      [ "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "SelectAll", "Find", "Replace" ],
+      [ "SpecialChar" ],
+      [ "Link", "Unlink", "Anchor", "Image", "Table", "Youtube" ],
+      [ "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "NumberedList", "BulletedList", "Outdent", "Indent" ],
+      [ "Bold", "Italic", "Underline", "Strike", "Blockquote", "Subscript", "Superscript", "RemoveFormat" ]
+    ],
+    stylesSet: 'app-styles:/assets/app-styles.js',
+    templates_files: [ '/assets/app-templates.js' ]
+  };
+
+	$.fn.ioxTextEditor = function ioxTextEditor( options ){
+
+		options = options || {};
+
+		var self = this;
+
+		var editor = CKEDITOR.inline( $(this).attr('id'), iox.ck_config );
+    $(this).droppable({
+      accept: '.image-browser > li',
+      drop: function( e, ui ){
+        var $item = $(ui.draggable).clone();
+        editor.focus();
+        editor.insertHtml('<img src="'+$item.find('img').attr('data-orig-path')+'" class="site-img" />');
+      }
+    });
+
+		$('.webpage-form').on('submit', function(e){
+    	$('.translation-content-'+$(self).attr('id').replace('wb_','')).val( editor.getData() );
+      console.log( $('.translation-content-'+$(self).attr('id').replace('wb_','')).val());
+    });
+
+	}
+
+</script>

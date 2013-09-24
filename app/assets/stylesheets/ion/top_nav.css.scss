@@ -1,6 +1,7 @@
 .ion-top-nav{
   background: #F0F0F0;
   height: 55px;
+  border-bottom: 1px solid #ccc;
   .right-menu{
     float: right;
     margin: 10px;
@@ -98,9 +99,30 @@
     .body{
       padding: 10px;
       .title{
+        display: block;
+        border-bottom: 1px solid #ddd;
         font-size: 1em;
         color: #999;
       }
+      .time{
+        font-size: 0.8em;
+        float: right;
+        width: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        white-space: nowrap;
+        color: #999;
+      }
+      a{
+        color: #333;
+      }
+      .icon-user{
+        color: #777;
+      }
+      ul{ list-style: none; margin: 10px 0; }
+      li{ margin: 2px 0; padding: 5px; border-bottom: 1px solid #ddd; float: none; min-height: 10px; }
+      li:last-child{ border-bottom: none; }
     }
   }
   .activities-dropdown .trigger{

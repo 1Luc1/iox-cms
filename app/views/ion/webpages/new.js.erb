@@ -1,0 +1,5 @@
+$.blockUI({ message: '<%= escape_javascript(render partial: 'new_form') %>',
+  onBlock: function(){
+    $('#webpage_template').select2();
+  }
+});

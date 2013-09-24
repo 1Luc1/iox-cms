@@ -14,6 +14,8 @@ module Ion
 
         include InstanceMethods
 
+        Ion::register_model self
+
         default_scope { where(deleted_at: nil) }
 
       end

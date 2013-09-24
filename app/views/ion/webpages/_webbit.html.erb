@@ -1,0 +1,34 @@
+<% if defined?(global) and global %>
+  <% @webbit = Iox::Webbit.where(:name => webbit_name).first %>
+  <% @webbit.global = true if @webbit %>
+<% else %>
+  <% @webbit = @webpage.webbits.where(:name => webbit_name).first %>
+<% end %>
+
+<% if @webbit and controller.action_name == 'edit' and !@webbit.global %>
+
+  <div class="<%= @webbit.css_classes %><%= " webbit" unless @webbit.global %>" id="wb_<%= @webbit.id %>" data-plugin-name='<%= @webbit.plugin_type %>'<%= " contenteditable=true" if @webbit.plugin_type.include?('text') and not @webbit.global %>>
+    <%= raw( get_translation_content(@webbit) ) %>
+  </div>
+
+  <div class="webbit-meta-info" style="display:none">
+    <%= fields_for "webbit[]" do |wb| %>
+      <%= wb.hidden_field :name %>
+      <%= wb.hidden_field :plugin_type %>
+      <%= wb.hidden_field :id %>
+
+      <% @translation = get_translation(@webbit) %>
+      <%= fields_for "translation[]" do |tr| %>
+        <%= tr.hidden_field :content, :class => "translation-content-#{@webbit.id}" %>
+        <%= tr.hidden_field :id %>
+        <%= tr.hidden_field :locale %>
+      <% end %>
+
+    <% end %>
+  </div>
+
+<% else %>
+  <div class="<%= @webbit and @webbit.css_classes %>" id="wb_<%= @webbit and @webbit.id %>" data-plugin-name='text' <%= controller.action_name == 'edit' ? "contenteditable='true'" : '' %>>
+    <%= raw( get_translation_content(@webbit) ) %>
+  </div>
+<% end %>

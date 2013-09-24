@@ -45,3 +45,13 @@
     text-indent: 5px;
   }
 }
+
+.ion-auth-container .forgot-pwd{
+  margin-top: 50px;
+  h3{ font-size: 1.2em; font-weight: 100; }
+  h2{ font-size: 2em; font-weight: 100; color: #777; line-height: 1.2em; }
+}
+.ion-auth-container .field-box{
+  margin: 10px 0;
+  label{ color: #777; font-size: 0.8em; }
+}

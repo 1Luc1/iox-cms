@@ -5,6 +5,7 @@
   width: 25%;
   height: 100%;
   position: relative;
+  float: left;
 }
 .ion-sidebar-frame{
   position: absolute;
@@ -12,7 +13,7 @@
   left: 10px;
   right: 0;
   bottom: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   padding: 10px;
   background-color: #f5f5f5;
 }

@@ -1,0 +1,35 @@
+<%= content_for :prepend_head do %>
+  <%= stylesheet_link_tag 'iox/webpages' %>
+<% end %>
+<%= content_for :add_head do %>
+  <%= javascript_include_tag '3rdparty/ckeditor/ckeditor.js' %>
+  <%= javascript_include_tag 'iox/webpages' %>
+<% end %>
+
+<div class="flash-container" data-close-tooltip="<%= t('close') %>">
+  <%= render '/layouts/iox/flash_messages' %>
+</div>
+
+<%= render partial: "iox/webpages/templates/#{@webpage.template}" %>
+
+<%= javascript_tag do %>
+
+  $(document).ready( function(){
+
+    $('[data-plugin-name=gallery]').each( function(){
+      $(this).ioxImageGallery();
+    });
+
+    $('[data-plugin-name=text]').each( function(){
+      $(this).ioxTextEditor();
+    });
+
+  });
+
+<% end %>
+
+<%= content_for :webpage_sidebar do %>
+  <%= form_for @webpage, { html: { class: 'webpage-form', style: 'margin:0;' }} do |f| %>
+    <%= render partial: 'iox/webpages/webpage_sidebar', locals: { f: f } %>
+  <% end %>
+<% end %>

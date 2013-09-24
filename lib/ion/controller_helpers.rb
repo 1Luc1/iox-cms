@@ -40,5 +40,18 @@ module Ion
       end
     end
 
+    def notify_401
+      flash.now.alert = I18n.t('insufficient_rights')
+    end
+
+    def notify_404
+      flash.now.alert = I18n.t('not_found')
+    end
+
+    def redirect_401
+      flash.alert = I18n.t('insufficient_rights')
+      redirect_to( Rails.configuration.ion.redirect_after_login || dashboard_path )
+    end
+
   end
 end

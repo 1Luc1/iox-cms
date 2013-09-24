@@ -1,0 +1,10 @@
+<% if flash.notice %>
+  $('#webpages-list').ioxTree('append', <%= raw @webpage.to_json %>, <%= raw( @webpage.parent_id ? @webpage.parent_id : 'null' ) %>);
+  <% if params[:keep_open].blank? || params[:keep_open] == 'false' %>
+    $.unblockUI();
+  <% else %>
+    $('.block-body').find('input[type=text]').val('')
+    $('.block-body').find('input[type=text]:first').focus();
+  <% end %>
+<% end %>
+iox.flash(<%= raw flash.to_json %>);

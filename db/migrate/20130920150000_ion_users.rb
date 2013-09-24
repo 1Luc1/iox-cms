@@ -2,9 +2,12 @@ class IonUsers < ActiveRecord::Migration
   def change
     create_table :ion_users do |t|
 
-      t.string    :username, :index => true
+      t.string    :username, index: true
       t.string    :firstname
       t.string    :lastname
+
+      t.string    :phone
+
       t.string    :time_zone
       t.string    :lang
       t.string    :email, :index => true
@@ -14,7 +17,9 @@ class IonUsers < ActiveRecord::Migration
       t.string    :last_login_ip
       t.text      :settings
 
-      t.string    :roles, :default => ['user']
+      t.boolean   :suspended, default: false
+
+      t.string    :roles, default: ['user']
 
       t.string    :password_digest
 

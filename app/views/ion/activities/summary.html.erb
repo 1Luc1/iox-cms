@@ -1,6 +1,6 @@
 <a class="trigger" href="#" data-toggle="dropdown">
   <i class="icon-warning-sign"></i>
-  <% if @activities.size > 0 %>
+  <% if 0 == 1 # @activities.size > 0 %>
     <span class="count"><%= @activities.size %></span>
   <% end %>
   <span class="caret"></span>
@@ -13,15 +13,14 @@
   <div class="body">
     <div class="notifications">
       <span class="title"><%= t('activities.you_have', count: @activities.size ) %></span>
-      <% @activities.each do |activity| %>
-        <a class="item" href="#">
-          <% if activity.icon_class %>
-            <i class="<%= activity.icon_class %>"></i>
-          <% end %>
-          <%= raw t("activity.#{activity.action}", ( activity.obj_name ? link_to( activity.obj_name, activity.obj_path ) : '' ) ) %>
-          <span class="time"><i class="icon-time"></i> <%= time_ago_in_words(activity.created_at) %></span>
-        </a>
-      <% end %>
+      <ul>
+        <% @activities.each do |activity| %>
+          <li>
+            <span class="time"><i class="icon-time"></i><span class="short-time">&nbsp;<%= time_ago_in_words(activity.created_at).sub(/Minuten|Minute|minutes/i,'min').sub(/Stunden|Stunde|hour|hours/i,'h').sub(/one|eine/,'1').sub(/less|less than|weniger/,'<').sub(/etwa|about/,'~').sub(/mehr|mehr als|more|more than/,'>') %></span></span>
+            <%= raw t("activity.#{activity.action}", name: ( activity.obj_name ? link_to( activity.obj_name, activity.obj_path ) : '' ), user: link_to(activity.user.username,activity.user), icon: ( activity.icon_class ? "<i class='#{activity.icon_class}'></i>" : '' ) ) %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
   <div class="footer">

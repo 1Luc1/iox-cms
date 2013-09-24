@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%= stylesheet_link_tag    "ion/application", media: "all" %>
+    <%= yield :add_css %>
     <%= javascript_include_tag "ion/application" %>
-    <%= yield :add_to_head %>
+    <%= yield :add_js %>
     <%= csrf_meta_tags %>
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

@@ -1,14 +1,20 @@
-//
-//= require 3rdparty/jquery
+//= require jquery
+//= require jquery_ujs
+
 //= require 3rdparty/jquery.center
+//= require 3rdparty/jquery-ui-1.10.3.custom
+//= require 3rdparty/jquery.nested-sortable.min
 //= require 3rdparty/bootstrap
 //= require 3rdparty/knockout
 //= require 3rdparty/jquery.blockui
+
+//= require 3rdparty/kendoui/kendo.web.min
 
 //= require ion/ion.core
 //= require ion/ion.flash
 //= require ion/ion.tree
 //= require ion/ion.win
+
 
 //= require_self
 
@@ -18,11 +24,18 @@ $(function(){
 
   $('.js-get-focus:first').focus();
 
+  $('.ion-app-nav a').tooltip({
+    placement: 'right'
+  });
+  $('[rel=tooltip]').tooltip({
+    placement: 'bottom'
+  });
+
   $.blockUI.defaults.css = {};
   $.blockUI.defaults.overlayCSS = {};
   $.blockUI.defaults.message = ion.loader;
 
-  $('.ion-mcc').css( 'height', ( $(window).height() - $('.ion-top-nav').height() ) );
+  $('.ion-mcc').css( 'height', ( $(window).height() - $('.ion-top-nav').height() - 1 ) );
   if( $('.ion-sidebar').length ){
     $('.ion-sidebar-arrow').css('top', $('.ion-app-nav li.active').offset().top+12);
   }

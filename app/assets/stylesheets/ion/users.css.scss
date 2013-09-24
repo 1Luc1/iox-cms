@@ -1,0 +1,164 @@
+/**
+ * user.css.scss
+ */
+
+#ion-users-list{
+  overflow: auto;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  .icon{
+    color: #999;
+    margin: 2px;
+  }
+  .icon-user{
+    float: left;
+    margin-right: 5px;
+  }
+  .item{
+    cursor: pointer;
+  }
+}
+.user-avatar{
+  float: left;
+  border: 1px solid #ddd;
+  position: relative;
+  img{
+    max-height: 100px;
+    max-width: 100px;
+    background-color: #eee;
+  }
+  &:hover{
+    .user-upload-avatar-txt{
+      display: block;
+    }
+  }
+  .user-upload-avatar-txt{
+    display: none;
+    background-color: rgba(200, 50, 50, 0.7);
+    bottom: 0;
+    color: #FFFFFF;
+    left: 0;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    font-size: 0.8em;
+  }
+  .user-upload-avatar{
+    cursor: pointer;
+    font-size: 50px;
+    height: 100px;
+    left: 0;
+    line-height: 0;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100px;
+    z-index: 999;
+  }
+}
+.user-details{
+  margin-left: 120px;
+  .scrollable-content{
+    left: 140px;
+  }
+}
+
+.user-details input[type=text],
+.user-details input[type=password],
+.user-details textarea{
+  font-size: 1.1em;
+  padding: 5px 0;
+  text-indent: 5px;
+  width: 400px;
+  box-shadow: none;
+}
+
+.user-details input[type=text].k-invalid,
+.user-details input[type=password].k-invalid,
+.user-details textarea.k-invalid{
+  outline: 1px solid #e33;
+}
+
+.user-details .select-roles{
+  width: 400px;
+}
+
+.user-details .title{
+  font-size: 2em;
+  font-weight: 100;
+  color: #999;
+  margin: 0;
+  padding: 10px;
+}
+
+.user-details .fields-header{
+  border-bottom: 1px solid #ddd;
+  margin: 20px 0;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.user-details .field-box{
+  margin: 10px 0;
+}
+
+.user-details .required label:after{
+  color: #e32;
+  content: ' *';
+  display:inline;
+}
+
+.user-details .field-box .desc{
+  margin: 10px 0;
+  max-width: 400px;
+}
+
+.user-details .field-box label{
+  width: 100px;
+  float: left;
+  display: block;
+  font-weight: 600;
+  font-size: 0.8em;
+  color: #777;
+  margin: 5px 0;
+}
+
+.user-details .field-box .label-offset{
+  margin-left: 100px;
+}
+
+/**
+ * show a user
+ */
+.user-profile{
+  margin: 40px;
+}
+
+.user-profile .user-avatar{
+  margin: 0 20px;
+}
+
+.user-profile .user-content{
+  margin-left: 150px;
+}
+
+.user-profile .field-box{
+  margin: 20px 0;
+  h4{ margin:0; color: #999; font-weight: 500; }
+  h3{ font-size: 3em; font-weight: 100; color: #333; }
+}
+
+.send-welcome-msg{
+  float: right;
+  margin: 7px 20px;
+  input{
+    margin-right: 5px;
+  }
+}

@@ -11,7 +11,11 @@ en:
   close: "Close"
   delete: "Delete"
   back: "Back"
+  back_to_startpage: "Back to startpage"
   keep_open: "Keep this window open"
+  refresh: "Refresh"
+  filter_results: "Filter results"
+  please_fill_out_all_fields: "Please fill out all fields"
 
   loading_quota: "loading quota"
 
@@ -41,13 +45,17 @@ en:
 
   tags: "Tags"
   name: "Name"
+  full_name: "Full name"
   country: "Country"
   street: "Street"
   url: "URL"
   city: "City"
   zip: "ZIP"
+  firstname: "Vorname"
+  lastname: "Nachname"
   zip_city: "Zip / City"
   description: "Description"
+  phone: "Phone"
   firstname: "Firstname"
   lastname: "Lastname"
 
@@ -55,11 +63,16 @@ en:
 
   activities:
     you_have:
+      one: "One new notification"
       zero: "No new notifictations"
       other: "%{count} new notifications"
     activities: "Activities"
     loading: "Loading activities"
     view_all: "View all activities"
+
+  activity:
+    created: "created"
+    deleted: "deleted"
 
   # error messages
   error:
@@ -92,14 +105,25 @@ en:
     you_have_been_logged_out: "You are now logged of from the system"
     login_required: "Login required"
     login_failed: "Login failed"
+    password_changed: "Password has been changed successfully"
     email_not_recognized: "This email address is not known to us"
     instructions_have_been_sent: "Instructions for continuing the procedure have been sent to the given email address"
     forgot_password_request: "Lost password?"
     forgot_password_head: "You can request a new password by providing your email address"
+    request_password: "Reset password"
     password: "Password"
     new_password: "New password"
     password_confirmation: "Repeat password"
     send_instructions: "Send Instructions"
+    new_password: "Your new password"
+    confirm_password: "Confirm your password"
+    invalid_key: "Invalid key/email combination"
+    new_password_saved: "Your new password has been saved"
+    passwords_missmatch: "Passwords missmatch"
+    save_password: "Save new password"
+    welcome: "Hi"
+    reset_password_txt: "Du kannst dein Passwort jetzt neu setzen"
+    set_password_txt: "Bevore you start, please choose a password"
     login_failures:
       one: "one failed login since your last session (at %{at})"
       other: "%{count} failed logins since your last session (at %{at})"
@@ -129,14 +153,44 @@ en:
     save_restore_settings_desc: "Sie können Ihre Einstellungen als Datei abspeichern und zu einem späteren Zeitpunkt wiederherstellen"
     import_settings_file: "Einstellungsdatei importieren"
     export_settings_file: "Einstellungsdatei herunterladen"
+    contact_info: "Contact information"
+    administration: "Administration"
+    suspend: "Suspend"
+    suspend_user: "Suspend user %{name}"
+    suspend_user_text: "Suspend user <strong>%{name}</strong>? <br />This will lock the user's access to this system. The account will not be deleted"
+    suspend_user_yes: "Yes, suspend"
+    suspend_desc: "Suspended users can not log in any more nor will they be notified about system changes via email"
+    suspend_this_user: "Suspend user"
+    unsuspend_this_user: "Unsuspend this user"
+    cannot_suspend_yourself: "You cannot suspend yourself"
+    suspending_ok: "Account %{name} has been suspended"
+    suspending_failed: "Account %{name} could not be suspended"
+    unsuspending_ok: "Account %{name} has been re-enabled"
+    unsuspending_failed: "Account %{name} could not be re-enabled"
+
+    delete: "Delete user account"
+    delete_user: "Delete account &raquo;%{name}&laquo;"
+    delete_desc: "Deletes this user account and all it's messages. Content created by this user will not be deleted unless required. This action cannot be undone"
+    delete_contents: "Also delete contents created by this user"
+    delete_this_user: "Delete this user"
+    delete_entered_username_missmatch: "Given username does not match <strong>%{name}</strong>"
+    deletion_ok: "User &raquo;%{name}&laquo; has been deleted"
+    deletion_failed: "Deleting user failed"
+    deletion_and_content_ok: "User &raquo;%{name}&laquo; and linked contents have been deleted"
+
+    saved: "Settings for %{name} have been saved"
+    creation_failed: "Failed to create user"
+
+    username_required: "Username required"
+    email_required: "Email required"
+
+    roles: "Roles"
+    edit: "edit profile"
 
     new: "Neues Benutzerkonto anlegen"
 
-    username: "Benutzername"
-    firstname: "Vorname"
-    lastname: "Nachname"
-    email: "Email"
-    last_seen: "Letztes Mal gesehen"
+    username: "Username"
+    last_time_online: "Last time online"
     registered_at: "Registriert am"
     timezone: "Zeitzone"
     role: "Rolle"
@@ -150,6 +204,9 @@ en:
 
     you_are_admin_and_can_edit: "Sie verfügen über Administratorrechte und können dieses Profil bearbeiten. <br> Seien Sie vorsichtig!"
 
+    created: "User &raquo;%{name}&laquo; has been created"
+    created_and_mail_sent: "User &raquo;%{name}&laquo; has been created and email has been sent"
+
     mailer:
       welcome: "Willkommen"
 
@@ -162,6 +219,7 @@ en:
     click_here_to_filter: "Click here to filter user accounts"
     only_where: "Only users who"
     type_a_users_name: "Type your search here"
+    click_on_user_to_show_details: "Click on a user to show details"
 
   webpage:
     name: "Name"
@@ -172,7 +230,7 @@ en:
     has_been_published: "&raquo;%{name}&laquo; has been published"
     has_been_unpublished: "&raquo;%{name}&laquo; has been unpublished"
     delete: "Remove this Webpage"
-    deleted: "&raquo;%{name}&laquo; removed <a href='/iox/webpages/%{id}/restore' class='btn btn-mini' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>restore</a>"
+    deleted: "&raquo;%{name}&laquo; removed <a href='/ion/webpages/%{id}/restore' class='btn btn-mini' data-method='post' data-remote='true'><i class='flash-icon icon-undo'></i>restore</a>"
     failed_to_delete: "&raquo;%{name}&laquo; could not be removed"
     restored: "'%{name}' has been restored"
     reordering_failed: "Following pages failed to save: %{names}"
@@ -228,7 +286,7 @@ en:
   activerecord:
     errors:
       models:
-        "iox/user":
+        "ion/user":
           attributes:
             password:
               confirmation: "Die Passwortwiederholung stimmt nicht überein"
@@ -239,3 +297,5 @@ en:
             email:
               invalid: "Die Emailadresse ist ungültig"
               blank: "Bitte geben Sie eine Emailadresse an"
+            username:
+              taken: "This username has been taken already"

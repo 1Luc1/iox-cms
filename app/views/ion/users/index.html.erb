@@ -1,14 +1,22 @@
+<%= content_for :add_js do %>
+  <%= javascript_include_tag "ion/users" %>
+<% end %>
+
+<%= content_for :add_css do %>
+  <%= stylesheet_link_tag "ion/users", media: "all" %>
+<% end %>
+
 <div class="ion-sidebar">
   <div class="ion-sidebar-arrow"></div>
   <div class="ion-sidebar-frame">
 
     <div class="ion-user-header ion-tree-control">
       <form>
-        <input type="text" name="query" />
+        <input type="text" name="query" placeholder="<%= t('filter_results') %> " />
         <input type="submit" value="<%= t('search') %>" />
       </form>
-      <button class="btn"><i class="icon-refresh"></i></button>
-      <button class="btn"><i class="icon-plus"></i></button>
+      <button class="btn" data-tree-role="refresh" rel="tooltip" title="<%= t('refresh') %>"><i class="icon-refresh"></i></button>
+      <button class="btn" data-tree-role="new" rel="tooltip" title="<%= t('user.new') %>"><i class="icon-plus"></i></button>
     </div>
 
     <ul id="ion-users-list"></ul>
@@ -17,13 +25,33 @@
 
 </div>
 
+<div class="ion-content offset-sidebar">
+  <div class="ion-content-frame hide">
+    <div id="ion-user-details" data-bind="template: { name: 'ion-user-form-template' }">
+    </div>
+    <div class="ion-content-arrow"></div>
+  </div>
+  <div class="ion-details-placeholder">
+    <i class="icon-info-sign"></i>
+    <%= t('users.click_on_user_to_show_details') %>
+  </div>
+</div>
+
+<%= render partial: 'form' %>
+
 <script id="ion-tree-item-template" type="text/html">
-  <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }" class="ui-nestedSortable-no-nesting">
-    <div class="item clearfix">
+  <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }, css: { hide: _hide }" class="ui-nestedSortable-no-nesting">
+    <div class="item clearfix" data-bind="click: showUserForm">
       <div class="actions">
-        <a class="action-icon default-hide" data-bind=" attr: { 'href': '/ion/users/'+id },  click: removeItem" title="<%= t('delete') %>"><span class="icon-remove"></span></a>
+      <!-- ko if: admin -->
+      <i class="icon-cogs icon"></i>
+      <!-- /ko -->
+      <!-- ko if: suspended -->
+      <i class="icon-ban-circle icon"></i>
+      <!-- /ko -->
       </div>
-      <a class="title" data-bind=" attr: { 'href': '/u/'+username, title: full_name }, text: full_name"></a>
+      <i class="icon-user icon"></i>
+      <a class="title" data-bind=" attr: { title: full_name }, text: full_name"></a>
     </div>
   </li>
 </script>
@@ -35,22 +63,90 @@
     $('#ion-users-list').ionTree({
       url: '/ion/users',
       creationURL: '/ion/users/new',
-      observe: [ 'suspended' ],
+      observe: [ 'suspended', 'username', 'roles', 'admin', 'full_name' ],
+      control: $('.ion-tree-control'),
+      queryFieldName: 'full_name',
       events: {
-        suspendUser: function publishWebpage( item, e ){
-          item.suspended( !item.suspended() );
-          $.ajax({ url: '/ion/users/'+item.id,
-            data: { user: { suspend: item.suspend()} },
-            type: 'put'
-          }).done( function(response){
-            if( !response.success )
-              item.suspended( !item.suspended() );
-            ion.flash( response.flash );
-          });
+        item: {
+          showUserForm: function showUserForm( item, e ){
+            $('.ion-details-placeholder').hide();
+            $('.ion-content-frame').show();
+            setupUserForm( item );
+          },
+          saveUserForm: function saveUserForm( form ){
+            var self = this;
+            if( this._validator.validate() ){
+              $('.ion-content-frame').block();
+              $.ajax({ url: this._master.options.url+'/'+self.id, data: $(form).serializeArray(), dataType: 'json', type: 'put' }).done( function( json ){
+                self.admin( json.item.admin );
+                self.full_name( json.item.full_name );
+                $('.ion-content-frame').unblock();
+                ion.flash.rails( json.flash );
+              });
+            } else {
+              ion.flash.notice('<%= t('please_fill_out_all_fields') %>');
+              return false;
+            }
+          },
+          createUserForm: function createUserForm( form ){
+            var TreeItem = this.constructor;
+            var self = this;
+            if( this._validator.validate() ){
+              $('.ion-content-frame').block();
+              $.ajax({ url: this._master.options.url, data: $(form).serializeArray(), dataType: 'json', type: 'post' }).done( function( json ){
+                $('.ion-content-frame').unblock();
+                if( json.success ){
+                  var item = new TreeItem( json.item, self._master );
+                  self._master.items.push( item );
+                  setupUserForm( item, self._master );
+                }
+                ion.flash.rails( json.flash );
+              });
+            } else {
+              ion.flash.notice('<%= t('please_fill_out_all_fields') %>');
+              return false;
+            }
+          }
+        },
+        tree: {
+          newItemForm: function newItem( e, tree, TreeItem ){
+            var self = this;
+            $('.ion-details-placeholder').show().block();
+            $('.ion-content-frame').hide();
+            $(this).block({ message: ion.loaderHorizontal });
+            $.getJSON( '/ion/users/new' ).done( function( json ){
+              $('.ion-details-placeholder').unblock().hide();
+              $('.ion-content-frame').show();
+              setupUserForm( new TreeItem(json, tree) );
+              $('#ion-user-details input[type=text]:first').focus();
+              $(self).unblock();
+            });
+          }
         }
       }
     });
 
+    function setupUserForm( item ){
+      ko.cleanNode($('#ion-user-details').get(0));
+      $('#ion-user-details').html('');
+      ko.applyBindings( item, $('#ion-user-details').get(0) );
+      $('.select-roles').kendoMultiSelect();
+      item._validator = $("#ion-user-details").kendoValidator().data("kendoValidator");
+
+      if( item.id )
+        $('.user-upload-avatar').fileupload({
+          dataType: 'json',
+          formData: {
+            "authenticity_token": $('input[name="authenticity_token"]:first').val()
+          },
+          done: function (e, data) {
+            var avatar = data._response.result[0];
+            $('.avatar-thumb[data-user-id='+item.id+']').attr('src', avatar.thumbnail_url);
+            $('.avatar[data-user-id='+item.id+']').attr('src', avatar.url);
+          }
+        });
+
+    }
   });
 
 </script>

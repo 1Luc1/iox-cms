@@ -34,6 +34,7 @@ module Ion
         copy_file "whenever_schedule.rb", "config/schedule.rb"
         create_file "app/assets/stylesheets/ion/overrides.css.scss"
 
+        gem 'rails-i18n', '~> 4.0.0.pre'
         # gem 'paperclip', '~> 3.0'
         # gem 'rails-i18n', '~> 0.7.4'
         # gem 'capistrano', group: :development
@@ -75,6 +76,7 @@ module Ion
           "    config.ion.session_timeout_min = 60\n"+
           "\n"+
           "    config.i18n.default_locale = :de\n"+
+          "    config.i18n.available_locales = [:en, :de]\n"+
           "    config.time_zone = 'Vienna'\n"+
           "\n"+
           "    config.action_mailer.default_options = { from: 'no-reply@#{domain_name}' }"+

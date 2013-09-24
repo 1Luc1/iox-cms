@@ -24,7 +24,7 @@ module Ion
     validates :username, presence: true,
                       uniqueness: true
 
-    before_create :gen_confirmation_key, :gen_user_settings
+    before_create :gen_confirmation_key
 
     before_validation :gen_password_if_empty, on: :create
 
@@ -37,18 +37,29 @@ module Ion
         str << " " unless str.blank?
         str << self.lastname
       end
-      if str.blank?
+      if str.blank? && username
         str << self.username
       end
       str
     end
     alias_method :name, :full_name
 
-    def gen_user_settings
+    def to_param
+      [id, name.parameterize].join("-")
     end
 
+    def as_json(options = { })
+      h = super(options)
+      h[:full_name] = full_name
+      h[:admin] = is_admin?
+      h[:avatar] = avatar.url(:original)
+      h[:avatar_thumb] = avatar.url(:thumb)
+      h
+    end
+
+
     def gen_confirmation_key
-      self.confirmation_key = Digest::SHA256::hexdigest( self.password )
+      self.confirmation_key = Digest::SHA256::hexdigest( password || Time.now.to_f.to_s )
       self.confirmation_key_valid_until = 36.hours.from_now
     end
 

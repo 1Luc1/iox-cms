@@ -1,0 +1,10 @@
+<%= t('user.mailer.welcome') %>, <%= @user.full_name %>
+===============================================
+
+<%= t('user.mailer.has_created_an_account', name: @creator.full_name) %>
+
+<%= t('user.mailer.login_and_start', url: @url, site_title: @site_title) %>
+
+<%= t('user.mailer.goodbye') %>
+
+<%= t('auto_generated', support_email: @support_email) %>

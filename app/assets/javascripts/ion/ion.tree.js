@@ -41,7 +41,16 @@
     // additional events which are bound to the
     // tree item. They can be called from the
     // knockoutjs template
-    events: []
+    // item will be attached to a tree item
+    // tree will be attached to the tree itself
+    //
+    events: { item: [], tree: [] },
+
+    // control div
+    // where find, create and refresh buttons are
+    // located
+    // default: null
+    control: null
 
   };
 
@@ -91,6 +100,12 @@
 
     this.items = ko.observableArray([]);
 
+    if( this.options.events ){
+      if( this.options.events.tree )
+        for( var i in this.options.events.tree )
+          this[i] = this.options.events.tree[i];
+    }
+
   }
 
   /**
@@ -109,6 +124,7 @@
    */
   Tree.prototype.loadData = function loadData( parent, callback ){
     var self = this;
+    self.items.removeAll();
     if( !parent )
       $.getJSON( this.options.url+'?parent=', function( json ){
         if( !json.items )
@@ -128,6 +144,47 @@
     ko.applyBindings( this, $(this.obj).get(0) );
     this.setupEventListeners();
     $(this.obj).data('ionTree', this);
+    if( this.options.control && $(this.options.control).length === 1 )
+      this.setupControlEvents();
+  }
+
+  /**
+   * setup tree control events
+   */
+  Tree.prototype.setupControlEvents = function setupControlEvents(){
+    var self = this;
+    var $control = $(this.options.control);
+    var $refreshBtn = $control.find('[data-tree-role=refresh]')
+    if( $refreshBtn.length )
+      $refreshBtn.off('click').on('click', function(e){
+        e.preventDefault();
+        self.loadData( null, self.render );
+      });
+    var $newBtn = $control.find('[data-tree-role=new]')
+    if( $newBtn.length )
+      $newBtn.off('click').on('click', function(e){ e.preventDefault(); self.newItemForm.apply( this, [ e, self, TreeItem ] ) });
+    var $queryField = $control.find('input[name=query]')
+    if( $queryField.length )
+      $queryField.attr('autocomplete','off').off('keyup').on('keyup', function(e){
+        e.preventDefault();
+        self.filterItems( $(this).val().toLowerCase() );
+      });
+  }
+
+  Tree.prototype.filterItems = function filerItems( filter ){
+    var self = this;
+    ko.utils.arrayForEach(self.items(), function(item) {
+      var name = item[ self.options.queryFieldName || 'name' ];
+      name = ( typeof(name) === 'function' ? name() : name );
+      if( filter === '' || name.toLowerCase().indexOf(filter) >= 0 ){
+        item._hide( false );
+        if( item.children() && item.children().length > 0 )
+          self.filterItems( filter );
+      }
+      else{
+        item._hide( true );
+      }
+    });
   }
 
   /**
@@ -175,6 +232,7 @@
   function TreeItem( item, master ){
     this._master = master;
     this.children = ko.observableArray();
+    this._hide = ko.observable(false);
     for( var i in item )
       if( i.match(/name|position/) || ( this._master.options.observe && this._master.options.observe.indexOf(i) >= 0 ) )
         this[i] = ko.observable( item[i] );
@@ -188,9 +246,11 @@
       return ( this.num_children > 0 || this.children.length > 0 );
     }, this);
 
-    if( this._master.options.events )
-      for( var i in this._master.options.events )
-        this[i] = this._master.options.events[i];
+    if( this._master.options.events ){
+      if( this._master.options.events.item )
+        for( var i in this._master.options.events.item )
+          this[i] = this._master.options.events.item[i];
+    }
 
   }
 

@@ -1,0 +1,14 @@
+<div class="webbit-gallery-plugin webbit-plugin-control">
+  <%= f.fields_for @webpage.translation do |tr| %>
+    <%= tr.hidden_field :content %>
+  <% end %>
+
+</div>
+
+<script type="text/javascript">
+
+  $('[data-plugin-name=gallery]').each( function(){
+    $(this).ioxImageGallery();
+  });
+
+</script>

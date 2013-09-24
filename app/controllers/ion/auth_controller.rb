@@ -5,7 +5,7 @@ module Ion
 
     layout 'ion/auth'
 
-    before_filter :authenticate!, except: [ :login, :forgot_password, :unauthenticated ]
+    before_filter :authenticate!, except: [ :login, :forgot_password, :unauthenticated, :reset_password, :set_password ]
 
     #
     # checks if the provided email address matches
@@ -59,7 +59,7 @@ module Ion
       if @user.save
         flash.now.notice = t('auth.password_changed')
       else
-        flash.now.alert = t('auth.password_saving_failed')
+        flash.now.alert = @user.errors.first.last
       end
     end
 
@@ -68,8 +68,9 @@ module Ion
       if request.post?
         if u = Ion::User.where( email: params[:email] ).first
           u.gen_confirmation_key
+          puts "confirmation key: #{u.confirmation_key}"
           if u.save
-            UserMailer.forgot_password_instructions( u ).deliver
+            UserMailer.forgot_password( u ).deliver
             flash.notice = I18n.t('auth.instructions_have_been_sent')
           else
             flash.alert = I18n.t('auth.key_could_not_be_generated')
@@ -77,8 +78,28 @@ module Ion
         else
           flash.alert = I18n.t('auth.email_not_recognized')
         end
+      end
+    end
+
+    def reset_password
+
+      if @user = User.where( id: params[:id], confirmation_key: params[:k] ).first
+        if request.post?
+          if params[:password] && params[:password_confirmation] && params[:password] == params[:password_confirmation]
+            @user.password = params[:password]
+            @user.password_confirmation = params[:password_confirmation]
+            if @user.save
+              flash.notice = t('auth.new_password_saved')
+              redirect_to login_path
+            else
+              flash.now.alert = @user.errors.first.last
+            end
+          else
+            flash.now.alert = t('auth.passwords_missmatch')
+          end
+        end
       else
-        flash.notice = I18n.t('auth.forgot_password_request')
+        flash.now.alert = t('auth.invalid_key')
       end
     end
 

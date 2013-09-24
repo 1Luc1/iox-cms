@@ -1,0 +1,99 @@
+<div class="container-fluid">
+
+  <div class="pad-wrapper users-list with-filter">
+    <div class="row-fluid header">
+
+      <div class="left-subcontainer">
+
+        <div class="iox-tree-control clearfix">
+          <%= link_to t('webpages.new'), new_webpage_path, id: 'trigger-new-webpage-block', class: 'btn btn-flat success pull-right', remote: true %>
+        </div>
+
+        <ul id="webpages-list" class="children"></ul>
+
+      </div>
+
+  </div>
+</div>
+
+<script id="iox-tree-item-template" type="text/html">
+  <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }">
+    <div class="item clearfix">
+      <!-- ko if: hasChildren -->
+        <i class="icon-angle-right folder-spacer open-folder" data-bind="click: showChildren"></i>
+      <!-- /ko -->
+      <!-- ko ifnot: hasChildren -->
+        <i class="folder-spacer">&nbsp;</i>
+      <!-- /ko -->
+      <div class="actions">
+        <a class="action-icon default-hide" data-bind=" attr: { 'href': '/iox/webpages/new?parent='+id }, click: newItemBelow" title="<%= t('webpage.new_below') %>"><span class="icon-plus-sign-alt"></span></a>
+        <a class="action-icon default-hide" data-bind=" attr: { 'href': '/iox/webpages/'+id },  click: removeItem" title="<%= t('webpage.delete') %>"><span class="icon-remove"></span></a>
+        <a class="action-icon publish-action" data-bind="click: publishWebpage">
+          <i class="icon-ban-circle success published-status" data-bind="css: { 'hide': published() }" title="<%= t('webpage.publish') %>"></i>
+          <i class="icon-ok-sign published-status" data-bind="css: { 'hide': !published() }" title="<%= t('webpage.unpublish') %>"></i>
+        </a>
+      </div>
+      <!-- ko if: template === 'frontpage' -->
+      <span class="icon-home"></span>
+      <!-- /ko -->
+      <a class="title" data-bind=" attr: { 'href': '/p/'+slug, title: name }, text: name"></a>
+    </div>
+    <ul class="children hide" data-bind="template: { name: 'iox-tree-item-template', foreach: children }"></ul>
+  </li>
+</script>
+
+<%= content_for :after_scripts do %>
+
+  <%= javascript_tag do %>
+
+    $(document).ready( function(){
+
+      $('#webpages-list').ioxTree({
+        url: '/iox/webpages',
+        creationURL: '/iox/webpages/new',
+        observe: ['published'],
+        events: {
+          publishWebpage: function publishWebpage( item, e ){
+            item.published( !item.published() );
+            $.ajax({ url: '/iox/webpages/'+item.id+'/publish',
+              data: {publish: item.published()},
+              type: 'put'
+            }).done( function(response){
+              if( !response.success )
+                item.published( !item.published() );
+              iox.flash( response.flash );
+            });
+          }
+        }
+      });
+
+      $('#trigger-new-webpage-block').on('click', function(e){
+        e.preventDefault();
+        $.blockUI({ message: $('#new-webpage-block') });
+      });
+
+      $('.change-publish-state').on('click', function(){
+
+        var self = this;
+
+        $.ajax({ url: $(this).closest('td').attr('data-publish-path'),
+                 type: 'put',
+                 dataType: 'json',
+                 data: { publish: $(this).hasClass('unpublished-icon') },
+                 success: function( data ){
+                    iox.flash( data );
+                    if( $(self).hasClass('unpublished-icon') )
+                      $(self).closest('td').find('.published-icon').show();
+                    else
+                      $(self).closest('td').find('.unpublished-icon').show()
+                    $(self).hide();
+                 }
+        });
+
+      })
+
+    });
+
+  <% end %>
+
+<% end %>

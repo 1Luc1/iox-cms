@@ -12,12 +12,17 @@ module Ion
         ion/application.js
         ion/application.css
         ion/webpages.js
+        ion/users.js
+        ion/users.css
         ion/webpages.css
+        ion/activities.css
         3rdparty/password-generator.min.js
+        3rdparty/jquery.fileupload
         ion/avatar/original/missing.png
         ion/avatar/thumb/missing.png
         ion/loader.gif
         ion/loader-horizontal.gif
+        3rdparty/kendoui/textures/highlight.png
       )
     end
 

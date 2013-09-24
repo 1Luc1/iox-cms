@@ -106,6 +106,13 @@
     $win.find('.js-get-focus').focus();
     $(document).on('click', checkCloseWin);
 
+    $win.find('form').on('submit', function(e){
+      $win.block();
+    });
+
+    if( this.options.completed && typeof(this.options.completed) === 'function' )
+      this.options.completed( $win );
+
   }
 
 

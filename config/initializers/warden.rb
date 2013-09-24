@@ -1,7 +1,7 @@
 require 'rails_warden'
 
 Rails.configuration.middleware.use RailsWarden::Manager do |manager|
-  manager.default_strategies :password, :basic
+  manager.default_strategies :password #, :basic
   manager.failure_app = Ion::AuthController
 end
 

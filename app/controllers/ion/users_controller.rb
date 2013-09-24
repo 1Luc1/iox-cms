@@ -7,7 +7,22 @@ module Ion
     # list all users
     #
     def index
-      @users = User.order(lastname: :asc, firstname: :asc).load
+      return redirect_401 unless current_user.is_admin?
+      return unless request.xhr?
+      offset = params[:page] || 0
+      limit = params[:limit] || 20
+      order = params[:order] || 'lastname ASC, firstname ASC'
+      query = params[:query] || nil
+      #suspended = (params[:suspended] && params[:suspended] == 'true')
+      # if suspended
+      #   @users = User.where(suspended: true)
+      # else
+      #   @users = User.where(suspended: false)
+      # end
+      @users = User
+      @users = @users.where(" lastname LIKE %?% OR firstname LIKE %?% ", params[:query], params[:query] ) if query
+      @users = @users.order(order).load
+      render json: { items: @users, query: query }
     end
 
     #
@@ -15,6 +30,7 @@ module Ion
     #
     def new
       @user = User.new roles: Rails.configuration.ion.user_default_roles.join(','), can_read_apps: Rails.configuration.ion.default_read_apps.join(','), can_write_apps: Rails.configuration.ion.default_write_apps.join(','), send_welcome_msg: true
+      render json: @user
     end
 
     #
@@ -29,19 +45,80 @@ module Ion
     end
 
     #
+    # confirm suspend form
+    #
+    def confirm_suspend
+      redirect_to render_404 unless current_user.is_admin?
+      @user = User.find_by_id( params[:id] )
+      render layout: false
+    end
+
+    #
+    # suspend user
+    #
+    def suspend
+      return notify_401 unless current_user.is_admin?
+      @user = User.find_by_id( params[:id] )
+      if current_user.id == @user.id
+        return flash.alert = t('user.cannot_suspend_yourself')
+      end
+      if @user.update( suspended: true )
+        flash.now.notice = t('user.suspending_ok', name: @user.username)
+      else
+        flash.now.alert = t('user.suspending_failed', name: @user.username)
+      end
+    end
+
+    #
+    # unsuspend user
+    #
+    def unsuspend
+      return notify_401 unless current_user.is_admin?
+      @user = User.find_by_id( params[:id] )
+      if @user.update( suspended: false )
+        flash.now.notice = t('user.unsuspending_ok', name: @user.username)
+      else
+        flash.now.alert = t('user.unsuspending_failed', name: @user.username)
+      end
+      render template: '/ion/users/suspend'
+    end
+
+    #
     # create a new user
     #
     def create
       @user = User.new user_params
-
-      @user.attributes = user_params
-
-      if @user.save
-        UserMailer.welcome_email(@user,current_user).deliver if @user.send_welcome_msg == '1'
-        flash.notice = t('user.created', name: @user.username)
-        redirect_to users_path
+      if current_user.is_admin?
+        @user.roles = params[:roles].join(',')
       else
-        render template: 'ion/users/new'
+        @user.roles = 'user'
+      end
+      if @user.save
+
+        Ion::Activity.create! user_id: current_user.id, obj_name: @user.username, action: 'created', icon_class: 'icon-user', obj_id: @user.id, obj_type: @user.class.name
+
+        puts "key: #{@user.confirmation_key}"
+
+        if params[:send_welcome_msg]
+          UserMailer.welcome_email(@user,current_user).deliver
+          flash.now.notice = t('user.created_and_mail_sent', name: @user.username)
+        else
+          flash.now.notice = t('user.created', name: @user.username)
+        end
+      else
+        if @user.errors.size > 0
+          flash.now.alert = @user.errors.first[1]
+        else
+          flash.now.alert = t('user.creation_failed')
+        end
+      end
+      if request.xhr?
+        render json: { item: @user,
+                        errors: @user.errors.full_messages,
+                        success: @user.persisted?,
+                        flash: flash }
+      else
+        redirect_to login_path
       end
     end
 
@@ -66,21 +143,33 @@ module Ion
     # show the user's profile
     #
     def show
-      flash.notice = I18n.t('user.you_are_admin_and_can_edit') if current_user.is_admin?
-      #@wide_content = true
       @user = User.where(:id => params[:id]).first
-      render template: 'ion/users/edit'
+    end
+
+    #
+    # show the user's profile
+    #
+    def edit
+      @user = User.where(:id => params[:id]).first
+      return render_401 if @user.id != current_user.id && !current_user.is_admin?
+      render layout: false
     end
 
     #
     # update a user's profile
     #
     def update
-      @wide_content = true
-      if @user = User.where(:id => params[:id]).first
+      @user = User.where(:id => params[:id].split('-').first).first
+      return notify_401 if @user.id != current_user.id && !current_user.is_admin?
+      if @user
         if @user.id != current_user.id && !current_user.is_admin?
           flash.alert = I18n.t('error.unsufficient_rights')
           return
+        end
+        if current_user.is_admin? && params[:roles]
+          params[:user][:roles] = params[:roles].join(',')
+        else
+          params[:user].delete(:roles)
         end
         if params[:user][:avatar]
           @user.avatar = params[:user][:avatar]
@@ -89,13 +178,20 @@ module Ion
           params[:user].delete(:password)
           params[:user].delete(:password_confirmation)
         end
-        if @user.update(user_params)
-          flash.notice = I18n.t('changes_have_been_saved')
+        if @user.update user_params
+          flash.now.notice = I18n.t('user.saved', name: @user.name)
         end
       else
-        flash.alert = I18n.t('error.object_not_found')
+        flash.now.alert = I18n.t('error.object_not_found')
       end
-      redirect_to @user
+      if request.xhr?
+        render json: { item: @user,
+                        errors: @user.errors.full_messages,
+                        success: @user.persisted?,
+                        flash: flash }
+      else
+        redirect_to user_path( @user )
+      end
     end
 
     #
@@ -112,10 +208,45 @@ module Ion
       end
     end
 
+    #
+    # confirm delete form
+    #
+    def confirm_delete
+      redirect_to render_401 unless current_user.is_admin?
+      @user = User.find_by_id( params[:id] )
+      render layout: false
+    end
+
+    #
+    # destroy a user
+    #
+    def destroy
+      @user = User.where(:id => params[:id]).first
+      return render_401 if !current_user.is_admin? && @user.id != current_user.id
+      if !params[:username] || params[:username] != @user.username
+        return flash.now.alert = I18n.t('user.delete_entered_username_missmatch', name: @user.username)
+      end
+      if @user.destroy
+
+        Ion::Activity.create! user_id: current_user.id, obj_name: @user.username, action: 'deleted', icon_class: 'icon-user'
+
+        if params[:delete_content] && params[:delete_content] == "1"
+          Ion::registered_models.each do |model|
+            model.where(created_by: @user.id).destroy_all
+          end
+          flash.now.notice = I18n.t('user.deletion_and_content_ok', name: @user.username)
+        else
+          flash.now.notice = I18n.t('user.deletion_ok', name: @user.username)
+        end
+      else
+        flash.now.alert = I18n.t('user.deletion_failed', name: @user.username)
+      end
+    end
+
     private
 
     def user_params
-      params.require(:user).permit(:username, :firstname, :lastname, :email, :password, :password_confirmation, :lang, :roles, :can_read_apps, :can_write_apps, :send_welcome_msg)
+      params.require(:user).permit(:username, :firstname, :lastname, :email, :password, :password_confirmation, :lang, :roles, :can_read_apps, :can_write_apps, :send_welcome_msg, :suspended, :phone )
     end
 
   end

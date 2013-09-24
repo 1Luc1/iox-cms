@@ -4,12 +4,13 @@ Ion::Engine.routes.draw do
   get '/login', to: 'auth#unauthenticated'
   post '/login', to: 'auth#login'
   get '/logout', to: 'auth#logout'
-  get '/a/f_pwd', to: 'auth#forgot_password'
-  post '/a/f_pwd', to: 'auth#forgot_password'
-  get '/a/r_pwd', to: 'auth#reset_password'
-  post '/a/r_pwd', to: 'auth#reset_password'
+  get '/forgot_password', to: 'auth#forgot_password'
+  post '/forgot_password', to: 'auth#forgot_password'
+  get '/reset_password/:id', to: 'auth#reset_password'
+  post '/reset_password/:id', to: 'auth#reset_password', as: 'reset_password'
+  get '/welcome/:id', to: 'auth#set_password'
   get '/a/c_pwd/:id', to: 'auth#change_password', as: 'change_password'
-  post '/a/c_pwd/:id', to: 'auth#save_password', as: 'save_password'
+  patch '/a/c_pwd/:id', to: 'auth#save_password', as: 'save_password'
 
   get '/dashboard', to: 'dashboard#index', as: 'dashboard'
   get '/dashboard/quota', to: 'dashboard#quota'
@@ -18,6 +19,10 @@ Ion::Engine.routes.draw do
 
   resources :users do
     member do
+      get 'confirm_suspend'
+      patch 'suspend'
+      patch 'unsuspend'
+      get 'confirm_delete'
       post 'upload_avatar'
       delete 'avatar'
     end

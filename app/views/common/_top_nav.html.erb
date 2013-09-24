@@ -2,11 +2,11 @@
   <li class="user-menu dropdown">
     <%= link_to current_user.username, user_path(current_user), class: 'username' %>
     <a href="<%= user_path(current_user) %>" data-toggle="dropdown" class="user-menu-trigger">
-      <%= image_tag current_user.avatar.url(:thumb), class: 'avatar' %>
+      <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-thumb', 'data-user-id' => current_user.id %>
       <span class="caret"></span>
     </a>
     <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-      <%= image_tag current_user.avatar.url, class: 'avatar', title: current_user.full_name %>
+      <%= image_tag current_user.avatar.url, class: 'avatar', 'data-user-id' => current_user.id, title: current_user.full_name %>
       <div class="next-to-avatar clearfix">
         <strong><%= current_user.full_name %></strong>
         <br />
@@ -16,7 +16,7 @@
         &mdash;
         <%= link_to t('activities.activities'), activities_path %>
         <br />
-        <button class="btn"><%= t('view_profile') %></button>
+        <a href="<%= user_path(current_user) %>" class="btn"><%= t('view_profile') %></a>
       </div>
       <div class="usage" data-xhr-url="<%= dashboard_quota_path %>" data-xhr-wait-txt="<%= t('loading_quota') %>..."></div>
       <div class="footer clearfix">

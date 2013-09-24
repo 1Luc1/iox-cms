@@ -22,7 +22,9 @@
       <%= yield %>
       <div class="auth-flash-container<%= ' error' if flash.alert  %>">
         <% if flash.notice || flash.alert %>
-          <%= flash.alert || flash.notice %>
+          <div class="flash-item">
+            <%= flash.alert || flash.notice %>
+          </div>
         <% end %>
       </div>
     </div>

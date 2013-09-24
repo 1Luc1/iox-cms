@@ -1,0 +1,7 @@
+$('.ion-content-frame').unblock();
+<% if flash.notice %>
+  var item = ko.dataFor( $('#ion-users-list li[data-id=<%= @user.id %>]').get(0) );
+  item.suspended( <%= @user.suspended %> );
+<% end %>
+ion.flash.rails( <%= raw flash.to_json %> );
+ion.Win.closeAll();

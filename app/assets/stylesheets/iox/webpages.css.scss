@@ -26,10 +26,20 @@
   padding: 20px;
 }
 
+#iox-webpage-details .webpage-head-control{
+  float: right;
+  margin: 5px;
+  .icon{ margin-right: 5px; }
+}
+
 #iox-webpage-details .publishing-status{
   .icon-ok-sign{ color: #81AD53; }
   .icon{ margin-right: 5px; }
   .label{ cursor: pointer; margin-left: 20px; }
   .icon-question-sign{ margin-left: 10px; color: #999; cursor: pointer; }
   .icon-question-sign:hover{ color: #333 }
+}
+
+#iox-webpage-details .iox-simple-select{
+  margin: 0 10px 0 0;
 }

@@ -59,8 +59,8 @@
       <!-- /ko -->
       <div class="actions">
         <a class="action-icon publish-action" data-bind="click: publishWebpage">
-          <i class="icon-ban-circle success published-status" data-bind="css: { 'hide': published() }" title="<%= t('webpage.publish') %>"></i>
-          <i class="icon-ok-sign published-status" data-bind="css: { 'hide': !published() }" title="<%= t('webpage.unpublish') %>"></i>
+          <i class="icon-ban-circle success published-status" data-bind="css: { 'hide': published() }" rel="tooltip" title="<%= t('webpage.publish') %>"></i>
+          <i class="icon-ok-sign published-status" data-bind="css: { 'hide': !published() }" rel="tooltip" title="<%= t('webpage.unpublish') %>"></i>
         </a>
         <!-- ko if: template === 'frontpage' -->
         <span class="icon-home"></span>
@@ -86,11 +86,20 @@
       },
       events: {
         item: {
+
+          /*
+           * show the webpage form (depending on the webpage's template)
+           * for editing existing webpages
+           */
           showWebpageForm: function showWebpageForm( item, e ){
             $('.iox-details-placeholder').hide();
             $('.iox-content-frame').show();
             setupWebpageForm( item );
           },
+
+          /**
+           * save an existing webpage
+           */
           saveWebpageForm: function saveWebpageForm( form ){
             var self = this;
             if( this._validator.validate() ){
@@ -106,6 +115,10 @@
               return false;
             }
           },
+
+          /**
+           * create a new webpage
+           */
           createWebpageForm: function createWebpageForm( form ){
             var TreeItem = this.constructor;
             var self = this;
@@ -137,6 +150,10 @@
               return false;
             }
           },
+
+          /**
+           * publish a webpage (ajax)
+           */
           publishWebpage: function publishWebpage( item, e ){
             item.published( !item.published() );
             $.ajax({ url: '/iox/webpages/'+item.id+'/publish',
@@ -147,9 +164,23 @@
                 item.published( !item.published() );
               iox.flash.rails( response.flash );
             });
+          },
+
+          /**
+           * switch to a different translation
+           */
+          switchTranslation: function switchTranslation( item, e ){
+
           }
+
         },
         tree: {
+
+          /**
+           * load a new webpage (by asking for json object from
+           * server). this gives opportunities to set default
+           * values at application level
+           */
           newItemForm: function newItem( e, tree, TreeItem ){
             var self = this;
             $('.iox-details-placeholder').show().block();
@@ -167,6 +198,7 @@
             });
           }
         }
+
       }
     });
 

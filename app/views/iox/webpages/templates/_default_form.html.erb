@@ -1,5 +1,21 @@
 <script id="iox-webpage-form-template-<%= template %>" type="text/html">
 
+  <div class="webpage-head-control">
+    <div class="iox-simple-select">
+      <span class="iox-simple-select-trigger"
+        <span class="current-select" data-bind="text: translation.locale"></span>
+        <span class="icon-caret-down"></span>
+      </span>
+      <ul class="iox-simple-select-list">
+        <% Rails.configuration.iox.available_langs.each do |lang| %>
+          <li data-bind="click: switchTranslation, css: { hide: '<%= lang %>' === translation.locale } "><%= lang %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <a class="btn" data-bind=" attr: { href: '/p/'+slug }" target="_blank"><i class="icon-eye-open icon"></i><%= t('webpage.view') %></a>
+  </div>
+
   <h3 class="title" data-bind="text: name"></h3>
 
   <form data-bind="submit: saveWebpageForm">
@@ -45,6 +61,7 @@
     </div>
 
     <div class="scrollable-content-footer">
+      <a data-bind="attr: { href: '/iox/webpages/'+id }" data-method="delete" data-remote="true" class="btn"><%= t('delete') %></a>
       <button type="submit" class="pull-right btn-primary btn"><%= t('save') %></button>
     </div>
 

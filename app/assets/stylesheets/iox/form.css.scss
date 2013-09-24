@@ -68,3 +68,43 @@ textarea.error{
 .iox-form .field-box .label-offset{
   margin-left: 120px;
 }
+
+.iox-simple-select{
+  display: inline-block;
+  text-align: right;
+  padding: 3px 5px;
+  position: relative;
+  min-width: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  &.toggled{
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    border-bottom: none;
+  }
+  .icon-caret{
+    margin: 2px 5px;
+  }
+  .iox-simple-select-list{
+    display: none;
+    position: absolute;
+    top: 25px;
+    border: 1px solid #ddd;
+    border-top: none;
+    right: 0;
+    min-width: 50px;
+    font-weight: 400;
+    list-style: none;
+    background: #fafafa;
+    padding: 0;
+    margin: 0;
+    li{
+      padding: 2px;
+      border-bottom: 1px solid #eee;
+      margin: 2px 0;
+      &:last-child{
+        border: none;
+      }
+    }
+  }
+}

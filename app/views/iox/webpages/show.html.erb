@@ -1,7 +1,7 @@
 <% if authenticated? and current_user and current_user.can_manage?(:webpages) %>
 
   <%= content_for :add_head do %>
-    <%= stylesheet_link_tag 'iox/webpages' %>
+    <%= stylesheet_link_tag 'iox/webpages_ext' %>
     <%= stylesheet_link_tag 'application' %>
     <%# javascript_include_tag 'iox/webpages' %>
   <% end %>
@@ -21,7 +21,8 @@
       </ul>
     </div>
 
-    <%= image_tag 'iox/logo-box_80x29.png', class: 'iox-logo' %>
+
+    <%= image_tag Rails.configuration.iox.brand_logo, class: 'iox-logo' %>
 
   </div>
 

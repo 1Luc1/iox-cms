@@ -1,9 +1,9 @@
 <%= content_for :prepend_head do %>
-  <%= stylesheet_link_tag 'iox/webpages' %>
+  <%= stylesheet_link_tag 'iox/webpages_ext' %>
 <% end %>
 <%= content_for :add_head do %>
   <%= javascript_include_tag '3rdparty/ckeditor/ckeditor.js' %>
-  <%= javascript_include_tag 'iox/webpages' %>
+  <%= javascript_include_tag 'iox/webpages_ext' %>
 <% end %>
 
 <div class="flash-container" data-close-tooltip="<%= t('close') %>">

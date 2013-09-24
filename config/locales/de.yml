@@ -299,6 +299,7 @@ de:
     failed_to_restore: "'%{name}' konnte nicht wiederhergestellt werden"
     edit: "Diese Webseite bearbeiten"
     views: "Seitenaufrufe"
+    view: "Ansehen"
     tags_desc: "Führe Stichworte an, die diese Seite kategorisieren bzw. eine Suche erleichtern"
     template: "Vorlage"
     content: "Text"

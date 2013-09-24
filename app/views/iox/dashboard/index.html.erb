@@ -1,3 +1,15 @@
-<div class="container-fluid">
-  <h1>Dashboard</h1>
+<%= content_for :add_js do %>
+  <%= javascript_include_tag "iox/dashboard" %>
+<% end %>
+
+<%= content_for :add_css do %>
+  <%= stylesheet_link_tag "iox/dashboard", media: "all" %>
+<% end %>
+
+<div class="iox-content">
+
+  <div class="pull-right" id="donut-example" style="height: 250px; width: 30%"></div>
+
+  <div id="myfirstchart" style="height: 250px; width: 60%"></div>
+
 </div>

@@ -10,18 +10,9 @@
 
  *= require select2
 
- *= require 3rdparty/bootstrap/bootstrap
- *= require 3rdparty/bootstrap/bootstrap-responsive
- *= require 3rdparty/bootstrap/bootstrap-overrides
+ *= require 3rdparty/bootstrap
 
- *= require 3rdparty/lib/jquery-ui-1.10.2.custom
- *= require 3rdparty/lib/font-awesome
-
- *= require 3rdparty/layout
- *= require 3rdparty/elements
- *= require 3rdparty/icons
-
- *= require 3rdparty/compiled/index
+ *= require 3rdparty/font-awesome
 
  *= require_self
  */
@@ -42,7 +33,7 @@ $sidebar-shadow: -2px -2px 5px rgba(0,0,0,0.3);
 .webpage-sidebar .btn-group{ text-align: right; margin: 0 0 10px 0; width: 100%; }
 .webpage-sidebar h1{ font-size: 1.2em; text-transform: uppercase; font-weight: 600; margin: 20px 0;}
 .webpage-sidebar .bottom-control{ margin-top: 20px; height: 40px; }
-.webpage-sidebar .iox-logo, .webpage-mini-sidebar .iox-logo{ cursor: move }
+.webpage-sidebar .iox-logo, .webpage-mini-sidebar .iox-logo{ cursor: move; width: 50px; margin-top: -17px }
 
 .webpage-mini-sidebar{ position: absolute; top: 5px; left: 5px; width: 200px; height: 30px; background-color: $sidebar-color; border: 1px solid #ddd; border-radius: 1px; box-shadow: $sidebar-shadow; padding: 10px; z-index: 1005; }
 

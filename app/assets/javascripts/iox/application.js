@@ -29,8 +29,18 @@ $(function(){
     placement: 'right'
   });
   $('body').tooltip({
-    placement: 'bottom',
-    selector: '[rel=tooltip]'
+    selector: '[rel=tooltip]',
+    placement: function(tip, element){
+      // DOES NOT WORK:
+      var position = $(element).position();
+      if (position.left > 515) {
+          return "left";
+      }
+      if (position.left < 515) {
+          return "right";
+      }
+      return "bottom";
+  }
   });
 
   $.blockUI.defaults.css = {};
@@ -87,6 +97,12 @@ $(function(){
       new iox.Win({ content: htmlRes });
     });
   });
+
+  $('body').on('click', '.iox-simple-select-trigger', function(e){
+    e.preventDefault();
+    $(this).closest('.iox-simple-select').find('.iox-simple-select-list').slideToggle(100);
+    $(this).closest('.iox-simple-select').toggleClass('toggled');
+  })
 
   $(document).on('click', '[data-confirmation-win]', function(e){
     e.preventDefault();

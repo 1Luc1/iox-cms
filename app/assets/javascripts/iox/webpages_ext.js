@@ -1,12 +1,10 @@
 //= require jquery
 //= require select2
 
-//= require 3rdparty/jquery-ui.min
-//= require 3rdparty/bootstrap.min
-//= require 3rdparty/theme
+//= require 3rdparty/jquery-ui-1.10.3.custom
+//= require 3rdparty/bootstrap
 
-//= require 3rdparty/jquery.block_ui
-//= require 3rdparty/knockout.min
+//= require 3rdparty/knockout
 
 //= require iox/iox.core
 //= require 3rdparty/jquery.ui.widget

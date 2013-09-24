@@ -18,6 +18,7 @@ en:
   filter_no_entries_found: "No results found for given query"
   please_fill_out_all_fields: "Please fill out all fields"
   max_255: "Maximum of 255 characters"
+  search: "Search"
 
   loading_quota: "loading quota"
   whats_this: "What's this"
@@ -248,6 +249,7 @@ en:
     reordering_saved: "New order has been saved"
     failed_to_restore: "'%{name}' failed to restore"
     edit: "Edit webpage"
+    view: "View webpage"
     new: "New webpage"
     views: "Views"
     tags_desc: "Enter keywords to help users find this webpage"
@@ -269,6 +271,7 @@ en:
     meta_information: "META Informationen"
     meta_keywords: "Tags/Keywords"
     meta_description: "Short description"
+    name_required: "Name is requried"
     templates:
       default: "Default"
       frontpage: "Frontpage"

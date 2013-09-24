@@ -11,10 +11,14 @@ module Iox
       Rails.application.config.assets.precompile << %w(
         iox/application.js
         iox/application.css
-        iox/webpages.js
         iox/users.js
         iox/users.css
+        iox/webpages.js
+        iox/webpages_ext.js
         iox/webpages.css
+        iox/webpages_ext.css
+        iox/dashboard.css
+        iox/dashboard.js
         iox/activities.css
         3rdparty/password-generator.min.js
         3rdparty/jquery.fileupload

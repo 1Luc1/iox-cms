@@ -148,8 +148,10 @@ module Iox
     #
     def get_translation( wb )
       return '' if wb.nil?
-      l =  @webpage.lang || I18n.default_locale
-      wb.translations.where(locale: l).first
+      l =  @webpage.translation && @webpage.translation.locale || I18n.default_locale
+      transl = wb.translations.where(locale: l).first
+      transl = wb.translations.create(locale: l, content: '<p>REPLACE ME</p>') unless transl
+      transl
     end
 
     def get_translation_content( wb )

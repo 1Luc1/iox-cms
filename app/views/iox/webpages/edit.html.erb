@@ -12,3 +12,17 @@
     <%= render partial: 'iox/webpages/webpage_sidebar', locals: { f: f } %>
   <% end %>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready( function(){
+
+    $('[data-plugin-name=gallery]').each( function(){
+      $(this).ioxImageGallery();
+    });
+
+    $('[data-plugin-name=text]').each( function(){
+      $(this).ioxTextEditor();
+    });
+
+  });
+</script>

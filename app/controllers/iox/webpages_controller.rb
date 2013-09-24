@@ -13,6 +13,7 @@ module Iox
     # only be one
     def frontpage
       @webpage = Webpage.where( template: 'frontpage' ).first
+      init_webpage_translation
       update_stat
       return if !redirect_if_no_webpage
       render layout: 'application'
@@ -61,6 +62,7 @@ module Iox
     #
     def show
       @webpage = Webpage.find_by_id( params[:id] )
+      init_webpage_translation
       return if !redirect_if_no_webpage
       update_stat
       render layout: 'application'
@@ -68,36 +70,10 @@ module Iox
 
     def by_slug
       @webpage = Webpage.where( slug: params[:slug] ).first
+      init_webpage_translation
       return if !redirect_if_no_webpage
       update_stat
       render layout: 'application', template: 'iox/webpages/show'
-    end
-
-    #
-    # preview this webpage and don't save the content yet
-    #
-    def preview
-      @webpage = Webpage.find_by_id( params[:id] )
-      @webpage.attributes = webpage_params
-
-      return if !redirect_if_no_webpage
-      return if !redirect_if_no_rights
-
-      webbit_params.each_pair do |id,p|
-        webbit = @webpage.webbits.where(id: id).first
-        unless webbit.attributes= p
-          flash.alert = "could not update webbit #{webbit.name}"
-        end
-      end
-      translation_params.each_pair do |id,t|
-        translation = Translation.where(id: id).first
-        unless translation.attributes= t
-          flash.alert = "could not update webbit #{translation.id} #{translation.locale}"
-        end
-      end
-
-      render layout: 'application', template: File.join( 'iox', 'webpages', 'templates', @webpage.template )
-
     end
 
     def upload_to
@@ -205,6 +181,7 @@ module Iox
       @webpage = Webpage.where( id: params[:id] ).first
       return if !redirect_if_no_webpage
       @webpage.translation = @webpage.translations.where( locale: params[:locale] || I18n.default_locale ).first
+      @webpage.translation = @webpage.translations.create( locale: params[:locale] || I18n.default_locale ) unless @webpage.translation
       redirect_if_no_webpage
       redirect_if_no_rights
       render layout: 'application'
@@ -264,6 +241,7 @@ module Iox
         flash.now.notice = t('webpage.deleted', name: @webpage.name, id: @webpage.id)
       else
         flash.now.alert = t('webpage.failed_to_delete', name: @webpage.name)
+        puts @webpage.errors.inspect
       end
       if request.xhr?
         render json: { flash: flash, success: flash[:alert].blank? }
@@ -338,6 +316,10 @@ module Iox
         :content,
         :meta_description
         )
+    end
+
+    def init_webpage_translation
+      @webpage.translation = @webpage.translations.where( locale: ( params[:locale] || session[:locale] || I18n.locale ) ).first
     end
 
     def update_stat

@@ -27,7 +27,7 @@ module Iox
 
         copy_file "application.html.erb", "app/views/layouts/application.html.erb"
         copy_file "application.css.scss", "app/assets/stylesheets/application.css.scss"
-        remove_file "/app/assets/stylesheets/application.css"
+        remove_file "app/assets/stylesheets/application.css"
 
         copy_file "iox_quota.yml", "config/iox_quota.yml"
         copy_file "deploy.rb", "config/deploy.rb"

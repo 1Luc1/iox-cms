@@ -15,6 +15,10 @@
 //= require iox/app-styles
 //= require iox/app-templates
 
+//= require 3rdparty/noty/jquery.noty
+//= require 3rdparty/noty/layouts/top
+//= require 3rdparty/noty/themes/default
+
 //=require_self
 
 var imagesData;
@@ -71,7 +75,8 @@ $(document).ready( function(){
         dataType: 'json',
         type: 'put'
       }).done(function(response){
-        iox.flash( response.flash );
+        if( response.flash.length > 0 && response.flash[0].length > 0 )
+          noty({text: response.flash[0][1]});
       });
     }, 100);
 

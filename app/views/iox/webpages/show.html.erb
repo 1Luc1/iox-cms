@@ -1,9 +1,8 @@
 <% if authenticated? and current_user and current_user.can_manage?(:webpages) %>
 
-  <%= content_for :add_head do %>
+  <%= content_for :add_css do %>
     <%= stylesheet_link_tag 'iox/webpages_ext' %>
     <%= stylesheet_link_tag 'application' %>
-    <%# javascript_include_tag 'iox/webpages' %>
   <% end %>
 
   <div class="webpage-mini-sidebar">

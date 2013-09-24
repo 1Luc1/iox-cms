@@ -54,9 +54,8 @@
         <%= tr.label :locale, t('language') %>
 
         <%= tr.select( :locale, available_webpage_langs( :translate ), { include_blank: true},
-            {class: 'select2', style: 'width: 280px', multiple: false} ) %>
+            {class: 'select2 select-lang', style: 'width: 280px', multiple: false} ) %>
 
-        <%= t('webpage.lang_desc') %>
       </p>
 
     <% end %>
@@ -194,6 +193,10 @@ function setupImageGalleryDraggable(){
     ko.applyBindings( imagesData, $('#image-browser').get(0) );
     setTimeout( setupImageGalleryDraggable, 100);
 
+  });
+
+  $('.select-lang').on('change', function(e){
+    location.href = '?locale='+$(this).find('option:selected').val();
   });
 
 </script>

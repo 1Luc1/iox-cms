@@ -1,5 +1,6 @@
 <div class="not-found-error">
-  <%= image_tag 'iox/logo-box_80x29.png', class: 'iox-logo' %>
+  <%= image_tag Rails.configuration.iox.brand_logo, class: 'iox-logo' %>
+
   <h1><%= t('webpage.errors.oups_not_found') %></h1>
   <% if authenticated? and current_user and current_user.can_manage?(:webpages) %>
 

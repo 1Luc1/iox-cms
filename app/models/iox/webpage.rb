@@ -6,7 +6,7 @@ module Iox
       if File.exists? tmpl_filename
         tmpl_data = HashWithIndifferentAccess.new(YAML::load_file( tmpl_filename ))
         puts "not found #{tmpl_data}"
-        if( tmpl_data[:unique] ) && Iox::Webpage.unscoped.where("template='#{record.template}'#{" AND id != #{record.id}" unless record.new_record?}" ).count > 0
+        if( tmpl_data[:unique] ) && Iox::Webpage.where("template='#{record.template}'#{" AND id != #{record.id}" unless record.new_record?}" ).count > 0
           record.errors[:template] << 'A webpage with that template already exists. Only one is allowed!'
         end
       end

@@ -8,6 +8,7 @@
 
 $(function(){
 
+/*
   new Morris.Line({
     // ID of the element in which to draw the chart.
     element: 'myfirstchart',
@@ -37,5 +38,6 @@ $(function(){
       {label: "Mail-Order Sales", value: 20}
     ]
   });
+*/
 
 });

@@ -168,8 +168,8 @@ de:
     forgot_password_instructions: "Du kannst dein Passwort unter folgendem Link neu setzen:"
     forgot_password_instructions_tail: "Falls du diese Anforderung nicht gesendet hast, bleibt alles beim Alten. Du brauchst nichts tun. Falls du öfter von diesen Anforderungen belästigt wirst, sende bitte eine Email an %{support_email}"
     login_failures:
-      one: "Ein fehlgeschlagener Anmeldeversuch seit letzter Sitzung (am %{at})"
-      other: "%{count} fehlgeschlagene Anmeldeversuche seit letzter Sitzung (am %{at})"
+      one: "Ein fehlgeschlagener Anmeldeversuch (am %{at}) seit letzter Sitzung"
+      other: "%{count} fehlgeschlagene Anmeldeversuche (am %{at}) seit letzter Sitzung"
     session_timeout: "Sitzung ist abgelaufen (Max: %{timeout} Minuten)"
 
   dashboard:

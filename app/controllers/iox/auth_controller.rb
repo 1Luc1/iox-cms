@@ -23,7 +23,7 @@ module Iox
           camefrom = session[:came_from]
 
           if( current_user.login_failures && current_user.login_failures > 0 )
-            flash.notice = I18n.t('auth.login_failures', at: current_user.last_login_failure, count: I18n.l(current_user.login_failures, format: :short) )
+            flash.notice = I18n.t('auth.login_failures', at: I18n.l(current_user.last_login_failure, format: :short), count: current_user.login_failures )
           end
 
           current_user.update!( last_request_at: Time.now,

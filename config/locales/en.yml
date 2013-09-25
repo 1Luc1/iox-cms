@@ -132,8 +132,8 @@ en:
     reset_password_txt: "Du kannst dein Passwort jetzt neu setzen"
     set_password_txt: "Bevore you start, please choose a password"
     login_failures:
-      one: "one failed login since your last session (at %{at})"
-      other: "%{count} failed logins since your last session (at %{at})"
+      one: "one failed login (at %{at}) since your last session"
+      other: "%{count} failed logins (at %{at}) since your last session"
     session_timeout: "Your session has expired (Max: %{timeout} min)"
 
 

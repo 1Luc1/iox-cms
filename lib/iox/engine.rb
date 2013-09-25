@@ -3,9 +3,9 @@ module Iox
 
     isolate_namespace Iox
 
-    #initializer "assets_initializers.initialize_rails", :group => :assets do |app|
-    #  require "#{Rails.root}/config/initializers/load_config.rb"
-    #end
+    initializer "assets_initializers.initialize_rails", :group => :assets do |app|
+      require "#{Rails.root}/config/initializers/load_config.rb"
+    end
 
     initializer :assets do |config|
       Rails.application.config.assets.precompile << %w(
@@ -22,11 +22,8 @@ module Iox
         iox/activities.css
         3rdparty/password-generator.min.js
         3rdparty/jquery.fileupload
-        iox/avatar/original/missing.png
-        iox/avatar/thumb/missing.png
         iox/loader.gif
         iox/loader-horizontal.gif
-        3rdparty/kendoui/textures/highlight.png
       )
     end
 

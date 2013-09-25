@@ -11,7 +11,7 @@ module Iox
 
     # paperclip plugin
     has_attached_file :avatar, :styles => { :original => "256x256#", :thumb => "32x32#" },
-                      :default_url => "/assets/iox/avatar/:style/missing.png",
+                      :default_url => "/images/iox/avatar/:style/missing.png",
                       :url => "/data/avatars/:hash.:extension",
                       :hash_secret => "5b1b59b59b08dfea721470feed062327909b8f91"
 

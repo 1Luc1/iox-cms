@@ -27,6 +27,10 @@ module Iox
 
         copy_file "application.html.erb", "app/views/layouts/application.html.erb"
         copy_file "application.css.scss", "app/assets/stylesheets/application.css.scss"
+
+        directory "avatar", "public/images/iox/avatar"
+        directory "kendoui", "public/stylesheets/kendoui"
+
         remove_file "app/assets/stylesheets/application.css"
 
         copy_file "iox_quota.yml", "config/iox_quota.yml"

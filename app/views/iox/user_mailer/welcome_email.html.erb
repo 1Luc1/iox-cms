@@ -4,9 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= t('user.mailer.welcome') %>, <%= @user.full_name %></h1>
+    <h3><%= t('user.mailer.welcome') %>, <%= @user.full_name %></h3>
     <p><%= t('user.mailer.has_created_an_account', name: @creator.full_name) %></p>
-    <p><%= t('user.mailer.login_and_start', url: @url, site_title: @site_title) %></p>
+    <p><%= raw t('user.mailer.login_and_start', url: "<a href=\"#{@url}\">#{@url}</a>", site_title: @site_title) %></p>
     <p><%= t('user.mailer.goodbye') %></p>
     <p>&nbsp;</p>
     <p><%= t('auto_generated', support_email: @support_email) %></p>

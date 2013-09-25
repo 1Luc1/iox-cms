@@ -1,6 +1,5 @@
 //= require select2
 
-//= require 3rdparty/ckeditor/ckeditor
 //= require 3rdparty/jquery-ui-1.10.3.custom
 //= require 3rdparty/bootstrap
 //= require 3rdparty/moment-2.0.0.min
@@ -12,9 +11,6 @@
 //= require 3rdparty/jquery.iframe-transport
 //= require 3rdparty/jquery.fileupload
 
-//= require iox/app-styles
-//= require iox/app-templates
-
 //= require 3rdparty/noty/jquery.noty
 //= require 3rdparty/noty/layouts/top
 //= require 3rdparty/noty/themes/default
@@ -25,7 +21,7 @@ var imagesData;
 
 $(document).ready( function(){
 
-  $('.webpage-mini-sidebar').draggable({ handle: '.iox-logo' });
+  //$('.webpage-mini-sidebar').draggable({ handle: '.iox-logo' });
 
   $('.webpage-sidebar button, .webpage-mini-sidebar button').on('click', function(e){
 

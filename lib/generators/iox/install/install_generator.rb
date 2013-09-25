@@ -19,8 +19,8 @@ module Iox
         copy_file "webpage_templates/_default.html.erb",
           "app/views/iox/webpages/templates/_default.html.erb"
 
-        copy_file "app-styles.js", "app/assets/javascripts/iox/app-styles.js"
-        copy_file "app-templates.js", "app/assets/javascripts/iox/app-templates.js"
+        copy_file "app-styles.js", "public/javascripts/iox/app-styles.js"
+        copy_file "app-templates.js", "public/javascripts/iox/app-templates.js"
 
         directory "webfonts", "public/webfonts"
         directory "javascripts", "public/javascripts/3rdparty/"
@@ -39,12 +39,12 @@ module Iox
         create_file "app/assets/stylesheets/iox/overrides.css.scss"
 
         gem 'rails-i18n', '~> 4.0.0.pre'
-        # gem 'paperclip', '~> 3.0'
+        gem 'paperclip', '~> 3.0'
         # gem 'rails-i18n', '~> 0.7.4'
         # gem 'capistrano', group: :development
         # gem 'rvm-capistrano', group: :development
         # gem 'therubyracer', group: :production, platform: :ruby
-        # gem 'select2-rails', '3.4.8'
+        gem 'select2-rails', '3.4.8'
         # gem 'jquery-rails'
         # gem 'rails_warden'
         # gem 'bcrypt-ruby'
@@ -75,6 +75,8 @@ module Iox
           "    config.iox.default_write_apps = ['dashboard']\n"+
           "\n"+
           "    config.iox.brand_logo = 'iox/logo_transp_150x150.png'\n"+
+          "\n"+
+          "    config.iox.webfile_sizes = { original: '800x800>', thumb: '100x100' }\n"+
           "\n"+
           "    config.iox.max_quota_mb = 500\n"+
           "    config.iox.session_timeout_min = 60\n"+

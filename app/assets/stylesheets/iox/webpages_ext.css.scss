@@ -54,10 +54,11 @@ $sidebar-shadow: -2px -2px 5px rgba(0,0,0,0.3);
 
 body .cke_chrome{ box-shadow: none; }
 body .cke_top{ background: none; border: none; box-shadow: none; }
+body .draggable-image{ list-style: none; border: 3px solid #fff; box-shadow: 0 0 3px rgba(0,0,0,0.5); width: 50px; height: 50px; }
 
-ul.image-browser{ margin: 0; list-style: none; }
+ul.image-browser{ margin: 0; list-style: none; padding: 0; }
 ul.image-browser li, .select-files{ position: relative; margin: 3px; border: 3px solid #fff; box-shadow: 0 0 3px #ccc; width: 50px; height: 50px; float: left; }
-ul.image-browser .action-icon.remove{ position: absolute; top: 10px; left: 32px; }
+ul.image-browser .action-icon.remove{ position: absolute; top: 10px; right: 10px; color: #555; font-size: 16px; }
 ul.image-browser .overlay{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.5); z-index: 3; }
 ul.image-browser li{
   cursor: pointer;

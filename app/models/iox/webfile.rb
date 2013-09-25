@@ -1,11 +1,13 @@
+require_dependency 'iox/file_object'
+
 module Iox
   class Webfile < ActiveRecord::Base
+
+    include Iox::FileObject
 
     Paperclip.interpolates :webpage_id do |attachment, style|
       attachment.instance.webpage_id
     end
-
-    include Iox::FileObject
 
     # paperclip plugin
     has_attached_file :file,

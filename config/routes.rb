@@ -28,9 +28,11 @@ Iox::Engine.routes.draw do
     end
   end
 
+  resources :webfiles
   resources :webpages do
 
     resources :translations
+    resources :webfiles
 
     collection do
       get 'images'
@@ -42,7 +44,6 @@ Iox::Engine.routes.draw do
       get 'frontpage'
       post 'restore'
       post 'reorder'
-      post 'upload_to'
       get 'images'
       delete 'delete_webbit_from'
     end

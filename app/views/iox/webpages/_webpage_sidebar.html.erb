@@ -98,7 +98,7 @@
     <script type="text/javascript">
 
       $('#upload').fileupload({
-        url: '<%= upload_to_webpage_path(@webpage) %>',
+        url: '<%= webpage_webfiles_path(@webpage) %>',
         dataType: 'json',
         formData: {
           "authenticity_token": $('input[name="authenticity_token"]:first').val()
@@ -137,6 +137,7 @@
 
   </div>
 
+  <!--
   <div class="bottom-control">
 
     <button class="btn btn-primary pull-right" title="<%= t('save') %>" type="submit" onclick="$('.webpage-form .stay-on-page').val('false');">
@@ -152,6 +153,7 @@
     </button>
 
   </div>
+  -->
 
   <%= hidden_field_tag :stay_on_page, false, class: 'stay-on-page' %>
 </div>
@@ -182,7 +184,12 @@ function setupImageGalleryDraggable(){
     revert: 'invalid',
     cursor: 'move',
     helper: 'clone',
-    zIndex: 10000
+    zIndex: 10000,
+    start: function(e, ui){
+      $(ui.helper).addClass("draggable-image")
+        .find('.overlay').remove().end()
+        .find('.action-icon').remove();
+    }
  });
 
 }

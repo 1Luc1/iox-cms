@@ -1,3 +1,5 @@
+require_dependency "iox/application_controller"
+
 module Iox
   class DashboardController < ApplicationController
 

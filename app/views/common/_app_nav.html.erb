@@ -1,6 +1,10 @@
+<a class="dashboard<%= " active" if controller.controller_name == 'dashboard' %>" href="<%= dashboard_path %>" title="<%= t('dashboard.title') %>">
+  <span class="day"><%= Time.new.strftime "%d" %></span>
+  <span class="month"><%= l Time.new, format: '%B' %></span>
+</a>
 <ul class="app-nav-list">
   <% get_ordered_plugins.each do |plugin| %>
-    <% pass = plugin.roles.size == 0 %>
+    <% pass = plugin.roles.size == 0 || current_user.is_admin? %>
     <% unless pass %>
       <% plugin.roles.each{ |role| pass = pass || current_user.roles.include?(role) } %>
     <% end %>

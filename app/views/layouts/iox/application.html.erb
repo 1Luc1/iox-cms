@@ -20,16 +20,16 @@
 <!-- ion main container wrapper -->
 <div class="iox-mcw">
 
+  <div class="iox-app-nav">
+    <%= render partial: 'common/app_nav' %>
+  </div>
+
   <div class="iox-top-nav clearfix">
     <%= render partial: 'common/top_nav' %>
     <div class="iox-flash-container"></div>
     <%= flash_with_javascript %>
 
     <%= image_tag Rails.configuration.iox.brand_logo, class: 'logo' %>
-  </div>
-
-  <div class="iox-app-nav">
-    <%= render partial: 'common/app_nav' %>
   </div>
 
   <div class="iox-mcc">

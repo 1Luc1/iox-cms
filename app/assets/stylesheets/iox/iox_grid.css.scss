@@ -1,0 +1,73 @@
+/**
+ * kendo grid formattings
+ */
+.iox-grid-header{
+  margin: 0 0 10px;
+  .btn-primary{
+    padding: 8px 20px;
+    float: right;
+  }
+  input[name=query]{
+    font-size: 1.2em;
+    padding: 10px 0;
+    text-indent: 5px;
+    width: 100%;
+  }
+  .query-container{
+    min-width: 350px;
+    max-width: 50%;
+    margin-right: 10px;
+    position: relative;
+    display: inline-block;
+    float: right;
+  }
+  .submit-query,
+  .clear-query{
+    float: right;
+    display: block;
+    font-size: 1.1em;
+    background: none;
+    border: none;
+    bottom: 7px;
+    height: 27px;
+    width: 27px;
+    color: #aaa;
+    padding: 0;
+    position: absolute;
+    right: 3px;
+    z-index: 2;
+  }
+  .clear-query{
+    right: 24px;
+    display: none;
+  }
+  .options-container{
+    font-size: 0.8em;
+    display: inline-block;
+    position: relative;
+    float: right;
+    margin: 3px 10px;
+  }
+  .options-container .item-col{
+    text-align: left;
+  }
+  .options-container-inner input[type=checkbox],
+  .options-container-inner input[type=radio]{
+    margin-right: 5px;
+  }
+  .options-container-inner span.item{
+    opacity: 0.5;
+    cursor: pointer;
+    &:hover{
+      opacity: 0.8;
+    }
+  }
+}
+.iox-k-grid{
+  tbody .k-button{
+    min-width: 0;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+}

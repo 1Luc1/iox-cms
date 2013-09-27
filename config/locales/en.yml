@@ -12,6 +12,8 @@ en:
   delete: "Delete"
   back: "Back"
   back_to_startpage: "Back to startpage"
+  updated_at: "Updated at"
+  updated_by: "Updated by"
   keep_open: "Keep this window open"
   refresh: "Refresh"
   view: "View"

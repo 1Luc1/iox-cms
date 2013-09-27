@@ -8,6 +8,7 @@
 //= require 3rdparty/bootstrap
 //= require 3rdparty/knockout
 //= require 3rdparty/moment-2.0.0.min
+//= require 3rdparty/moment.lang.de
 //= require 3rdparty/jquery.blockui
 
 //= require 3rdparty/kendoui/kendo.web.min
@@ -49,7 +50,7 @@ $(function(){
   $.blockUI.defaults.message = iox.loader;
 
   $('.iox-mcc').css( 'height', ( $(window).height() - $('.iox-top-nav').height() - 1 ) );
-  if( $('.iox-sidebar').length ){
+  if( $('.iox-sidebar-arrow').length ){
     $('.iox-sidebar-arrow').css('top', $('.iox-app-nav li.active a').offset().top-40);
   }
 

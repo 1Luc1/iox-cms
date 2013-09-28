@@ -50,7 +50,7 @@ $(function(){
   $.blockUI.defaults.message = iox.loader;
 
   $('.iox-mcc').css( 'height', ( $(window).height() - $('.iox-top-nav').height() - 1 ) );
-  if( $('.iox-sidebar-arrow').length ){
+  if( $('.iox-sidebar-arrow').length && $('.iox-app-nav li.active a').length ){
     $('.iox-sidebar-arrow').css('top', $('.iox-app-nav li.active a').offset().top-40);
   }
 

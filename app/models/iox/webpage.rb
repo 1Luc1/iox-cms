@@ -19,6 +19,8 @@ module Iox
 
     attr_accessor :translation, :lang
 
+    default_scope { where( deleted_at: nil ) }
+
     has_many :webbits, class_name: 'Iox::Webbit', dependent: :delete_all
     has_many :translations, dependent: :delete_all
 

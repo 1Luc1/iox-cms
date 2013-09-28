@@ -12,7 +12,7 @@ module Iox
     # the frontpage is of template type 'frontpage' and there should
     # only be one
     def frontpage
-      @webpage = Webpage.where( template: 'frontpage' ).first
+      @webpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
       init_webpage_translation
       update_stat
       return if !redirect_if_no_webpage

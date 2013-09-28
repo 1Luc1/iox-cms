@@ -200,16 +200,16 @@ en:
 
     username: "Username"
     last_time_online: "Last time online"
-    registered_at: "Registriert am"
-    timezone: "Zeitzone"
-    role: "Rolle"
-    password: "Passwort"
-    confirm_password: "Passwort wiederholen"
-    lang: "Systemsprache"
-    password_policy: "Achten Sie beim Vergeben des Passwortes darauf, ein starkes Passwort mit mind. einem Großbuchstaben und einer Ziffer zu verwenden"
-    define_at_least_one_role: "Definieren Sie mindestens eine Rolle"
+    registered_at: "Registered at"
+    timezone: "Timezone"
+    role: "Role"
+    password: "Password"
+    confirm_password: "Confirm password"
+    lang: "System language"
+    password_policy: "Please use strong passwords with capital letters and special characters mixed, so your account cannot be hacked easily"
+    define_at_least_one_role: "Define at least one role"
 
-    created: "Benutzer &raquo;%{name}&laquo; wurde erstellt"
+    created: "User &raquo;%{name}&laquo; has been created"
 
     you_are_admin_and_can_edit: "Sie verfügen über Administratorrechte und können dieses Profil bearbeiten. <br> Seien Sie vorsichtig!"
 
@@ -217,7 +217,10 @@ en:
     created_and_mail_sent: "User &raquo;%{name}&laquo; has been created and email has been sent"
 
     mailer:
-      welcome: "Willkommen"
+      welcome: "Welcome"
+      has_created_an_account: "%{name} has created an account for you. You can start by clicking the link below and set a password."
+      login_and_start: "%{url} (follow instructions there)"
+      goodbye: "have fun"
 
   users:
     title: "Accounts"

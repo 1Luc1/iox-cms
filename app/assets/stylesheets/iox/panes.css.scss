@@ -1,0 +1,16 @@
+/**
+ * panes
+ */
+
+
+/** one broad 2/3 pane **/
+.iox-left-pane{
+  max-width: 68%;
+  margin-right: 2%;
+  float: left;
+}
+
+.iox-right-pane{
+  margin-left: 2%;
+  float: left;
+}

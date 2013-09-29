@@ -22,6 +22,7 @@ require "iox/plugin"
 
 # authentication and warden integration
 require 'iox/controller_helpers'
+require 'iox/country_select_helpers'
 
 # require all gem files
 require 'paperclip'

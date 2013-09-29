@@ -63,6 +63,12 @@
     });
   }
 
+  window.iox.Win.closeVisible = function closeVisibleWin(){
+    $('.iox-win:visible').each( function(){
+      $(this).find('[data-close-win]:first').click();
+    });
+  }
+
   function checkCloseWin(e){
     if( $(e.target).closest('.iox-win').length )
       return;

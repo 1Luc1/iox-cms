@@ -62,7 +62,7 @@ textarea.error{
   font-size: 0.9em;
   font-weight: 600;
   margin: 10px 0 0;
-  width: 120px;
+  width: 140px;
 }
 
 .iox-form .field-box .label-offset{
@@ -113,6 +113,17 @@ textarea.error{
         background: #333;
         color: #fff;
       }
+    }
+  }
+}
+.iox-form{
+  fieldset{
+    border: none;
+    border-top: 1px solid #ccc;
+    legend{
+      font-size: 1.5em;
+      font-weight: 100;
+      padding: 2px 10px;
     }
   }
 }

@@ -18,6 +18,7 @@ en:
   refresh: "Refresh"
   view: "View"
   edit: "Edit"
+  email: "Email"
   filter_results: "Filter results"
   filter_no_entries_found: "No results found for given query"
   please_fill_out_all_fields: "Please fill out all fields"
@@ -181,6 +182,11 @@ en:
     delete_user: "Delete account &raquo;%{name}&laquo;"
     delete_desc: "Deletes this user account and all it's messages. Content created by this user will not be deleted unless required. This action cannot be undone"
     delete_contents: "Also delete contents created by this user"
+
+    delete_user_text: "You are about to remove this account forever.<br /> Comments and notifications from that user will be deleted as well. This action cannot be undone!"
+    enter_username_to_delete: "Please enter the account username <strong>%{name}</strong> into the text field below<br />so we can go sure, you know what you are doing"
+    delete_user_yes: "Yes, remove this account"
+
     delete_this_user: "Delete this user"
     delete_entered_username_missmatch: "Given username does not match <strong>%{name}</strong>"
     deletion_ok: "User &raquo;%{name}&laquo; has been deleted"

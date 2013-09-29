@@ -30,6 +30,8 @@ $(function(){
   $('.iox-app-nav a').tooltip({
     placement: 'right'
   });
+
+/*
   $('body').tooltip({
     selector: '[rel=tooltip]',
     placement: function(tip, element){
@@ -44,6 +46,7 @@ $(function(){
       return "bottom";
   }
   });
+*/
 
   $.blockUI.defaults.css = {};
   $.blockUI.defaults.overlayCSS = {};
@@ -96,7 +99,10 @@ $(function(){
       type: 'get'
     }).done( function( htmlRes ){
       $(self).unblock();
-      new iox.Win({ content: htmlRes });
+      var options = { content: htmlRes };
+      if( $(self).attr('data-xhr-win-title') )
+        options.title = $(self).attr('data-xhr-win-title');
+      new iox.Win( options );
     });
   });
 
@@ -109,6 +115,30 @@ $(function(){
   $(document).on('click', '[data-confirmation-win]', function(e){
     e.preventDefault();
     new iox.Win({ content: '<div class="content-padding">'+$(this).attr('data-confirmation-txt')+'</div><div class="iox-win-footer"><button class="btn" data-close-win="true">'+iox.Win.defaults.i18n.ok+'</button></div>' });
+  });
+
+  $('body').on('click', '[data-role=submit]', function(e){
+    e.preventDefault();
+    $(this).closest('.iox-content-padding').find('form:first').submit();
+  });
+
+  $('body').on('submit', '[data-role=submitAndBack]', function(e){
+    if( $(this).closest('.iox-content-padding').find('[data-role=switch2content]').length )
+      $(this).closest('.iox-content-padding').find('[data-role=switch2content]').click();
+  });
+
+  $('body').on('click', '[data-role=switch2content]', function(e){
+    var $prevContainer = $(this).closest('.iox-details-container').prev('.iox-details-container');
+    $(this).closest('.iox-details-container').remove();
+    if( $prevContainer.length )
+      $prevContainer.show();
+    else
+      $('.iox-content-container').show();
+  });
+
+  $(document).on('keyup', function(e){
+    if( e.keyCode === 27 && $('.iox-win:visible').length )
+      iox.Win.closeVisible();
   });
 
 });

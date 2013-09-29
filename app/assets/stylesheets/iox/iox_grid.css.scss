@@ -9,7 +9,7 @@
   }
   input[name=query]{
     font-size: 1.2em;
-    padding: 10px 0;
+    padding: 9px 0;
     text-indent: 5px;
     width: 100%;
   }
@@ -64,10 +64,30 @@
   }
 }
 .iox-k-grid{
+  font-size: 12px;
   tbody .k-button{
     min-width: 0;
     background: none;
     border: none;
-    padding: 0;
+    padding: 0 3px;
+    border-radius: 1px;
+    margin: 0;
+    padding: 0 4px 0;
+    &.k-grid-deletePE{
+      padding: 0 5px 1px;
+      &:hover{
+        background-color: #d55;
+        color: #fff;
+      }
+    }
+    &.k-grid-editPE{
+      &:hover{
+        background-color: #333;
+        color: #fff;
+      }
+    }
+    &:hover{
+      text-decoration: none;
+    }
   }
 }

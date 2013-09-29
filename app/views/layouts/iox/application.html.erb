@@ -48,6 +48,9 @@
         no: '<%= t('no') %>'
       }
 
+      if( typeof(CKEDITOR) !== 'undefined' )
+        CKEDITOR.basePath = '/javascripts/3rdparty/ckeditor/';
+
     })
   </script>
 </body>

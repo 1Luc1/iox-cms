@@ -23,11 +23,21 @@
 @import "common";
 @import "auth";
 @import "form";
+@import "panes";
 
 html,body{
   height: 100%;
   width: 100%;
+  font-size: 14px;
+  font-family: 'OpenSans', sans-serif;
 }
+
+h2, h3{
+  font-weight: 100;
+  font-size: 2em;
+  line-height: 2.2em;
+}
+
 
 /* main container wrapper at full height
  */
@@ -105,6 +115,18 @@ html,body{
   width: 0;
   z-index: 2;
 }
+.iox-details-container{
+  position: relative;
+  display: none;
+  .iox-loader{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}
 .iox-details-placeholder{
   text-align: center;
   padding: 20%;
@@ -141,6 +163,12 @@ html,body{
 }
 .iox-grid-header{
   text-align: right;
+}
+.iox-inline-notice{
+  margin: 20px 0;
+  padding: 20px;
+  background: #f5f5f5;
+  border: 1px solid #eee;
 }
 
 @import "top_nav";

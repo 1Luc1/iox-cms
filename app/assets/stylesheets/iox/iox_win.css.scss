@@ -5,7 +5,7 @@
 .iox-win-overlay{
   background: rgba( 255, 255, 255, 0.8 );
   position: absolute;
-  z-index: 1100;
+  z-index: 11000;
   top: 0;
   left: 0;
   right: 0;
@@ -16,7 +16,7 @@
   background: #fff;
   border: 1px solid #ddd;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-  z-index: 1101;
+  z-index: 11001;
 }
 .iox-win-header{
   padding: 15px;

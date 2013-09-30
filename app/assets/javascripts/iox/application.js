@@ -12,6 +12,8 @@
 //= require 3rdparty/jquery.blockui
 
 //= require 3rdparty/kendoui/kendo.web.min
+//= require 3rdparty/kendoui/cultures/kendo.culture.de-DE.min
+//= require 3rdparty/kendoui/cultures/kendo.culture.en-GB.min
 
 //= require iox/iox.core
 //= require iox/iox.flash

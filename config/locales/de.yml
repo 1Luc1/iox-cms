@@ -40,6 +40,7 @@ de:
   filter_results: "Ergebnisse filtern"
   filter_no_entries_found: "Für die angegebene Suche wurden keine Ergebnisse gefunden"
   please_fill_out_all_fields: "Bitte alle Felder ausfüllen"
+  required_field: "erforderliches Feld"
   max_255: "Maximal 255 Zeichen"
 
   loading_quota: "Quota wird geladen"

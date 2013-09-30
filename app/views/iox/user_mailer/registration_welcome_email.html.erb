@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3><%= t 'user.registration_form.hello', name: @user.full_name %></h3>
+    <p><%= t 'user.registration_form.text1', site_title: @site_title %></p>
+    <p><%= @url %></p>
+    <p><%= t 'user.registration_form.text2' %></p>
+    <p>&nbsp;</p>
+    <p>
+      <%= t 'user.registration_form.bye' %>,<br />
+      <%= t 'mailer.your_team', name: @site_title %>
+    </p>
+    <p><%= t 'auto_generated', support_email: @support_email %></p>
+  </body>
+</html>

@@ -150,6 +150,7 @@ de:
     login_failed: "Anmeldung fehlgeschlagen"
     email_not_recognized: "Diese Email Adresse ist uns nicht bekannt"
     instructions_have_been_sent: "Anweisungen zum weiteren Vorgehen wurden an die angegebene Emailadresse versandt"
+    forgot_password: "Passwort vergessen"
     forgot_password_request: "Passwort vergessen?"
     forgot_password_head: "Du kannst ein neues Passwort anfordern, wenn Du deine Email Adresse angibst"
     request_password: "Passwort zurücksetzen"
@@ -208,6 +209,17 @@ de:
     unsuspending_ok: "Account %{name} wurde wieder aktiviert"
     unsuspending_failed: "Account %{name} konnte nicht aktiviert werden"
 
+    registration_almost_complete_title: "Deine Registrierung ist fast abgeschlossen!"
+    registration_almost_complete: "Wir haben dir eine email geschickt. Bitte klick auf den Link in der email innerhalb der nächsten 30 Minuten um den Vorgang abzuschließen. Bis gleich!"
+    registration_failed: "Die Registrierung ist fehlgeschlagen"
+    registration_enter_email: "Hallo!<br>Du kannst dich ganz einfach registrieren, indem du deine Emailadresse angibst"
+    registration_form:
+      subject: "Willkommen! Bitte vervollständige deine Registrierung"
+      hello: "Hallo %{name},"
+      text1: "Du hast dich mit deiner email Adresse auf unserer Plattform %{site_title} registriert. Um die Registrierung abzuschließen, klick bitte auf den unten stehenden Link"
+      text2: "Wir freuen uns, dich gleich auf unserer Seite begrüßen zu dürfen!"
+      bye: "bis gleich,"
+
     saved: "Einstellungen für %{name} wurden gespeichert"
     creation_failed: "Benutzerkonto konnte nicht erstellt werden"
 
@@ -217,6 +229,7 @@ de:
 
     username_required: "Benutzername muss angegeben werden"
     email_required: "Emailadresse muss angegeben werden"
+    not_an_email_address: "Die angegebene Emailadresse ist ungültig"
 
     delete: "Benutzerkonto löschen"
     delete_user: "Benutzerkonto von &raquo;%{name}&laquo; löschen"
@@ -267,6 +280,7 @@ de:
       has_created_an_account: "%{name} hat ein Konto für dich angelegt. Du kannst gleich loslegen und dein Passwort setzen:"
       login_and_start: "Melde dich unter dem Link %{url} an und folge den Anweisungen"
       goodbye: "frohes Schaffen"
+      your_team: "Dein %{name}-Team"
 
   auto_generated: "Diese Email wurde automatisch erstellt. Bei Fragen und Problemen wende dich bitte an %{support_email}"
 
@@ -374,5 +388,6 @@ de:
             email:
               invalid: "Die Emailadresse ist ungültig"
               blank: "Bitte gib eine Emailadresse an"
+              taken: "Diese Emailadresse ist bereits registriert. Wenn das deine ist, probiers doch mit &raquo;Passwort vergessen&laquo;"
             username:
               taken: "Dieser Benutzername ist bereits vergeben"

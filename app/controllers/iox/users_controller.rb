@@ -1,7 +1,7 @@
 module Iox
   class UsersController < ApplicationController
 
-    before_filter :authenticate!
+    before_filter :authenticate!, except: [ :register ]
 
     #
     # list all users
@@ -37,11 +37,22 @@ module Iox
     # show registration form
     #
     def register
+      redirect_to render_401 unless Rails.configuration.iox.open_registration
       if request.post?
-        puts "register"
+        redirect_to render_401 unless params[:username].blank? # HONEYPOT !!!
+        @user = User.new roles: Rails.configuration.iox.user_default_roles, can_read_apps: Rails.configuration.iox.default_read_apps, can_write_apps: Rails.configuration.iox.default_write_apps, send_welcome_msg: true, email: params[:user][:email], confirmation_key_valid_until: 30.minutes.from_now, username: params[:user][:email]
+        if @user.save
+          @completed = true
+          flash.now.notice = t('user.registration_almost_complete_title')
+          UserMailer.registration_welcome_email(@user).deliver
+        else
+          flash.now.alert = t('user.registration_failed')
+        end
       else
-        @user = User.new roles: Rails.configuration.iox.user_default_roles, can_read_apps: Rails.configuration.iox.default_read_apps, can_write_apps: Rails.configuration.iox.default_write_apps, send_welcome_msg: true
+        flash.now.notice = t('user.registration_enter_email')
+        @user = User.new
       end
+      render layout: 'iox/auth'
     end
 
     #

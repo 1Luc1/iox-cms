@@ -60,7 +60,7 @@ module Iox
 
     def gen_confirmation_key
       self.confirmation_key = Digest::SHA256::hexdigest( password || Time.now.to_f.to_s )
-      self.confirmation_key_valid_until = 36.hours.from_now
+      self.confirmation_key_valid_until = 36.hours.from_now unless confirmation_key_valid_until
     end
 
     def gen_password_if_empty

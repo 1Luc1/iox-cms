@@ -26,6 +26,10 @@ Iox::Engine.routes.draw do
       post 'upload_avatar'
       delete 'avatar'
     end
+    collection do
+      get 'register'
+      post 'register'
+    end
   end
 
   resources :webfiles

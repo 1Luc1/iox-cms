@@ -1,0 +1,40 @@
+<% if @completed %>
+  <div class="login-form">
+
+    <div class="iox-auth-msg-box">
+      <% if flash.notice %>
+        <p><%= raw flash.notice %></p>
+      <% end %>
+    </div>
+
+    <div class="field-box" style="margin-bottom: 20px">
+      <%= raw t('user.registration_almost_complete') %>
+    </div>
+  </div>
+<% else %>
+  <%= form_for @user, url: '/iox/users/register', html: { class: 'login-form' } do |f| %>
+
+    <div class="iox-auth-msg-box">
+      <% if @user.errors.size > 0 %>
+        <div class="form-errors">
+          <p><%= raw @user.errors[:email][0] %></p>
+        </div>
+      <% end %>
+      <% if flash.notice %>
+        <p><%= raw flash.notice %></p>
+      <% end %>
+    </div>
+
+
+    <div class="field-box">
+      <%= f.label :email, t('email') %><br />
+      <%= f.text_field 'email', class: 'js-get-focus' %>
+    </div>
+    <p class="submit-p"><%= submit_tag t('auth.register'), class: 'btn' %></p>
+
+  <% end %>
+<% end %>
+
+<div class="footer">
+  <a href="<%= forgot_password_path %>"><%= t('auth.forgot_password') %></a>&nbsp;|&nbsp;<a href="/"><%= t('back_to_startpage') %></a>
+</div>

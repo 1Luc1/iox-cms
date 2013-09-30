@@ -17,16 +17,18 @@
 <div class="iox-mcw">
 
   <div class="iox-mcc">
+
+    <div class="auth-flash-container<%= ' error' if flash.alert  %>">
+      <% if flash.alert %>
+        <div class="flash-item">
+          <%= raw flash.alert %>
+        </div>
+      <% end %>
+    </div>
+
     <div class="iox-auth-container">
-      <%= image_tag 'iox/logo_transp_150x150.png', class: 'logo' %>
+      <%= image_tag Rails.configuration.iox.brand_logo, class: 'logo' %>
       <%= yield %>
-      <div class="auth-flash-container<%= ' error' if flash.alert  %>">
-        <% if flash.notice || flash.alert %>
-          <div class="flash-item">
-            <%= flash.alert || flash.notice %>
-          </div>
-        <% end %>
-      </div>
     </div>
   </div>
 

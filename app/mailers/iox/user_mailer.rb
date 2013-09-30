@@ -12,6 +12,13 @@ module Iox
       mail( to: @user.email, subject: "[#{Rails.configuration.iox.site_title}] #{I18n.t('user.mailer.welcome')}" )
     end
 
+    def registration_welcome_email(user)
+      @user = user
+      @url  = "http://#{Rails.configuration.iox.domain_name}/iox/welcome/#{user.id}?k=#{user.confirmation_key}"
+      @site_title = Rails.configuration.iox.site_title
+      mail( to: @user.email, subject: "[#{Rails.configuration.iox.site_title}] #{I18n.t('user.registration_form.welcome')}" )
+    end
+
     def confirmation_email(user)
       @user = user
       @url  = "http://#{Rails.configuration.iox.domain_name}/iox/confirm/#{user.confirmation_key}"

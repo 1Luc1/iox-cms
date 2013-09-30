@@ -53,5 +53,11 @@ module Iox
       redirect_to( Rails.configuration.iox.redirect_after_login || dashboard_path )
     end
 
+    def render_401
+      flash.alert = I18n.t('insufficient_rights')
+      redirect_to( Rails.configuration.iox.redirect_after_login || dashboard_path )
+      render template: 'common/render_401', layout: 'application'
+    end
+
   end
 end

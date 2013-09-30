@@ -33,23 +33,6 @@ $(function(){
     placement: 'right'
   });
 
-/*
-  $('body').tooltip({
-    selector: '[rel=tooltip]',
-    placement: function(tip, element){
-      // DOES NOT WORK:
-      var position = $(element).position();
-      if (position.left > 515) {
-          return "left";
-      }
-      if (position.left < 515) {
-          return "right";
-      }
-      return "bottom";
-  }
-  });
-*/
-
   $.blockUI.defaults.css = {};
   $.blockUI.defaults.overlayCSS = {};
   $.blockUI.defaults.message = iox.loader;

@@ -3,7 +3,7 @@ module Iox
   module Quota
 
     def self.read
-      @@quota ||= ActiveSupport::HashWithIndifferentAccess.new(
+      ActiveSupport::HashWithIndifferentAccess.new(
         YAML::load_file( File.join( Rails.root, '/config/iox_quota.yml') )
       )
     end

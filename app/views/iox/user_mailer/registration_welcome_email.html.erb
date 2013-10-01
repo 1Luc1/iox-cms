@@ -6,7 +6,7 @@
   <body>
     <h3><%= t 'user.registration_form.hello', name: @user.full_name %></h3>
     <p><%= t 'user.registration_form.text1', site_title: @site_title %></p>
-    <p><%= @url %></p>
+    <p><%= link_to @url, @url %></p>
     <p><%= t 'user.registration_form.text2' %></p>
     <p>&nbsp;</p>
     <p>

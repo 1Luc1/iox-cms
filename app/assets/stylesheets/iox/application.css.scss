@@ -47,12 +47,17 @@ h2, h3{
   background: #fafafa;
   height: 100%;
   width: 100%;
+  position: absolute;
 
 }
 
 .iox-mcc{
   overflow: hidden;
-  margin-left: 70px;
+  left: 70px;
+  right: 0;
+  top: 55px;
+  bottom: 0;
+  position: absolute;
 }
 
 .indicator-icon{

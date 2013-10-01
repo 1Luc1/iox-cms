@@ -46,7 +46,7 @@
 
     <div class="field-box">
       <h4><%= t('user.last_time_online') %></h4>
-      <span title="<%= l(@user.last_request_at) %>" rel="tooltip"><i class="icon-time desc"></i> <%= time_ago_in_words @user.last_request_at %></span>
+      <span title="<%= @user.last_request_at ? l(@user.last_request_at) : t('never') %>" rel="tooltip"><i class="icon-time desc"></i> <%= @user.last_request_at ? time_ago_in_words(@user.last_request_at) : t('never') %></span>
     </div>
 
   </div>

@@ -1,3 +1,5 @@
+require_dependency "iox/application_controller"
+
 module Iox
   class UsersController < ApplicationController
 
@@ -40,9 +42,12 @@ module Iox
       redirect_to render_401 unless Rails.configuration.iox.open_registration
       if request.post?
         redirect_to render_401 unless params[:username].blank? # HONEYPOT !!!
-        @user = User.new roles: Rails.configuration.iox.user_default_roles, can_read_apps: Rails.configuration.iox.default_read_apps, can_write_apps: Rails.configuration.iox.default_write_apps, send_welcome_msg: true, email: params[:user][:email], confirmation_key_valid_until: 30.minutes.from_now, username: params[:user][:email]
+        @user = User.new roles: Rails.configuration.iox.user_default_roles, can_read_apps: Rails.configuration.iox.default_read_apps, can_write_apps: Rails.configuration.iox.default_write_apps, send_welcome_msg: true, email: params[:user][:email], confirmation_key_valid_until: 30.minutes.from_now, username: params[:user][:email], registration_ip: request.remote_ip
         if @user.save
           @completed = true
+
+          Iox::Activity.create! user_id: @user.id, obj_name: @user.username, action: 'registered', icon_class: 'icon-user', obj_id: @user.id, obj_type: @user.class.name, obj_path: user_path(@user)
+
           flash.now.notice = t('user.registration_almost_complete_title')
           UserMailer.registration_welcome_email(@user).deliver
         else
@@ -107,8 +112,6 @@ module Iox
       if @user.save
 
         Iox::Activity.create! user_id: current_user.id, obj_name: @user.username, action: 'created', icon_class: 'icon-user', obj_id: @user.id, obj_type: @user.class.name
-
-        puts "key: #{@user.confirmation_key}"
 
         if params[:send_welcome_msg]
           UserMailer.welcome_email(@user,current_user).deliver

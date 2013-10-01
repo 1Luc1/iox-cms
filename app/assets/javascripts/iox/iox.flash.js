@@ -36,7 +36,7 @@
       return;
 
     var $flash = $('<span/>').addClass('flash-item notice')
-      .html( options.message );
+      .html(  options.message + ' &nbsp; <span style="opacity: 0.3">(' + moment().format('HH:MM:ss')+')</span>' );
 
     if( options.type === 'alert' )
       $flash.addClass('alert').removeClass('notice');

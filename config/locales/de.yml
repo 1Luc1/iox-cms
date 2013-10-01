@@ -15,6 +15,7 @@ de:
   close: "Schließen"
   delete: "Löschen"
   back: "Zurück"
+  never: "Nie"
   back_to_startpage: "Zurück zur Startseite"
   next: "Weiter"
   previous: "Zurück"
@@ -44,6 +45,7 @@ de:
   required_field: "erforderliches Feld"
   max_255: "Maximal 255 Zeichen"
   archive_this_entry: "Diesen Eintrag archivieren"
+  insufficient_rights: "Du verfügst nicht über ausreichen Rechte um diese Aktion auszuführen"
 
   loading_quota: "Quota wird geladen"
 
@@ -113,6 +115,11 @@ de:
     created: "%{user} hat %{icon} %{name} angelegt"
     deleted: "%{user} hat %{icon} %{name} gelöscht"
     edited: "%{user} hat %{icon} %{name} bearbeitet"
+    updated: "%{user} hat %{icon} %{name} bearbeitet"
+    registered: "%{icon} %{name} hat sich registriert"
+    first_signup: "%{icon} %{name} hat sich zum ersten Mal erfolgreich angemeldet"
+    published: "%{user} hat %{icon} %{name} veröffentlicht"
+    unpublished: "%{user} hat %{icon} %{name} für die Öffentlichkeit gesperrt"
 
   select_files: "Wähle Dateien aus oder ziehe sie hier her"
 

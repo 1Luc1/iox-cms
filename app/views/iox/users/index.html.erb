@@ -40,7 +40,7 @@
 <%= render partial: 'form' %>
 
 <script id="iox-tree-item-template" type="text/html">
-  <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }, css: { hide: _hide }" class="ui-nestedSortable-no-nesting">
+  <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }, css: { hide: _hide, registration_incomplete: !registration_completed }" class="ui-nestedSortable-no-nesting">
     <div class="item clearfix" data-bind="click: showUserForm">
       <div class="actions">
       <!-- ko if: admin -->

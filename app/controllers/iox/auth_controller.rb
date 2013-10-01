@@ -26,11 +26,18 @@ module Iox
             flash.notice = I18n.t('auth.login_failures', at: I18n.l(current_user.last_login_failure, format: :short), count: current_user.login_failures )
           end
 
-          current_user.update!( last_request_at: Time.now,
+          unless current_user.registration_completed
+            Iox::Activity.create! user_id: current_user.id, obj_name: current_user.username, action: 'first_signup', icon_class: 'icon-user', obj_id: current_user.id, obj_type: current_user.class.name, obj_path: user_path(current_user)
+            current_user.registration_completed = true
+          end
+
+          current_user.attributes = { last_request_at: Time.now,
                                 last_request_ip: request.remote_ip,
                                 last_login_ip: request.remote_ip,
                                 login_failures: 0,
-                                last_login_at: Time.now )
+                                last_login_at: Time.now }
+          current_user.save!
+
           redirect_to ( (camefrom && camefrom != "/login") ? session[:came_from] : Rails.configuration.iox.redirect_after_login )
         end
 
@@ -99,6 +106,13 @@ module Iox
           end
         end
       else
+        flash.now.alert = t('auth.invalid_key')
+      end
+    end
+
+
+    def set_password
+      unless @user = User.where( id: params[:id], confirmation_key: params[:k] ).first
         flash.now.alert = t('auth.invalid_key')
       end
     end

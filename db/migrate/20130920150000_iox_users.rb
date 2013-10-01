@@ -25,6 +25,7 @@ class IoxUsers < ActiveRecord::Migration
 
       t.string    :confirmation_key
       t.datetime  :confirmation_key_valid_until
+      t.string    :registration_ip
 
       t.integer   :login_failures
       t.datetime  :last_login_failure

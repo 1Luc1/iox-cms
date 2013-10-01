@@ -43,6 +43,7 @@ de:
   please_fill_out_all_fields: "Bitte alle Felder ausfüllen"
   required_field: "erforderliches Feld"
   max_255: "Maximal 255 Zeichen"
+  archive_this_entry: "Diesen Eintrag archivieren"
 
   loading_quota: "Quota wird geladen"
 

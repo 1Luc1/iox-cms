@@ -32,6 +32,7 @@ class IoxUsers < ActiveRecord::Migration
       t.string    :last_login_failure_ip
 
       t.datetime  :last_activities_call
+      t.boolean   :registration_completed
 
       t.string    :can_write_apps
       t.string    :can_read_apps

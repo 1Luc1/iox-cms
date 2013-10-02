@@ -105,15 +105,28 @@ h2, h3{
 .iox-content.offset-sidebar .iox-content-frame{
   left: 20px;
 }
+.iox-content-arrow:after, .iox-sidebar-arrow:after{
+  border-color: rgba(0, 0, 0, 0) #F5F5F5 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+  border-style: solid;
+  border-width: 10px;
+  content: ".";
+  display: block;
+  height: 0;
+  left: -9px;
+  position: absolute;
+  top: -10px;
+  width: 0;
+  z-index: 3;
+}
 .iox-content-frame.auto-overflow{
   overflow: auto;
 }
 .iox-content-arrow{
-  border-color: transparent #f5f5f5 transparent transparent;
+  border-color: transparent #bbb transparent transparent;
   border-style: solid;
   border-width: 11px;
   font-size: 0;
-  left: -22px;
+  left: -11px;
   line-height: 0;
   position: absolute;
   top: 45%;

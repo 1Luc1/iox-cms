@@ -80,6 +80,7 @@ module Iox
           "\n"+
           "    config.iox.max_quota_mb = 500\n"+
           "    config.iox.session_timeout_min = 60\n"+
+          "    config.iox.exception_recipients = [  ]\n"+
           "\n"+
           "    config.i18n.default_locale = :de\n"+
           "    config.i18n.available_locales = [:en, :de]\n"+

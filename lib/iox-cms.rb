@@ -27,3 +27,6 @@ require 'iox/country_select_helpers'
 # require all gem files
 require 'paperclip'
 require 'select2-rails'
+
+# exception_notifier middleware
+require 'iox/exception_notifier/exception_notifier'

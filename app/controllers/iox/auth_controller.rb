@@ -26,7 +26,7 @@ module Iox
             flash.notice = I18n.t('auth.login_failures', at: I18n.l(current_user.last_login_failure, format: :short), count: current_user.login_failures )
           end
 
-          unless current_user.registration_completed
+          if Rails.configuration.iox.open_registration && !current_user.registration_completed
             Iox::Activity.create! user_id: current_user.id, obj_name: current_user.username, action: 'first_signup', icon_class: 'icon-user', obj_id: current_user.id, obj_type: current_user.class.name, obj_path: user_path(current_user)
             current_user.registration_completed = true
           end

@@ -9,7 +9,6 @@ module Iox
     # list all users
     #
     def index
-      1/0
       return redirect_401 unless current_user.is_admin?
       return unless request.xhr?
       offset = params[:page] || 0

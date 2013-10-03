@@ -37,11 +37,12 @@ module Iox
 
 
     initializer :iox_exception_notifier do |app|
-      # Exception Notification
-      puts "SETUP ESCEPTION HANDLER"
-      config.middleware.use Iox::ExceptionNotifier, {
-       :exception_recipients => Rails.configuration.iox.exception_recipients
-      }
+      if Rails.env == 'production'
+        # Exception Notification
+        config.middleware.use Iox::ExceptionNotifier, {
+         :exception_recipients => Rails.configuration.iox.exception_recipients
+        }
+      end
     end
 
 

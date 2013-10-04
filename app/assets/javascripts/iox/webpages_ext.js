@@ -125,7 +125,7 @@ $(document).ready( function(){
              dataType: 'json',
              data: { publish: $(this).hasClass('on') },
              success: function( data ){
-               iox.flash( data );
+               iox.flash.rails( data );
              }
     });
   });

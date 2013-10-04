@@ -6,7 +6,7 @@ module Iox
       message = flash.alert || flash.notice
       if message
         type = flash.keys[0].to_s
-        javascript_tag %Q{ iox.flash({ message:"#{message}", type:"#{type}" }); }
+        javascript_tag %Q{ iox.flash["#{type}"]("#{message}"); }
       end
     end
 

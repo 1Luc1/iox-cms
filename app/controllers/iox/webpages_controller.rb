@@ -306,6 +306,7 @@ module Iox
 
     def init_webpage_translation
       @webpage.translation = @webpage.translations.where( locale: ( params[:locale] || session[:locale] || I18n.locale ) ).first
+      @webpage.translation = @webpage.translations.create!( locale: params[:locale] || I18n.default_locale ) unless @webpage.translation
     end
 
     def update_stat

@@ -32,10 +32,6 @@
       <%= f.text_field :name %>
     </p>
 
-    <%= f.fields_for @webpage.translation do |tr| %>
-
-      <%= tr.hidden_field :id %>
-
 
       <div class="slider-frame <%= @webpage.published? ? 'success' : '' %> pull-right">
         <span class="publish-button slider-button<%= ' on' if @webpage.published? %>" data-href="<%= publish_webpage_path(@webpage) %>" data-off-text="NO" data-on-text="YES"><%= @webpage.published? ? 'YES' : 'NO' %></span>
@@ -50,32 +46,43 @@
             {class: 'select2', style: 'width: 280px', multiple: false} ) %>
       </p>
 
-      <p>
-        <%= tr.label :locale, t('language') %>
+      <% if @webpage.translation %>
 
-        <%= tr.select( :locale, available_webpage_langs( :translate ), { include_blank: true},
-            {class: 'select2 select-lang', style: 'width: 280px', multiple: false} ) %>
+        <%= f.fields_for @webpage.translation do |tr| %>
 
-      </p>
+          <%= tr.hidden_field :id %>
 
-    <% end %>
+          <p>
+            <%= tr.label :locale, t('language') %>
+
+            <%= tr.select( :locale, available_webpage_langs( :translate ), { include_blank: true},
+                {class: 'select2 select-lang', style: 'width: 280px', multiple: false} ) %>
+
+          </p>
+
+        <% end %>
+
+      <% end %>
+
   </div>
 
   <div id="webpage-tab-meta" class="webpage-tab">
 
-    <%= f.fields_for @webpage.translation do |tr| %>
+    <% if @webpage.translation %>
+      <%= f.fields_for @webpage.translation do |tr| %>
 
-      <p><%= tr.label :meta_keywords, t('tags') %></p>
+        <p><%= tr.label :meta_keywords, t('tags') %></p>
 
-      <%= tr.text_field( :meta_keywords, class: 'select2tags', style: 'width: 280px' ) %>
+        <%= tr.text_field( :meta_keywords, class: 'select2tags', style: 'width: 280px' ) %>
 
-      <p><%= t('webpage.tags_desc') %></p>
+        <p><%= t('webpage.tags_desc') %></p>
 
-      <p>
-        <%= tr.label :meta_description, t('webpage.description') %>
-        <%= tr.text_area :meta_description %>
-      </p>
+        <p>
+          <%= tr.label :meta_description, t('webpage.description') %>
+          <%= tr.text_area :meta_description %>
+        </p>
 
+      <% end %>
     <% end %>
 
   </div>

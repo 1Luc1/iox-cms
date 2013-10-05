@@ -167,7 +167,7 @@ module Iox
       @webpage = Webpage.where( id: params[:id] ).first
       return if !redirect_if_no_webpage
       @webpage.translation = @webpage.translations.where( locale: params[:locale] || I18n.default_locale ).first
-      @webpage.translation = @webpage.translations.create( locale: params[:locale] || I18n.default_locale ) unless @webpage.translation
+      @webpage.translation = @webpage.translations.create!( locale: params[:locale] || I18n.default_locale ) unless @webpage.translation
       redirect_if_no_webpage
       redirect_if_no_rights
       render layout: 'application'

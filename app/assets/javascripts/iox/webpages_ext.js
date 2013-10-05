@@ -7,6 +7,7 @@
 //= require 3rdparty/knockout
 
 //= require iox/iox.core
+//= require iox/iox.flash
 //= require 3rdparty/jquery.ui.widget
 //= require 3rdparty/jquery.iframe-transport
 //= require 3rdparty/jquery.fileupload

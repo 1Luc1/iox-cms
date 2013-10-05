@@ -1,2 +1,3 @@
 iox.flash.rails( <%= raw flash.to_json %> );
 $('li[data-webbit-id=wb_<%= @webbit.id %>]').remove();
+$('#wb_<%= @webbit.id %>').remove();

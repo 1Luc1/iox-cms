@@ -82,7 +82,7 @@ module Iox
       return if !redirect_if_no_webpage
       return if !redirect_if_no_rights
 
-      @webbit = @webpage.webbits( id: params[:webbit_id] ).first
+      @webbit = @webpage.webbits.where( id: params[:webbit_id] ).first
       if @webbit.destroy
         flash.now.notice = 'webbit removed'
       else

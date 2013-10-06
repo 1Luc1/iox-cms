@@ -115,6 +115,10 @@
     $(this.options.appendTo).append( $overlay );
     $overlay.css('height', window.innerHeight );
 
+    $overlay.on('click', function(e){
+      $win.find('[data-close-win]').click();
+    });
+
     $(this.options.appendTo).append( $win );
 
     $win.center();

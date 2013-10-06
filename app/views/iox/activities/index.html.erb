@@ -15,7 +15,7 @@
               <i class="icon-time"></i>
               <%= l activity.created_at %>
             </div>
-            <%= raw t("activity.#{activity.action}", name: ( activity.obj_name ? link_to( activity.obj_name, activity.obj_path ) : '' ), user: link_to(activity.user.username,activity.user), icon: ( activity.icon_class ? "<i class='#{activity.icon_class}'></i>" : '' ) ) %>
+            <%= raw t("activity.#{activity.action}", name: ( activity.obj_name ? link_to( activity.obj_name, activity.obj_path ) : '' ), user: link_to(activity.user.username,activity.user), icon: ( activity.icon_class ? "<i class='#{activity.icon_class}'></i>" : '' ), recipient_name: activity.recipient_name, recipient_path: activity.recipient_path ) %>
           </li>
 
         <% end %>

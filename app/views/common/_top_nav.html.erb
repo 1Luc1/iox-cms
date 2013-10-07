@@ -18,7 +18,9 @@
         <br />
         <a href="<%= user_path(current_user) %>" class="btn"><%= t('view_profile') %></a>
       </div>
+      <% if current_user.is_admin? %>
       <div class="usage" data-xhr-url="<%= dashboard_quota_path %>" data-xhr-wait-txt="<%= t('loading_quota') %>..."></div>
+      <% end %>
       <div class="footer clearfix">
         <a class="btn pull-right" href="<%= logout_path %>"><%= t('auth.logout') %></a>
       </div>

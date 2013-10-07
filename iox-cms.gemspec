@@ -29,5 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sass-rails', "~> 4.0.0"
   spec.add_dependency 'paperclip', '~> 3.0'
   spec.add_dependency 'whenever'
+  spec.add_dependency 'rails-observers', '0.1.2'
 
 end

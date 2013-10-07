@@ -29,7 +29,7 @@
     <div class="iox-flash-container"></div>
     <%= flash_with_javascript %>
 
-    <%= link_to image_tag(Rails.configuration.iox.brand_logo, class: 'logo'), '/' %>
+    <%= link_to image_tag(Rails.configuration.iox.brand_logo, class: 'logo', title: t('to_startpage'), rel: 'tooltip'), '/' %>
   </div>
 
   <div class="iox-mcc">

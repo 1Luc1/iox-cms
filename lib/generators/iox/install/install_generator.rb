@@ -64,6 +64,7 @@ module Iox
           "    config.iox.domain_name = '#{domain_name}'\n"+
           "    config.iox.open_registration = false\n"+
           "    config.iox.redirect_after_login = '/iox/dashboard'\n"+
+          "    config.iox.redirect_after_logout = '/iox/login'\n"+
           "    config.iox.support_email = 'support@tastenwerk.com'\n"+
           "    config.iox.available_langs = [:de, :en]\n"+
           "    config.iox.user_roles = ['user','admin','editor']\n"+

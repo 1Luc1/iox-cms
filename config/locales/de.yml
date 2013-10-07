@@ -1,5 +1,6 @@
 de:
   today: "Heute"
+  stick: "Anheften"
   download: "Herunterladen"
   change_password: "Passwort ändern"
   view_profile: "Profil anzeigen"
@@ -17,6 +18,7 @@ de:
   back: "Zurück"
   never: "Nie"
   back_to_startpage: "Zurück zur Startseite"
+  to_startpage: "Zu deiner öffentlichen Startseite gehen"
   next: "Weiter"
   previous: "Zurück"
   preview: "Vorschau"

@@ -1,20 +1,21 @@
 <!-- side right column -->
 <div class="webpage-sidebar">
 
-    <!-- save and other actions -->
-    <div class="btn-group settings pull-right" style="width:auto">
-      <button class="btn" title="<%= t('webpages.back') %>" data-href="<%= webpages_path %>"><i class="icon-chevron-sign-left"></i></button>
-      <button class="btn" type="submit" title="<%= t('save') %>"><i class="icon-save"></i></button>
-      <button class="btn" title="<%= t('view') %>" data-href="<%= webpage_path(@webpage) %>"><i class="icon-eye-open"></i></button>
-      <button data-toggle="dropdown" class="btn dropdown-toggle">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-          <li><a href="<%= webpages_path %>"><%= t('webpages.back') %></a></li>
-          <li><a href="<%= webpage_path(@webpage) %>" target='_blank'><%= t('view') %></a></li>
-          <li><%= link_to t('delete'), @webpage, method: :delete, data: { confirm: t('webpage.really_delete', name: @webpage.name) } %></li>
-      </ul>
-    </div>
+  <!-- save and other actions -->
+  <div class="btn-group settings pull-right" style="width:auto">
+    <button class="btn" title="<%= t('webpages.back') %>" data-href="<%= webpages_path %>"><i class="icon-chevron-sign-left"></i></button>
+    <span id="push-sidebar-pin" class="btn" title="<%= t('stick') %>"><i class="icon-pushpin"></i></span>
+    <button class="btn" type="submit" title="<%= t('save') %>"><i class="icon-save"></i></button>
+    <button class="btn" title="<%= t('view') %>" data-href="<%= webpage_path(@webpage) %>"><i class="icon-eye-open"></i></button>
+    <button data-toggle="dropdown" class="btn dropdown-toggle">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="<%= webpages_path %>"><%= t('webpages.back') %></a></li>
+        <li><a href="<%= webpage_path(@webpage) %>" target='_blank'><%= t('view') %></a></li>
+        <li><%= link_to t('delete'), @webpage, method: :delete, data: { confirm: t('webpage.really_delete', name: @webpage.name) } %></li>
+    </ul>
+  </div>
 
   <%= image_tag Rails.configuration.iox.brand_logo, class: 'iox-logo' %>
 
@@ -34,7 +35,9 @@
 
 
       <div class="slider-frame <%= @webpage.published? ? 'success' : '' %> pull-right">
-        <span class="publish-button slider-button<%= ' on' if @webpage.published? %>" data-href="<%= publish_webpage_path(@webpage) %>" data-off-text="NO" data-on-text="YES"><%= @webpage.published? ? 'YES' : 'NO' %></span>
+        <span class="publish-button" data-href="<%= publish_webpage_path(@webpage) %>">
+        <i class="icon-<%= @webpage.published? ? 'ok-sign' : 'ban-circle' %>"></i>
+        </span>
       </div>
 
       <%= f.label :template, t('webpage.published') %>
@@ -63,6 +66,11 @@
         <% end %>
 
       <% end %>
+
+      <p>
+        <%= f.label :slug, "Slug" %>
+        <%= f.text_field :slug %>
+      </p>
 
   </div>
 
@@ -163,6 +171,10 @@
   -->
 
   <%= hidden_field_tag :stay_on_page, false, class: 'stay-on-page' %>
+  <div class="sidebar-hidden-arr">
+    <%= image_tag Rails.configuration.iox.brand_logo, class: 'iox-logo' %>
+    <i class="icon-chevron-left"></i>
+  </div>
 </div>
 
 

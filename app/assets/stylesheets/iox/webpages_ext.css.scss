@@ -22,7 +22,15 @@ $sidebar-shadow: -2px -2px 5px rgba(0,0,0,0.3);
 
 .webpage-sidebar .dropdown-backdrop{ display: none; }
 
-.webpage-sidebar{ position: absolute; z-index: 1005; top: 5px; left: 5px; bottom: 5px; width: 280px; background-color: $sidebar-color; padding: 10px; border-radius: 1px; border: 1px solid #eee; box-shadow: $sidebar-shadow; overflow: auto; }
+.webpage-sidebar{ position: fixed; z-index: 1005; top: 5px; left: -250px; bottom: 5px; width: 280px; background-color: $sidebar-color; padding: 10px; border-radius: 1px; border: 1px solid #eee; box-shadow: $sidebar-shadow; overflow: auto; transition: left 0.5s }
+
+.webpage-sidebar.full-visible{ left: 5px; transition: left 0.3s }
+.webpage-sidebar .sidebar-hidden-arr{ position: absolute; z-index: 10; width: 50px; right: 0; top: 0; bottom: 0; background: inherit; }
+.webpage-sidebar .sidebar-hidden-arr .iox-logo{ height: 32px;position: absolute;right: 9px;width: 32px;top: 22px; }
+.webpage-sidebar .sidebar-hidden-arr .icon-chevron-left{ font-size: 2em; color: #777; float: left; margin: 5px; position: absolute; top: 45%; right: 12px; }
+.webpage-sidebar.full-visible .sidebar-hidden-arr{ display: none; }
+
+
 .webpage-sidebar input[type=text]{ width: 280px; padding: 4px 0; text-indent: 6px; border-style: none none solid; border-width: 0 0 1px; border-color: #DEE3EA; background: transparent; border-radius: 0; transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s; box-shadow: none; margin-bottom: 0; }
 .webpage-sidebar .default{ margin: 50px 0; text-align: center; }
 .webpage-sidebar input[type=text]:hover,
@@ -30,12 +38,15 @@ $sidebar-shadow: -2px -2px 5px rgba(0,0,0,0.3);
 .webpage-sidebar textarea{ width: 280px; height: 10em; padding: 4px 0; text-indent: 6px; }
 .webpage-sidebar label{ margin-bottom: 0; margin-top: 10px; }
 
+.webpage-sidebar .publish-button{ cursor: pointer; font-size: 1.2em; }
+.webpage-sidebar .publish-button .icon-ok-sign{ color: #81AD53; }
+
 .webpage-sidebar .btn-group{ text-align: right; margin: 0 0 10px 0; width: 100%; }
 .webpage-sidebar h1{ font-size: 1.2em; text-transform: uppercase; font-weight: 600; margin: 20px 0;}
 .webpage-sidebar .bottom-control{ margin-top: 20px; height: 40px; }
-.webpage-sidebar .iox-logo, .webpage-mini-sidebar .iox-logo{ cursor: move; width: 50px; margin-top: -17px }
+.webpage-sidebar .iox-logo, .webpage-mini-sidebar .iox-logo{ cursor: move; width: 50px; margin-top: -10px }
 
-.webpage-mini-sidebar{ position: absolute; top: 5px; left: 5px; width: 200px; height: 30px; background-color: $sidebar-color; border: 1px solid #ddd; border-radius: 1px; box-shadow: $sidebar-shadow; padding: 10px; z-index: 1005; }
+.webpage-mini-sidebar{ position: fixed; top: 5px; left: 5px; width: 200px; height: 30px; background-color: $sidebar-color; border: 1px solid #ddd; border-radius: 1px; box-shadow: $sidebar-shadow; padding: 10px; z-index: 1005; }
 
 .webbit-list ul{ list-style: none; padding: 0; margin: 0; max-height: 300px; overflow: auto; }
 .webbit-list li{ border: 1px solid #eee;

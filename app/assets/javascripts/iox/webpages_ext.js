@@ -121,13 +121,17 @@ $(document).ready( function(){
   });
 
   $('.publish-button').on('click', function(){
+    var self = this;
     $.ajax({ url: $(this).attr('data-href'),
              type: 'put',
              dataType: 'json',
-             data: { publish: $(this).hasClass('on') },
-             success: function( data ){
-               iox.flash.rails( data );
-             }
+             data: { publish: ($(this).find('.icon-ban-circle').length > 0) }
+    }).done( function( data ){
+      iox.flash.rails( data.flash );
+      if( data.published )
+        $(self).html('<i class="icon-ok-sign"></i>');
+      else
+        $(self).html('<i class="icon-ban-circle"></i>');
     });
   });
 
@@ -140,7 +144,26 @@ $(document).ready( function(){
     e.preventDefault();
   })
 
-  $('.webpage-sidebar').draggable({ handle: '.iox-logo' });
+  var skipSidebarHide = false;
+
+  $('.webpage-sidebar').draggable({ handle: '.iox-logo' })
+    .on('mouseenter', function(e){
+      $(this).addClass('full-visible');
+      skipSidebarHide = true;
+    })
+    .on('mouseleave', function(e){
+      if( $('#push-sidebar-pin').hasClass('active') )
+        return;
+      skipSidebarHide = false;
+      setTimeout( function(e){
+        if( !skipSidebarHide )
+          $('.webpage-sidebar').removeClass('full-visible');
+      },1000)
+    });
+
+  $('#push-sidebar-pin').on('click', function(e){
+    $(this).toggleClass('active');
+  })
 
   $('.flash-container .alert').on('click', function(e){
     $(this).effect('drop');

@@ -33,6 +33,10 @@ $(function(){
     placement: 'right'
   });
 
+  $('[rel=tooltip]').tooltip({
+    placement: 'right'
+  });
+
   $.blockUI.defaults.css = {};
   $.blockUI.defaults.overlayCSS = {};
   $.blockUI.defaults.message = iox.loader;

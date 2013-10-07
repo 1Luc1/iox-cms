@@ -133,7 +133,7 @@ module Iox
       else
         flash.now.alert = 'unknown error'
       end
-      render :json => { flash: flash, success: flash[:alert].blank? }
+      render :json => { flash: flash, success: flash[:alert].blank?, published: @webpage.published? }
     end
 
     #
@@ -227,7 +227,6 @@ module Iox
         flash.now.notice = t('webpage.deleted', name: @webpage.name, id: @webpage.id)
       else
         flash.now.alert = t('webpage.failed_to_delete', name: @webpage.name)
-        puts @webpage.errors.inspect
       end
       if request.xhr?
         render json: { flash: flash, success: flash[:alert].blank? }
@@ -250,7 +249,7 @@ module Iox
     private
 
     def webpage_params
-      params.require(:webpage).permit(:name, :template, :parent_id, :webpage_translation => [ :locale, :meta_keywords, :content ])
+      params.require(:webpage).permit(:name, :slug, :template, :parent_id, :webpage_translation => [ :locale, :meta_keywords, :content ])
     end
 
     def set_and_save_webpage_translation
@@ -305,6 +304,7 @@ module Iox
     end
 
     def init_webpage_translation
+      return unless @webpage
       @webpage.translation = @webpage.translations.where( locale: ( params[:locale] || session[:locale] || I18n.locale ) ).first
       @webpage.translation = @webpage.translations.create!( locale: params[:locale] || I18n.default_locale ) unless @webpage.translation
     end

@@ -52,7 +52,7 @@ module Iox
     validates_with UniqueTemplateValidator
     validates :name, presence: true
 
-    before_save        :create_slug
+    before_create      :create_slug
     before_create      :publish_if_frontpage
     after_create       :init_webbits
 

@@ -127,8 +127,12 @@ module Iox
     #
     def logout
       warden.logout
+      # delete any cookie set by this login session
+      cookies.each do |cookie|
+        cookies.delete( cookie[0] )
+      end
       flash[:notice] = I18n.t('auth.you_have_been_logged_out')
-      redirect_to login_path
+      redirect_to (Rails.configuration.iox.redirect_after_logout || login_path)
     end
 
   end

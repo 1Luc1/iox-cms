@@ -307,6 +307,9 @@ de:
     type_a_users_name: "Tippe den Beginn eines Benutzernamens"
     click_on_user_to_show_details: "Klick auf einen Benutzer zeigt Details"
 
+  webfile:
+    deleted: "Datei %{name} wurde gelöscht"
+
   webpage:
     name: "Name"
     publishing_status: "Veröffentlichung"

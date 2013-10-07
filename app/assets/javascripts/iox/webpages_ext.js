@@ -18,8 +18,6 @@
 
 //=require_self
 
-var imagesData;
-
 $(document).ready( function(){
 
   //$('.webpage-mini-sidebar').draggable({ handle: '.iox-logo' });
@@ -73,7 +71,7 @@ $(document).ready( function(){
         type: 'put'
       }).done(function(response){
         if( response.flash.length > 0 && response.flash[0].length > 0 )
-          noty({text: response.flash[0][1]});
+          noty({text: response.flash[0][1], timeout: 2000 });
       });
     }, 100);
 
@@ -169,14 +167,15 @@ $(document).ready( function(){
     $(this).effect('drop');
   });
 
-  imagesData = { images: ko.observableArray() };
+  window.imagesData = { images: ko.observableArray() };
 
   $('.image-browser').on('click', '.icon-remove', function(e){
     var img = ko.dataFor($(this).closest('li').get(0));
     $.ajax({ url: 'webfiles/'+img.id, type: 'delete', dataType: 'json', success: function( json ){
         if( json.success ){
-          imagesData.remove( member );
+          imagesData.images.remove( img );
         }
+        noty({text: json.flash[0][1],timeout: 2000});
       }
     })
   });

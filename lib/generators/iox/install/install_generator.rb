@@ -30,6 +30,7 @@ module Iox
 
         directory "avatar", "public/images/iox/avatar"
         directory "kendoui", "public/stylesheets/kendoui"
+        directory "javascripts/ckeditor", "public/javascritps/3rdparty/ckeditor"
 
         remove_file "app/assets/stylesheets/application.css"
 

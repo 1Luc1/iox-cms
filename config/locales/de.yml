@@ -46,6 +46,7 @@ de:
   max_255: "Maximal 255 Zeichen"
   archive_this_entry: "Diesen Eintrag archivieren"
   insufficient_rights: "Du verfügst nicht über ausreichen Rechte um diese Aktion auszuführen"
+  general: "Allgemein"
 
   loading_quota: "Quota wird geladen"
 
@@ -114,6 +115,7 @@ de:
   activity:
     created: "%{user} hat %{icon} %{name} angelegt"
     deleted: "%{user} hat %{icon} %{name} gelöscht"
+    restored: "%{user} hat %{icon} %{name} wiederhergestellt"
     edited: "%{user} hat %{icon} %{name} bearbeitet"
     updated: "%{user} hat %{icon} %{name} bearbeitet"
     registered: "%{icon} %{name} hat sich registriert"

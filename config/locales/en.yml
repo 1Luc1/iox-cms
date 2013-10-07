@@ -223,6 +223,7 @@ en:
     created_and_mail_sent: "User &raquo;%{name}&laquo; has been created and email has been sent"
 
     mailer:
+      subject: "Welcome!"
       welcome: "Welcome"
       has_created_an_account: "%{name} has created an account for you. You can start by clicking the link below and set a password."
       login_and_start: "%{url} (follow instructions there)"

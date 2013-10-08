@@ -323,6 +323,7 @@
    * highlight and mark this item
    */
   TreeItem.prototype.markItem = function markItem( item, e ){
+
     if( e )
       e.stopPropagation();
     if( item._selected() ){
@@ -330,6 +331,7 @@
       item._master._selectedItem = null;
       return;
     }
+    item.showWebpageForm( item, e );
     item._selected( true );
     if( item._master._selectedItem )
         item._master._selectedItem._selected( false );

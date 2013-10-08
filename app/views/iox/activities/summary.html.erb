@@ -17,7 +17,7 @@
         <% @activities.each do |activity| %>
           <li>
             <span class="time"><i class="icon-time"></i><span class="short-time">&nbsp;<%= time_ago_in_words(activity.created_at).sub(/Minuten|Minute|minutes/i,'min').sub(/Stunden|Stunde|hour|hours/i,'h').sub(/one|eine/,'1').sub(/less|less than|weniger/,'<').sub(/etwa|about/,'~').sub(/mehr|mehr als|more|more than/,'>') %></span></span>
-            <%= raw t("activity.#{activity.action}", name: ( activity.obj_name ? link_to( activity.obj_name, activity.obj_path ) : '' ), user: link_to(activity.user.username,activity.user), icon: ( activity.icon_class ? "<i class='#{activity.icon_class}'></i>" : '' ), recipient_name: activity.recipient_name, recipient_path: activity.recipient_path ) %>
+            <%= raw t("activity.#{activity.action}", name: ( activity.obj_name ? link_to( activity.obj_name, activity.obj_path ) : '' ), user: link_to(activity.user.full_name,activity.user), icon: ( activity.icon_class ? "<i class='#{activity.icon_class}'></i>" : '' ), recipient_name: activity.recipient_name, recipient_path: activity.recipient_path ) %>
           </li>
         <% end %>
       </ul>

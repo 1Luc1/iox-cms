@@ -118,6 +118,14 @@ h2, h3{
   width: 0;
   z-index: 3;
 }
+.iox-content-arrow.offset-arrow{
+  left: -22px;
+}
+.iox-content-arrow.offset-arrow:after{
+border-width: 11px;
+left: -11px;
+top: -11px;
+}
 .auto-overflow{
   overflow: auto;
 }

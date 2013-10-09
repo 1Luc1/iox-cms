@@ -8,6 +8,12 @@ class IoxWebbits < ActiveRecord::Migration
 
       t.belongs_to :webpage
 
+      # new as of 08/10/2013
+      t.string  :category
+      t.integer :parent_id
+      t.integer :links_to_webbit_id       # if this webbit links to another webbit,
+                                          # which should be used instead
+
     end
   end
 end

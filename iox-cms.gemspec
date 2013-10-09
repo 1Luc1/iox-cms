@@ -25,10 +25,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency "bcrypt-ruby", "~> 3.0.1"
   spec.add_dependency 'rails_warden'
   spec.add_dependency 'jquery-rails'
-  spec.add_dependency 'select2-rails'
+  spec.add_dependency 'select2-rails', '3.5.0'
   spec.add_dependency 'sass-rails', "~> 4.0.0"
   spec.add_dependency 'paperclip', '~> 3.0'
   spec.add_dependency 'whenever'
-  spec.add_dependency 'rails-observers', '0.1.2'
+  spec.add_dependency 'rqrcode-rails3'
+  spec.add_dependency 'mini_magick'
 
 end

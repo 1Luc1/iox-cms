@@ -5,6 +5,7 @@ module Iox
 
     def index
       @activities = Iox::Activity.where("user_id != ?", current_user.id).order("created_at DESC").limit(30).load
+      Iox::Activity.where("created_at < ?", 7.days.from_now).delete_all
       current_user.last_activities_call = Time.now
       current_user.save
     end

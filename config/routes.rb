@@ -19,6 +19,7 @@ Iox::Engine.routes.draw do
 
   resources :users do
     member do
+      get 'confirmation_qr'
       get 'confirm_suspend'
       patch 'suspend'
       patch 'unsuspend'

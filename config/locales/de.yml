@@ -205,6 +205,7 @@ de:
 
   user:
     change_picture: "Bild ändern"
+    welcome_link: "Willkommenslink (zum Passwortsetzen)"
     my_account: "Mein Konto"
     account_of: "Konto von %{name}"
     suggest_password: "Passwort vorschlagen"

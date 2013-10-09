@@ -20,6 +20,15 @@
 
         <div class="fields-header"><%= t('user.general') %></div>
 
+        <div class="user-qr" onclick="$(this).toggleClass('hovered');">
+          <p><%= t('user.welcome_link') %></p>
+          <img data-bind=" attr: { src: '/iox/users/'+id+'/confirmation_qr.png' }" />
+          <div class="control">
+            <a data-bind="attr: { href: '/iox/welcome/'+id+'?k='+confirmation_key }, text: 'http://<%= Rails.configuration.iox.domain_name %>/iox/welcome/'+id+'?k='+confirmation_key"></a>
+            <br />
+          </div>
+        </div>
+
         <div class="field-box required">
           <label for="username"><%= t('user.username') %></label>
           <input type="text" name="user[username]" data-bind="value: username" required validationMessage="<%= t('user.username_required') %>" />

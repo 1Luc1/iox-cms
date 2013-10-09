@@ -99,6 +99,16 @@ module Iox
       render template: '/iox/users/suspend'
     end
 
+    # get a confirmation qr
+    # code for this user (only for admins)
+    def confirmation_qr
+      return render_401 unless current_user.is_admin?
+      @user = User.find_by_id( params[:id] )
+      respond_to do |format|
+        format.png  { render :qrcode => "http://#{Rails.configuration.iox.domain_name}/iox/welcome/#{@user.id}?k=#{@user.confirmation_key}", level: :m, offset: 20 }
+      end
+    end
+
     #
     # create a new user
     #

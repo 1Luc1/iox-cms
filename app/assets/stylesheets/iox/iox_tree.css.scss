@@ -22,9 +22,10 @@
       text-decoration: none;
       max-width: 200px;
       &.title{
-        font-weight: 100;
-        font-size: 1.2em;
         float: left;
+        font-weight: 100;
+        margin: 2px;
+        line-height: 1.2em;
       }
     }
     .icon-home{
@@ -64,6 +65,7 @@
         &.publish-action{
           opacity: 0.5;
           cursor: pointer;
+          line-height: 22px;
         }
         .icon-ok-sign{
           color: #81AD53;

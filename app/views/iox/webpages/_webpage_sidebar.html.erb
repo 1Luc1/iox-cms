@@ -25,6 +25,7 @@
     <button class="btn-flat btn white" data-to-id="meta" style="padding: 7px 10px 6px"><i class="icon-cog"></i></button>
     <button class="btn-flat btn white" data-to-id="images" style="padding: 7px 10px 6px"><i class="icon-picture"></i></button>
     <button class="btn-flat btn white" data-to-id="webbit" style="padding: 7px 10px 6px"><i class="icon-sitemap"></i></button>
+    <button class="btn-flat btn white" data-to-id="webbit-tools" style="padding: 7px 10px 6px"><i class="icon-wrench"></i></button>
   </div>
 
   <div id="webpage-tab-general" class="webpage-tab active">
@@ -137,14 +138,23 @@
   <div id="webpage-tab-webbit" class="webpage-tab">
 
     <div class="webbit-list">
+      <div class="webbit-control">
+        <a href="#" class="create-webbit">
+          <i class="icon-plus-sign"></i>
+        </a>
+        <a href="#" class="delete-selected-webbits">
+          <i class="icon-trash"></i>
+        </a>
+      </div>
       <h1><%= t('webpage.structure') %></h1>
-      <ul>
-        <% @webpage.webbits.each do |wb| %>
-          <li data-webbit-id="wb_<%= wb.id %>"><span class="pull-right">[<%= wb.plugin_type %>]</span>
-          <a class="pull-right" style="margin-right: 5px" href="<%= delete_webbit_from_webpage_path( @webpage ) %>?webbit_id=<%= wb.id %>" data-method="delete" data-remote="true" data-confirm="Really delete this webbit?"><i class="icon-trash"></i></a><a href="#"><%= wb.name %></a></li>
-        <% end %>
-      </ul>
+      
+      <div id="webbits-tree"></div>
+
     </div>
+
+  </div>
+
+  <div id="webpage-tab-webbit-tools" class="webpage-tab">
 
     <% get_required_webbits.each do |webbit| %>
       <%= render partial: "iox/webpages/webbits/#{webbit}", locals: {f: f} %>
@@ -152,23 +162,6 @@
 
   </div>
 
-  <!--
-  <div class="bottom-control">
-
-    <button class="btn btn-primary pull-right" title="<%= t('save') %>" type="submit" onclick="$('.webpage-form .stay-on-page').val('false');">
-      <i class="icon-save"></i>&nbsp; &plus;
-      <%= t('back') %>
-    </button>
-
-    <span class="pull-right">&nbsp;</span>
-
-    <button class="btn btn-primary pull-right" title="<%= t('save') %>" type="submit" onclick="$('.webpage-form .stay-on-page').val('true');">
-      <i class="icon-save"></i>
-      <%= t('save') %>
-    </button>
-
-  </div>
-  -->
 
   <%= hidden_field_tag :stay_on_page, false, class: 'stay-on-page' %>
   <div class="sidebar-hidden-arr">
@@ -177,6 +170,10 @@
   </div>
 </div>
 
+<script id="webbit-template" type="text/kendo-ui-template">
+  <span class='icon #: item.icon #'>
+  <span>#: item.name #</span>
+</script>
 
 <script type="text/html" id="image-template">
   <li data-bind="attr: { 'data-id': id } ">
@@ -223,6 +220,57 @@ function setupImageGalleryDraggable(){
 
   $('.select-lang').on('change', function(e){
     location.href = '?locale='+$(this).find('option:selected').val();
+  });
+
+  var treeSource = new kendo.data.HierarchicalDataSource({
+          transport: {
+              read: function( options ){
+                $.ajax({
+                  url: '<%= webpage_webbits_path(@webpage) %>',
+                  dataType: 'json',
+                  type: 'get'
+                }).done( function( json ){
+                  options.success( json );
+                });
+              },
+              destroy: function( options ){
+                $.ajax({
+                  url: '<%= webpage_webbits_path(@webpage) %>/'+options.data.id,
+                  type: 'delete',
+                  dataType: 'json'
+                }).done( function( json ){
+                  noty({text: json.flash[0][1], timeout: 2000 });
+                  options.success( json );
+                });
+              }
+          },
+          schema: {
+              model: {
+                  id: 'id',
+                  hasChildren: 'has_children'
+              }
+          },
+          patch: false
+      });
+
+  $('#webbits-tree').kendoTreeView({
+      dataSource: treeSource,
+      dataTextField: 'name',
+      expanded: true,
+      template: kendo.template( $('#webbit-template').html() )
+  });
+
+  $('#webbits-tree').on('click', '.k-item', function(e){
+    $(this).toggleClass('selected');
+  });
+
+  $('.delete-selected-webbits').on('click', function(e){
+    e.preventDefault();
+    var treeview = $('#webbits-tree').data('kendoTreeView');
+    $('#webbits-tree .selected').each( function(){
+      treeSource.remove( treeview.dataItem( this ) );
+    });
+    treeSource.sync();
   });
 
 </script>

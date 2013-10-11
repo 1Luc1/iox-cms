@@ -104,3 +104,30 @@ ul.image-browser li .overlay{ display: none;  }
 
 .flash-container{ position: fixed; top: 20px; }
 .flash-container .icon-remove{ cursor: pointer; margin-right: 0; }
+
+#webbits-tree{
+  position: absolute;
+  top: 140px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+#webbits-tree .icon{
+  margin-right: 5px;
+  color: #999;
+}
+#webbits-tree .k-item.selected{
+  background-color: #FaF7d5;
+}
+.webbit-control{
+  float: right;
+  text-align: right;
+}
+.webbit-control a{
+  margin-left: 5px;
+  padding: 2px 5px;
+}
+.webbit-control a:hover{
+  background-color: #333;
+  color: #fff;
+}

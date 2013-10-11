@@ -3,6 +3,7 @@
 //= require 3rdparty/jquery-ui-1.10.3.custom
 //= require 3rdparty/bootstrap
 //= require 3rdparty/moment-2.0.0.min
+//= require 3rdparty/kendoui/kendo.web.min
 
 //= require 3rdparty/knockout
 

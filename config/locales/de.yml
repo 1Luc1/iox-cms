@@ -359,6 +359,8 @@ de:
     meta_keywords: "Schlüsselwörter"
     meta_description: "Beschreibung"
     translation_does_not_exist_create: "Eine Version dieser Sprache existiert noch nicht. Möchtest du eine erstellen?"
+    slug: "Pfad"
+    slug_required: "Pfad muss vorhanden sein"
     templates:
       default: "Standard"
       frontpage: "Frontpage"
@@ -366,6 +368,12 @@ de:
       oups_not_found: "Oups! Die angeforderte Seite wurde nicht gefunden!"
       create_webpage: "Seite neu erstellen"
 
+  webbit:
+    deleted: "Webbit %{name} wurde gelöscht"
+    deletion_failed: "Webbit %{name} konnte nicht gelöscht werden"
+    not_found: "Webbit wurde nicht gefunden"
+    created: "Webbit %{name} wurde angelegt"
+    creation_failed: "Konnte Webbit nicht anlegen"
 
   webpages:
     title: "Webseiten"

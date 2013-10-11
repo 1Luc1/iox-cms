@@ -29,7 +29,7 @@ module Iox
         copy_file "application.css.scss", "app/assets/stylesheets/application.css.scss"
 
         directory "avatar", "public/images/iox/avatar"
-        directory "kendoui", "public/stylesheets/kendoui"
+        directory "kendoui", "public/stylesheets/3rdparty/kendoui"
         directory "javascripts/ckeditor", "public/javascritps/3rdparty/ckeditor"
 
         remove_file "app/assets/stylesheets/application.css"

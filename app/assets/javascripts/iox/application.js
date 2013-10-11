@@ -11,6 +11,8 @@
 //= require 3rdparty/moment.lang.de
 //= require 3rdparty/jquery.blockui
 
+//= require iox/browser_detect
+
 //= require 3rdparty/kendoui/kendo.web.min
 //= require 3rdparty/kendoui/cultures/kendo.culture.de-DE.min
 //= require 3rdparty/kendoui/cultures/kendo.culture.en-GB.min
@@ -129,5 +131,17 @@ $(function(){
     if( e.keyCode === 27 && $('.iox-win:visible').length )
       iox.Win.closeVisible();
   });
+
+
+  BrowserDetect.init();
+  var browserFailedMsg = 'Your Browser is too old for this system. Please update to a newer version of ' + BrowserDetect.browser + '. Currently you have version ' + BrowserDetect.version + '. You can continue using this site, but cannot guarantee everything working as expected. For more information, please contact contact@tastenwerk.com';
+  if( BrowserDetect.browser == 'Firefox' && BrowserDetect.version < 21 )
+    alert( browserFailedMsg );
+  else if( BrowserDetect.browser == 'Chrome' && BrowserDetect.version < 25 )
+    alert( browserFailedMsg );
+  else if( BrowserDetect.browser == 'Explorer' && BrowserDetect.version < 25 )
+    alert( browserFailedMsg );
+  else if( BrowserDetect.browser == 'Safari' && BrowserDetect.version < 6 )
+    alert( browserFailedMsg );
 
 });

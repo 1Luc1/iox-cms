@@ -38,6 +38,7 @@ Iox::Engine.routes.draw do
 
     resources :translations
     resources :webfiles
+    resources :webbits
 
     collection do
       get 'images'

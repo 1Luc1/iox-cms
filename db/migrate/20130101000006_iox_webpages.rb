@@ -18,6 +18,10 @@ class IoxWebpages < ActiveRecord::Migration
 
       t.datetime :deleted_at
 
+      # added at 11/10/2013
+      t.boolean   :show_in_menu, default: true
+      t.boolean   :show_in_sitemap, default: true
+
       t.timestamps
     end
   end

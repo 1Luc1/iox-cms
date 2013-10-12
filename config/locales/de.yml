@@ -361,6 +361,8 @@ de:
     translation_does_not_exist_create: "Eine Version dieser Sprache existiert noch nicht. Möchtest du eine erstellen?"
     slug: "Pfad"
     slug_required: "Pfad muss vorhanden sein"
+    show_in_menu: "Im Menü anzeigen"
+    show_in_sitemap: "In Sitemap anzeigen"
     templates:
       default: "Standard"
       frontpage: "Frontpage"
@@ -374,6 +376,10 @@ de:
     not_found: "Webbit wurde nicht gefunden"
     created: "Webbit %{name} wurde angelegt"
     creation_failed: "Konnte Webbit nicht anlegen"
+    create: "Neues Webbit erstellen"
+    type: "Plugin"
+    css_classes: "CSS Klassen"
+    category: "Kategorie"
 
   webpages:
     title: "Webseiten"

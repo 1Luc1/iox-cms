@@ -113,7 +113,7 @@ module Iox
 
         route "root 'iox/webpages#frontpage'"
         route "get '/login', to: 'iox/auth#login'"
-        route "mount Iox::Engine, at: 'iox'"
+        route "mount Iox::Engine => 'iox', as: 'iox'"
 
       end
 

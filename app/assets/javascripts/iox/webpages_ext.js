@@ -88,16 +88,19 @@ $(document).ready( function(){
     $('.webbit').css('z-index','auto');
     $(this).css('z-index', 999);
 
-    $('.webbit-list li.active').removeClass('active');
-    $('.webbit-list li[data-webbit-id='+$(this).attr('id')+']').addClass('active');
+    $('.webbit-list li.selected').removeClass('selected');
+    
+    $('.webbit-list [data-webbit-id='+$(this).attr('id').replace('wb_','')+']').closest('li.k-item').addClass('selected');
 
 		$('.webbit.active').removeClass('active');
 
 		$(this).addClass('active');
 
     $('.webbit-plugin-control').hide();
-		$('#webpage-tab-webbit .webbit-'+$(this).attr('data-plugin-name')+'-plugin').show();
-		$('.webpage-tabs-control [data-to-id=webbit]').click();
+
+    $('.webpage-tabs-control [data-to-id=webbit-tools]').click();
+
+		$('#webpage-tab-webbit-tools .webbit-'+$(this).attr('data-plugin-name')+'-plugin').show();
 	});
 
 	$('.webpage-tab').hide();
@@ -152,6 +155,8 @@ $(document).ready( function(){
     })
     .on('mouseleave', function(e){
       if( $('#push-sidebar-pin').hasClass('active') )
+        return;
+      if( e.pageX < 400 )
         return;
       skipSidebarHide = false;
       setTimeout( function(e){

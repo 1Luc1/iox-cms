@@ -19,13 +19,17 @@
 <script type="text/javascript">
   $(document).ready( function(){
 
-    $('[data-plugin-name=gallery]').each( function(){
-      $(this).ioxImageGallery();
-    });
+    try{
+      $('[data-plugin-name=gallery]').each( function(){
+        $(this).ioxImageGallery();
+      });
+    } catch(e){ console.log('no text editor found'); }
 
-    $('[data-plugin-name=text]').each( function(){
-      $(this).ioxTextEditor();
-    });
+    try{
+      $('[data-plugin-name=text]').each( function(){
+        $(this).ioxTextEditor();
+      });
+    } catch(e){ console.log('no text editor found'); }
 
   });
 </script>

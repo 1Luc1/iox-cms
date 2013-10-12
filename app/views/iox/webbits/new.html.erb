@@ -1,0 +1,35 @@
+<%= form_for @webbit, url: webpage_webbits_path(@webpage) do |f| %>
+
+	<%= f.hidden_field :webpage_id %>
+
+	<div class="field-box">
+		<%= f.label :name, t('name') %>
+		<div class="field">
+			<%= f.text_field :name %>
+		</div>
+	</div>
+
+	<div class="field-box">
+		<%= f.label :plugin_type, t('webbit.type') %>
+		<div class="field">
+			<%= f.text_field :plugin_type %>
+		</div>
+	</div>
+	
+	<div class="field-box">
+		<%= f.label :css_classes, t('webbit.css_classes') %>
+		<div class="field">
+			<%= f.text_field :css_classes %>
+		</div>
+	</div>
+
+	<div class="field-box">
+		<%= f.label :category, t('webbit.category') %>
+		<div class="field">
+			<%= f.text_field :category %>
+		</div>
+	</div>
+
+	<%= f.submit t('create'), class: 'btn' %>
+
+<% end %>

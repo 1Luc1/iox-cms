@@ -34,6 +34,7 @@ Iox::Engine.routes.draw do
   end
 
   resources :webfiles
+  
   resources :webpages do
 
     resources :translations

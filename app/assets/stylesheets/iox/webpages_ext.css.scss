@@ -12,6 +12,9 @@
 
  *= require 3rdparty/font-awesome
 
+ *= require 3rdparty/kendoui/kendo.common.min
+ *= require 3rdparty/kendoui/kendo.silver.min
+
  *= require_self
  */
 
@@ -130,4 +133,18 @@ ul.image-browser li .overlay{ display: none;  }
 .webbit-control a:hover{
   background-color: #333;
   color: #fff;
+}
+
+.new_webbit .field-box label{
+  float: left;
+}
+
+.new_webbit .field-box .field{
+  margin-left: 100px;
+}
+
+#webbits-tree .k-state-selected{
+  background: none;
+  color: inherit;
+  box-shadow: none;
 }

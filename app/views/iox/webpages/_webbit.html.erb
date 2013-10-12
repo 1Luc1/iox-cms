@@ -1,10 +1,12 @@
-<% if defined?(global) and global %>
-  <% @webbit = Iox::Webbit.where(:name => webbit_name).first %>
-  <% @webbit.global = true if @webbit %>
-<% else %>
-  <% @webbit = @webpage.webbits.where(:name => webbit_name).first %>
+<% @webbit = (defined?(webbit) ? webbit : nil) %>
+<% if @webbit.nil? && defined?(webbit_name) %>
+  <% if defined?(global) and global %>
+    <% @webbit = Iox::Webbit.where(:name => webbit_name).first %>
+    <% @webbit.global = true if @webbit %>
+  <% else %>
+    <% @webbit = @webpage.webbits.where(:name => webbit_name).first %>
+  <% end %>
 <% end %>
-
 <% if @webbit and controller.action_name == 'edit' and !@webbit.global %>
 
   <div class="<%= @webbit.css_classes %><%= " webbit" unless @webbit.global %>" id="wb_<%= @webbit.id %>" data-plugin-name='<%= @webbit.plugin_type %>'<%= " contenteditable=true" if @webbit.plugin_type.include?('text') and not @webbit.global %>>

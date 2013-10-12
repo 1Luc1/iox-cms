@@ -171,7 +171,7 @@
 </div>
 
 <script id="webbit-template" type="text/kendo-ui-template">
-  <span class='icon #: item.icon #'>
+  <span class='icon #: item.icon #' data-webbit-id='#: item.id #'>
   <span>#: item.name #</span>
 </script>
 
@@ -223,35 +223,36 @@ function setupImageGalleryDraggable(){
   });
 
   var treeSource = new kendo.data.HierarchicalDataSource({
-          transport: {
-              read: function( options ){
-                $.ajax({
-                  url: '<%= webpage_webbits_path(@webpage) %>',
-                  dataType: 'json',
-                  type: 'get'
-                }).done( function( json ){
-                  options.success( json );
-                });
-              },
-              destroy: function( options ){
-                $.ajax({
-                  url: '<%= webpage_webbits_path(@webpage) %>/'+options.data.id,
-                  type: 'delete',
-                  dataType: 'json'
-                }).done( function( json ){
-                  noty({text: json.flash[0][1], timeout: 2000 });
-                  options.success( json );
-                });
-              }
+      transport: {
+          read: function( options ){
+            $.ajax({
+              url: '<%= webpage_webbits_path(@webpage) %>',
+              dataType: 'json',
+              type: 'get'
+            }).done( function( json ){
+              options.success( json );
+            });
           },
-          schema: {
-              model: {
-                  id: 'id',
-                  hasChildren: 'has_children'
-              }
-          },
-          patch: false
-      });
+          destroy: function( options ){
+            $.ajax({
+              url: '<%= webpage_webbits_path(@webpage) %>/'+options.data.id,
+              type: 'delete',
+              dataType: 'json'
+            }).done( function( json ){
+              noty({text: json.flash[0][1], timeout: 2000 });
+              $('#wb_'+options.data.id).remove();
+              options.success( json );
+            });
+          }
+      },
+      schema: {
+          model: {
+              id: 'id',
+              hasChildren: 'has_children'
+          }
+      },
+      patch: false
+  });
 
   $('#webbits-tree').kendoTreeView({
       dataSource: treeSource,
@@ -261,7 +262,12 @@ function setupImageGalleryDraggable(){
   });
 
   $('#webbits-tree').on('click', '.k-item', function(e){
-    $(this).toggleClass('selected');
+    var wasSelected = $(this).hasClass('selected').length > 0;
+    $('#webbits-tree li').removeClass('selected');
+    if( !wasSelected )
+      $(this).addClass('selected');
+    $('.webbit').removeClass('active');
+    $('#wb_'+$(this).find('[data-webbit-id]').attr('data-webbit-id')).addClass('active');
   });
 
   $('.delete-selected-webbits').on('click', function(e){
@@ -271,6 +277,43 @@ function setupImageGalleryDraggable(){
       treeSource.remove( treeview.dataItem( this ) );
     });
     treeSource.sync();
+  });
+
+  $('.create-webbit').on('click', function(e){
+    e.preventDefault();
+
+    $('body').append('<div id="new-webbit-window"></div>');
+
+    var $win = $('#new-webbit-window');
+    $win.kendoWindow({
+      width: '400px',
+      modal: true,
+      title: '<%= t('webbit.create') %>',
+      content: '<%= new_webpage_webbit_path(@webpage) %>',
+      refresh: setupFormHandler
+    });
+
+    $win.data('kendoWindow').center();
+
+    function setupFormHandler(){
+      $('#new-webbit-window form').on('submit', function(e){
+        e.preventDefault();
+        $.ajax({ url: $(this).attr('action'),
+          data: $(this).serializeArray(),
+          type: 'post',
+          dataType: 'json'
+        }).done( function( json ){
+          if( json.success ){
+            treeSource.read();
+            $win.data('kendoWindow').close();
+            //var treeview = $('#webbits-tree').data('kendoTreeView');
+            //treeview.append( json.item, $('.k-item.selected') );
+          }
+          noty({text: json.flash[0][1], timeout: 2000 });
+        });
+      });
+    }
+
   });
 
 </script>

@@ -166,8 +166,7 @@ module Iox
     def edit
       @webpage = Webpage.where( id: params[:id] ).first
       return if !redirect_if_no_webpage
-      @webpage.translation = @webpage.translations.where( locale: params[:locale] || I18n.default_locale ).first
-      @webpage.translation = @webpage.translations.create!( locale: params[:locale] || I18n.default_locale ) unless @webpage.translation
+      @webpage.translation( params[:locale] )
       redirect_if_no_webpage
       redirect_if_no_rights
       render layout: 'application'
@@ -249,7 +248,15 @@ module Iox
     private
 
     def webpage_params
-      params.require(:webpage).permit(:name, :slug, :template, :parent_id, :webpage_translation => [ :locale, :meta_keywords, :content ])
+      params.require(:webpage).permit(
+        :name, 
+        :slug, 
+        :template, 
+        :parent_id, 
+        :show_in_menu,
+        :show_in_sitemap,
+        :webpage_translation => [ :locale, :meta_keywords, :content ]
+      )
     end
 
     def set_and_save_webpage_translation
@@ -269,7 +276,7 @@ module Iox
     def save_webbits
       webbit_params.each_pair do |id,p|
         next if p[:global]
-        webbit = @webpage.webbits.where(id: id).first
+        webbit = Webbit.where(id: id).first
         unless webbit.update p
           flash.alert = "could not update webbit #{webbit.name}"
         end
@@ -305,8 +312,7 @@ module Iox
 
     def init_webpage_translation
       return unless @webpage
-      @webpage.translation = @webpage.translations.where( locale: ( params[:locale] || session[:locale] || I18n.locale ) ).first
-      @webpage.translation = @webpage.translations.create!( locale: params[:locale] || I18n.default_locale ) unless @webpage.translation
+      @webpage.translation( params[:locale] )
     end
 
     def update_stat

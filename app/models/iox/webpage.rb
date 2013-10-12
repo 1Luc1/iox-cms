@@ -118,6 +118,13 @@ module Iox
       prev_sibling ? prev_sibling.slug : nil
     end
 
+    def translation( locale=I18n.default_locale )
+      return @translation if @translation
+      @translation = translations.where( locale: locale ).first
+      @translation = translations.create!( locale: locale ) unless @translation
+      @translation
+    end
+
     def to_param
       [id, name.parameterize].join("-")
     end

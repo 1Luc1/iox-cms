@@ -18,12 +18,14 @@ en:
   refresh: "Refresh"
   view: "View"
   edit: "Edit"
+  stick: "Sticky"
   email: "Email"
   filter_results: "Filter results"
   filter_no_entries_found: "No results found for given query"
   please_fill_out_all_fields: "Please fill out all fields"
   max_255: "Maximum of 255 characters"
   search: "Search"
+  to_startpage: "To startpage"
 
   loading_quota: "loading quota"
   whats_this: "What's this"
@@ -240,6 +242,17 @@ en:
     type_a_users_name: "Type your search here"
     click_on_user_to_show_details: "Click on a user to show details"
 
+  webbit:
+    deleted: "Webbit %{name} has been deleted"
+    deletion_failed: "Webbit %{name} could not be deleted"
+    not_found: "Webbit was not found"
+    created: "Webbit %{name} has been created"
+    creation_failed: "Failed to create Webbit"
+    create: "Create a new Webbit"
+    type: "Plugin"
+    css_classes: "CSS Classes"
+    category: "Category"
+
   webpage:
     name: "Name"
     publishing_status: "Publish"
@@ -288,6 +301,8 @@ en:
     meta_description: "Short description"
     name_required: "Name is requried"
     translation_does_not_exist_create: "A version of this language does not exist yet. Would you like to create one?"
+    show_in_menu: "Show this page in menu"
+    show_in_sitemap: "Show this page in sitemap"
     templates:
       default: "Default"
       frontpage: "Frontpage"

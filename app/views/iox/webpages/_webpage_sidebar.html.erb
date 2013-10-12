@@ -91,6 +91,16 @@
           <%= tr.text_area :meta_description %>
         </p>
 
+        <div>
+          <%= f.check_box :show_in_menu %>
+          <%= f.label :show_in_menu, t('webpage.show_in_menu') %>
+        </div>
+
+        <div>
+          <%= f.check_box :show_in_sitemap %>
+          <%= f.label :show_in_sitemap, t('webpage.show_in_sitemap') %>
+        </div>
+
       <% end %>
     <% end %>
 
@@ -99,6 +109,7 @@
   <div id="webpage-tab-images" class="webpage-tab">
 
     <h1><%= t('webpage.image_browser') %></h1>
+    <div id="images-progress"><div style="width:0" class="bar"></div></div>
 
     <p class="select-files-text"><%= t('select_files') %></p>
 
@@ -115,6 +126,10 @@
 
       $('#upload').fileupload({
         url: '<%= webpage_webfiles_path(@webpage) %>',
+        processQueue: {
+          action: 'validate',
+          acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+        },
         dataType: 'json',
         formData: {
           "authenticity_token": $('input[name="authenticity_token"]:first').val()
@@ -128,6 +143,16 @@
             imagesData.images.push( { orig_url: file.url, thumb_url: file.thumbnail_url, id: file.id } );
             setTimeout( setupImageGalleryDraggable, 50 );
           }
+          setTimeout( function(){
+            $('#images-progress .bar').css( 'width', 0 );
+          }, 500 );
+        },
+        error: function( response, type, msg ){
+          iox.flash.alert( JSON.parse(response.responseText).errors.file[0] );
+        },
+        progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#images-progress .bar').css( 'width', progress + '%' );
         }
       });
 
@@ -139,6 +164,9 @@
 
     <div class="webbit-list">
       <div class="webbit-control">
+        <a href="#" class="reload-webbits">
+          <i class="icon-refresh"></i>
+        </a>
         <a href="#" class="create-webbit">
           <i class="icon-plus-sign"></i>
         </a>
@@ -171,8 +199,8 @@
 </div>
 
 <script id="webbit-template" type="text/kendo-ui-template">
-  <span class='icon #: item.icon #' data-webbit-id='#: item.id #'>
-  <span>#: item.name #</span>
+  <span class='icon #: item.icon #' data-webbit-id='#: item.id #'></span>
+  <span>#: item.name #</span><i>#: item.category #</i>
 </script>
 
 <script type="text/html" id="image-template">
@@ -226,7 +254,7 @@ function setupImageGalleryDraggable(){
       transport: {
           read: function( options ){
             $.ajax({
-              url: '<%= webpage_webbits_path(@webpage) %>',
+              url: '<%= webpage_webbits_path(@webpage) %>?parent_id='+(options.data.id ? options.data.id : ''),
               dataType: 'json',
               type: 'get'
             }).done( function( json ){
@@ -254,35 +282,63 @@ function setupImageGalleryDraggable(){
       patch: false
   });
 
+  var treeview;
+
   $('#webbits-tree').kendoTreeView({
       dataSource: treeSource,
       dataTextField: 'name',
       expanded: true,
+      dragAndDrop: true,
+      dragend: function(e) {
+        var newOrderIds = [];
+        $('#webbits-tree .k-item').each( function(e){
+          newOrderIds.push( treeview.dataItem(this).id )
+        });
+        $.ajax({ 
+          url: '<%= reorder_webpage_webbits_path(@webpage) %>',
+          data: { webbit_id: treeview.dataItem(e.sourceNode).id, 
+                  parent_id: (e.destinationNode && e.dropPosition === 'over' ? treeview.dataItem(e.destinationNode).id : null),
+                  order: newOrderIds },
+          type: 'post',
+          dataType: 'json'
+        }).done( function( json ){
+          noty({text: json.flash[0][1], timeout: 2000 });
+        })
+      },
       template: kendo.template( $('#webbit-template').html() )
   });
-
+  
+  treeview = $('#webbits-tree').data('kendoTreeView');
+  
   $('#webbits-tree').on('click', '.k-item', function(e){
+    e.stopPropagation();
     var wasSelected = $(this).hasClass('selected').length > 0;
-    $('#webbits-tree li').removeClass('selected');
-    if( !wasSelected )
+    $('#webbits-tree li').removeClass('selected').find('.k-in').removeClass('k-state-selected');
+    if( !wasSelected ){
       $(this).addClass('selected');
+      $(this).find('.k-in:first').addClass('k-state-selected')
+    }
     $('.webbit').removeClass('active');
     $('#wb_'+$(this).find('[data-webbit-id]').attr('data-webbit-id')).addClass('active');
   });
 
   $('.delete-selected-webbits').on('click', function(e){
     e.preventDefault();
-    var treeview = $('#webbits-tree').data('kendoTreeView');
     $('#webbits-tree .selected').each( function(){
       treeSource.remove( treeview.dataItem( this ) );
     });
     treeSource.sync();
   });
 
+  $('.reload-webbits').on('click', function(e){
+    treeSource.read();
+  });
+
   $('.create-webbit').on('click', function(e){
     e.preventDefault();
 
-    $('body').append('<div id="new-webbit-window"></div>');
+    if( !$('#new-webbit-window').length )
+      $('body').append('<div id="new-webbit-window"></div>');
 
     var $win = $('#new-webbit-window');
     $win.kendoWindow({
@@ -292,10 +348,10 @@ function setupImageGalleryDraggable(){
       content: '<%= new_webpage_webbit_path(@webpage) %>',
       refresh: setupFormHandler
     });
-
     $win.data('kendoWindow').center();
 
     function setupFormHandler(){
+      $('#new-webbit-window form input[type=text]:first').focus();
       $('#new-webbit-window form').on('submit', function(e){
         e.preventDefault();
         $.ajax({ url: $(this).attr('action'),
@@ -305,7 +361,9 @@ function setupImageGalleryDraggable(){
         }).done( function( json ){
           if( json.success ){
             treeSource.read();
-            $win.data('kendoWindow').close();
+            $win.data('kendoWindow').destroy();
+            if( confirm('<%= t('webpage.reload_page_now') %>') )
+              location.reload();
             //var treeview = $('#webbits-tree').data('kendoTreeView');
             //treeview.append( json.item, $('.k-item.selected') );
           }
@@ -315,5 +373,21 @@ function setupImageGalleryDraggable(){
     }
 
   });
+
+
+  var numPressedKeys = 0;
+  $(document).on('keyup', function(e){
+    var charCode = e.keyCode? e.keyCode : e.charCode;
+    if( ($(e.target).closest('.webbit').length ||
+         $(e.target).closest('.webpage-form').length ) ){
+        numPressedKeys += 1;
+    }
+  });
+
+  window.onbeforeunload = function closeEditorWarning(){
+    if( numPressedKeys > 1 )
+      return '<%= t('webpage.unsaved_content_leave_q') %>';
+  }
+
 
 </script>

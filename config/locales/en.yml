@@ -252,6 +252,7 @@ en:
     type: "Plugin"
     css_classes: "CSS Classes"
     category: "Category"
+    new_order_saved: "New order has been saved"
 
   webpage:
     name: "Name"
@@ -299,10 +300,13 @@ en:
     meta_information: "META Informationen"
     meta_keywords: "Tags/Keywords"
     meta_description: "Short description"
-    name_required: "Name is requried"
+    name_required: "Name is required"
+    slug_required: "Path is required"
     translation_does_not_exist_create: "A version of this language does not exist yet. Would you like to create one?"
     show_in_menu: "Show this page in menu"
     show_in_sitemap: "Show this page in sitemap"
+    unsaved_content_leave_q: "Unsaved content will be dismissed. Really leave page?"
+    reload_page_now: "It is recommended to reload the page now. Continue?"
     templates:
       default: "Default"
       frontpage: "Frontpage"

@@ -16,6 +16,8 @@ class IoxWebbits < ActiveRecord::Migration
       t.integer :links_to_webbit_id       # if this webbit links to another webbit,
                                           # which should be used instead
 
+      t.integer :position, default: 999
+
       t.timestamps
 
     end

@@ -26,10 +26,14 @@
 	<div class="field-box">
 		<%= f.label :category, t('webbit.category') %>
 		<div class="field">
-			<%= f.text_field :category %>
+			<%= f.select :category, options_for_select( Rails.configuration.iox.webbit_categories || [''] ) %>
 		</div>
 	</div>
 
 	<%= f.submit t('create'), class: 'btn' %>
 
 <% end %>
+
+<script type="text/javascript">
+	$('#webbit_category').kendoComboBox();
+</script>

@@ -143,8 +143,9 @@ module Iox
       @webpage = Webpage.new webpage_params
       return if !redirect_if_no_rights
       @webpage.set_creator_and_updater( current_user )
-      @webpage.translation = @webpage.translations.build( locale: I18n.default_locale )
       if @webpage.save
+
+        @webpage.translation # just touch translation in order to make it create
 
         Iox::Activity.create! user_id: current_user.id, obj_name: @webpage.name, action: 'created', icon_class: 'icon-globe', obj_id: @webpage.id, obj_type: @webpage.class.name
 

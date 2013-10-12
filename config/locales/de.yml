@@ -363,6 +363,8 @@ de:
     slug_required: "Pfad muss vorhanden sein"
     show_in_menu: "Im Menü anzeigen"
     show_in_sitemap: "In Sitemap anzeigen"
+    unsaved_content_leave_q: "Ungespeicherte Elemente gehen verloren? Diese Seite wirklich verlassen?"
+    reload_page_now: "Du solltest die Seite nun neu laden. Fortfahren und neu Laden?"
     templates:
       default: "Standard"
       frontpage: "Frontpage"
@@ -380,6 +382,7 @@ de:
     type: "Plugin"
     css_classes: "CSS Klassen"
     category: "Kategorie"
+    new_order_saved: "Neue Ordnung wurde gespeichert"
 
   webpages:
     title: "Webseiten"

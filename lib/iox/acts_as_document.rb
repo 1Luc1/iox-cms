@@ -32,6 +32,9 @@ module Iox
 
       def delete
         self.deleted_at = Time.now
+        if defined?(children)
+          children.each{ |child| child.delete }
+        end
         self.save
       end
 

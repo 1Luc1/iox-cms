@@ -39,7 +39,11 @@ Iox::Engine.routes.draw do
 
     resources :translations
     resources :webfiles
-    resources :webbits
+    resources :webbits do
+      collection do
+        post 'reorder'
+      end
+    end
 
     collection do
       get 'images'

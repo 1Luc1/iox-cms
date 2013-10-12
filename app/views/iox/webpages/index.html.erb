@@ -109,9 +109,10 @@
             var self = this;
             if( this._validator.validate() ){
               $('.iox-content-frame').block();
-              $.ajax({ url: this._master.options.url+'/'+self.id, data: $(form).serializeArray(), dataType: 'json', type: 'put' }).done( function( json ){
-                  $('.iox-content-frame').unblock();
-                  iox.flash.rails( json.flash );
+              $.ajax({ url: this._master.options.url+'/'+self.id, data: $(form).serializeArray(), dataType: 'json', type: 'put' 
+              }).done( function( json ){
+                $('.iox-content-frame').unblock();
+                iox.flash.rails( json.flash );
               });
             } else {
               iox.flash.notice('<%= t('please_fill_out_all_fields') %>');

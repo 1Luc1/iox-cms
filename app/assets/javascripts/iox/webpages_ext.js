@@ -71,8 +71,10 @@ $(document).ready( function(){
         dataType: 'json',
         type: 'put'
       }).done(function(response){
-        if( response.flash.length > 0 && response.flash[0].length > 0 )
+        if( response.flash.length > 0 && response.flash[0].length > 0 ){
           noty({text: response.flash[0][1], timeout: 2000 });
+          numPressedKeys = 0;
+        }
       });
     }, 100);
 
@@ -81,9 +83,8 @@ $(document).ready( function(){
 
 	$('.webbit').on('click', function(e){
 
-		if( $(this).hasClass('active') ){
+		if( $(this).hasClass('active') )
 			return;
-		}
 
     $('.webbit').css('z-index','auto');
     $(this).css('z-index', 999);
@@ -101,6 +102,9 @@ $(document).ready( function(){
     $('.webpage-tabs-control [data-to-id=webbit-tools]').click();
 
 		$('#webpage-tab-webbit-tools .webbit-'+$(this).attr('data-plugin-name')+'-plugin').show();
+
+    $('.webpage-sidebar').addClass('full-visible');
+    $('.webpage-sidebar #push-sidebar-pin').click();
 	});
 
 	$('.webpage-tab').hide();
@@ -148,7 +152,7 @@ $(document).ready( function(){
 
   var skipSidebarHide = false;
 
-  $('.webpage-sidebar').draggable({ handle: '.iox-logo' })
+  $('.webpage-sidebar').draggable()
     .on('mouseenter', function(e){
       $(this).addClass('full-visible');
       skipSidebarHide = true;
@@ -156,7 +160,7 @@ $(document).ready( function(){
     .on('mouseleave', function(e){
       if( $('#push-sidebar-pin').hasClass('active') )
         return;
-      if( e.pageX < 400 )
+      if( e.pageX < 300 )
         return;
       skipSidebarHide = false;
       setTimeout( function(e){

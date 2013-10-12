@@ -24,7 +24,7 @@ module Iox
     has_many :webbits, class_name: 'Iox::Webbit', dependent: :delete_all
     has_many :translations, dependent: :delete_all
 
-    has_many :children, -> { where("deleted_at IS NULL").order(:position) }, class_name: 'Iox::Webpage', foreign_key: 'parent_id'
+    has_many :children, -> { where("deleted_at IS NULL").order(:position) }, class_name: 'Iox::Webpage', foreign_key: 'parent_id', dependent: :destroy
     has_many :stats, class_name: 'Iox::WebpageStat', dependent: :delete_all
 
     belongs_to :parent, class_name: 'Iox::Webpage', foreign_key: 'parent_id', inverse_of: :children
@@ -121,7 +121,7 @@ module Iox
     def translation( locale=I18n.default_locale )
       return @translation if @translation
       @translation = translations.where( locale: locale ).first
-      @translation = translations.create!( locale: locale ) unless @translation
+      @translation = translations.create!( locale: locale ) if !@translation && !new_record?
       @translation
     end
 

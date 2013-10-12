@@ -36,16 +36,37 @@ module Iox
           flash.now.alert = t('webbit.failed_to_create')
         end
       else
-        flash.alert = t('not_found')
+        flash.now.alert = t('not_found')
       end
       render json: { flash: flash, item: @webbit, success: (flash.notice ? true : false) }
+    end
 
+    def reorder
+      errors = []
+      if @webpage = Webpage.find_by_id( params[:webpage_id] )
+        if params[:order] && params[:order].size > 0
+          params[:order].each_with_index do |id,i|
+            webbit = Webbit.find_by_id( id )
+            errors << webbit unless webbit.update position: i
+          end
+          if changed_webbit = Webbit.find_by_id( params[:webbit_id] )
+            changed_webbit.parent = params[:parent_id].blank? ? nil : Webbit.find_by_id( params[:parent_id] )
+            errors << changed_webbit unless changed_webbit.save
+            flash.now.notice = t('webbit.new_order_saved')
+          else
+            flash.now.alert = t('webbit.not_found')
+          end
+        end
+      else
+        flash.now.alert = t('not_found')
+      end
+      render json: { flash: flash, success: errors.blank?, errors: errors }
     end
 
     def destroy
       return render json: '' unless current_user.is_editor?
       if @webpage = Webpage.find_by_id( params[:webpage_id] )
-        if @webbit = @webpage.webbits.where( id: params[:id] ).first
+        if @webbit = Webbit.where( id: params[:id] ).first
           if @webbit.delete
             flash.now.notice = t('webbit.deleted', name: @webbit.name )
           else
@@ -65,6 +86,7 @@ module Iox
         :name,
         :webpage_id,
         :plugin_type,
+        :category,
         :css_classes
         )
     end

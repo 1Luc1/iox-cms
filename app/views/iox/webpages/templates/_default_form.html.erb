@@ -32,10 +32,10 @@
           <!-- /ko -->
           <i class="icon-question-sign" title="<%= t('whats_this') %>?" style="margin-right: 10px;" rel="tooltip" data-confirmation-win="true" data-confirmation-txt="<%= t('webpage.publish_desc') %>"></i>
           <input type="hidden" name="webpage[show_in_menu]" value="0" />
-          <input type="checkbox" name="webpage[show_in_menu]" data-bind="value: (show_in_menu() ? '1' : '0'), checked: show_in_menu()" />
+          <input type="checkbox" name="webpage[show_in_menu]" data-bind="value: (show_in_menu() ? '1' : '0'), checked: show_in_menu" />
           <span><%= t('webpage.show_in_menu') %></span>
           <input type="hidden" name="webpage[show_in_sitemap]" value="0" />
-          <input type="checkbox" name="webpage[show_in_sitemap]" data-bind="value: (show_in_sitemap() ? '1' : '0'), checked: show_in_sitemap()" />
+          <input type="checkbox" name="webpage[show_in_sitemap]" data-bind="value: (show_in_sitemap() ? '1' : '0'), checked: show_in_sitemap" />
           <span><%= t('webpage.show_in_sitemap') %></span>
         </div>
       </div>

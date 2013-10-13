@@ -178,6 +178,25 @@
       
       <div id="webbits-tree"></div>
 
+      <div id="webbit-form">
+        <input type="hidden" class="webbit_id" data-bind="value: id" />
+        <label><%= t('name') %></label><br />
+        <input type="text" class="name" data-bind="value: name" />
+
+        <label><%= t('webbit.category') %></label><br />
+        <input type="text" data-bind="value: category" class="category" />
+
+        <label><%= t('title') %></label><br />
+        <input type="text" data-bind="value: title" class="title" />
+
+        <label><%= t('webbit.type') %></label><br />
+        <input type="text" class="plugin_type" data-bind="value: plugin_type" />
+
+        <a href="#" class="btn restore-webbit-text"><%= t('webbit.restore_text') %></a>
+
+        <a href="#" class="btn save-webbit-form"><%= t('save') %></a>
+      </div>
+
     </div>
 
   </div>
@@ -261,16 +280,26 @@ function setupImageGalleryDraggable(){
               options.success( json );
             });
           },
-          destroy: function( options ){
+          update: function( options ){
+            /*
             $.ajax({
               url: '<%= webpage_webbits_path(@webpage) %>/'+options.data.id,
-              type: 'delete',
+              data: { webbit: { name: options.data.name,
+                                title: options.data.title,
+                                category: options.data.category } 
+              },
+              type: 'patch',
               dataType: 'json'
-            }).done( function( json ){
+            }).done( function(json){
+              numPressedKeys = 0;
               noty({text: json.flash[0][1], timeout: 2000 });
-              $('#wb_'+options.data.id).remove();
-              options.success( json );
+              options.success();
             });
+            */
+            options.success();
+          },
+          destroy: function( options ){
+            options.success();
           }
       },
       schema: {
@@ -278,8 +307,7 @@ function setupImageGalleryDraggable(){
               id: 'id',
               hasChildren: 'has_children'
           }
-      },
-      patch: false
+      }
   });
 
   var treeview;
@@ -291,6 +319,7 @@ function setupImageGalleryDraggable(){
       dragAndDrop: true,
       dragend: function(e) {
         var newOrderIds = [];
+        var treeview = $('#webbits-tree').data('kendoTreeView');
         $('#webbits-tree .k-item').each( function(e){
           newOrderIds.push( treeview.dataItem(this).id )
         });
@@ -320,14 +349,27 @@ function setupImageGalleryDraggable(){
     }
     $('.webbit').removeClass('active');
     $('#wb_'+$(this).find('[data-webbit-id]').attr('data-webbit-id')).addClass('active');
+
+    showWebbitForm( $(this) );
+
   });
 
   $('.delete-selected-webbits').on('click', function(e){
     e.preventDefault();
     $('#webbits-tree .selected').each( function(){
-      treeSource.remove( treeview.dataItem( this ) );
+      var item = treeview.dataItem( this );
+      var self = this;
+      $.ajax({
+        url: '<%= webpage_webbits_path(@webpage) %>/'+item.id,
+        type: 'delete',
+        dataType: 'json'
+      }).done( function( json ){
+        noty({text: json.flash[0][1], timeout: 2000 });
+        $('#wb_'+item.id).remove();
+        treeview.remove( self );
+      });
     });
-    treeSource.sync();
+
   });
 
   $('.reload-webbits').on('click', function(e){
@@ -388,6 +430,54 @@ function setupImageGalleryDraggable(){
     if( numPressedKeys > 1 )
       return '<%= t('webpage.unsaved_content_leave_q') %>';
   }
+
+  function showWebbitForm( $elem ){
+    $('#webbit-form').fadeIn();
+    kendo.bind( $('#webbit-form').get(0), treeview.dataItem( $elem ) );
+  }
+
+  $('.save-webbit-form').on('click', function(e){
+    var $form = $(this).closest('#webbit-form');
+    $.ajax({
+      url: '<%= webpage_webbits_path(@webpage) %>/'+$form.find('.webbit_id').val(),
+      type: 'patch',
+      data: { webbit: { name: $form.find('.name').val(),
+                        title: $form.find('.title').val(),
+                        category: $form.find('.category').val(),
+                        plugin_type: $form.find('.plugin_type').val() } 
+      },
+      type: 'patch',
+      dataType: 'json'
+    }).done( function(json){
+      numPressedKeys = 0;
+      noty({text: json.flash[0][1], timeout: 2000 });
+      treeSource.read();
+    });
+  });
+
+
+  $('.restore-webbit-text').on('click', function(e){
+    var $form = $(this).closest('#webbit-form');
+    $.ajax({
+      url: '<%= webpage_webbits_path(@webpage) %>/'+$form.find('.webbit_id').val(),
+      type: 'patch',
+      data: { webbit: 
+        { content: 'REPLACE this with text' }
+      },
+      type: 'patch',
+      dataType: 'json'
+    }).done( function(json){
+      numPressedKeys = 0;
+      noty({text: json.flash[0][1], timeout: 2000 });
+      treeSource.read();
+    });
+  });
+
+  $('#webbit-form input[type=text]').on('keydown', function(e){
+    if( e.keyCode === 13 ){
+      e.preventDefault();
+    }
+  });
 
 
 </script>

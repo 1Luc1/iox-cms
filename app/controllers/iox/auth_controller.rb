@@ -23,7 +23,7 @@ module Iox
           camefrom = session[:came_from]
 
           if( current_user.login_failures && current_user.login_failures > 0 )
-            flash.notice = I18n.t('auth.login_failures', at: I18n.l(current_user.last_login_failure, format: :short), count: current_user.login_failures )
+            flash.now.notice = I18n.t('auth.login_failures', at: I18n.l(current_user.last_login_failure, format: :short), count: current_user.login_failures )
           end
 
           if Rails.configuration.iox.open_registration && !current_user.registration_completed
@@ -39,6 +39,7 @@ module Iox
           current_user.save!
 
           redirect_to ( (camefrom && camefrom != "/login") ? session[:came_from] : Rails.configuration.iox.redirect_after_login )
+          session.delete( :came_from )
         end
 
       end
@@ -75,7 +76,6 @@ module Iox
       if request.post?
         if u = Iox::User.where( email: params[:email] ).first
           u.gen_confirmation_key
-          puts "confirmation key: #{u.confirmation_key}"
           if u.save
             UserMailer.forgot_password( u ).deliver
             flash.notice = I18n.t('auth.instructions_have_been_sent')
@@ -89,7 +89,6 @@ module Iox
     end
 
     def reset_password
-
       if @user = User.where( id: params[:id], confirmation_key: params[:k] ).first
         if request.post?
           if params[:password] && params[:password_confirmation] && params[:password] == params[:password_confirmation]
@@ -110,7 +109,6 @@ module Iox
       end
     end
 
-
     def set_password
       unless @user = User.where( id: params[:id], confirmation_key: params[:k] ).first
         flash.now.alert = t('auth.invalid_key')
@@ -118,7 +116,8 @@ module Iox
     end
 
     def unauthenticated
-      flash[:alert] = warden.message ? I18n.t(warden.message) : I18n.t('auth.login_failed')
+      session[:came_from] = request.original_url
+      flash.now.alert = warden.message ? I18n.t(warden.message) : I18n.t('auth.login_failed')
       render template: 'iox/auth/login'
     end
 

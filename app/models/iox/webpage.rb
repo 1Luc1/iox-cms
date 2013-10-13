@@ -140,7 +140,10 @@ module Iox
         tmpl_data = YAML::load_file( tmpl_filename )
         tmpl_data.each_pair do |name, data|
           next unless data.is_a?(Hash)
-          wb = self.webbits.create!( plugin_type: data['type'], name: name, css_classes: data['css_classes'] )
+          wb = self.webbits.create!( plugin_type: data['type'], 
+                                    name: name, 
+                                    category: data['category'],
+                                    css_classes: data['css_classes'] )
           t = wb.translations.create!( locale: lang || I18n.default_locale, content: data['content'] )
         end
       else

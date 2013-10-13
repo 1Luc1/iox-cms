@@ -41,6 +41,34 @@ module Iox
       render json: { flash: flash, item: @webbit, success: (flash.notice ? true : false) }
     end
 
+    def update
+      return render json: '' unless current_user.is_editor?
+      if @webpage = Webpage.find_by_id( params[:webpage_id] )
+        if @webbit = Webbit.where( id: params[:id] ).first
+          if @webbit.update webbit_params
+            unless @webbit.template.blank?
+              @webbit.translation.template = @webbit.template
+            end
+            unless @webbit.content.blank?
+              @webbit.translation.content = @webbit.content
+            end
+            unless @webbit.title.blank?
+              @webbit.translation.title = @webbit.title
+            end
+            @webbit.translation.save
+            flash.now.notice = t('saved', name: @webbit.name )
+          else
+            flash.now.alert = t('saving_failed', name: @webbit.name)
+          end
+        else
+          flash.now.alert = t('webbit.not_found')
+        end
+      else
+        flash.now.alert = t('not_found')
+      end
+      render json: { flash: flash, item: @webbit }
+    end
+
     def reorder
       errors = []
       if @webpage = Webpage.find_by_id( params[:webpage_id] )
@@ -87,7 +115,10 @@ module Iox
         :webpage_id,
         :plugin_type,
         :category,
-        :css_classes
+        :css_classes,
+        :title,
+        :template,
+        :content
         )
     end
 

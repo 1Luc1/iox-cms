@@ -33,7 +33,7 @@ module Iox
       if warden.authenticate!
         if !current_user.last_request_at || current_user.last_request_at < Rails.configuration.iox.session_timeout_min.minutes.ago
           warden.logout
-          flash.alert = I18n.t('auth.session_timeout', timeout: Rails.configuration.iox.session_timeout_min )
+          flash.now.alert = I18n.t('auth.session_timeout', timeout: Rails.configuration.iox.session_timeout_min )
           return redirect_to login_path
         end
         current_user.update!( last_request_at: Time.now )

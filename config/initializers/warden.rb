@@ -26,7 +26,6 @@ Warden::Strategies.add(:password) do
       if x = Iox::User.where( "email = '#{params[:email]}' OR username = '#{params[:email]}' ").first
         x.update!( login_failures: ( x.login_failures ? x.login_failures+1 : 1), last_login_failure: Time.now )
       end
-      session[:came_from] ||= request.referer
       return fail!('auth.login_failed')
     end
   end

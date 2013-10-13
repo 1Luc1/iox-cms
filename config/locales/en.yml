@@ -253,6 +253,7 @@ en:
     css_classes: "CSS Classes"
     category: "Category"
     new_order_saved: "New order has been saved"
+    restore_text: "Restore Text"
 
   webpage:
     name: "Name"

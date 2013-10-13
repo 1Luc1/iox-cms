@@ -383,6 +383,7 @@ de:
     css_classes: "CSS Klassen"
     category: "Kategorie"
     new_order_saved: "Neue Ordnung wurde gespeichert"
+    restore_text: "Text zurücksetzen"
 
   webpages:
     title: "Webseiten"

@@ -83,9 +83,6 @@ $(document).ready( function(){
 
 	$('.webbit').on('click', function(e){
 
-		if( $(this).hasClass('active') )
-			return;
-
     $('.webbit').css('z-index','auto');
     $(this).css('z-index', 999);
 

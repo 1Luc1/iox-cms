@@ -23,13 +23,14 @@
       $('[data-plugin-name=gallery]').each( function(){
         $(this).ioxImageGallery();
       });
-    } catch(e){ console.log('no text editor found'); }
+    } catch(e){ console.log('no gallery found'); }
 
     try{
-      $('[data-plugin-name=text]').each( function(){
+      $('[data-plugin-name="text"]').each( function(){
+        console.log( $(this).attr('id') );
         $(this).ioxTextEditor();
       });
-    } catch(e){ console.log('no text editor found'); }
+    } catch(e){ console.log('no text editor found'); console.log(e) }
 
   });
 </script>

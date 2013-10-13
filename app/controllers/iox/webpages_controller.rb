@@ -12,7 +12,7 @@ module Iox
     # the frontpage is of template type 'frontpage' and there should
     # only be one
     def frontpage
-      @webpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
+      @webpage = @frontpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
       init_webpage_translation
       update_stat
       return if !redirect_if_no_webpage
@@ -62,6 +62,7 @@ module Iox
     #
     def show
       @webpage = Webpage.find_by_id( params[:id] )
+      @frontpage = Webpage.where(template: 'frontpage').first
       init_webpage_translation
       return if !redirect_if_no_webpage
       update_stat
@@ -70,6 +71,7 @@ module Iox
 
     def by_slug
       @webpage = Webpage.where( slug: params[:slug] ).first
+      @frontpage = Webpage.where(template: 'frontpage').first
       init_webpage_translation
       return if !redirect_if_no_webpage
       update_stat
@@ -166,6 +168,7 @@ module Iox
     #
     def edit
       @webpage = Webpage.where( id: params[:id] ).first
+      @frontpage = Webpage.where(template: 'frontpage').first
       return if !redirect_if_no_webpage
       @webpage.translation( params[:locale] )
       redirect_if_no_webpage

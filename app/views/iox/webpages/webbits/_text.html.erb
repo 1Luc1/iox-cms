@@ -37,7 +37,20 @@
 
 	$.fn.ioxTextEditor = function ioxTextEditor( options ){
 
+    if( $(this).hasClass('ioxTextEditor') )
+      return;
+
+    $(this).addClass('ioxTextEditor');
+    
 		options = options || {};
+
+    if( typeof(options) === 'string' ){
+      if( options === 'detach' ){
+        $(this).droppable('destroy');
+        CKEDITOR.instances[$(this).attr('id')].destroy();
+        return;
+      }
+    }
 
 		var self = this;
 
@@ -53,7 +66,6 @@
 
 		$('.webpage-form').on('submit', function(e){
     	$('.translation-content-'+$(self).attr('id').replace('wb_','')).val( editor.getData() );
-      //console.log( $('.translation-content-'+$(self).attr('id').replace('wb_','')).val());
     });
 
 	}

@@ -204,7 +204,9 @@ en:
     roles: "Roles"
     edit: "edit profile"
 
-    new: "Neues Benutzerkonto anlegen"
+    new: "Create new account"
+    send_welcome_msg: "Send invitation email to this user"
+
 
     username: "Username"
     last_time_online: "Last time online"

@@ -17,11 +17,11 @@ module Iox
 
     acts_as_iox_document
 
-    attr_accessor :translation, :lang
+    attr_accessor :translation, :locale
 
     default_scope { where( deleted_at: nil ) }
 
-    has_many :webbits, class_name: 'Iox::Webbit', dependent: :delete_all
+    has_many :webbits, -> { order(:position) }, class_name: 'Iox::Webbit', dependent: :delete_all
     has_many :translations, dependent: :delete_all
 
     has_many :children, -> { where("deleted_at IS NULL").order(:position) }, class_name: 'Iox::Webpage', foreign_key: 'parent_id', dependent: :destroy
@@ -118,7 +118,7 @@ module Iox
       prev_sibling ? prev_sibling.slug : nil
     end
 
-    def translation( locale=I18n.default_locale )
+    def translation
       return @translation if @translation
       @translation = translations.where( locale: locale ).first
       @translation = translations.create!( locale: locale ) if !@translation && !new_record?
@@ -144,7 +144,7 @@ module Iox
                                     name: name, 
                                     category: data['category'],
                                     css_classes: data['css_classes'] )
-          t = wb.translations.create!( locale: lang || I18n.default_locale, content: data['content'] )
+          t = wb.translations.create!( locale: self.locale || I18n.default_locale, content: data['content'] )
         end
       else
         raise StandardError.new "Could not find template #{tmpl_filename}"

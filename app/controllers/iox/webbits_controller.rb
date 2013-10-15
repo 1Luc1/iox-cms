@@ -9,9 +9,11 @@ module Iox
     def index
       return render json: '' unless current_user.is_editor?
       if @webpage = Webpage.find_by_id( params[:webpage_id] )
+        @webpage.locale = params[:locale] || I18n.default_locale
         @webbits = @webpage.webbits
         parent_id = params[:parent_id].blank? ? nil : params[:parent_id]
         @webbits = @webbits.where(parent_id: parent_id).load
+        @webbits.each{ |wb| wb.locale = @webpage.locale }
         render json: @webbits
       end
     end
@@ -45,6 +47,7 @@ module Iox
       return render json: '' unless current_user.is_editor?
       if @webpage = Webpage.find_by_id( params[:webpage_id] )
         if @webbit = Webbit.where( id: params[:id] ).first
+          @webbit.locale = params[:locale]
           if @webbit.update webbit_params
             unless @webbit.template.blank?
               @webbit.translation.template = @webbit.template

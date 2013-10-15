@@ -27,7 +27,6 @@
 
     try{
       $('[data-plugin-name="text"]').each( function(){
-        console.log( $(this).attr('id') );
         $(this).ioxTextEditor();
       });
     } catch(e){ console.log('no text editor found'); console.log(e) }

@@ -13,6 +13,7 @@ module Iox
     # only be one
     def frontpage
       @webpage = @frontpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
+      setup_webpage_locale
       init_webpage_translation
       update_stat
       return if !redirect_if_no_webpage
@@ -52,6 +53,7 @@ module Iox
     #
     def new
       @webpage = Webpage.new template: 'default'
+      setup_webpage_locale
       @webpage.parent_id = params[:parent] unless params[:parent].blank?
       @parent = @webpage.parent if( @webpage.parent_id )
       render json: @webpage
@@ -62,6 +64,7 @@ module Iox
     #
     def show
       @webpage = Webpage.find_by_id( params[:id] )
+      setup_webpage_locale
       @frontpage = Webpage.where(template: 'frontpage').first
       init_webpage_translation
       return if !redirect_if_no_webpage
@@ -71,7 +74,9 @@ module Iox
 
     def by_slug
       @webpage = Webpage.where( slug: params[:slug] ).first
+      setup_webpage_locale
       @frontpage = Webpage.where(template: 'frontpage').first
+      setup_webpage_locale( @frontpage )
       init_webpage_translation
       return if !redirect_if_no_webpage
       update_stat
@@ -156,7 +161,8 @@ module Iox
         flash.alert = I18n.t('creation_failed') + ": " + @webpage.errors.full_messages.inspect
       end
 
-      render json: { item: @webpage,
+      render json: {
+        item: @webpage,
                       errors: @webpage.errors.full_messages,
                       success: @webpage.persisted?,
                       flash: flash }
@@ -169,8 +175,11 @@ module Iox
     def edit
       @webpage = Webpage.where( id: params[:id] ).first
       @frontpage = Webpage.where(template: 'frontpage').first
+      setup_webpage_locale
+      setup_webpage_locale( @frontpage )
       return if !redirect_if_no_webpage
-      @webpage.translation( params[:locale] )
+      @webpage.translation
+      puts " translation with locale: #{@webpage.translation.locale}"
       redirect_if_no_webpage
       redirect_if_no_rights
       render layout: 'application'
@@ -280,9 +289,12 @@ module Iox
     def save_webbits
       webbit_params.each_pair do |id,p|
         next if p[:global]
-        webbit = Webbit.where(id: id).first
-        unless webbit.update p
-          flash.alert = "could not update webbit #{webbit.name}"
+        if webbit = Webbit.where(id: id).first
+          unless webbit.update p
+            flash.now.alert = "could not update webbit #{webbit.name}"
+          end
+        else
+          flash.now.alert = t('webbit.not_found')
         end
       end
     end
@@ -316,7 +328,12 @@ module Iox
 
     def init_webpage_translation
       return unless @webpage
-      @webpage.translation( params[:locale] )
+      @webpage.translation
+    end
+
+    def setup_webpage_locale(webpage=@webpage)
+      webpage.locale = params[:locale] || I18n.default_locale
+      webpage.webbits.each{ |wb| wb.locale = webpage.locale }
     end
 
     def update_stat

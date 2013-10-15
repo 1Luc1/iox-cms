@@ -273,7 +273,7 @@ function setupImageGalleryDraggable(){
       transport: {
           read: function( options ){
             $.ajax({
-              url: '<%= webpage_webbits_path(@webpage) %>?parent_id='+(options.data.id ? options.data.id : ''),
+              url: '<%= webpage_webbits_path(@webpage) %>?parent_id='+(options.data.id ? options.data.id : '')+'&locale=<%= params[:locale] || I18n.default_locale %>',
               dataType: 'json',
               type: 'get'
             }).done( function( json ){
@@ -444,7 +444,8 @@ function setupImageGalleryDraggable(){
       data: { webbit: { name: $form.find('.name').val(),
                         title: $form.find('.title').val(),
                         category: $form.find('.category').val(),
-                        plugin_type: $form.find('.plugin_type').val() } 
+                        plugin_type: $form.find('.plugin_type').val() },
+              locale: '<%= params[:locale] %>'
       },
       type: 'patch',
       dataType: 'json'

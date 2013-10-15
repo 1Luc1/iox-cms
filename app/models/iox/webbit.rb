@@ -3,7 +3,7 @@ module Iox
 
     acts_as_iox_document
 
-    attr_accessor :lang, 
+    attr_accessor :locale, 
       :webbit_translation, 
       :global, 
       :title, # the translation title cache
@@ -16,7 +16,7 @@ module Iox
 
     accepts_nested_attributes_for :translations
 
-    def translation( locale=I18n.default_locale )
+    def translation
       return @translation if @translation
       @translation = translations.where( locale: locale ).first
       @translation = translations.create!( locale: locale, content: 'REPLACE ME' ) if !@translation && !new_record?
@@ -27,7 +27,7 @@ module Iox
       h = super(options)
       h[:has_children] = children.size > 0
       h[:title] = translation.title || name
-      h[:title] = translation.template || ''
+      h[:template] = translation.template || ''
       h
     end
 

@@ -138,13 +138,16 @@ module Iox
     def init_webbits
       if File.exists? tmpl_filename
         tmpl_data = YAML::load_file( tmpl_filename )
+        i = 0
         tmpl_data.each_pair do |name, data|
           next unless data.is_a?(Hash)
           wb = self.webbits.create!( plugin_type: data['type'], 
                                     name: name, 
+                                    position: i,
                                     category: data['category'],
                                     css_classes: data['css_classes'] )
           t = wb.translations.create!( locale: self.locale || I18n.default_locale, content: data['content'] )
+          i += 1
         end
       else
         raise StandardError.new "Could not find template #{tmpl_filename}"

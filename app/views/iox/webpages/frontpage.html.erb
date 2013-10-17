@@ -1,30 +1,39 @@
-<% if authenticated? and current_user and current_user.can_manage?(:webpages) %>
+<section class="hero">
 
-  <%= content_for :add_css do %>
-    <%= stylesheet_link_tag 'iox/webpages_ext' %>
-    <%= stylesheet_link_tag 'application' %>
-  <% end %>
-
-  <div class="webpage-mini-sidebar">
-        <!-- save and other actions -->
-    <div class="btn-group settings pull-right" style="width:auto">
-      <a class="btn" title="<%= t('webpages.back') %>" href="<%= webpages_path %>"><i class="icon-chevron-sign-left"></i></a>
-      <a class="btn" title="<%= t('webpage.edit') %>" href="<%= edit_webpage_path(@webpage) %>"><i class="icon-edit"></i></a>
-      <button data-toggle="dropdown" class="btn dropdown-toggle">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-          <li><a href="<%= webpages_path %>"><%= t('webpages.back') %></a></li>
-          <li><a href="<%= edit_webpage_path(@webpage) %>" target='_blank'><%= t('view') %></a></li>
-          <li><%= link_to t('delete'), @webpage, method: :delete, data: { confirm: t('webpage.really_delete', name: @webpage.name) } %></li>
-      </ul>
-    </div>
-
-
-    <%= image_tag 'iox/logo_transp_150x150.png', class: 'iox-logo' %>
-
+  <div class="text">
+    Wir bauen Team- und<br> Web Apps
   </div>
 
-<% end %>
+  <div class="main-slider-container">
+    <ul class="main-slider">
+      <li class="slider-item">
+        <div class="iobot"></div>
+        <h3>Solide und kreative Webseiten</h3>
+        <p>mit konservativen- oder bleeding-edge Web-Technologien</p>
+      </li>
+      <li class="slider-item">Two</li>
+      <li class="slider-item">Three</li>
+      <li class="slider-item">Four</li>
+    </ul>
+  </div>
 
-<%= render partial: "iox/webpages/templates/frontpage" %>
+</section>
+<div id="nav" class="centered">
+  
+  <h1><%= link_to( "TASTENWERK e.U.", "/") %></h1>
+  <ul class="links">
+  <li>
+    <a href="#home">Home</a>
+  </li>
+  <li>
+    <a href="#services">Services</a>
+  </li>
+  <li>
+    <a href="#portfolio">Portfolio</a>
+  </li>
+  <li>
+    <a href="#about">About</a>
+  </li>
+  </ul>
+
+</div>

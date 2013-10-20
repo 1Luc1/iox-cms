@@ -332,6 +332,7 @@ module Iox
     end
 
     def setup_webpage_locale(webpage=@webpage)
+      return unless webpage
       webpage.locale = params[:locale] || I18n.default_locale
       webpage.webbits.each{ |wb| wb.locale = webpage.locale }
     end

@@ -72,6 +72,9 @@
       events: {
         item: {
           showUserForm: function showUserForm( item, e ){
+            var $div = $(e.target).hasClass('item') ? $(e.target) : $(e.target).closest('.item');
+            $div.closest('ul').find('.selected').removeClass('selected');
+            $div.addClass('selected');
             $('.iox-details-placeholder').hide();
             $('.iox-content-frame').show();
             setupUserForm( item );

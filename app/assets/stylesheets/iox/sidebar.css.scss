@@ -1,6 +1,9 @@
 /**
  * sidebar
  */
+
+ @import "common.css.scss";
+
 .iox-sidebar{
   width: 25%;
   height: 100%;
@@ -15,17 +18,44 @@
   bottom: 10px;
   border: 1px solid #ccc;
   padding: 10px;
-  background-color: #f5f5f5;
+  background-color: $iox-light-grey;
 }
 .iox-sidebar-arrow{
-  border-color: transparent #bbb transparent transparent;
+  border-color: transparent #aaa transparent transparent;
   border-style: inset;
   border-width: 11px;
   font-size: 0;
-  left: -11px;
+  left: -12px;
   line-height: 0;
   position: absolute;
   top: 15px;
   width: 0;
   z-index: 2;
+}
+.iox-content-frame .iox-sidebar-arrow{
+  left: -22px;
+}
+.iox-content.offset-sidebar .iox-content-frame{
+  left: 20px;
+}
+.iox-content-arrow:after, .iox-sidebar-arrow:after{
+  border-color: rgba(0, 0, 0, 0) $iox-light-grey rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+  border-style: solid;
+  border-width: 10px;
+  content: ".";
+  display: block;
+  height: 0;
+  left: -8px;
+  position: absolute;
+  top: -11px;
+  width: 0;
+  z-index: 3;
+}
+.iox-content-arrow.offset-arrow{
+  left: -22px;
+}
+.iox-content-arrow.offset-arrow:after{
+border-width: 11px;
+left: -11px;
+top: -11px;
 }

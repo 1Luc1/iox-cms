@@ -13,7 +13,6 @@
     outline: 1px dashed #4183C4;
   }
   li{
-    margin: 2px;
     a{
       text-overflow: ellipsis;
       overflow: hidden;
@@ -74,17 +73,22 @@
     }
     .item{
       padding: 7px 5px;
-      border: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      border-left: 3px solid transparent;
       border-radius: 2px;
       &:hover{
-        background-color: #dce6ef;
+        background-color: #FaF7d5;
         .actions .action-icon{
           opacity: 1;
         }
       }
       &.selected{
-        background-color: #FaF7d5;
+        background-color: #eee;
+        border-left-color: #d55;
       }
+    }
+    &:last-child .item{
+      border-bottom: 1px solid #ddd;
     }
   }
 }

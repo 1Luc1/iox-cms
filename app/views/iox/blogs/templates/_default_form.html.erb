@@ -1,0 +1,64 @@
+<script id="iox-blog-form-template" type="text/html">
+
+  <%= render partial: '/iox/webpages/form/header', locals: { skip_template_select: true, skip_edit: true } %>
+
+  <form data-bind="submit: saveBlogForm">
+
+    <div class="scrollable-content w-header w-footer">
+
+      <div class="fields-header"><%= t('webpage.general') %></div>
+
+      <div class="field-box required">
+        <label for="name"><%= t('name') %></label>
+        <input type="text" name="webpage[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
+      </div>
+      
+      <div class="fields-header"><%= t('webpage.publishing_status') %></div>
+
+      <div class="field-box required">
+        <div class="label-offset publishing-status">
+          <%= t('blog.your_blog_currently_is') %>
+          <!-- ko if: published -->
+          <span class="label label-success" data-bind="click: publishBlog" rel="tooltip" title="<%= t 'webpage.unpublish' %>"><i class="icon icon-ok-sign"></i><%= t('webpage.published') %></span>
+          <!-- /ko -->
+          <!-- ko ifnot: published -->
+          <span class="label" data-bind="click: publishBlog" rel="tooltip" title="<%= t 'webpage.publish' %>"><i class="icon icon-ban-circle"></i><%= t('webpage.not_published') %></span>
+          <!-- /ko -->
+          <i class="icon-question-sign" title="<%= t('whats_this') %>?" style="margin-right: 10px;" rel="tooltip" data-confirmation-win="true" data-confirmation-txt="<%= t('webpage.publish_desc') %>"></i>
+        </div>
+      </div>
+
+      <div class="fields-header"><%= t('webpage.meta_information') %></div>
+
+      <div class="field-box">
+        <label for="webpage_meta_keywords"><%= t('webpage.meta_keywords') %></label>
+        <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'translation['+translation().id+'][meta_keywords]' }, value: translation().meta_keywords" />
+      </div>
+
+      <div class="fields-header"><%= t('webpage.content') %></div>
+
+      <div>
+        <textarea id="blog-content" data-bind="value: translation().content" />
+      </div>
+
+    </div>
+
+    <input type="hidden" data-bind="attr: { name: 'translation['+translation().id+'][id]' }, value: translation().id" />
+
+    <%= render partial: '/iox/webpages/form/footer' %>
+
+  </form>
+
+</script>
+
+<script type="text/javascript">
+
+$(function(){
+  iox.webpageTmpl['blog'] = function defaultTmplSetup( item ){
+    if( $('.webpage_meta_keywords').data('select2') )
+      $('.webpage_meta_keywords').select2('destroy')
+    $('.webpage_meta_keywords').select2({ tokenSeparators: [',', ' '], tags: [], width: '400px' })
+  }
+});
+
+</script>

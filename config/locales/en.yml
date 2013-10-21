@@ -313,6 +313,9 @@ en:
     templates:
       default: "Default"
       frontpage: "Frontpage"
+    errors:
+      oups_not_found: "We are sorry! The requested page was not found!"
+      create_webpage: "Create this page now"
 
   webpages:
     title: "Webpages"
@@ -326,6 +329,18 @@ en:
       zero: "No page"
       other: "%{count} pages"
     match_filter: "matching"
+
+  blogs:
+    title: "Blogs"
+    
+  blog:
+    title: "Blog"
+    new: "New Blog"
+    your_blog_currently_is: "Your Blog is"
+    publish: "Publish this Blog entry"
+    unpublish: "Unpublish this Blog entry"
+    name_required: "Name is required"
+    view: "View Blog"
 
   contacts:
     title: "Contacts"

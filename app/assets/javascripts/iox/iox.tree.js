@@ -331,7 +331,7 @@
       item._master._selectedItem = null;
       return;
     }
-    item.showWebpageForm( item, e );
+    item.showForm( item, e );
     item._selected( true );
     if( item._master._selectedItem )
         item._master._selectedItem._selected( false );

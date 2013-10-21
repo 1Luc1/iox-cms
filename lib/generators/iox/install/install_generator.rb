@@ -70,6 +70,7 @@ module Iox
           "    config.iox.available_langs = [:de, :en]\n"+
           "    config.iox.user_roles = ['user','admin','editor']\n"+
           "    config.iox.user_default_roles = ['user']\n"+
+          "    config.iox.skip_plugins = []\n"+
           "    config.iox.addons_order = ['dashboard','webpages']\n"+
           "    config.iox.user_settings = { notify_on_new_content: false, notify_on_comment: false, notify_on_new_user: false }"+
           "\n"+

@@ -27,4 +27,4 @@
 
 <% end %>
 
-<%= render partial: "iox/webpages/templates/#{@webpage.template}" %>
+<%= render partial: "iox/#{@webpage.class.name.demodulize.pluralize.downcase}/templates/#{@webpage.template}" %>

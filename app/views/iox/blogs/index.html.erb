@@ -1,4 +1,5 @@
 <%= content_for :add_js do %>
+  <%= javascript_include_tag "3rdparty/ckeditor/ckeditor" %>
   <%= javascript_include_tag "iox/webpages" %>
 <% end %>
 
@@ -15,8 +16,8 @@
         <input type="text" name="query" placeholder="<%= t('filter_results') %> " />
         <input type="submit" value="<%= t('search') %>" />
       </form>
-      <button class="btn" data-tree-role="refresh" rel="tooltip" title="<%= t('refresh') %>"><i class="icon-refresh"></i></button>
-      <button class="btn" data-tree-role="new" rel="tooltip" title="<%= t('webpage.new') %>"><i class="icon-plus"></i></button>
+      <button class="btn" data-tree-role="refresh" title="<%= t('refresh') %>"><i class="icon-refresh"></i></button>
+      <button class="btn" data-tree-role="new" title="<%= t('blog.new') %>"><i class="icon-plus"></i></button>
     </div>
 
     <ul id="iox-webpages-list"></ul>
@@ -27,42 +28,31 @@
 
 <div class="iox-content offset-sidebar">
   <div class="iox-content-frame hide">
-    <div id="iox-webpage-details" class="iox-form" data-bind="template: { name: (id ? 'iox-webpage-form-template-'+template() : 'iox-new-webpage-form-template') }">
+    <div id="iox-webpage-details" class="iox-form" data-bind="template: { name: (id ? 'iox-blog-form-template' : 'iox-new-blog-form-template') }">
     </div>
   </div>
   <div class="iox-details-placeholder">
     <i class="icon-info-sign"></i>
-    <%= t('webpages.click_on_webpage_to_show_details') %>
+    <%= t('webpages.click_on_blog_to_show_details') %>
   </div>
 </div>
 
-<%= render partial: 'new_form' %>
+<%= render partial: '/iox/blogs/new_form' %>
 <%#
-  # render all webpage templates
-  # found in the /iox/webpages/templates dir
+  # render all blog templates
+  # found in the /iox/blogs/templates dir
   #
 %>
-<% available_webpage_form_templates.each do |tmpl| %>
-  <%= render partial: tmpl[:file], locals: { template: tmpl[:name] } %>
-<% end %>
+<%= render partial: '/iox/blogs/templates/default_form' %>
 
 <script id="iox-tree-item-template" type="text/html">
   <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }, click: markItem">
     <div class="item clearfix" data-bind=" css: { selected: _selected, hide: _hide }">
-      <!-- ko if: hasChildren -->
-        <i class="icon-angle-right folder-spacer open-folder" data-bind="click: showChildren"></i>
-      <!-- /ko -->
-      <!-- ko ifnot: hasChildren -->
-        <i class="folder-spacer" data-bind="click: showChildren">&nbsp;</i>
-      <!-- /ko -->
       <div class="actions">
-        <a class="action-icon publish-action" data-bind="click: publishWebpage">
-          <i class="icon-ban-circle success published-status" data-bind="css: { 'hide': published() }" rel="tooltip" title="<%= t('webpage.publish') %>"></i>
-          <i class="icon-ok-sign published-status" data-bind="css: { 'hide': !published() }" rel="tooltip" title="<%= t('webpage.unpublish') %>"></i>
+        <a class="action-icon publish-action" data-bind="click: publishBlog">
+          <i class="icon-ban-circle success published-status" data-bind="css: { 'hide': published() }" rel="tooltip" title="<%= t('blog.publish') %>"></i>
+          <i class="icon-ok-sign published-status" data-bind="css: { 'hide': !published() }" rel="tooltip" title="<%= t('blog.unpublish') %>"></i>
         </a>
-        <!-- ko if: template() === 'frontpage' -->
-        <span class="icon-home"></span>
-        <!-- /ko -->
       </div>
       <a class="title" data-bind="click: showForm, attr: { title: name }, text: name"></a>
     </div>
@@ -75,8 +65,9 @@
   $(document).ready( function(){
 
     $('#iox-webpages-list').ioxTree({
-      url: '/iox/webpages',
-      creationURL: '/iox/webpages/new',
+      url: '/iox/blogs',
+      creationURL: '/iox/blogs/new',
+      deletionURL: '/iox/webpages',
       observe: ['published','translation','template','show_in_menu','show_in_sitemap'],
       control: $('.iox-tree-control'),
       i18n:{
@@ -92,19 +83,19 @@
         item: {
 
           /*
-           * show the webpage form (depending on the webpage's template)
-           * for editing existing webpages
+           * show the blog form (depending on the blog's template)
+           * for editing existing blogs
            */
           showForm: function showForm( item, e ){
             $('.iox-details-placeholder').hide();
             $('.iox-content-frame').show();
-            setupWebpageForm( item );
+            setupBlogForm( item );
           },
 
           /**
-           * save an existing webpage
+           * save an existing blog
            */
-          saveWebpageForm: function saveWebpageForm( form ){
+          saveBlogForm: function saveblogForm( form ){
             var self = this;
             if( this._validator.validate() ){
               $('.iox-content-frame').block();
@@ -120,9 +111,9 @@
           },
 
           /**
-           * create a new webpage
+           * create a new blog
            */
-          createWebpageForm: function createWebpageForm( form ){
+          createBlogForm: function createBlogForm( form ){
             var TreeItem = this.constructor;
             var self = this;
             if( this._validator.validate() ){
@@ -144,7 +135,7 @@
                     }
                   } else
                     self._master.items.push( item );
-                  setupWebpageForm( item );
+                  setupBlogForm( item );
                 }
                 iox.flash.rails( json.flash );
               });
@@ -155,9 +146,9 @@
           },
 
           /**
-           * publish a webpage (ajax)
+           * publish a blog (ajax)
            */
-          publishWebpage: function publishWebpage( item, e ){
+          publishBlog: function publishBlog( item, e ){
             item.published( !item.published() );
             $.ajax({ url: '/iox/webpages/'+item.id+'/publish',
               data: {publish: item.published()},
@@ -173,26 +164,24 @@
            * switch to a different translation
            */
           switchTranslation: function switchTranslation( item, e ){
-            $.getJSON( '/iox/webpages/'+item.id+'/translations/'+$(e.target).text(),
+            $.getJSON( '/iox/blogs/'+item.id+'/translations/'+$(e.target).text(),
               function( jsonResponse ){
                 if( jsonResponse ){
                   item.translation( jsonResponse );
-                  if( typeof(iox.webpageTmpl[item.template()]) === 'function' )
-                    iox.webpageTmpl[item.template()]( item );
+                    iox.webpageTmpl.blog( item );
                 }
                 else
                   new iox.Win({
-                    yesNoQuestion: '<%= t('webpage.translation_does_not_exist_create') %>',
+                    yesNoQuestion: '<%= t('blog.translation_does_not_exist_create') %>',
                     onYes: function onYes($win){
-                      $.ajax({ url: '/iox/webpages/'+item.id+'/translations',
+                      $.ajax({ url: '/iox/blogs/'+item.id+'/translations',
                                data: { locale: $(e.target).text() },
                                dataType: 'json',
                                type: 'post'
                       }).done( function( jsonResponse ){
                         if( jsonResponse.success ){
                           item.translation( jsonResponse.item );
-                          if( typeof(iox.webpageTmpl[item.template()]) === 'function' )
-                            iox.webpageTmpl[item.template()]( item );
+                            iox.webpageTmpl.blog( item );
                         }
                         iox.flash.rails( jsonResponse.flash );
                       });
@@ -219,7 +208,7 @@
         tree: {
 
           /**
-           * load a new webpage (by asking for json object from
+           * load a new blog (by asking for json object from
            * server). this gives opportunities to set default
            * values at application level
            */
@@ -228,13 +217,13 @@
             $('.iox-details-placeholder').show().block();
             $('.iox-content-frame').hide();
             $(this).block({ message: iox.loaderHorizontal });
-            $.getJSON( '/iox/webpages/new' ).done( function( json ){
+            $.getJSON( '/iox/blogs/new' ).done( function( json ){
               $('.iox-details-placeholder').unblock().hide();
               $('.iox-content-frame').show();
               var item = new TreeItem(json, tree);
               if( tree._selectedItem )
                 item._parent( tree._selectedItem );
-              setupWebpageForm( item );
+              setupBlogForm( item );
               $('#iox-webpage-details input[type=text]:first').focus();
               $(self).unblock();
             });
@@ -245,19 +234,29 @@
     });
 
 
-    function setupWebpageForm( item ){
+    function setupBlogForm( item ){
       ko.cleanNode($('#iox-webpage-details').get(0));
       $('#iox-webpage-details').html('');
       ko.applyBindings( item, $('#iox-webpage-details').get(0) );
-      $('.webpage-template').kendoDropDownList();
+      $('.blog-template').kendoDropDownList();
       item._validator = $("#iox-webpage-details").kendoValidator().data("kendoValidator");
 
-      if( typeof(iox.webpageTmpl[item.template()]) === 'function' )
-        iox.webpageTmpl[item.template()]( item );
+      iox.webpageTmpl.blog( item );
 
-      if( item.id ){
-        // if webpage exists
-      }
+      var ck_config = {
+        allowedContent: true,
+        language: '<%= I18n.locale %>',
+        toolbar: [
+          [ "Sourcedialog", "Undo", "Redo" ], [ "Styles", "Templates", "Format" ],
+          [ "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "SelectAll", "Find", "Replace" ],
+          [ "SpecialChar" ],
+          [ "Link", "Unlink", "Anchor", "Image", "Table", "Youtube" ],
+          [ "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "NumberedList", "BulletedList", "Outdent", "Indent" ],
+          [ "Bold", "Italic", "Underline", "Strike", "Blockquote", "Subscript", "Superscript", "RemoveFormat" ]
+        ]
+      };
+
+      CKEDITOR.replace('blog-content', ck_config);
 
     }
   });

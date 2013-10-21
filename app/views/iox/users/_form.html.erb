@@ -20,7 +20,7 @@
 
         <div class="fields-header"><%= t('user.general') %></div>
 
-        <!-- ko if: id() -->
+        <!-- ko if: id -->
         <div class="user-qr" onclick="$(this).toggleClass('hovered');">
           <p><%= t('user.welcome_link') %></p>
           <img data-bind=" attr: { src: '/iox/users/'+id+'/confirmation_qr.png' }" />

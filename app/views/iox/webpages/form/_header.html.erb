@@ -12,21 +12,25 @@
     </ul>
   </div>
 
-  <div class="iox-simple-select select-template">
-    <span class="iox-simple-select-trigger"
-      <span class="current-select" data-bind="text: template"></span>
-      <span class="icon-caret-down"></span>
-    </span>
-    <ul class="iox-simple-select-list">
-      <% available_webpage_templates.each do |tmpl| %>
-        <li data-bind="click: switchTemplate, css: { hide: '<%= tmpl[0] %>' === template } "><%= tmpl[0] %></li>
-      <% end %>
-    </ul>
-  </div>
+  <% unless defined?(skip_template_select) %>
+    <div class="iox-simple-select select-template">
+      <span class="iox-simple-select-trigger"
+        <span class="current-select" data-bind="text: template"></span>
+        <span class="icon-caret-down"></span>
+      </span>
+      <ul class="iox-simple-select-list">
+        <% available_webpage_templates.each do |tmpl| %>
+          <li data-bind="click: switchTemplate, css: { hide: '<%= tmpl[0] %>' === template } "><%= tmpl[0] %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <a class="btn" data-bind=" attr: { href: '/iox/webpages/'+id }" rel="tooltip" title="<%= t('webpage.view') %>"><i class="icon-eye-open icon"></i><%= t('webpage.view') %></a>
+  <a class="btn" data-bind=" attr: { href: '/iox/webpages/'+id }" rel="tooltip" title="<%= t("#{controller.controller_name.singularize}.view") %>"><i class="icon-eye-open icon"></i><%= t("#{controller.controller_name.singularize}.view") %></a>
 
-  <a class="btn" data-bind=" attr: { href: '/iox/webpages/'+id+'/edit' }" rel="tooltip" title="<%= t('edit') %>"><i class="icon-edit icon only"></i></a>
+  <% unless defined?(skip_edit) %>
+    <a class="btn" data-bind=" attr: { href: '/iox/webpages/'+id+'/edit' }" rel="tooltip" title="<%= t('edit') %>"><i class="icon-edit icon only"></i></a>
+  <% end %>
 
 </div>
 

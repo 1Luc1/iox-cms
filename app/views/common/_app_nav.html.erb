@@ -5,6 +5,7 @@
 <ul class="app-nav-list">
   <% get_ordered_plugins.each do |plugin| %>
     <% pass = plugin.roles.size == 0 || current_user.is_admin? %>
+    <% next if Rails.configuration.iox.skip_plugins && Rails.configuration.iox.skip_plugins.include?(plugin.name) %>
     <% unless pass %>
       <% plugin.roles.each{ |role| pass = pass || current_user.roles.include?(role) } %>
     <% end %>

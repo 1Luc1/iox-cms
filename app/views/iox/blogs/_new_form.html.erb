@@ -1,0 +1,28 @@
+<script id="iox-new-blog-form-template" type="text/html">
+
+  <h3 class="title" data-bind="html: (id ? name() : '<%= t('blog.new') %>')"></h3>
+
+  <form data-bind="submit: (id ? saveblogForm : createBlogForm)">
+
+    <div class="scrollable-content w-header w-footer">
+
+      <div class="fields-header"><%= t('blog.general') %></div>
+
+      <div class="field-box required">
+        <label for="name"><%= t('name') %></label>
+        <input type="text" name="blog[name]" data-bind="value: name" required validationMessage="<%= t('blog.name_required') %>" />
+      </div>
+
+    </div>
+
+    <div class="scrollable-content-footer">
+      <button type="submit" class="pull-right btn-primary btn" data-bind="text: ( id ? '<%= t('save') %>' : '<%= t('create') %>' )"></button>
+    </div>
+
+
+    <input type="hidden" name="blog[type]" data-bind="value: type" />
+    <input type="submit" class="hide" value="submit" />
+
+  </form>
+
+</script>

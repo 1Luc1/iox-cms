@@ -8,7 +8,8 @@
   <%= stylesheet_link_tag 'iox/webpages_ext' %>
 <% end %>
 
-<%= render partial: "iox/webpages/templates/#{@webpage.template}" %>
+
+<%= render partial: "iox/#{@webpage.class.name.demodulize.pluralize.downcase}/templates/#{@webpage.template}" %>
 
 <%= content_for :webpage_sidebar do %>
   <%= form_for @webpage, { html: { class: 'webpage-form', style: 'margin:0;' }} do |f| %>

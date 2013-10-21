@@ -60,4 +60,6 @@ Iox::Engine.routes.draw do
     end
   end
 
+  resources :blogs
+
 end

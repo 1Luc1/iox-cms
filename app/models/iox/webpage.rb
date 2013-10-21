@@ -52,7 +52,7 @@ module Iox
     validates_with UniqueTemplateValidator
     validates :name, presence: true
 
-    before_create      :create_slug
+    before_create      :check_create_slug
     before_create      :publish_if_frontpage
     after_create       :init_webbits
 
@@ -65,6 +65,7 @@ module Iox
       h = super(options)
       h[:num_children] = children.count
       h[:translation] = translation
+      h[:type] = type
       h
     end
 
@@ -120,8 +121,8 @@ module Iox
 
     def translation
       return @translation if @translation
-      @translation = translations.where( locale: locale ).first
-      @translation = translations.create!( locale: locale ) if !@translation && !new_record?
+      @translation = translations.where( locale: (locale || I18n.default_locale) ).first
+      @translation = translations.create!( locale: (locale || I18n.default_locale) ) if !@translation && !new_record?
       @translation
     end
 
@@ -136,6 +137,7 @@ module Iox
     end
 
     def init_webbits
+      return if self.class.name == 'Iox::Blog'
       if File.exists? tmpl_filename
         tmpl_data = YAML::load_file( tmpl_filename )
         i = 0
@@ -152,6 +154,10 @@ module Iox
       else
         raise StandardError.new "Could not find template #{tmpl_filename}"
       end
+    end
+
+    def check_create_slug
+      create_slug if type.nil?
     end
 
   end

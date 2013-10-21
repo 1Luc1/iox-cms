@@ -37,7 +37,7 @@ module Iox
         else
           query = "parent_id = '#{params[:parent]}'"
         end
-        @webpages = Webpage.where( query ).limit( limit ).offset( offset ).order(:position).load.map{ |webpage|
+        @webpages = Webpage.where( query ).where(type: nil).limit( limit ).offset( offset ).order(:position).load.map{ |webpage|
           webpage.translation = webpage.translations.where( locale: params[:locale] || I18n.default_locale ).first
           webpage
         }

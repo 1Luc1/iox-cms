@@ -272,20 +272,6 @@ module Iox
       )
     end
 
-    def set_and_save_webpage_translation
-      t = nil
-      unless trans_params[:id].blank?
-        t = @webpage.translations.where( id: trans_params[:id] ).first
-        t.updater = current_user
-        return t.update( trans_params )
-      else
-        t = @webpage.translations.build( trans_params )
-        t.creator = current_user
-      end
-      t.updater = current_user
-      t.save
-    end
-
     def save_webbits
       webbit_params.each_pair do |id,p|
         next if p[:global]

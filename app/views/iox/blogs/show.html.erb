@@ -1,0 +1,16 @@
+<%= content_for :add_js do %>
+  <%= javascript_include_tag 'blog' %>
+<% end %>
+<%= content_for :add_css do %>
+  <%= javascript_include_tag '3rdparty/highlightjs/github' %>
+<% end %>
+
+<div class="main-container">
+
+  <div class="centered">
+
+    <%= render partial: @blog %>
+
+  </div>
+
+</div>

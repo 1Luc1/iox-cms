@@ -23,9 +23,16 @@
       &.title{
         float: left;
         font-weight: 100;
-        margin: 2px;
+        padding: 2px 0 0;
         line-height: 1.2em;
       }
+    }
+    .newline{
+      margin-top: 2px;
+    }
+    .date{
+      font-size: 0.8em;
+      color: #999;
     }
     .icon-home{
       float: left;

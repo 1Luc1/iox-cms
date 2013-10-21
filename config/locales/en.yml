@@ -1,4 +1,5 @@
 en:
+  javascript_required: "Javascript is required to run these pages. Please activate Javascript in you Browser settings or tell your script blocker to allow this site"
   change_password: "Change password"
   view_profile: "View profile"
   data_usage_quota: "Quota / Usage"

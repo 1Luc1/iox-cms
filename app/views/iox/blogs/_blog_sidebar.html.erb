@@ -1,0 +1,217 @@
+<!-- side right column -->
+<div class="webpage-sidebar">
+
+  <!-- save and other actions -->
+  <div class="btn-group settings pull-right" style="width:auto">
+    <button class="btn" title="<%= t('webpages.back') %>" data-href="<%= webpages_path %>"><i class="icon-chevron-sign-left"></i></button>
+    <span id="push-sidebar-pin" class="btn" title="<%= t('stick') %>"><i class="icon-pushpin"></i></span>
+    <button class="btn" type="submit" title="<%= t('save') %>"><i class="icon-save"></i></button>
+    <button class="btn" title="<%= t('view') %>" data-href="<%= blog_path(@blog) %>"><i class="icon-eye-open"></i></button>
+    <button data-toggle="dropdown" class="btn dropdown-toggle">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="<%= blogs_path %>"><%= t('webpages.back') %></a></li>
+        <li><a href="<%= blog_path(@blog) %>" target='_blank'><%= t('view') %></a></li>
+        <li><%= link_to t('delete'), @blog, method: :delete, data: { confirm: t('webpage.really_delete', name: @blog.name) } %></li>
+    </ul>
+  </div>
+
+  <%= image_tag 'iox/logo_transp_150x150.png', class: 'iox-logo' %>
+
+  <!-- Tabs control -->
+  <div class="btn-group webpage-tabs-control">
+    <button class="btn-flat btn active white" data-to-id="general" style="padding: 6px 10px 7px;"><%= t('webpage.general') %></button>
+    <button class="btn-flat btn white" data-to-id="meta" style="padding: 7px 10px 6px"><i class="icon-cog"></i></button>
+    <button class="btn-flat btn white" data-to-id="images" style="padding: 7px 10px 6px"><i class="icon-picture"></i></button>
+    <button class="btn-flat btn white" data-to-id="webbit-tools" style="padding: 7px 10px 6px"><i class="icon-wrench"></i></button>
+  </div>
+
+  <div id="webpage-tab-general" class="webpage-tab active">
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
+
+
+      <div class="slider-frame <%= @blog.published? ? 'success' : '' %> pull-right">
+        <span class="publish-button" data-href="<%= publish_webpage_path(@blog) %>">
+        <i class="icon-<%= @blog.published? ? 'ok-sign' : 'ban-circle' %>"></i>
+        </span>
+      </div>
+
+      <%= f.label :template, t('webpage.published') %>
+
+      <% if @blog.translation %>
+
+        <%= f.fields_for @blog.translation do |tr| %>
+
+          <%= tr.hidden_field :id %>
+      
+          <p>
+            <%= tr.label :title, t('title') %>
+            <%= tr.text_field :title, value: @blog.translation.title || @blog.name %>
+          </p>
+
+          <p>
+            <%= tr.label :locale, t('language') %>
+
+            <%= tr.select( :locale, available_webpage_langs( :translate ), { include_blank: false },
+                {class: 'select2 select-lang', style: 'width: 280px', multiple: false} ) %>
+
+          </p>
+
+        <% end %>
+
+      <% end %>
+
+  </div>
+
+  <div id="webpage-tab-meta" class="webpage-tab">
+
+    <% if @blog.translation %>
+      <%= f.fields_for @blog.translation do |tr| %>
+
+        <p><%= tr.label :meta_keywords, t('tags') %></p>
+
+        <%= tr.text_field( :meta_keywords, class: 'select2tags', style: 'width: 280px' ) %>
+
+        <p><%= t('webpage.tags_desc') %></p>
+
+        <p>
+          <%= tr.label :meta_description, t('webpage.description') %>
+          <%= tr.text_area :meta_description %>
+        </p>
+
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <div id="webpage-tab-images" class="webpage-tab">
+
+    <h1><%= t('webpage.image_browser') %></h1>
+    <div id="images-progress"><div style="width:0" class="bar"></div></div>
+
+    <p class="select-files-text"><%= t('select_files') %></p>
+
+    <ul class="clearfix image-browser" id="image-browser" data-bind="template: { name: 'image-template', foreach: images }"></ul>
+
+    <ul class="clearfix select-files-list">
+      <li class="select-files">
+        <span class="icon-plus"></span>
+        <input type="file" id="upload" name="file" multiple="true" />
+      </li>
+    </ul>
+
+    <script type="text/javascript">
+
+      $('#upload').fileupload({
+        url: '<%= webpage_webfiles_path(@blog) %>',
+        processQueue: {
+          action: 'validate',
+          acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+        },
+        dataType: 'json',
+        formData: {
+          "authenticity_token": $('input[name="authenticity_token"]:first').val()
+        },
+        dragover: function( e ){
+          $(this).addClass('drop-here');
+        },
+        done: function (e, data) {
+          var file = data._response.result;
+          if( file.content_type.indexOf( 'image' ) >= 0 ){
+            imagesData.images.push( { orig_url: file.url, thumb_url: file.thumbnail_url, id: file.id } );
+            setTimeout( setupImageGalleryDraggable, 50 );
+          }
+          setTimeout( function(){
+            $('#images-progress .bar').css( 'width', 0 );
+          }, 500 );
+        },
+        error: function( response, type, msg ){
+          iox.flash.alert( JSON.parse(response.responseText).errors.file[0] );
+        },
+        progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#images-progress .bar').css( 'width', progress + '%' );
+        }
+      });
+
+    </script>
+
+  </div>
+
+  <div id="webpage-tab-webbit-tools" class="webpage-tab">
+    <%= render partial: "iox/webpages/webbits/text", locals: {f: f} %>
+  </div>
+
+  <%= hidden_field_tag :stay_on_page, false, class: 'stay-on-page' %>
+  <div class="sidebar-hidden-arr">
+    <%= image_tag 'iox/logo_transp_150x150.png', class: 'iox-logo' %>
+    <i class="icon-chevron-left"></i>
+  </div>
+</div>
+
+<script type="text/html" id="image-template">
+  <li data-bind="attr: { 'data-id': id } ">
+    <img data-bind='attr: { src: thumb_url, "data-orig-path": orig_url }' />
+    <div class="overlay"></div>
+    <a href="#" class="action-icon remove">
+      <i class="icon-remove"></i>
+    </a>
+  </li>
+</script>
+
+<script type="text/javascript">
+
+function setupImageGalleryDraggable(){
+
+  $('.image-browser li').each( function(){
+    if( $(this).data('draggable') )
+      $(this).draggable('destroy');
+  });
+
+  $('.image-browser li').draggable({
+    delay: 300,
+    appendTo: 'body',
+    revert: 'invalid',
+    cursor: 'move',
+    helper: 'clone',
+    zIndex: 10000,
+    start: function(e, ui){
+      $(ui.helper).addClass("draggable-image")
+        .find('.overlay').remove().end()
+        .find('.action-icon').remove();
+    }
+ });
+
+}
+  $.getJSON( '<%= images_webpage_path( @blog ) %>', function( json ){
+    json.forEach( function( img ){
+      imagesData.images.push( img );
+    });
+    ko.applyBindings( imagesData, $('#image-browser').get(0) );
+    setTimeout( setupImageGalleryDraggable, 100);
+
+  });
+
+  $('.select-lang').on('change', function(e){
+    location.href = '?locale='+$(this).find('option:selected').val();
+  });
+
+  var numPressedKeys = 0;
+  $(document).on('keyup', function(e){
+    var charCode = e.keyCode? e.keyCode : e.charCode;
+    if( ($(e.target).closest('.webbit').length ||
+         $(e.target).closest('.webpage-form').length ) ){
+        numPressedKeys += 1;
+    }
+  });
+
+  window.onbeforeunload = function closeEditorWarning(){
+    if( numPressedKeys > 1 )
+      return '<%= t('webpage.unsaved_content_leave_q') %>';
+  }
+
+</script>

@@ -66,6 +66,9 @@
 
 		$('.webpage-form').on('submit', function(e){
     	$('.translation-content-'+$(self).attr('id').replace('wb_','')).val( editor.getData() );
+      <% if controller.controller_name == 'blogs' %>
+        $('#blog_translation_content').val( editor.getData() );
+      <% end %>
     });
 
 	}

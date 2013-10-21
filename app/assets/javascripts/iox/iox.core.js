@@ -15,6 +15,13 @@
   window.iox.loader = "<div class=\"iox-loader\"></div>";
   window.iox.loaderHorizontal = "<div class=\"iox-loader-horizontal\"></div>";
 
+  window.iox.preloadImage = function preloadImage( imgPath, callback ){
+    $('<img/>').attr('src', imgPath).load( function(){
+      $(this).remove();
+      callback( imgPath );
+    });
+  }
+
   window.iox.validationHelper = {};
   window.iox.validationHelper.email = function validateEmail(email){
       var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

@@ -23,6 +23,15 @@ module Iox
       Rails.configuration.iox.plugins
     end
 
+    def can_write_plugin?( plugin_name=controller.controller_name )
+      Rails.configuration.iox.plugins.each do |plugin|
+        if plugin.name == plugin_name
+          return !(Set.new(plugin.roles) & Set.new(current_user.roles)).empty?
+        end
+      end
+      false
+    end
+
   end
 
 end

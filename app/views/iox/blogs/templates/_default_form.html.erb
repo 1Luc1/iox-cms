@@ -1,6 +1,6 @@
 <script id="iox-blog-form-template" type="text/html">
 
-  <%= render partial: '/iox/webpages/form/header', locals: { skip_template_select: true, skip_edit: true } %>
+  <%= render partial: '/iox/webpages/form/header', locals: { skip_template_select: true } %>
 
   <form data-bind="submit: saveBlogForm">
 
@@ -10,7 +10,7 @@
 
       <div class="field-box required">
         <label for="name"><%= t('name') %></label>
-        <input type="text" name="webpage[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
+        <input type="text" name="blog[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
       </div>
       
       <div class="fields-header"><%= t('webpage.publishing_status') %></div>
@@ -32,18 +32,12 @@
 
       <div class="field-box">
         <label for="webpage_meta_keywords"><%= t('webpage.meta_keywords') %></label>
-        <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'translation['+translation().id+'][meta_keywords]' }, value: translation().meta_keywords" />
-      </div>
-
-      <div class="fields-header"><%= t('webpage.content') %></div>
-
-      <div>
-        <textarea id="blog-content" data-bind="value: translation().content" />
+        <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'blog[translation]['+translation().id+'][meta_keywords]' }, value: translation().meta_keywords" />
       </div>
 
     </div>
 
-    <input type="hidden" data-bind="attr: { name: 'translation['+translation().id+'][id]' }, value: translation().id" />
+    <input type="hidden" data-bind="attr: { name: 'blog[translation]['+translation().id+'][id]' }, value: translation().id" />
 
     <%= render partial: '/iox/webpages/form/footer' %>
 

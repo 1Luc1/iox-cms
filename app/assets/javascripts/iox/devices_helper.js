@@ -9,6 +9,6 @@
 	window.iox = window.iox || {};
 	window.iox.devices = window.iox.devices || {};
 
-	window.iox.devices.isMobile = false;
+	window.iox.devices.isMobile = function(){ return false };
 
 })();

@@ -1,0 +1,25 @@
+<%= content_for :add_js do %>
+  <%= javascript_include_tag 'iox/webpages_ext' %>
+  <script type="text/javascript" src="/javascripts/3rdparty/ckeditor/ckeditor.js"></script>
+<% end %>
+<%= content_for :add_css do %>
+  <%= stylesheet_link_tag 'iox/webpages_ext' %>
+<% end %>
+
+<div class="main-container">
+  <div class="centered">
+    <%= render partial: @blog %>
+  </div>
+</div>
+
+<%= content_for :webpage_sidebar do %>
+  <%= form_for @blog, { html: { class: 'webpage-form', style: 'margin:0;' }} do |f| %>
+    <%= render partial: 'iox/blogs/blog_sidebar', locals: { f: f } %>
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready( function(){
+    $('#blog-content').ioxTextEditor();
+  });
+</script>

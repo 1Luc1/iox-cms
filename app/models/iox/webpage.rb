@@ -122,7 +122,7 @@ module Iox
     def translation
       return @translation if @translation
       @translation = translations.where( locale: (locale || I18n.default_locale) ).first
-      @translation = translations.create!( locale: (locale || I18n.default_locale) ) if !@translation && !new_record?
+      @translation = translations.create!( locale: (locale || I18n.default_locale), title: name ) if !@translation && !new_record?
       @translation
     end
 

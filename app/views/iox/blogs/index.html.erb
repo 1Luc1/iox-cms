@@ -55,6 +55,10 @@
         </a>
       </div>
       <a class="title" data-bind="click: showForm, attr: { title: name }, text: name"></a>
+      <br class="clearfix">
+      <div class="newline">
+        <span class="date" data-bind="text: moment( created_at ).format('DD. MMMM YYYY - HH:mm')"></span>
+      </div>
     </div>
     <ul class="children hide" data-bind="template: { name: 'iox-tree-item-template', foreach: children }"></ul>
   </li>
@@ -242,22 +246,6 @@
       item._validator = $("#iox-webpage-details").kendoValidator().data("kendoValidator");
 
       iox.webpageTmpl.blog( item );
-
-      var ck_config = {
-        allowedContent: true,
-        language: '<%= I18n.locale %>',
-        toolbar: [
-          [ "Sourcedialog", "Undo", "Redo" ], [ "Styles", "Templates", "Format" ],
-          [ "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "SelectAll", "Find", "Replace" ],
-          [ "SpecialChar" ],
-          [ "Link", "Unlink", "Anchor", "Image", "Table", "Youtube" ],
-          [ "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "NumberedList", "BulletedList", "Outdent", "Indent" ],
-          [ "Bold", "Italic", "Underline", "Strike", "Blockquote", "Subscript", "Superscript", "RemoveFormat" ]
-        ]
-      };
-
-      CKEDITOR.replace('blog-content', ck_config);
-
     }
   });
 </script>

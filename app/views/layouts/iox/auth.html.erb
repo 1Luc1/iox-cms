@@ -26,7 +26,20 @@
       <% end %>
     </div>
 
-    <div class="iox-auth-container">
+    <noscript>
+    <div class="login-form">
+      <%= t('javascript_required') %>
+    </div>
+    </noscript>
+    <script type="text/javascript">
+      $(document).ready( function(){
+        iox.preloadImage( $('.logo').attr('src'), function(imgPath){
+          $('.iox-auth-container').fadeIn();
+        });
+      });
+    </script>
+
+    <div class="iox-auth-container" style="display:none">
       <%= image_tag Rails.configuration.iox.brand_logo, class: 'logo' %>
       <%= yield %>
     </div>

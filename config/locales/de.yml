@@ -1,4 +1,5 @@
 de:
+  javascript_required: "Javascript wird zum Auszuführen dieser Seiten benötigt. Bitte aktiviere es in deinen Browsereinstellungen oder sag deinem Skript-Blocker, dass er diese Domäne zulassen soll"
   today: "Heute"
   stick: "Anheften"
   download: "Herunterladen"
@@ -60,6 +61,7 @@ de:
   by: "von"
   ago: "vor"
   of: "von"
+  by: "von"
 
   yes: "Ja"
   no: "Nein"

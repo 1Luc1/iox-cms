@@ -2,8 +2,8 @@ module Iox
   module WebpagesHelper
 
     ## helpers for controller
-    def redirect_if_no_webpage
-      if !@webpage
+    def redirect_if_no_webpage(webpage=@webpage)
+      if !webpage
         if authenticated?
           flash.alert = I18n.t('error.object_not_found')
           redirect_to webpages_path
@@ -13,7 +13,7 @@ module Iox
           return false
         end
       end
-      if !@webpage.published? and !authenticated?
+      if !webpage.published? and !authenticated?
         render template: "iox/webpages/error_404", layout: 'application', status: 404
         return false
       end
@@ -21,7 +21,7 @@ module Iox
     end
 
     def redirect_if_no_rights
-      if !current_user.can_manage?( :webpages ) && !current_user.is_admin?
+      if !current_user.can_manage?( :webpages ) && !current_user.is_admin? && !can_write_plugin?
         flash.alert = I18n.t('error.insufficient_rights')
         redirect_to webpages_path
         return false
@@ -168,6 +168,20 @@ module Iox
         arr << wb.plugin_type unless arr.include? wb.plugin_type
       end
       arr
+    end
+
+    def set_and_save_webpage_translation(webpage=@webpage)
+      t = nil
+      unless trans_params[:id].blank?
+        t = webpage.translations.where( id: trans_params[:id] ).first
+        t.updater = current_user
+        return t.update( trans_params )
+      else
+        t = webpage.translations.build( trans_params )
+        t.creator = current_user
+      end
+      t.updater = current_user
+      t.save
     end
 
   end

@@ -139,7 +139,7 @@ $(function(){
     alert( browserFailedMsg );
   else if( BrowserDetect.browser == 'Chrome' && BrowserDetect.version < 25 )
     alert( browserFailedMsg );
-  else if( BrowserDetect.browser == 'Explorer' && BrowserDetect.version < 25 )
+  else if( BrowserDetect.browser == 'Explorer' && BrowserDetect.version < 10 )
     alert( browserFailedMsg );
   else if( BrowserDetect.browser == 'Safari' && BrowserDetect.version < 6 )
     alert( browserFailedMsg );

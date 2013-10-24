@@ -12,14 +12,14 @@
 
   'use strict';
 
-  if( window.Iox && window.Iox.Tree )
+  if( window.iox && window.iox.Tree )
     return;
 
-  window.Iox = window.Iox || {};
+  window.iox = window.iox || {};
 
-  window.Iox.Tree = window.Iox.Tree || {};
+  window.iox.Tree = window.iox.Tree || {};
 
-  window.Iox.Tree.defaults = {
+  window.iox.Tree.defaults = {
     template: 'iox-tree-item-template',
 
     // the to be used, when creating a new obbject
@@ -98,9 +98,9 @@
 
     this.obj = obj;
     this.options = options || {};
-    for( var i in window.Iox.Tree.defaults )
+    for( var i in window.iox.Tree.defaults )
       if( !(i in this.options) )
-        this.options[i] = Iox.Tree.defaults[i];
+        this.options[i] = iox.Tree.defaults[i];
 
     this.items = ko.observableArray([]);
 

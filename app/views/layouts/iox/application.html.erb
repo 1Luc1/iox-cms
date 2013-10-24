@@ -48,6 +48,9 @@
         no: '<%= t('no') %>'
       }
 
+      // setup iox Tree defaults
+      iox.Tree.defaults.i18n.noEntriesFound = '<%= t('filter_no_entries_found') %>';
+
       kendo.culture('<%= (I18n.locale == 'en' ? 'en-GB' : 'de-DE') %>');
 
       if( typeof(CKEDITOR) !== 'undefined' )

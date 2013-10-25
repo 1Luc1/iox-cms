@@ -501,10 +501,22 @@ function setupImageGalleryDraggable(){
             }
         });
         acEditor.commands.addCommand({
-            name: 'saveFile',
+            name: 'saveFileAndCloseWin',
             bindKey: {
             win: 'Ctrl-S',
             mac: 'Command-S',
+            sender: 'editor|cli'
+          },
+          exec: function(env, args, request) {
+            $('#ace-win').data('kendoWindow').close();
+            $('.webpage-form').submit();
+          }
+        });
+        acEditor.commands.addCommand({
+            name: 'closeWin',
+            bindKey: {
+            win: 'Ctrl-W',
+            mac: 'Command-W',
             sender: 'editor|cli'
           },
           exec: function(env, args, request) {
@@ -539,6 +551,16 @@ function setupImageGalleryDraggable(){
       e.preventDefault();
     }
   });
+
+  $(window).on('keydown', function(e){
+    if( $('#ace-win').length )
+      return;
+    if( (e.ctrlKey || e.metaKey) && e.keyCode === 83 ){
+      e.preventDefault();
+      $('.webpage-form').submit();
+      return false;
+    }
+  })
 
 
 </script>

@@ -194,6 +194,7 @@
 
         <a href="#" class="btn restore-webbit-text"><%= t('webbit.restore_text') %></a>
 
+        <a href="#" class="btn edit-webbit-sourcecode" data-bind="attr: { data-webbit-id: id }"><i class="icon-code"></i></a>
         <a href="#" class="btn save-webbit-form"><%= t('save') %></a>
       </div>
 
@@ -455,6 +456,49 @@ function setupImageGalleryDraggable(){
       treeSource.read();
     });
   });
+
+  var acEditor;
+  $('.edit-webbit-sourcecode').on('click', function(e){
+    var self = this;
+    if( typeof(ace) === 'undefined' )
+      $.getScript( '/javascripts/3rdparty/ace-noconflict/ace.js', function(){
+        $.getScript( '/javascripts/3rdparty/ace-noconflict/ext-searchbox.js', function(){
+          $.getScript( '/javascripts/3rdparty/ace-noconflict/ext-spellcheck.js', function(){
+            $.getScript( '/javascripts/3rdparty/ace-noconflict/mode-html.js', function(){
+              $.getScript( '/javascripts/3rdparty/ace-noconflict/theme-monokai.js', showAceWin );
+            });
+          });
+        });
+      });
+    else
+      showAceWin();
+
+    function showAceWin(){
+      $('.ace-win').remove();
+      var $win = $('<div class="ace-win"><div id="ace-editor"></div></div>');
+      var $wb;
+      $('body').append($win);
+      $win.kendoWindow({
+          width: "80%",
+          height: "80%",
+          title: '<%= t('webbit.edit_source') %>',
+          actions: [ 'Close' ],
+          activate: function(){
+            $wb = $('#wb_'+$(self).attr('data-webbit-id'));
+            console.log($wb, $wb.html());
+            acEditor = ace.edit("ace-editor");
+            acEditor.setTheme("ace/theme/monokai");
+            acEditor.getSession().setMode("ace/mode/html");
+            acEditor.setValue( $wb.html() );
+          },
+          close: function(){
+            $wb.html( acEditor.getValue() );
+            acEditor.destroy();
+          }
+      });
+      $win.data('kendoWindow').center();
+    }
+  })
 
 
   $('.restore-webbit-text').on('click', function(e){

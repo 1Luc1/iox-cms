@@ -387,6 +387,7 @@ de:
     category: "Kategorie"
     new_order_saved: "Neue Ordnung wurde gespeichert"
     restore_text: "Text zurücksetzen"
+    edit_source: "Quellcode bearbeiten"
 
   webpages:
     title: "Webseiten"
@@ -400,6 +401,18 @@ de:
       zero: "Keine Seite"
       other: "%{count} Seiten"
     match_filter: "treffen zu"
+
+  blogs:
+    title: "Blogs"
+    
+  blog:
+    title: "Blog"
+    new: "Neuer Blogeintrag"
+    your_blog_currently_is: "Dieser Eintrag ist aktuell"
+    publish: "Diesen Blogeintrag veröffentlichen"
+    unpublish: "Veröffentlichung zurückziehen"
+    name_required: "Name ist erforderlich"
+    view: "Blogeintrag ansehen"
 
   contacts:
     title: "Kontakte"

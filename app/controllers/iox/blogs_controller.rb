@@ -33,33 +33,8 @@ module Iox
 
     def list
       offset = params[:page] || 0
-      @blogs = Blog.limit( 10 ).offset( offset ).order("created_at desc").load
-      respond_to do |format|
-        format.html do 
-          @tags = {}
-          Blog.where('').each do |blog|
-            if blog.translation.meta_keywords && blog.translation.meta_keywords.size > 0
-              blog.translation.meta_keywords.split(',').each do |tag|
-                @tags[tag] ||= 0
-                @tags[tag] += 1
-              end
-            end
-          end
-          render layout: 'application'
-        end
-        format.atom{ render layout: false }
-        format.rss{ redirect_to list_blogs_path(format: :atom), status: :moved_permanently }
-      end
-    end
-
-    def tags
-      @blogs = Blog.includes(:translations).references(:iox_translations)
-                    .where("LOWER(iox_translations.meta_keywords) = ?", params[:tag].downcase).order("iox_webpages.created_at desc").load
-      respond_to do |format|
-        format.html{ render layout: 'application' }
-        format.atom{ render layout: false }
-        format.rss{ redirect_to list_blogs_path(format: :atom), status: :moved_permanently }
-      end
+      @blogs = Blog.limit( 10 ).offset( offset ).order(:created_at).load
+      render layout: 'application'
     end
 
     #

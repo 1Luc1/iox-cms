@@ -257,6 +257,7 @@ en:
     category: "Category"
     new_order_saved: "New order has been saved"
     restore_text: "Restore Text"
+    edit_source: "Edit Sourcecode"
 
   webpage:
     name: "Name"

@@ -31,6 +31,7 @@ module Iox
         directory "avatar", "public/images/iox/avatar"
         directory "kendoui", "public/stylesheets/3rdparty/kendoui"
         directory "javascripts/ckeditor", "public/javascritps/3rdparty/ckeditor"
+        directory "javascripts/ace-noconflict", "public/javascritps/3rdparty/ace-noconflict"
 
         remove_file "app/assets/stylesheets/application.css"
 

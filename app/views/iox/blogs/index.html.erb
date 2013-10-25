@@ -58,9 +58,9 @@
       <br class="clearfix">
       <div class="newline">
         <span class="date" data-bind="text: moment( created_at ).format('DD. MMMM YYYY - HH:mm')"></span>
+        <span class="author" data-bind="text: creator_name"></span>
       </div>
     </div>
-    <ul class="children hide" data-bind="template: { name: 'iox-tree-item-template', foreach: children }"></ul>
   </li>
 </script>
 

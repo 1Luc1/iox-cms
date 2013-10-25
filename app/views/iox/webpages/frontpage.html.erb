@@ -1,3 +1,11 @@
+<%= content_for :meta_description do %>
+  <meta name="keywords" content="<%= @webpage.translation.meta_keywords %>">
+  <meta name="description" content="<%= @webpage.translation.meta_description %>">
+  <meta property="og:title" content="<%= @webpage.translation.title %>">
+  <meta property="og:description" content="<%= @webpage.translation.meta_description %>">
+  <meta name="twitter:title" content="<%= @webpage.translation.title %>">
+  <meta name="twitter:description" content="<%= @webpage.translation.meta_description %>">
+<% end %>
 <% if authenticated? and current_user and current_user.can_manage?(:webpages) %>
 
   <%= content_for :add_css do %>

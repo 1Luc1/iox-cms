@@ -60,6 +60,12 @@ Iox::Engine.routes.draw do
     end
   end
 
-  resources :blogs
+  resources :blogs do
+    collection do
+      get :list
+    end
+  end
+  
+  get '/blogs/tag/:tag', to: 'blogs#tags', as: 'tags_blogs'
 
 end

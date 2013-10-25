@@ -7,7 +7,7 @@ class IoxTranslations < ActiveRecord::Migration
       t.string :title
       t.string :subtitle
       t.string :meta_description
-      t.string :meta_keywords
+      t.string :meta_keywords, index: true
       t.text   :content
 
       t.integer :created_by

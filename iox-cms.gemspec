@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sass-rails', "~> 4.0.0"
   spec.add_dependency 'paperclip', '~> 3.0'
   spec.add_dependency 'whenever'
-  spec.add_dependency 'rqrcode-rails3'
+  spec.add_dependency 'rqrcode-rails3' # used in user qr code confirmation code generation
   spec.add_dependency 'mini_magick'
 
 end

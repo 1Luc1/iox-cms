@@ -358,6 +358,7 @@ de:
     new: "Neue Webseite"
     new_below: "Neue Webseite unterhalb"
     meta_information: "META Informationen"
+    current_translation: "Sprachspezifisch"
     meta_keywords: "Schlüsselwörter"
     meta_description: "Beschreibung"
     translation_does_not_exist_create: "Eine Version dieser Sprache existiert noch nicht. Möchtest du eine erstellen?"

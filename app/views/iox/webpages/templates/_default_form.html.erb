@@ -40,23 +40,29 @@
         </div>
       </div>
 
-      <div class="fields-header"><%= t('webpage.meta_information') %></div>
+      <div class="fields-header"><%= t('webpage.current_translation') %></div>
+
+      <input type="hidden" name="webpage[translation][id]" data-bind="value: translation().id" />
+
+      <div class="field-box required">
+        <label for="name"><%= t('name') %></label>
+        <input type="text" name="webpage[translation][title]" data-bind="value: translation().title" required validationMessage="<%= t('webpage.name_required') %>" />
+      </div>
+
 
       <div class="field-box">
         <label for="webpage_meta_keywords"><%= t('webpage.meta_keywords') %></label>
-        <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'translation['+translation().id+'][meta_keywords]' }, value: translation().meta_keywords" />
+        <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'webpage[translation][meta_keywords]' }, value: translation().meta_keywords" />
       </div>
 
       <div class="field-box">
         <label for="webpage_meta_description"><%= t('webpage.meta_description') %></label>
-        <textarea maxlength="255" data-bind="attr: { name: 'translation['+translation().id+'][meta_description]' }, value: translation().meta_description" />
+        <textarea maxlength="255" data-bind="attr: { name: 'webpage[translation][meta_description]' }, value: translation().meta_description" />
         <br />
         <span class="label-offset mini-desc"><%= t('max_255') %></span>
       </div>
 
     </div>
-
-    <input type="hidden" data-bind="attr: { name: 'translation['+translation().id+'][id]' }, value: translation().id" />
 
     <%= render partial: '/iox/webpages/form/footer' %>
 
@@ -70,7 +76,7 @@ $(function(){
   iox.webpageTmpl['<%= template %>'] = function defaultTmplSetup( item ){
     if( $('.webpage_meta_keywords').data('select2') )
       $('.webpage_meta_keywords').select2('destroy')
-    $('.webpage_meta_keywords').select2({ tokenSeparators: [',', ' '], tags: [], width: '400px' })
+    $('.webpage_meta_keywords').select2({ tokenSeparators: [','], tags: [], width: '400px' })
   }
 });
 

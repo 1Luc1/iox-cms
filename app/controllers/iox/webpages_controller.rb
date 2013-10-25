@@ -267,8 +267,7 @@ module Iox
         :template, 
         :parent_id, 
         :show_in_menu,
-        :show_in_sitemap,
-        :webpage_translation => [ :locale, :meta_keywords, :content ]
+        :show_in_sitemap
       )
     end
 
@@ -308,6 +307,7 @@ module Iox
         :locale,
         :meta_keywords,
         :content,
+        :title,
         :meta_description
         )
     end

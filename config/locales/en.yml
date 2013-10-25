@@ -302,6 +302,7 @@ en:
     new: "New Webpage"
     new_below: "New Webpage below"
     meta_information: "META Informationen"
+    current_translation: "Language specific"
     meta_keywords: "Tags/Keywords"
     meta_description: "Short description"
     name_required: "Name is required"

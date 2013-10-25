@@ -28,16 +28,21 @@
         </div>
       </div>
 
-      <div class="fields-header"><%= t('webpage.meta_information') %></div>
+      <div class="fields-header"><%= t('webpage.current_translation') %></div>
+
+      <input type="hidden" name="blog[translation][id]" data-bind="value: translation().id" />
+
+      <div class="field-box required">
+        <label for="name"><%= t('name') %></label>
+        <input type="text" name="blog[translation][title]" data-bind="value: translation().title" required validationMessage="<%= t('webpage.name_required') %>" />
+      </div>
 
       <div class="field-box">
         <label for="webpage_meta_keywords"><%= t('webpage.meta_keywords') %></label>
-        <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'blog[translation]['+translation().id+'][meta_keywords]' }, value: translation().meta_keywords" />
+        <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'blog[translation][meta_keywords]' }, value: translation().meta_keywords" />
       </div>
 
     </div>
-
-    <input type="hidden" data-bind="attr: { name: 'blog[translation]['+translation().id+'][id]' }, value: translation().id" />
 
     <%= render partial: '/iox/webpages/form/footer' %>
 
@@ -51,7 +56,7 @@ $(function(){
   iox.webpageTmpl['blog'] = function defaultTmplSetup( item ){
     if( $('.webpage_meta_keywords').data('select2') )
       $('.webpage_meta_keywords').select2('destroy')
-    $('.webpage_meta_keywords').select2({ tokenSeparators: [',', ' '], tags: [], width: '400px' })
+    $('.webpage_meta_keywords').select2({ tokenSeparators: [','], tags: [], width: '400px' })
   }
 });
 

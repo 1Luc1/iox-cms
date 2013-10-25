@@ -2,9 +2,16 @@
   <%= javascript_include_tag 'blog' %>
 <% end %>
 <%= content_for :add_css do %>
-  <%= javascript_include_tag '3rdparty/highlightjs/github' %>
+  <%= stylesheet_link_tag '3rdparty/highlightjs/github' %>
 <% end %>
-
+<%= content_for :meta_description do %>
+  <meta name="keywords" content="<%= @blog.translation.meta_keywords %>">
+  <meta name="description" content="<%= @blog.translation.meta_description %>">
+  <meta property="og:title" content="<%= @blog.translation.title %>">
+  <meta property="og:description" content="<%= @blog.translation.meta_description %>">
+  <meta name="twitter:title" content="<%= @blog.translation.title %>">
+  <meta name="twitter:description" content="<%= @blog.translation.meta_description %>">
+<% end %>
 <div class="main-container">
 
   <div class="centered">

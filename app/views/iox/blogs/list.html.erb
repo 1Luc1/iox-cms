@@ -1,0 +1,26 @@
+<%= content_for :add_js do %>
+  <%= javascript_include_tag 'blog' %>
+<% end %>
+<%= content_for :add_css do %>
+  <link rel="alternate" type="application/atom+xml"
+                        title="<%= Rails.configuration.iox.site_title %>"
+                        href="<%= list_blogs_path %>.atom" />
+<% end %>
+
+<div class="main-container">
+
+  <div class="centered" style="position: relative;">
+
+    <div class="blog-categories">
+      <% @tags.each_pair do |tag,occurrence| %>
+        <%= link_to tag, "/blogs/tag/#{tag}", rel: occurrence %>
+      <% end %>
+    </div>
+
+    <% @blogs.each do |blog| %>
+      <%= render partial: blog, locales: { short_text: 500 } %>
+    <% end %>
+
+  </div>
+
+</div>

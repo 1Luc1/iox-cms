@@ -34,7 +34,9 @@
     <script type="text/javascript">
       $(document).ready( function(){
         iox.preloadImage( $('.logo').attr('src'), function(imgPath){
-          $('.iox-auth-container').fadeIn();
+          $('.iox-auth-container').fadeIn( function(){
+            $('.iox-auth-container input[type=text]:first').focus();
+          });
         });
       });
     </script>

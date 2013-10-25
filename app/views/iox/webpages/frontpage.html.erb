@@ -1,74 +1,30 @@
-<div class="loading-container">
-  <div class="pulse"></div>
-</div>
-<div id="slides">
-  <div class="slides-background"></div>
-  <ul class="slides-container">
-    <li>
-      <div class="container hero">
+<% if authenticated? and current_user and current_user.can_manage?(:webpages) %>
 
-        <div class="text">
-          <h3>Web- und TEAM Apps</h3>
-          <h4>Webseiten <span class="bullet">•</span> Projektmanagement <span class="bullet">•</span> Mobile <span class="bullet">•</span> Hosting</h4>
-        </div>
+  <%= content_for :add_css do %>
+    <%= stylesheet_link_tag 'iox/webpages_ext' %>
+    <%= stylesheet_link_tag 'application' %>
+  <% end %>
 
-      </div>
+  <div class="webpage-mini-sidebar">
+        <!-- save and other actions -->
+    <div class="btn-group settings pull-right" style="width:auto">
+      <a class="btn" title="<%= t('webpages.back') %>" href="<%= webpages_path %>"><i class="icon-chevron-sign-left"></i></a>
+      <a class="btn" title="<%= t('webpage.edit') %>" href="<%= edit_webpage_path(@webpage) %>"><i class="icon-edit"></i></a>
+      <button data-toggle="dropdown" class="btn dropdown-toggle">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+          <li><a href="<%= webpages_path %>"><%= t('webpages.back') %></a></li>
+          <li><a href="<%= edit_webpage_path(@webpage) %>" target='_blank'><%= t('view') %></a></li>
+          <li><%= link_to t('delete'), @webpage, method: :delete, data: { confirm: t('webpage.really_delete', name: @webpage.name) } %></li>
+      </ul>
+    </div>
 
-    </li>
 
-    <li>
+    <%= image_tag 'iox/logo_transp_150x150.png', class: 'iox-logo' %>
 
-      <div class="container hire">
+  </div>
 
-        <div class="hire box round-box absolute-box">
-          <h5>TASTENWERK</h5>
-          <h3>anheuern</h3>
-          <h4>Über interessante Projekte reden wir gerne und unverbindlich</h4>
-        </div>
+<% end %>
 
-        <div class="box via absolute-box via-phone">
-          <a href="tel:00436649223306">
-            <i class="icon icon-phone-sign"></i>
-            <span class="text">+43 664 922 33 06</span>
-          </a>
-        </div>
-
-        <div class="box via absolute-box via-email">
-          <i class="icon icon-envelope"></i>
-          <form class="text">
-            <input type="text" name="subject" placeholder="Optional Betreff" />
-            <button type="submit" title="Standardmailprogramm öffnen"><i class="icon-play-circle"></i></button>
-          </form>
-        </div>
-
-        <div class="iobot"></div>
-
-      </div>
-
-    </li>
-
-    <li>
-      <div class="container mobile">
-
-        <div class="text">
-          <h3>Mobilität</h3>
-        </div>
-
-        <div class="m1"></div>
-        <div class="m2"></div>
-        <div class="m3"></div>
-
-      </div>
-
-    </li>
-
-  </ul>
-  <nav class="slides-navigation">
-    <a href="#" class="next">
-      <i class="icon-chevron-right"></i>
-    </a>
-    <a href="#" class="prev">
-      <i class="icon-chevron-left"></i>
-    </a>
-  </nav>
-</div>
+<%= render partial: "iox/#{@webpage.class.name.demodulize.pluralize.downcase}/templates/#{@webpage.template}" %>

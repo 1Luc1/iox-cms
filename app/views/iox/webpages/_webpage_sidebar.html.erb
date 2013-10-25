@@ -186,6 +186,9 @@
         <label><%= t('webbit.category') %></label><br />
         <input type="text" data-bind="value: category" class="category" />
 
+        <label><%= t('webbit.css_classes') %></label><br />
+        <input type="text" data-bind="value: css_classes" class="css_classes" />
+
         <label><%= t('title') %></label><br />
         <input type="text" data-bind="value: title" class="title" />
 
@@ -445,6 +448,7 @@ function setupImageGalleryDraggable(){
       data: { webbit: { name: $form.find('.name').val(),
                         title: $form.find('.title').val(),
                         category: $form.find('.category').val(),
+                        css_classes: $form.find('.css_classes').val(),
                         plugin_type: $form.find('.plugin_type').val() },
               locale: '<%= params[:locale] %>'
       },
@@ -473,30 +477,42 @@ function setupImageGalleryDraggable(){
     else
       showAceWin();
 
+    $('body').append('<div id="ace-win"><div id="ace-editor"></div></div>');
+
     function showAceWin(){
-      $('.ace-win').remove();
-      var $win = $('<div class="ace-win"><div id="ace-editor"></div></div>');
       var $wb;
-      $('body').append($win);
-      $win.kendoWindow({
-          width: "80%",
-          height: "80%",
-          title: '<%= t('webbit.edit_source') %>',
-          actions: [ 'Close' ],
-          activate: function(){
-            $wb = $('#wb_'+$(self).attr('data-webbit-id'));
-            console.log($wb, $wb.html());
-            acEditor = ace.edit("ace-editor");
-            acEditor.setTheme("ace/theme/monokai");
-            acEditor.getSession().setMode("ace/mode/html");
-            acEditor.setValue( $wb.html() );
+      if( !$('#ace-win').data('kendoWindow') ){
+        $('#ace-win').kendoWindow({
+            width: "80%",
+            height: "80%",
+            position: { top: '10%', left: '10%' },
+            title: '<%= t('webbit.edit_source') %>',
+            activate: function(){
+              $wb = $('#wb_'+$(self).attr('data-webbit-id'));
+              acEditor = ace.edit("ace-editor");
+              acEditor.setTheme("ace/theme/monokai");
+              acEditor.getSession().setMode("ace/mode/html");
+              acEditor.setValue( $('.translation-content-'+$wb.attr('id').replace('wb_','')).val() );
+            },
+            deactivate: function(){
+              CKEDITOR.instances[$wb.attr('id')].setData( acEditor.getValue() );
+              $('.translation-content-'+$wb.attr('id').replace('wb_','')).val( acEditor.getValue() );
+              acEditor.destroy();
+            }
+        });
+        acEditor.commands.addCommand({
+            name: 'saveFile',
+            bindKey: {
+            win: 'Ctrl-S',
+            mac: 'Command-S',
+            sender: 'editor|cli'
           },
-          close: function(){
-            $wb.html( acEditor.getValue() );
-            acEditor.destroy();
+          exec: function(env, args, request) {
+            $('#ace-win').data('kendoWindow').close();
           }
-      });
-      $win.data('kendoWindow').center();
+        });
+      }
+      $('#ace-win').data('kendoWindow').open();
     }
   })
 

@@ -27,8 +27,6 @@
 
 $(function(){
 
-  $('.iox-auth-win input[type=text]:first').focus();
-
   $('.js-get-focus:first').focus();
 
   $('.iox-app-nav a').tooltip({

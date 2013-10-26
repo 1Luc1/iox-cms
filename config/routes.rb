@@ -61,6 +61,7 @@ Iox::Engine.routes.draw do
   end
 
   resources :blogs do
+    resources :translations
     collection do
       get :list
     end

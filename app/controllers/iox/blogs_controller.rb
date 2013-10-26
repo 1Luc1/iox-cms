@@ -34,6 +34,17 @@ module Iox
     def list
       offset = params[:page] || 0
       @blogs = Blog.limit( 10 ).offset( offset ).order(:created_at).load
+      @tags = {}
+      Blog.where('').each do |blog|
+        next if blog.translation.meta_keywords.blank?
+        @tags[blog.translation.meta_keywords] ||= 0
+        @tags[blog.translation.meta_keywords] += 1
+      end
+      render layout: 'application'
+    end
+
+    def tag
+      @blogs = Blog.where('iox_translations.meta_keywords=?',params[:tag]).order("created_at DESC").load
       render layout: 'application'
     end
 

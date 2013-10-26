@@ -16,11 +16,11 @@ module Iox
 
     class << self
       def default_sender_address
-        "iox ExceptionMailer <#{Rails.configuration.iox.notifier_mailer || 'iox-exceptions@tastenwerk.com'}>"
+        "iox ExceptionMailer <#{Rails.configuration.iox.notifier_mailer || 'errors@tastenwerk.com'}>"
       end
 
       def default_exception_recipients
-        []
+        Rails.configuration.iox.exception_mail_recipients || ['errors@tastenwerk.com']
       end
 
       def default_email_prefix

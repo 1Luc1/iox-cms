@@ -13,7 +13,6 @@ module Iox
       def acts_as_iox_document(options = {})
 
         include InstanceMethods
-
         Iox::register_model self
 
         default_scope { where(deleted_at: nil) }

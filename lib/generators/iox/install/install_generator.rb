@@ -68,7 +68,6 @@ module Iox
           "    config.iox.redirect_after_login = '/iox/dashboard'\n"+
           "    config.iox.redirect_after_logout = '/iox/login'\n"+
           "    config.iox.support_email = 'support@tastenwerk.com'\n"+
-          "    config.iox.exception_mail_recipients = 'errors@tastenwerk.com'\n"+
           "    config.iox.available_langs = [:de, :en]\n"+
           "    config.iox.user_roles = ['user','admin','editor']\n"+
           "    config.iox.user_default_roles = ['user']\n"+
@@ -85,7 +84,7 @@ module Iox
           "\n"+
           "    config.iox.max_quota_mb = 500\n"+
           "    config.iox.session_timeout_min = 60\n"+
-          "    config.iox.exception_recipients = [  ]\n"+
+          "    config.iox.exception_recipients = [ 'errors@tastenwerk.com' ]\n"+
           "\n"+
           "    config.i18n.default_locale = :de\n"+
           "    config.i18n.available_locales = [:en, :de]\n"+

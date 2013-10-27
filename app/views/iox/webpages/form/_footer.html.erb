@@ -1,5 +1,9 @@
 <div class="scrollable-content-footer">
   <a data-bind="attr: { href: '/iox/webpages/'+id }, click: removeItem" class="btn"><%= t('delete') %></a>
+  <span class="desc">
+    ID: 
+    <span class="item-id" data-bind="text: id"></span>
+  </span>
   <button type="submit" class="pull-right btn-primary btn"><%= t('save') %></button>
 </div>
 

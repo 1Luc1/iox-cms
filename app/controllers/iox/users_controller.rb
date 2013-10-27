@@ -14,7 +14,7 @@ module Iox
       offset = params[:page] || 0
       limit = params[:limit] || 20
       order = params[:order] || 'lastname ASC, firstname ASC'
-      query = params[:query] || nil
+      query = params[:query].blank? ? nil : params[:query]
       #suspended = (params[:suspended] && params[:suspended] == 'true')
       # if suspended
       #   @users = User.where(suspended: true)
@@ -22,7 +22,11 @@ module Iox
       #   @users = User.where(suspended: false)
       # end
       @users = User
-      @users = @users.where(" lastname LIKE %?% OR firstname LIKE %?% ", params[:query], params[:query] ) if query
+      @users = @users.where(" email LIKE ? OR username LIKE ? OR lastname LIKE ? OR firstname LIKE ? ", 
+                          "%#{query}%", 
+                          "%#{query}%", 
+                          "%#{query}%", 
+                          "%#{query}%" ) if query
       @users = @users.order(order).load
       render json: { items: @users, query: query }
     end
@@ -105,7 +109,9 @@ module Iox
       return render_401 unless current_user.is_admin?
       @user = User.find_by_id( params[:id] )
       respond_to do |format|
-        format.png  { render :qrcode => "http://#{Rails.configuration.iox.domain_name}/iox/welcome/#{@user.id}?k=#{@user.confirmation_key}", level: :m, offset: 20 }
+        format.png  { 
+          render :qrcode => "http://#{Rails.configuration.iox.domain_name}/iox/welcome/#{@user.id}?k=#{@user.confirmation_key}", level: :m, offset: 20 
+        }
       end
     end
 
@@ -270,7 +276,21 @@ module Iox
     private
 
     def user_params
-      params.require(:user).permit(:username, :firstname, :lastname, :email, :password, :password_confirmation, :lang, :roles, :can_read_apps, :can_write_apps, :send_welcome_msg, :suspended, :phone )
+      params.require(:user).permit(
+        :username, 
+        :firstname, 
+        :lastname, 
+        :email, 
+        :password, 
+        :password_confirmation, 
+        :lang, 
+        :roles, 
+        :can_read_apps, 
+        :can_write_apps, 
+        :send_welcome_msg, 
+        :suspended, 
+        :phone,
+        :registration_completed )
     end
 
   end

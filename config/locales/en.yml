@@ -160,7 +160,7 @@ en:
     change_picture: "Cange picture"
     my_account: "Mein Konto"
     account_of: "Konto von %{name}"
-
+    welcome_link: "Welcome / set initial password link"
     settings: "Kontoeinstellungen"
     save_restore_settings: "Einstellungen sichern oder wiederherstellen"
     save_restore_settings_desc: "Sie können Ihre Einstellungen als Datei abspeichern und zu einem späteren Zeitpunkt wiederherstellen"
@@ -212,6 +212,7 @@ en:
     username: "Username"
     last_time_online: "Last time online"
     registered_at: "Registered at"
+    registration_completed: "Registration completed"
     timezone: "Timezone"
     role: "Role"
     password: "Password"

@@ -32,12 +32,17 @@ module Iox
         @num_webpages = Webpage.count
         offset = params[:page] || 0
         limit = params[:limit] || 20
-        if params[:parent].blank?
-          query = "parent_id IS NULL"
+        if params[:query].blank?
+          if params[:parent].blank?
+            query = "parent_id IS NULL"
+          else
+            query = "parent_id = '#{params[:parent]}'"
+          end
+          @webpages = Webpage.where( query )
         else
-          query = "parent_id = '#{params[:parent]}'"
+          @webpages = Webpage.where("name LIKE ?", "%#{params[:query]}%")
         end
-        @webpages = Webpage.where( query ).where(type: nil).limit( limit ).offset( offset ).order(:position).load.map{ |webpage|
+        @webpages = @webpages.where(type: nil).limit( limit ).offset( offset ).order(:position).load.map{ |webpage|
           webpage.translation = webpage.translations.where( locale: params[:locale] || I18n.default_locale ).first
           webpage
         }

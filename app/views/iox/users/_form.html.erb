@@ -110,6 +110,10 @@
         <span class="send-welcome-msg">
           <input type="checkbox" name="send_welcome_msg" data-bind="attr: {checked: !id}" /><%= t('user.send_welcome_msg') %>
         </span>
+        <span class="send-welcome-msg">
+          <input type="hidden" value="0" name="user[registration_completed]" />
+          <input type="checkbox" value="1" name="user[registration_completed]" data-bind="checked: registration_completed" /><%= t('user.registration_completed') %>
+        </span>
       </div>
 
       <input type="submit" class="hide" value="submit" />

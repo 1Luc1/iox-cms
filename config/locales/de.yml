@@ -278,6 +278,7 @@ de:
     username: "Benutzername"
     last_time_online: "Letztes Mal online"
     registered_at: "Registriert am"
+    registration_completed: "Registrierung abgeschlossen"
     timezone: "Zeitzone"
     role: "Rolle"
     password: "Passwort"

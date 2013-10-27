@@ -52,6 +52,8 @@
     // default: null
     control: null,
 
+    searchTimeout: 200,
+
     i18n: {
       noEntriesFound: 'No entries were found (clear query above to reset)'
     }
@@ -126,11 +128,16 @@
    *
    * expecting a json
    */
-  Tree.prototype.loadData = function loadData( parent, callback ){
+  Tree.prototype.loadData = function loadData( parent, query, callback ){
     var self = this;
+    if( typeof(query) === 'function' && typeof(callback) === 'undefined' ){
+      callback = query;
+      query = '';
+    }
     self.items.removeAll();
+    $(self.obj).find('li').remove();
     if( !parent )
-      $.getJSON( this.options.url+'?parent=', function( json ){
+      $.getJSON( this.options.url+'?parent=&query='+query, function( json ){
         if( !json.items )
           throw Error('[iox.tree] expected object key "items" in json response');
         for( var i=0,item; item=json.items[i]; i++ )
@@ -158,35 +165,81 @@
   Tree.prototype.setupControlEvents = function setupControlEvents(){
     var self = this;
     var $control = $(this.options.control);
+
+    if( $(self.obj).hasClass('control-setup-done') )
+      return;
+
+    $(self.obj).addClass('control-setup-done');
+
+
     var $refreshBtn = $control.find('[data-tree-role=refresh]')
     if( $refreshBtn.length )
       $refreshBtn.off('click').on('click', function(e){
         e.preventDefault();
         self.loadData( null, self.render );
       });
+
+    var $searchBtn = $control.find('[data-tree-role=search]')
+    if( $searchBtn.length ){
+      $searchBtn.off('click').on('click', function(e){
+        e.preventDefault();
+        $(this).closest('form').addClass('search-active')
+          .find('input[type=text]').select();
+      });
+      $(document).on('click', function(e){
+        if( $(e.target).closest('.iox-tree-control').length || $('.iox-tree-control input[type=text]').val().length > 0 )
+          return;
+        $('.iox-tree-control form').removeClass('search-active');
+      }).on('keydown', function(e){
+        if( e.keyCode === 27 ){
+          $('.iox-tree-control input[type=text]').val('');
+          $('.iox-tree-control form').removeClass('search-active').submit();
+        }
+      })
+    }
+
     var $newBtn = $control.find('[data-tree-role=new]')
     if( $newBtn.length )
       $newBtn.off('click').on('click', function(e){ e.preventDefault(); self.newItemForm.apply( this, [ e, self, TreeItem ] ) });
     var $queryField = $control.find('input[name=query]')
     if( $queryField.length ){
+      var continueSearchFilter;
+      var lastSearchTriggered;
       $queryField.attr('autocomplete','off').off('keyup').on('keyup', function(e){
-        if( $(this).val().length > 0 )
-          $queryField.addClass('highlight');
-        else
-          $queryField.removeClass('highlight');
-        e.preventDefault();
-        self.filterItems( $(this).val().toLowerCase() );
-        if( $(self.obj).find('.item:visible').length < 1 ){
-          if( !$control.next('.iox-no-entries-found').length )
-            $control.after('<div class="iox-no-entries-found">'+self.options.i18n.noEntriesFound+'</div>');
-        } else
-          $control.next('.iox-no-entries-found').remove();
+        var val = $(this).val();
+        continueSearchFilter = $(this).val();
+        setTimeout( function(){
+          if( continueSearchFilter != val )
+            return;
+          e.preventDefault();
+          if( lastSearchTriggered != val )
+            self.filterItems( val .toLowerCase() );
+          lastSearchTriggered = val;
+        }, self.options.searchTimeout );
       });
-      $queryField.closest('form').off('submit').on('submit', function(e){ e.preventDefault(); });
+      $queryField.closest('form').off('submit').on('submit', function(e){ 
+        e.preventDefault();
+        self.filterItems( $(this).find('input[type=text]').val().toLowerCase() );
+      });
     }
   }
 
   Tree.prototype.filterItems = function filerItems( filter, items ){
+    var self = this;
+    var $control = $(this.options.control);
+    this.loadData( null, filter, function(){
+      self.render( self );
+      if( $(self.obj).find('.item:visible').length < 1 ){
+        if( !$control.next('.iox-no-entries-found').length )
+          $control.after('<div class="iox-no-entries-found">'+self.options.i18n.noEntriesFound+'</div>');
+      } else
+        $control.next('.iox-no-entries-found').remove();
+    });
+
+    // changed behavior to server side response as only
+    // this can consider any item
+    //
+    /*
     var self = this;
     items = items || self.items();
     ko.utils.arrayForEach(items, function(item) {
@@ -201,6 +254,7 @@
       if( item.children() && item.children().length > 0 )
         self.filterItems( filter, item.children() );
     });
+    */
   }
 
   /**

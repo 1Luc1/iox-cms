@@ -31,5 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'whenever'
   spec.add_dependency 'rqrcode-rails3' # used in user qr code confirmation code generation
   spec.add_dependency 'mini_magick'
+  spec.add_dependency 'vpim'
 
 end

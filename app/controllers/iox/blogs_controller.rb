@@ -43,8 +43,8 @@ module Iox
       render layout: 'application'
     end
 
-    def tag
-      @blogs = Blog.where('iox_translations.meta_keywords=?',params[:tag]).order("created_at DESC").load
+    def tags
+      @blogs = Blog.includes(:translations).references(:iox_translations).where('iox_translations.meta_keywords=?',params[:tag]).order("iox_webpages.created_at DESC").load
       render layout: 'application'
     end
 

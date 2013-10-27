@@ -11,6 +11,10 @@
 
   <div class="centered">
 
+  <div class="blog-entry">
+    <div class="blog-content"><%= t('tagged_with') %>: <tt><%= params[:tag] %></tt></div>
+  </div>
+
   <% @blogs.each do |blog| %>
     <%= render partial: blog, locales: { short_text: 500 } %>
   <% end %>

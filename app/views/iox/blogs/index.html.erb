@@ -8,16 +8,17 @@
 <% end %>
 
 <div class="iox-sidebar">
-  <div class="iox-sidebar-arrow"></div>
+  <!--<div class="iox-sidebar-arrow"></div>-->
   <div class="iox-sidebar-frame">
 
-    <div class="iox-webpage-header iox-tree-control">
+    <div class="iox-tree-control">
       <form>
         <input type="text" name="query" placeholder="<%= t('filter_results') %> " />
         <input type="submit" value="<%= t('search') %>" />
+        <a href="#" data-tree-role="search" title="<%= t('filter_results') %>"><i class="icon-search">  </i></a>
+        <a href="#" data-tree-role="refresh" title="<%= t('refresh') %>"><i class="icon-refresh"></i></a>
+        <a href="#" class="btn btn-success" data-tree-role="new" title="<%= t('user.new') %>"><i class="icon-plus"></i></a>
       </form>
-      <button class="btn" data-tree-role="refresh" title="<%= t('refresh') %>"><i class="icon-refresh"></i></button>
-      <button class="btn" data-tree-role="new" title="<%= t('blog.new') %>"><i class="icon-plus"></i></button>
     </div>
 
     <ul id="iox-webpages-list"></ul>

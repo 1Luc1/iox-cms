@@ -203,7 +203,7 @@ en:
     email_required: "Email required"
 
     roles: "Roles"
-    edit: "edit profile"
+    edit: "Edit profile"
 
     new: "Create new account"
     send_welcome_msg: "Send invitation email to this user"

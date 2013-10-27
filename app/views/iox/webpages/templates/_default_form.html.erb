@@ -32,10 +32,10 @@
           <!-- /ko -->
           <i class="icon-question-sign" title="<%= t('whats_this') %>?" style="margin-right: 10px;" rel="tooltip" data-confirmation-win="true" data-confirmation-txt="<%= t('webpage.publish_desc') %>"></i>
           <input type="hidden" name="webpage[show_in_menu]" value="0" />
-          <input type="checkbox" name="webpage[show_in_menu]" data-bind="value: (show_in_menu() ? '1' : '0'), checked: show_in_menu" />
+          <input type="checkbox" name="webpage[show_in_menu]" value="1" data-bind="checked: show_in_menu" />
           <span><%= t('webpage.show_in_menu') %></span>
           <input type="hidden" name="webpage[show_in_sitemap]" value="0" />
-          <input type="checkbox" name="webpage[show_in_sitemap]" data-bind="value: (show_in_sitemap() ? '1' : '0'), checked: show_in_sitemap" />
+          <input type="checkbox" name="webpage[show_in_sitemap]" value="1" data-bind="checked: show_in_sitemap" />
           <span><%= t('webpage.show_in_sitemap') %></span>
         </div>
       </div>
@@ -44,9 +44,9 @@
 
       <input type="hidden" name="webpage[translation][id]" data-bind="value: translation().id" />
 
-      <div class="field-box required">
+      <div class="field-box">
         <label for="name"><%= t('name') %></label>
-        <input type="text" name="webpage[translation][title]" data-bind="value: translation().title" required validationMessage="<%= t('webpage.name_required') %>" />
+        <input type="text" name="webpage[translation][title]" data-bind="value: translation().title" />
       </div>
 
 

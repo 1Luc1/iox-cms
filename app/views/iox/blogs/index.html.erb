@@ -17,7 +17,7 @@
         <input type="submit" value="<%= t('search') %>" />
         <a href="#" data-tree-role="search" title="<%= t('filter_results') %>"><i class="icon-search">  </i></a>
         <a href="#" data-tree-role="refresh" title="<%= t('refresh') %>"><i class="icon-refresh"></i></a>
-        <a href="#" class="btn btn-success" data-tree-role="new" title="<%= t('user.new') %>"><i class="icon-plus"></i></a>
+        <a href="#" class="btn btn-success" data-tree-role="new" title="<%= t('blog.new') %>"><i class="icon-plus"></i></a>
       </form>
     </div>
 
@@ -104,7 +104,7 @@
             var self = this;
             if( this._validator.validate() ){
               $('.iox-content-frame').block();
-              $.ajax({ url: this._master.options.url+'/'+self.id, data: $(form).serializeArray(), dataType: 'json', type: 'put' 
+              $.ajax({ url: this._master.options.url+'/'+self.id, data: $(form).serializeArray(), dataType: 'json', type: 'put'
               }).done( function( json ){
                 $('.iox-content-frame').unblock();
                 iox.flash.rails( json.flash );

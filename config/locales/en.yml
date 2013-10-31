@@ -8,7 +8,11 @@ en:
   last_modified: "Last change"
   created_at: "created at"
   created: "&raquo;%{name}&laquo; has been created successfully"
+  creation_failed: "Could not create object"
+  deleted: "&raquo;%{name}&laquo; has been removed successfully"
+  deletion_failed: "&raquo;%{name}&laquo; could not be removed"
   saved: "&raquo;%{name}&laquo; has been saved"
+  saving_failed: "&raquo;%{name}&laquo; could not be saved"
   close: "Close"
   delete: "Delete"
   back: "Back"
@@ -336,7 +340,7 @@ en:
 
   blogs:
     title: "Blogs"
-    
+
   blog:
     title: "Blog"
     new: "New Blog"

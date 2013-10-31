@@ -6,6 +6,7 @@ de:
   change_password: "Passwort ändern"
   view_profile: "Profil anzeigen"
   data_usage_quota: "Quota / Datenverbrauch"
+  date_format: "Datumsformat TT.MM.JJJJ (z.B. 21.01.2018)"
   this_week: "Diese Woche"
   last_modified: "Letzte Änderung"
   created_at: "Angelegt am"
@@ -13,7 +14,10 @@ de:
   updated_by: "Geändert von"
   created: "&raquo;%{name}&laquo; wurde erfolgreich erstellt"
   creation_failed: "Objekt konnte nicht erzeugt werden"
+  deleted: "&raquo;%{name}&laquo; wurde vom System entfernt"
+  deletion_failed: "&raquo;%{name}&laquo; konnte nicht gelöscht werden"
   saved: "Änderungen an &raquo;%{name}&laquo; wurden gespeichert"
+  saving_failed: "Änderungen an &raquo;%{name}&laquo; konnten nicht gespeichert werden"
   close: "Schließen"
   delete: "Löschen"
   back: "Zurück"
@@ -49,6 +53,7 @@ de:
   max_255: "Maximal 255 Zeichen"
   archive_this_entry: "Diesen Eintrag archivieren"
   insufficient_rights: "Du verfügst nicht über ausreichen Rechte um diese Aktion auszuführen"
+  currently_is: "Dieses Dokument ist"
   general: "Allgemein"
 
   loading_quota: "Quota wird geladen"
@@ -405,7 +410,7 @@ de:
 
   blogs:
     title: "Blogs"
-    
+
   blog:
     title: "Blog"
     new: "Neuer Blogeintrag"

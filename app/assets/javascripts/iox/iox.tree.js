@@ -65,12 +65,14 @@
     if( typeof(arguments[0]) === 'string' )
       return dispatchFunctions.apply( $(this).data('ioxTree'), arguments );
 
-    if( $(this).get(0).nodeName !== 'UL' )
-      throw new Error('[iox.tree] object must be a <ul> element');
+    if( !$(this).get(0) || $(this).get(0).nodeName !== 'UL' )
+      throw new Error('[iox.tree] dom elemen not found. must be a <ul> element');
 
     var tree = new Tree( this, options );
     tree.init();
     tree.loadData( null, tree.render );
+    if( tree.options.control && $(tree.options.control).length === 1 )
+      tree.setupControlEvents();
 
   };
 
@@ -155,14 +157,13 @@
     ko.applyBindings( this, $(this.obj).get(0) );
     this.setupEventListeners();
     $(this.obj).data('ioxTree', this);
-    if( this.options.control && $(this.options.control).length === 1 )
-      this.setupControlEvents();
   }
 
   /**
    * setup tree control events
    */
   Tree.prototype.setupControlEvents = function setupControlEvents(){
+
     var self = this;
     var $control = $(this.options.control);
 
@@ -198,9 +199,10 @@
       })
     }
 
-    var $newBtn = $control.find('[data-tree-role=new]')
+    var $newBtn = $control.find('[data-tree-role=new]');
     if( $newBtn.length )
       $newBtn.off('click').on('click', function(e){ e.preventDefault(); self.newItemForm.apply( this, [ e, self, TreeItem ] ) });
+
     var $queryField = $control.find('input[name=query]')
     if( $queryField.length ){
       var continueSearchFilter;
@@ -217,7 +219,7 @@
           lastSearchTriggered = val;
         }, self.options.searchTimeout );
       });
-      $queryField.closest('form').off('submit').on('submit', function(e){ 
+      $queryField.closest('form').off('submit').on('submit', function(e){
         e.preventDefault();
         self.filterItems( $(this).find('input[type=text]').val().toLowerCase() );
       });

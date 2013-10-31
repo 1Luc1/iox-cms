@@ -4,7 +4,7 @@
 
   <form data-bind="submit: saveBlogForm">
 
-    <div class="scrollable-content w-header w-footer">
+    <div class="scrollable-content w-header w-footer w-padding">
 
       <div class="fields-header"><%= t('webpage.general') %></div>
 
@@ -12,7 +12,7 @@
         <label for="name"><%= t('name') %></label>
         <input type="text" name="blog[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
       </div>
-      
+
       <div class="fields-header"><%= t('webpage.publishing_status') %></div>
 
       <div class="field-box required">

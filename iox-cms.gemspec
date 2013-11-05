@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Iox::VERSION
   spec.authors       = ["thorsten zerha"]
   spec.email         = ["thorsten.zerha@tastenwerk.com"]
-  spec.description   = %q{ioDa is a content management basement used by TASTENWERK}
+  spec.description   = %q{ioxCMS is a content management basement used by TASTENWERK}
   spec.summary       = %q{content management basement}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/tastenwerk/iox-cms"
   spec.license       = "GPLv3"
 
   spec.files = Dir["{app,config,db,lib}/**/*", "GPLv3-LICENSE", "Rakefile", "README.rdoc"]

@@ -48,7 +48,7 @@
         no: '<%= t('no') %>'
       }
 
-      kendo.culture('<%= (I18n.locale == 'en' ? 'en-GB' : 'de-DE') %>');
+      kendo.culture('<%= (I18n.locale.match(/en/) ? 'en-GB' : 'de-DE') %>');
 
       if( typeof(CKEDITOR) !== 'undefined' )
         CKEDITOR.basePath = '/javascripts/3rdparty/ckeditor/';

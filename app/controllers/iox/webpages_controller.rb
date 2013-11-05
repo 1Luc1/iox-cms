@@ -30,8 +30,6 @@ module Iox
     def index
       if request.xhr?
         @num_webpages = Webpage.count
-        offset = params[:page] || 0
-        limit = params[:limit] || 20
         if params[:query].blank?
           if params[:parent].blank?
             query = "parent_id IS NULL"
@@ -42,7 +40,7 @@ module Iox
         else
           @webpages = Webpage.where("name LIKE ?", "%#{params[:query]}%")
         end
-        @webpages = @webpages.where(type: nil).limit( limit ).offset( offset ).order(:position).load.map{ |webpage|
+        @webpages = @webpages.where(type: nil).order(:position).load.map{ |webpage|
           webpage.translation = webpage.translations.where( locale: params[:locale] || I18n.default_locale ).first
           webpage
         }
@@ -184,7 +182,6 @@ module Iox
       setup_webpage_locale( @frontpage )
       return if !redirect_if_no_webpage
       @webpage.translation
-      puts " translation with locale: #{@webpage.translation.locale}"
       redirect_if_no_webpage
       redirect_if_no_rights
       render layout: 'application'

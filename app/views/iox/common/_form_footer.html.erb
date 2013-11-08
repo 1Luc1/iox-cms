@@ -1,0 +1,10 @@
+<div class="scrollable-content-footer">
+  <a data-bind="attr: { href: '/iox/<%= item_name.demodulize.pluralize %>/'+id }, click: removeItem" class="btn"><%= t('delete') %></a>
+  <span class="desc">
+    ID: 
+    <span class="item-id" data-bind="text: id"></span>
+  </span>
+  <button type="submit" class="pull-right btn-primary btn"><%= t('save') %></button>
+</div>
+
+<input type="submit" class="hide" value="submit" />

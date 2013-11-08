@@ -60,7 +60,7 @@ module Iox
         domain_name = app_name.include?('.') ? app_name : app_name+'.site'
         application do
           "\n"+
-          "    # ION Defaults \n"+
+          "    # ioX Defaults \n"+
           "    config.iox.site_title = '#{app_name}'\n"+
           "    config.iox.deny_apps = ['contacts']\n"+
           "    config.iox.domain_name = '#{domain_name}'\n"+
@@ -82,6 +82,8 @@ module Iox
           "\n"+
           "    config.iox.webfile_sizes = { original: '800x800>', thumb: '100x100' }\n"+
           "\n"+
+          "    config.iox.cloud_storage_path = 'cloud-storage/'\n"+
+          "\n"+
           "    config.iox.max_quota_mb = 500\n"+
           "    config.iox.session_timeout_min = 60\n"+
           "    config.iox.exception_recipients = [ 'errors@tastenwerk.com' ]\n"+
@@ -96,7 +98,7 @@ module Iox
         end
         application(nil, env: "production") do
           "\n"+
-          "  # TASTENbOX configuration\n"+
+          "  # ioX configuration\n"+
           "\n"+
           "  config.action_mailer.delivery_method = :smtp\n" +
           "  config.action_mailer.smtp_settings = {\n" +

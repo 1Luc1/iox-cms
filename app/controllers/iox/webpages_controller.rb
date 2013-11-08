@@ -183,7 +183,6 @@ module Iox
       setup_webpage_locale( @frontpage )
       return if !redirect_if_no_webpage
       @webpage.translation
-      puts " translation with locale: #{@webpage.translation.locale}"
       redirect_if_no_webpage
       redirect_if_no_rights
       render layout: 'application'

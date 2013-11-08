@@ -31,7 +31,6 @@ module Iox
       if request.xhr?
         @num_webpages = Webpage.count
         offset = params[:page] || 0
-        limit = params[:limit] || 20
         if params[:query].blank?
           if params[:parent].blank?
             query = "parent_id IS NULL"
@@ -42,7 +41,7 @@ module Iox
         else
           @webpages = Webpage.where("name LIKE ?", "%#{params[:query]}%")
         end
-        @webpages = @webpages.where(type: nil).limit( limit ).offset( offset ).order(:position).load.map{ |webpage|
+        @webpages = @webpages.where(type: nil).order(:position).load.map{ |webpage|
           webpage.translation = webpage.translations.where( locale: params[:locale] || I18n.default_locale ).first
           webpage
         }
@@ -267,10 +266,10 @@ module Iox
 
     def webpage_params
       params.require(:webpage).permit(
-        :name, 
-        :slug, 
-        :template, 
-        :parent_id, 
+        :name,
+        :slug,
+        :template,
+        :parent_id,
         :show_in_menu,
         :show_in_sitemap,
         :webpage_translation => [ :locale, :meta_keywords, :content ]

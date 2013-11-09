@@ -5,7 +5,7 @@ module Iox
 
     include Iox::WebpagesHelper
 
-    before_filter :authenticate!, except: [ :list, :show ]
+    before_filter :authenticate!, except: [ :list, :show, :tags ]
 
     #
     # list all blogs
@@ -33,18 +33,20 @@ module Iox
 
     def list
       offset = params[:page] || 0
-      @blogs = Blog.limit( 10 ).offset( offset ).order(:created_at).load
+      @blogs = Blog.limit( 10 ).offset( offset ).order("created_at DESC").load
       @tags = {}
       Blog.where('').each do |blog|
         next if blog.translation.meta_keywords.blank?
-        @tags[blog.translation.meta_keywords] ||= 0
-        @tags[blog.translation.meta_keywords] += 1
+        blog.translation.meta_keywords.split(',').each do |tag|
+          @tags[tag] ||= 0
+          @tags[tag] += 1
+        end
       end
       render layout: 'application'
     end
 
     def tags
-      @blogs = Blog.includes(:translations).references(:iox_translations).where('iox_translations.meta_keywords=?',params[:tag]).order("iox_webpages.created_at DESC").load
+      @blogs = Blog.includes(:translations).references(:iox_translations).where('iox_translations.meta_keywords LIKE ?',"%#{params[:tag]}%").order("iox_webpages.created_at DESC").load
       render layout: 'application'
     end
 
@@ -130,7 +132,7 @@ module Iox
       params.require(:blog).require(:translation).permit(
         :id,
         :title,
-        :locale, 
+        :locale,
         :meta_keywords,
         :meta_description,
         :content

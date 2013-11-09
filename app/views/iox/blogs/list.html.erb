@@ -11,7 +11,7 @@
 
   <div class="centered" style="position: relative;">
 
-    <div class="blog-categories">
+    <div class="blog-tag-cloud">
       <% @tags.each_pair do |tag,occurrence| %>
         <%= link_to tag, "/blogs/tag/#{tag}", rel: occurrence %>
       <% end %>

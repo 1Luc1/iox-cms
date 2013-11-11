@@ -1,10 +1,12 @@
 <script id="iox-webpage-form-template-<%= template %>" type="text/html">
 
-  <%= render partial: '/iox/webpages/form/header' %>
+  <%= render partial: '/iox/common/form_control', locals: { item_name: 'webpage' } %>
 
+  <%= render partial: '/iox/webpages/form/header' %>
+  
   <form data-bind="submit: saveWebpageForm">
 
-    <div class="scrollable-content w-header w-footer w-padding">
+    <div class="scrollable-content w-header w-padding">
 
       <div class="fields-header"><%= t('webpage.general') %></div>
 
@@ -63,8 +65,6 @@
       </div>
 
     </div>
-
-    <%= render partial: '/iox/webpages/form/footer' %>
 
   </form>
 

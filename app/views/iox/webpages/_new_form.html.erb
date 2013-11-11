@@ -1,6 +1,6 @@
 <script id="iox-new-webpage-form-template" type="text/html">
 
-  <h3 class="title" data-bind="html: (id ? name() : '<%= t('webpage.new') %>')+(_parent() ? ' in <strong>&raquo;'+_parent().name()+'&laquo;</strong>' : '')"></h3>
+  <%= render partial: '/iox/common/form_control', locals: { item_name: 'webpage' } %>
 
   <form data-bind="submit: (id ? saveWebpageForm : createWebpageForm)">
 
@@ -23,11 +23,6 @@
       </div>
 
     </div>
-
-    <div class="scrollable-content-footer">
-      <button type="submit" class="pull-right btn-primary btn" data-bind="text: ( id ? '<%= t('save') %>' : '<%= t('create') %>' )"></button>
-    </div>
-
 
     <input type="hidden" name="webpage[parent_id]" data-bind="value: (_parent() ? _parent().id : '')" />
     <input type="submit" class="hide" value="submit" />

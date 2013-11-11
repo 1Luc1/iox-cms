@@ -131,6 +131,10 @@ module Iox
       [id, name.parameterize].join("-")
     end
 
+    def self.allowed_attrs
+      Rails::configuration.iox.allowed_webpage_attrs
+    end
+
     private
 
     def publish_if_frontpage
@@ -153,7 +157,7 @@ module Iox
           i += 1
         end
       else
-        raise StandardError.new "Could not find template #{tmpl_filename}"
+        Rails.logger.info "No template for #{tmpl_filename} has been found. Skipping auto-populating template"
       end
     end
 
@@ -163,3 +167,13 @@ module Iox
 
   end
 end
+
+Rails.configuration.iox.allowed_webpage_attrs ||= [
+  :name,
+  :slug,
+  :template,
+  :parent_id,
+  :show_in_menu,
+  :show_in_sitemap,
+  { :webpage_translation => [ :locale, :meta_keywords, :content ] }
+]

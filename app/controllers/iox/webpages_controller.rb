@@ -264,15 +264,8 @@ module Iox
     private
 
     def webpage_params
-      params.require(:webpage).permit(
-        :name,
-        :slug,
-        :template,
-        :parent_id,
-        :show_in_menu,
-        :show_in_sitemap,
-        :webpage_translation => [ :locale, :meta_keywords, :content ]
-      )
+      params[:webpage]
+      params.require(:webpage).permit( Iox::Webpage::allowed_attrs )
     end
 
     def save_webbits

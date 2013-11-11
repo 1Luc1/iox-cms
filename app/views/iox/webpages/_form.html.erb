@@ -1,5 +1,7 @@
 <script id="iox-webpage-form-template" type="text/html">
 
+  <%= render partial: '/iox/common/form_control', locals: { item_name: 'webpage' } %>
+
   <h3 class="title" data-bind="text: name"></h3>
 
   <form data-bind="submit: saveWebpageForm)">
@@ -13,10 +15,6 @@
         <input type="text" name="webpage[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
       </div>
 
-    </div>
-
-    <div class="scrollable-content-footer">
-      <button type="submit" class="pull-right btn-primary btn" data-bind="text: ( id ? '<%= t('save') %>' : '<%= t('create') %>' )"></button>
     </div>
 
     <input type="submit" class="hide" value="submit" />

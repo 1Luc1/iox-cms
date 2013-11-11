@@ -1,4 +1,4 @@
-<div class="webpage-head-control">
+<div class="webpage-head-control iox-form-control">
 
   <div class="iox-simple-select select-lang">
     <span class="iox-simple-select-trigger"
@@ -26,7 +26,7 @@
     </div>
   <% end %>
 
-  <a class="btn" data-bind=" attr: { href: '/iox/<%= controller.controller_name %>/'+id }" rel="tooltip" title="<%= t("#{controller.controller_name.singularize}.view") %>"><i class="icon-eye-open icon"></i><%= t("#{controller.controller_name.singularize}.view") %></a>
+  <a class="btn" data-bind=" attr: { href: '/iox/<%= controller.controller_name %>/'+id }" rel="tooltip" title="<%= t("#{controller.controller_name.singularize}.view") %>"><i class="icon-eye-open icon"></i></a>
 
   <% unless defined?(skip_edit) %>
     <a class="btn" data-bind=" attr: { href: '/iox/<%= controller.controller_name %>/'+id+'/edit' }" rel="tooltip" title="<%= t('edit') %>"><i class="icon-edit icon only"></i></a>

@@ -39,7 +39,7 @@ textarea.error{
 
 .iox-form .fields-header{
   border-bottom: 1px solid #ddd;
-  margin: 20px 0;
+  margin: 40px 0 0;
   font-size: 0.9em;
   text-transform: uppercase;
   color: #aaa;
@@ -66,8 +66,11 @@ textarea.error{
   float: left;
   font-size: 0.9em;
   font-weight: 600;
-  margin: 10px 0 0;
   width: 140px;
+}
+
+.iox-form .field-box.w-input label{
+  margin: 10px 0 0;
 }
 
 .iox-form .field-box .label-offset{
@@ -135,4 +138,30 @@ textarea.error{
 .iox-form input[type="text"].k-input{
   padding: 2px 0;
   width: auto;
+}
+
+.iox-form-control{
+  float: right;
+}
+
+.iox-form-control .btn{
+  font-size: 14px;
+  line-height: 14px;
+  padding: 5px 10px;
+  border-radius: 1px;
+  margin-left: 3px;
+  float: right;
+  background: none;
+  border: none;
+}
+.iox-form-control .btn:hover{
+  box-shadow: none;
+  text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+.iox-form-control .btn-primary{
+  background: $iox-green;
+  font-size: 12px;
+}
+.iox-form-control .btn-primary:hover{
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }

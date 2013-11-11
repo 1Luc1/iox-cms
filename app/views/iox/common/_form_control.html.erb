@@ -1,0 +1,15 @@
+<div class="iox-form-control">
+
+<% if can_write_plugin?( item_name ) %>
+  <a data-bind="attr: { href: '/iox/<%= item_name.demodulize.pluralize %>/'+id }, click: removeItem" class="btn" title="<%= t('delete') %>" data-confirm-proceed="<%= t('really_delete') %>"><span class="icon-trash"></span></a>
+  <% if defined? show_view_btn %>
+  <a href="/ens/<%= item_name %>" class="btn" title="<%= t('view') %>" target="_blank"><i class="icon-eye-open"></i></a>
+  <% end %>
+  <% if defined? pref_path %>
+  <a href="#" data-xhr-win="true" data-bind="attr: { 'data-xhr-href': '<%= pref_path %>'}
+  " class="btn"><i class="icon-gear"></i></a>
+  <% end %>
+  <a href="#" data-role="submit" class="btn btn-primary" title="<%= t('save') %>"><span class="icon-save"></span>&nbsp; <%= t('save') %></a>
+<% end %>
+
+</div>

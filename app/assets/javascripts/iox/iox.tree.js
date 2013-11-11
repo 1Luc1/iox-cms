@@ -333,6 +333,14 @@
    *
    */
   TreeItem.prototype.removeItem = function removeItem( item, e ){
+    var text = $(e.target).attr('data-confirm-proceed') || ( $(e.target).closest('[data-confirm-proceed]') && $(e.target).closest('[data-confirm-proceed]').attr('data-confirm-proceed') );
+    if( text ){
+      if( !confirm( text ) ){
+        e.preventDefault();
+        return false;
+      }
+    }
+
     var url = (item._master.options.deletionURL || item._master.options.url)+'/'+item.id;
     $.ajax({ url: url, type: 'delete', dataType: 'json' }).done( function( response ){
       if( response.success ){

@@ -12,7 +12,7 @@
 }
 .iox-sidebar-frame{
   position: absolute;
-  top: 10px;
+  top: 0;
   left: 10px;
   right: 0;
   bottom: 10px;
@@ -36,7 +36,7 @@
   left: -22px;
 }
 .iox-content.offset-sidebar .iox-content-frame{
-  left: 20px;
+  left: 60px;
 }
 .iox-content-arrow:after, .iox-sidebar-arrow:after{
   border-color: rgba(0, 0, 0, 0) $iox-light-grey rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);

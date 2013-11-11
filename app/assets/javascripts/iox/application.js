@@ -19,9 +19,9 @@
 
 //= require iox/iox.core
 //= require iox/iox.flash
+//= require iox/iox.tabs
 //= require iox/iox.tree
 //= require iox/iox.win
-
 
 //= require_self
 
@@ -108,7 +108,7 @@ $(function(){
 
   $('body').on('click', '[data-role=submit]', function(e){
     e.preventDefault();
-    $(this).closest('.iox-content-padding').find('form:first').submit();
+    $(this).closest('.iox-content').find('form:first').submit();
   });
 
   $('body').on('submit', '[data-role=submitAndBack]', function(e){

@@ -16,6 +16,7 @@ de:
   creation_failed: "Objekt konnte nicht erzeugt werden"
   deleted: "&raquo;%{name}&laquo; wurde vom System entfernt"
   deletion_failed: "&raquo;%{name}&laquo; konnte nicht gelöscht werden"
+  really_delete: "Möchtest du dieses Dokument wirklich löschen?"
   saved: "Änderungen an &raquo;%{name}&laquo; wurden gespeichert"
   saving_failed: "Änderungen an &raquo;%{name}&laquo; konnten nicht gespeichert werden"
   close: "Schließen"

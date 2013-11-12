@@ -327,7 +327,7 @@ de:
     published: "Veröffentlicht"
     not_published: "Nicht veröffentlicht"
     your_webpage_currently_is: "Diese Webseite ist"
-    click_on_webpage_to_show_details: "Klick auf eine Webseite um Details anzuzeigen"
+    click_on_webpage_to_show_details: "Klick auf ein Dokument um Details anzuzeigen"
     publish_desc: >
       Eine veröffentlichte Webseite kann von jedem gesehen werden und wird - <br />
       abhängig von der Bekanntheit des Internetauftritts - innerhalb weniger<br />
@@ -399,6 +399,7 @@ de:
 
   webpages:
     title: "Webseiten"
+    click_on_webpage_to_show_details: "Klick auf ein Dokument um Details anzuzeigen"
     type_a_webpages_name: "Schreib ein paar Buchstaben einer Webseite"
     click_here_to_filter: "Filter anwenden"
     back: "Zurück zur Liste"

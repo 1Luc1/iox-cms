@@ -272,7 +272,7 @@ en:
     name: "Name"
     publishing_status: "Publish"
     your_webpage_currently_is: "This webpage is"
-    click_on_webpage_to_show_details: "Click on a webpage to show details"
+    click_on_webpage_to_show_details: "Click an item to show details"
     published: "published"
     not_published: "not published"
     publish: "click to publish this webpage"
@@ -332,6 +332,7 @@ en:
   webpages:
     title: "Webpages"
     type_a_webpages_name: "Type your search here"
+    click_on_webpage_to_show_details: "Click an item to show details"
     click_here_to_filter: "Apply filter"
     back: "back to list"
     list:

@@ -28,6 +28,8 @@ module Iox
 
     before_validation :gen_password_if_empty, on: :create
 
+    scope :admins, ->{ where("roles LIKE '%admin%'") }
+
     attr_accessor :send_welcome_msg
 
     def full_name

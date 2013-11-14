@@ -19,7 +19,7 @@ class IoxUsers < ActiveRecord::Migration
 
       t.boolean   :suspended, default: false
 
-      t.string    :roles, default: ['user']
+      t.string    :roles, default: 'user'
 
       t.string    :password_digest
 

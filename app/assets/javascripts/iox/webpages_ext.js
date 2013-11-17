@@ -168,6 +168,7 @@ $(document).ready( function(){
 
   $('#push-sidebar-pin').on('click', function(e){
     $(this).toggleClass('active');
+    e.preventDefault();
   })
 
   $('.flash-container .alert').on('click', function(e){

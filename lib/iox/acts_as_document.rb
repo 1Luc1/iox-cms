@@ -15,6 +15,9 @@ module Iox
         include InstanceMethods
         Iox::register_model self
 
+        belongs_to :creator, class_name: 'Iox::User', foreign_key: :created_by
+        belongs_to :updater, class_name: 'Iox::User', foreign_key: :updated_by
+
         default_scope { where(deleted_at: nil) }
 
       end

@@ -49,6 +49,7 @@ module Iox
         # gem 'therubyracer', group: :production, platform: :ruby
         gem 'select2-rails', '3.4.8'
         gem 'premailer-rails', '~> 1.5.1'
+        gem 'i18n-js', "~> 2.1.2"
         # gem 'jquery-rails'
         # gem 'rails_warden'
         # gem 'bcrypt-ruby'

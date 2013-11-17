@@ -1,7 +1,7 @@
 /**
  * webpage.css.scss
  *
- *= require iox/webbits
+ *= require iox/webfiles
  */
 
 #iox-webpages-list{
@@ -23,7 +23,7 @@
     cursor: pointer;
   }
 }
-#iox-webpage-details .webpage-head-control{
+#iox-content-details .webpage-head-control{
   position: absolute;
   top: 0;
   right: 120px;
@@ -32,11 +32,11 @@
   .icon.only{ margin: 0; }
 }
 
-#iox-webpage-details .webpage-head-control .btn{
+#iox-content-details .webpage-head-control .btn{
   font-size: 12px;
 }
 
-#iox-webpage-details .publishing-status{
+#iox-content-details .publishing-status{
   .icon-ok-sign{ color: #81AD53; }
   .icon{ margin-right: 5px; }
   .label{ cursor: pointer; margin-left: 20px; }
@@ -44,6 +44,6 @@
   .icon-question-sign:hover{ color: #333 }
 }
 
-#iox-webpage-details .iox-simple-select{
+#iox-content-details .iox-simple-select{
   margin: 0 10px 0 0;
 }

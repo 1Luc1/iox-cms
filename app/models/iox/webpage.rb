@@ -30,9 +30,6 @@ module Iox
     belongs_to :parent, class_name: 'Iox::Webpage', foreign_key: 'parent_id', inverse_of: :children
     belongs_to :master, class_name: 'Iox::Webpage', foreign_key: 'master_id', inverse_of: :widgets
 
-    belongs_to :creator, class_name: 'Iox::User', foreign_key: :created_by
-    belongs_to :updater, class_name: 'Iox::User', foreign_key: :updated_by
-
     accepts_nested_attributes_for :translations
     accepts_nested_attributes_for :webbits
 

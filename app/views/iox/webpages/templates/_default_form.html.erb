@@ -8,7 +8,6 @@
 
     <ul>
       <li class="active"><a href="#general"><%= t('cloud_container.settings') %></a></li>
-      <li><a href="#webbits"><%= t('webpage.webbits') %></a></li>
       <li><a href="#files"><%= t('webpage.files') %></a></li>
     </ul>
 
@@ -54,6 +53,7 @@
 
           <div class="fields-header"><%= t('webpage.current_translation') %></div>
 
+          <input type="hidden" name="webpage[template]" data-bind="value: template()" />
           <input type="hidden" name="webpage[translation][id]" data-bind="value: translation().id" />
 
           <div class="field-box">
@@ -81,13 +81,23 @@
 
     <div class="clearfix">
 
-      <div class="webbits-grid"></div>
+      <div class="iox-grid-header clearfix">
+        <div class="select-files">
+          <i class="icon-upload"></i>
+          &nbsp;<span><%= t('webfile.upload') %></span>
+          <input type="file" name="file" id="upload-file" />
+          <div class="progress-num"></div>
+          <div class="progress"><div class="bar"></div></div>
+        </div>
+        <div class="query-container">
+          <input type="text" class="query" name="query" autocomplete="off" />
+          <button class="clear-query"><i class="icon-remove"></i></button>
+          <button class="submit-query"><i class="icon-search"></i></button>
+        </div>
+      </div>
 
-    </div>
-
-
-    <div class="clearfix">
-      <h1>files</h1>
+      <div class="webfiles-grid iox-k-grid"></div>
+      
     </div>
 
   </div>

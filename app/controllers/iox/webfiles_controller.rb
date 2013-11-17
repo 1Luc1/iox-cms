@@ -8,6 +8,13 @@ module Iox
 
     include WebpagesHelper
 
+    def index
+      @webpage = Webpage.find_by_id( params[:webpage_id] )
+      @order = params[:sort] ? params[:sort]['0'][:field] : 'name'
+      @webfiles = @webpage.webfiles.order(@order)
+      render json: @webfiles
+    end
+
     def create
       @webpage = Webpage.find_by_id( params[:webpage_id] )
 
@@ -21,6 +28,19 @@ module Iox
       else
         render :json => [{:error => "custom_failure"}], :status => 304
       end
+    end
+
+    def update
+      if @webfile = Webfile.find_by_id( params[:id] )
+        if @webfile.update webfile_params
+          flash.notice = t('webfile.saved', name: @webfile.name )
+        else
+          flash.alert = t('webfile.saving_failed', name: @webfile.name, error: @webfile.errors.full_messages.inspect )
+        end
+      else
+        notify_404
+      end
+      render json: { flash: flash, success: flash[:alert].blank?, item: @webfile }
     end
 
     def destroy
@@ -37,6 +57,12 @@ module Iox
         flash.now.alert = t('not_found')
       end
       render json: { flash: flash, success: success, item: @webfile }
+    end
+
+    private
+
+    def webfile_params
+      params.require(:webfile).permit(:name, :description, :copyright)
     end
 
   end

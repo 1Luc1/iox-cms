@@ -58,6 +58,9 @@ Iox::Engine.routes.draw do
       get 'images'
       delete 'delete_webbit_from'
     end
+
+    resources :privileges, controller: :webpage_privileges
+    
   end
 
   resources :blogs do

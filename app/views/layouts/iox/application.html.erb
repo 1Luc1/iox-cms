@@ -42,6 +42,10 @@
     $(function(){
 
       moment.lang('<%= I18n.locale %>');
+      
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+      
       iox.Win.defaults.i18n = {
         ok: '<%= t('ok') %>',
         yes: '<%= t('yes') %>',

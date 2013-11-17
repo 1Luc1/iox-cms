@@ -23,6 +23,9 @@
 //= require iox/iox.tree
 //= require iox/iox.win
 
+//= require i18n
+//= require i18n/translations
+
 //= require_self
 
 $(function(){

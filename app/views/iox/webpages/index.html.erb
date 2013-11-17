@@ -28,7 +28,7 @@
 
 <div class="iox-content offset-sidebar">
   <div class="iox-content-frame hide">
-    <div id="iox-webpage-details" class="iox-form" data-bind="template: { name: (id ? 'iox-webpage-form-template-'+template() : 'iox-new-webpage-form-template') }">
+    <div id="iox-content-details" class="iox-form" data-bind="template: { name: (id ? 'iox-webpage-form-template-'+template() : 'iox-new-webpage-form-template') }">
     </div>
   </div>
   <div class="iox-details-placeholder">
@@ -46,6 +46,8 @@
 <% available_webpage_form_templates.each do |tmpl| %>
   <%= render partial: tmpl[:file], locals: { template: tmpl[:name] } %>
 <% end %>
+
+<%= render partial: 'edit_webfile_form_tmpl' %>
 
 <script id="iox-tree-item-template" type="text/html">
   <li data-bind=" attr: { 'data-id': id, id: 'item_'+id }, click: markItem">
@@ -65,7 +67,7 @@
         <span class="icon-home"></span>
         <!-- /ko -->
       </div>
-      <a class="title" data-bind="click: showForm, attr: { title: name }, text: name"></a>
+      <a class="title" data-bind="attr: { title: name }, text: name"></a>
     </div>
     <ul class="children hide" data-bind="template: { name: 'iox-tree-item-template', foreach: children }"></ul>
   </li>
@@ -242,7 +244,7 @@
               if( tree._selectedItem )
                 item._parent( tree._selectedItem );
               setupWebpageForm( item );
-              $('#iox-webpage-details input[type=text]:first').focus();
+              $('#iox-content-details input[type=text]:first').focus();
               $(self).unblock();
             });
           }
@@ -253,18 +255,18 @@
 
 
     function setupWebpageForm( item ){
-      ko.cleanNode($('#iox-webpage-details').get(0));
-      $('#iox-webpage-details').html('');
-      ko.applyBindings( item, $('#iox-webpage-details').get(0) );
+      ko.cleanNode($('#iox-content-details').get(0));
+      $('#iox-content-details').html('');
+      ko.applyBindings( item, $('#iox-content-details').get(0) );
       $('.webpage-template').kendoDropDownList();
-      item._validator = $("#iox-webpage-details").kendoValidator().data("kendoValidator");
+      item._validator = $("#iox-content-details").kendoValidator().data("kendoValidator");
 
       if( typeof(iox.webpageTmpl[item.template()]) === 'function' )
         iox.webpageTmpl[item.template()]( item );
 
-      $('#iox-webpage-details').find('.iox-tabs').ioxTabs();
+      $('#iox-content-details').find('.iox-tabs').ioxTabs();
 
-      iox.webbits.setupGrid( $('#iox-webpage-details .webbits-grid'), item )
+      iox.webfiles.setupGrid( $('#iox-content-details .webfiles-grid'), item )
 
     }
 

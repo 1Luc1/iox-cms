@@ -29,7 +29,7 @@
 
 <div class="iox-content offset-sidebar">
   <div class="iox-content-frame hide">
-    <div id="iox-webpage-details" class="iox-form" data-bind="template: { name: (id ? 'iox-blog-form-template' : 'iox-new-blog-form-template') }">
+    <div id="iox-content-details" class="iox-form" data-bind="template: { name: (id ? 'iox-blog-form-template' : 'iox-new-blog-form-template') }">
     </div>
   </div>
   <div class="iox-details-placeholder">
@@ -229,7 +229,7 @@
               if( tree._selectedItem )
                 item._parent( tree._selectedItem );
               setupBlogForm( item );
-              $('#iox-webpage-details input[type=text]:first').focus();
+              $('#iox-content-details input[type=text]:first').focus();
               $(self).unblock();
             });
           }
@@ -240,11 +240,11 @@
 
 
     function setupBlogForm( item ){
-      ko.cleanNode($('#iox-webpage-details').get(0));
-      $('#iox-webpage-details').html('');
-      ko.applyBindings( item, $('#iox-webpage-details').get(0) );
+      ko.cleanNode($('#iox-content-details').get(0));
+      $('#iox-content-details').html('');
+      ko.applyBindings( item, $('#iox-content-details').get(0) );
       $('.blog-template').kendoDropDownList();
-      item._validator = $("#iox-webpage-details").kendoValidator().data("kendoValidator");
+      item._validator = $("#iox-content-details").kendoValidator().data("kendoValidator");
 
       iox.webpageTmpl.blog( item );
     }

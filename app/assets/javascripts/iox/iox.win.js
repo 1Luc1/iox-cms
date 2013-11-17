@@ -94,7 +94,8 @@
       this.options.content = '<div class="content-padding">'+this.options.yesNoQuestion+'</div><div class="iox-win-footer"><button class="btn btn-danger answer-no">'+this.options.i18n.no+'</button><button class="btn btn-success answer-yes pull-right" data-close-win="true">'+this.options.i18n.yes+'</button></div>';
     }
 
-    this.options.content = $('<div>'+this.options.content+'</div>');
+    if( !(this.options.content instanceof jQuery) )
+      this.options.content = $('<div>'+this.options.content+'</div>');
 
     var $win = $('<div/>')
       .addClass('iox-win');

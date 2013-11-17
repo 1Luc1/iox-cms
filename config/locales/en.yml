@@ -254,6 +254,17 @@ en:
     type_a_users_name: "Type your search here"
     click_on_user_to_show_details: "Click on a user to show details"
 
+  webfile:
+    preview: "Preview"
+    name: "Name"
+    size: "Size"
+    updated_by: "Updated by"
+    updated_at: "Updated at"
+    upload: "Upload file"
+    deleted: "File '%{name}' has been deleted"
+    saved: "File '%{name}' has been saved"
+    saving_failed: "File '%{name}' could not be updated (%{error})"
+
   webbit:
     deleted: "Webbit %{name} has been deleted"
     deletion_failed: "Webbit %{name} could not be deleted"

@@ -30,6 +30,9 @@
 
   window.iox.formatHelper = {};
   window.iox.formatHelper.Filesize = function formatFilesize( filesize, human ){
+    // assuming filesize is comming as kb
+    filesize = filesize * 1000;
+    
     if (filesize >= 1073741824){
       var filesize = iox.formatHelper.FormatNumber(filesize / 1073741824, 3, '.', '');
       return ( human ? (filesize + ' Gb') : filesize );

@@ -31,6 +31,7 @@
       <div class="fields-header"><%= t('webpage.current_translation') %></div>
 
       <input type="hidden" name="blog[translation][id]" data-bind="value: translation().id" />
+      <input type="hidden" name="blog[template]" data-bind="value: template()" />
 
       <div class="field-box required">
         <label for="name"><%= t('name') %></label>

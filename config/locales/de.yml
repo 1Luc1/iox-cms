@@ -319,6 +319,11 @@ de:
     click_on_user_to_show_details: "Klick auf einen Benutzer zeigt Details"
 
   webfile:
+    preview: "Preview"
+    name: "Name"
+    size: "Size"
+    updated_by: "Updated by"
+    updated_at: "Updated at"
     deleted: "Datei %{name} wurde gelöscht"
 
   webpage:

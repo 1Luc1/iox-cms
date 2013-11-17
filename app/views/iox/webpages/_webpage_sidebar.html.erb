@@ -3,10 +3,10 @@
 
   <!-- save and other actions -->
   <div class="btn-group settings pull-right" style="width:auto">
-    <button class="btn" title="<%= t('webpages.back') %>" data-href="<%= webpages_path %>"><i class="icon-chevron-sign-left"></i></button>
-    <span id="push-sidebar-pin" class="btn" title="<%= t('stick') %>"><i class="icon-pushpin"></i></span>
+    <button class="btn" title="<%= t('webpages.back') %>" data-href="<%= webpages_path %>"><i class="icon-chevron-circle-left"></i></button>
+    <button id="push-sidebar-pin" class="btn" title="<%= t('stick') %>"><i class="icon-thumb-tack"></i></button>
     <button class="btn" type="submit" title="<%= t('save') %>"><i class="icon-save"></i></button>
-    <button class="btn" title="<%= t('view') %>" data-href="<%= webpage_path(@webpage) %>"><i class="icon-eye-open"></i></button>
+    <button class="btn" title="<%= t('view') %>" data-href="<%= webpage_path(@webpage) %>"><i class="icon-eye"></i></button>
     <button data-toggle="dropdown" class="btn dropdown-toggle">
       <span class="caret"></span>
     </button>
@@ -23,7 +23,7 @@
   <div class="btn-group webpage-tabs-control">
     <button class="btn-flat btn active white" data-to-id="general" style="padding: 6px 10px 7px;"><%= t('webpage.general') %></button>
     <button class="btn-flat btn white" data-to-id="meta" style="padding: 7px 10px 6px"><i class="icon-cog"></i></button>
-    <button class="btn-flat btn white" data-to-id="images" style="padding: 7px 10px 6px"><i class="icon-picture"></i></button>
+    <button class="btn-flat btn white" data-to-id="images" style="padding: 7px 10px 6px"><i class="icon-picture-o"></i></button>
     <button class="btn-flat btn white" data-to-id="webbit" style="padding: 7px 10px 6px"><i class="icon-sitemap"></i></button>
     <button class="btn-flat btn white" data-to-id="webbit-tools" style="padding: 7px 10px 6px"><i class="icon-wrench"></i></button>
   </div>
@@ -168,10 +168,10 @@
           <i class="icon-refresh"></i>
         </a>
         <a href="#" class="create-webbit">
-          <i class="icon-plus-sign"></i>
+          <i class="icon-plus-square"></i>
         </a>
         <a href="#" class="delete-selected-webbits">
-          <i class="icon-trash"></i>
+          <i class="icon-trash-o"></i>
         </a>
       </div>
       <h1><%= t('webpage.structure') %></h1>
@@ -488,11 +488,14 @@ function setupImageGalleryDraggable(){
             position: { top: '10%', left: '10%' },
             title: '<%= t('webbit.edit_source') %>',
             activate: function(){
-              $wb = $('#wb_'+$(self).attr('data-webbit-id'));
               acEditor = ace.edit("ace-editor");
               acEditor.setTheme("ace/theme/monokai");
               acEditor.getSession().setMode("ace/mode/html");
+
+              console.log('looking for webbit', $(self).attr('data-webbit-id') );
+              $wb = $('#wb_'+$(self).attr('data-webbit-id'));
               acEditor.setValue( $('.translation-content-'+$wb.attr('id').replace('wb_','')).val() );
+
             },
             deactivate: function(){
               CKEDITOR.instances[$wb.attr('id')].setData( acEditor.getValue() );
@@ -500,6 +503,7 @@ function setupImageGalleryDraggable(){
               acEditor.destroy();
             }
         });
+        acEditor.setFontSize("16px");
         acEditor.commands.addCommand({
             name: 'saveFileAndCloseWin',
             bindKey: {

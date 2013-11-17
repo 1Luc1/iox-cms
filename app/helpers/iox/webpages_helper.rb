@@ -165,7 +165,7 @@ module Iox
     def get_required_webbits
       arr = []
       @webpage.webbits.each do |wb|
-        arr << wb.plugin_type unless arr.include? wb.plugin_type
+        arr << wb.plugin_type if (!wb.plugin_type.blank? && !arr.include?(wb.plugin_type) )
       end
       arr
     end

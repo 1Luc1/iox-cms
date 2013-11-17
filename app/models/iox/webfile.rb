@@ -19,6 +19,12 @@ module Iox
 
     validates_attachment :file, content_type: { content_type: ["application/pdf", "image/jpg", "image/png", "image/jpeg", 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3'] }
 
+    before_post_process :skip_for_audio
+
+    def skip_for_audio
+      ! %w(application/mp3 application/x-mp3 audio/mpeg audio/mp3 audio/ogg application/ogg).include?(file_content_type)
+    end
+
     belongs_to :webpage
 
     def as_json(options = { })

@@ -23,6 +23,9 @@ module Iox
 
       @webfile = @webpage.webfiles.build name: params[:file].original_filename, content_type: params[:file].content_type
       @webfile.file = params[:file]
+
+      @webfile.set_creator_and_updater( current_user )
+
       if @webfile.save
         render :json => @webfile.to_jq_upload(:file)
       else

@@ -17,7 +17,7 @@ module Iox
                       :default_url => "/images/:style/missing.png",
                       :url => "/data/webfiles/:webpage_id/:style/:updated_at_:basename.:extension"
 
-    validates_attachment :file, content_type: { content_type: ["application/pdf", "image/jpg", "image/png", "image/jpeg"] }
+    #validates_attachment :file, content_type: { content_type: ["application/pdf", "image/jpg", "image/png", "image/jpeg"] }
 
     belongs_to :webpage
 

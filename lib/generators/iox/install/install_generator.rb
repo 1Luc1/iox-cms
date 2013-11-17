@@ -44,9 +44,11 @@ module Iox
         gem 'paperclip', '~> 3.0'
         # gem 'rails-i18n', '~> 0.7.4'
         # gem 'capistrano', group: :development
+        gem "capistrano", "~ 2", group: :development
         # gem 'rvm-capistrano', group: :development
         # gem 'therubyracer', group: :production, platform: :ruby
         gem 'select2-rails', '3.4.8'
+        gem 'premailer-rails', '~> 1.5.1'
         # gem 'jquery-rails'
         # gem 'rails_warden'
         # gem 'bcrypt-ruby'

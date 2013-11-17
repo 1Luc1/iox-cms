@@ -188,6 +188,10 @@ h2, h3{
   color: #999;
 }
 
+.iox-tabs .scrollable-content{
+  top: 30px;
+}
+
 @import "top_nav";
 @import "app_nav";
 @import "sidebar";

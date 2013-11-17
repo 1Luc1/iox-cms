@@ -295,6 +295,8 @@ en:
     view: "View webpage"
     new: "New webpage"
     views: "Views"
+    webbits: "Webbits"
+    files: "Files"
     tags_desc: "Enter keywords to help users find this webpage"
     template: "Template"
     content: "Text"

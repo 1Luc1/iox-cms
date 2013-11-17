@@ -71,6 +71,12 @@
   </li>
 </script>
 
+<script id="webbit-tree-item-template" type="text/kendo-ui-template">
+  <span class='icon #: item.icon #' data-webbit-id='#: item.id #'></span>
+  <span>#: item.name #</span><i>#: item.category #</i>
+</script>
+
+
 <script type="text/javascript">
 
   $(document).ready( function(){
@@ -256,10 +262,11 @@
       if( typeof(iox.webpageTmpl[item.template()]) === 'function' )
         iox.webpageTmpl[item.template()]( item );
 
-      if( item.id ){
-        // if webpage exists
-      }
+      $('#iox-webpage-details').find('.iox-tabs').ioxTabs();
+
+      iox.webbits.setupGrid( $('#iox-webpage-details .webbits-grid'), item )
 
     }
+
   });
 </script>

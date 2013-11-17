@@ -35,7 +35,6 @@ module Iox
       end
     end
 
-
     initializer :iox_exception_notifier do |app|
       if Rails.env == 'production'
         # Exception Notification
@@ -44,7 +43,6 @@ module Iox
         }
       end
     end
-
 
   end
 end

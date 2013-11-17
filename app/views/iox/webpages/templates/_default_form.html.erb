@@ -3,70 +3,94 @@
   <%= render partial: '/iox/common/form_control', locals: { item_name: 'webpage' } %>
 
   <%= render partial: '/iox/webpages/form/header' %>
-  
-  <form data-bind="submit: saveWebpageForm">
 
-    <div class="scrollable-content w-header w-padding">
+  <div class="iox-tabs">
 
-      <div class="fields-header"><%= t('webpage.general') %></div>
+    <ul>
+      <li class="active"><a href="#general"><%= t('cloud_container.settings') %></a></li>
+      <li><a href="#webbits"><%= t('webpage.webbits') %></a></li>
+      <li><a href="#files"><%= t('webpage.files') %></a></li>
+    </ul>
 
-      <div class="field-box required">
-        <label for="name"><%= t('name') %></label>
-        <input type="text" name="webpage[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
-      </div>
+    <div class="clearfix">
 
-      <div class="field-box required">
-        <label for="name"><%= t('webpage.slug') %></label>
-        <tt>/p/</tt>
-        <input type="text" name="webpage[slug]" data-bind="value: slug" required validationMessage="<%= t('webpage.slug_required') %>" style="width:372px; font-size: 0.8em;" />
-      </div>
+      <form data-bind="submit: saveWebpageForm">
 
-      <div class="fields-header"><%= t('webpage.publishing_status') %></div>
+        <div class="scrollable-content">
 
-      <div class="field-box required">
-        <div class="label-offset publishing-status">
-          <%= t('webpage.your_webpage_currently_is') %>
-          <!-- ko if: published -->
-          <span class="label label-success" data-bind="click: publishWebpage" rel="tooltip" title="<%= t 'webpage.unpublish' %>"><i class="icon icon-ok-sign"></i><%= t('webpage.published') %></span>
-          <!-- /ko -->
-          <!-- ko ifnot: published -->
-          <span class="label" data-bind="click: publishWebpage" rel="tooltip" title="<%= t 'webpage.publish' %>"><i class="icon icon-ban-circle"></i><%= t('webpage.not_published') %></span>
-          <!-- /ko -->
-          <i class="icon-question-sign" title="<%= t('whats_this') %>?" style="margin-right: 10px;" rel="tooltip" data-confirmation-win="true" data-confirmation-txt="<%= t('webpage.publish_desc') %>"></i>
-          <input type="hidden" name="webpage[show_in_menu]" value="0" />
-          <input type="checkbox" name="webpage[show_in_menu]" value="1" data-bind="checked: show_in_menu" />
-          <span><%= t('webpage.show_in_menu') %></span>
-          <input type="hidden" name="webpage[show_in_sitemap]" value="0" />
-          <input type="checkbox" name="webpage[show_in_sitemap]" value="1" data-bind="checked: show_in_sitemap" />
-          <span><%= t('webpage.show_in_sitemap') %></span>
+          <div class="fields-header"><%= t('webpage.general') %></div>
+
+          <div class="field-box required">
+            <label for="name"><%= t('name') %></label>
+            <input type="text" name="webpage[name]" data-bind="value: name" required validationMessage="<%= t('webpage.name_required') %>" />
+          </div>
+
+          <div class="field-box required">
+            <label for="name"><%= t('webpage.slug') %></label>
+            <tt>/p/</tt>
+            <input type="text" name="webpage[slug]" data-bind="value: slug" required validationMessage="<%= t('webpage.slug_required') %>" style="width:372px; font-size: 0.8em;" />
+          </div>
+
+          <div class="fields-header"><%= t('webpage.publishing_status') %></div>
+
+          <div class="field-box required">
+            <div class="label-offset publishing-status">
+              <%= t('webpage.your_webpage_currently_is') %>
+              <!-- ko if: published -->
+              <span class="label label-success" data-bind="click: publishWebpage" rel="tooltip" title="<%= t 'webpage.unpublish' %>"><i class="icon icon-ok-sign"></i><%= t('webpage.published') %></span>
+              <!-- /ko -->
+              <!-- ko ifnot: published -->
+              <span class="label" data-bind="click: publishWebpage" rel="tooltip" title="<%= t 'webpage.publish' %>"><i class="icon icon-ban-circle"></i><%= t('webpage.not_published') %></span>
+              <!-- /ko -->
+              <i class="icon-question-sign" title="<%= t('whats_this') %>?" style="margin-right: 10px;" rel="tooltip" data-confirmation-win="true" data-confirmation-txt="<%= t('webpage.publish_desc') %>"></i>
+              <input type="hidden" name="webpage[show_in_menu]" value="0" />
+              <input type="checkbox" name="webpage[show_in_menu]" value="1" data-bind="checked: show_in_menu" />
+              <span><%= t('webpage.show_in_menu') %></span>
+              <input type="hidden" name="webpage[show_in_sitemap]" value="0" />
+              <input type="checkbox" name="webpage[show_in_sitemap]" value="1" data-bind="checked: show_in_sitemap" />
+              <span><%= t('webpage.show_in_sitemap') %></span>
+            </div>
+          </div>
+
+          <div class="fields-header"><%= t('webpage.current_translation') %></div>
+
+          <input type="hidden" name="webpage[translation][id]" data-bind="value: translation().id" />
+
+          <div class="field-box">
+            <label for="name"><%= t('name') %></label>
+            <input type="text" name="webpage[translation][title]" data-bind="value: translation().title" />
+          </div>
+
+
+          <div class="field-box">
+            <label for="webpage_meta_keywords"><%= t('webpage.meta_keywords') %></label>
+            <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'webpage[translation][meta_keywords]' }, value: translation().meta_keywords" />
+          </div>
+
+          <div class="field-box">
+            <label for="webpage_meta_description"><%= t('webpage.meta_description') %></label>
+            <textarea maxlength="255" data-bind="attr: { name: 'webpage[translation][meta_description]' }, value: translation().meta_description" />
+            <br />
+            <span class="label-offset mini-desc"><%= t('max_255') %></span>
+          </div>
+
         </div>
-      </div>
 
-      <div class="fields-header"><%= t('webpage.current_translation') %></div>
+      </form>
+    </div>
 
-      <input type="hidden" name="webpage[translation][id]" data-bind="value: translation().id" />
+    <div class="clearfix">
 
-      <div class="field-box">
-        <label for="name"><%= t('name') %></label>
-        <input type="text" name="webpage[translation][title]" data-bind="value: translation().title" />
-      </div>
-
-
-      <div class="field-box">
-        <label for="webpage_meta_keywords"><%= t('webpage.meta_keywords') %></label>
-        <input type="text" class="webpage_meta_keywords" data-bind="attr: { name: 'webpage[translation][meta_keywords]' }, value: translation().meta_keywords" />
-      </div>
-
-      <div class="field-box">
-        <label for="webpage_meta_description"><%= t('webpage.meta_description') %></label>
-        <textarea maxlength="255" data-bind="attr: { name: 'webpage[translation][meta_description]' }, value: translation().meta_description" />
-        <br />
-        <span class="label-offset mini-desc"><%= t('max_255') %></span>
-      </div>
+      <div class="webbits-grid"></div>
 
     </div>
 
-  </form>
+
+    <div class="clearfix">
+      <h1>files</h1>
+    </div>
+
+  </div>
 
 </script>
 

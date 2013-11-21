@@ -60,20 +60,21 @@ module Iox
     end
 
     def set_locale
-      return if session[:locale] and (session[:locale] == I18n.locale) and (!params.has_key?(:locale) or !request.get?)
-      if params[:locale] && Rails.configuration.iox.available_langs.include?(params[:locale].downcase)
-        I18n.locale = (session[:locale] = params[:locale])
-      #elsif current_user and current_user.settings["locale"]
-      #  I18n.locale = (session[:locale] = current_user.settings["locale"])
-      #elsif request.env.has_key?("HTTP_ACCEPT_LANGUAGE") && detected_locale = request.env["HTTP_ACCEPT_LANGUAGE"][0..1]
-      #  if Rails.configuration.i18n.available_locales && Rails::Application.config.i18n.available_locales.include?(detected_locale.downcase)
-      #    I18n.locale = (session[:locale] = detected_locale)
-      #  else
-      #    session[:locale] = I18n.locale
-      #  end
+      logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
+      locale =  params[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
+      locale = locale.to_sym
+      if Rails.configuration.iox.available_langs.include? locale
+        I18n.locale = locale
+        logger.debug "* Locale set to '#{I18n.locale}'"
       else
-        I18n.locale = session[:locale] = Rails.configuration.iox.available_langs.include?(I18n.locale.downcase) ? I18n.locale : I18n.default_locale
+        logger.warn "* Locale not included in #{Rails.configuration.iox.available_langs} could not set to '#{locale}'"
       end
+    end
+
+    private
+
+    def extract_locale_from_accept_language_header
+      request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
     end
 
   end

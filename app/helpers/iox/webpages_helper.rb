@@ -184,5 +184,12 @@ module Iox
       t.save
     end
 
+    def get_slugs(webpage=@webpage)
+      slugs = []
+      slugs << webpage.slug
+      slugs << webpage.parent.slug if webpage.parent
+      slugs
+    end
+
   end
 end

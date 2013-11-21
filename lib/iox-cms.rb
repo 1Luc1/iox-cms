@@ -24,6 +24,7 @@ require "iox/plugin"
 require 'iox/controller_helpers'
 require 'iox/access_controller_helpers'
 require 'iox/country_select_helpers'
+require 'iox/webpage_stats'
 
 # require all gem files
 require 'paperclip'

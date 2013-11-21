@@ -16,7 +16,7 @@
   <div class="webbit-meta-info" style="display:none">
     <%= fields_for "webbit[]" do |wb| %>
       <%= wb.hidden_field :name %>
-      <%= wb.hidden_field :plugin_type %>
+      <%# wb.hidden_field :plugin_type %>
       <%= wb.hidden_field :id %>
 
       <% @translation = get_translation(@webbit) %>

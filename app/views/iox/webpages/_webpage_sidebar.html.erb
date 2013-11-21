@@ -7,14 +7,6 @@
     <button id="push-sidebar-pin" class="btn" title="<%= t('stick') %>"><i class="icon-thumb-tack"></i></button>
     <button class="btn" type="submit" title="<%= t('save') %>"><i class="icon-save"></i></button>
     <button class="btn" title="<%= t('view') %>" data-href="<%= webpage_path(@webpage) %>"><i class="icon-eye"></i></button>
-    <button data-toggle="dropdown" class="btn dropdown-toggle">
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-        <li><a href="<%= webpages_path %>"><%= t('webpages.back') %></a></li>
-        <li><a href="<%= webpage_path(@webpage) %>" target='_blank'><%= t('view') %></a></li>
-        <li><%= link_to t('delete'), @webpage, method: :delete, data: { confirm: t('webpage.really_delete', name: @webpage.name) } %></li>
-    </ul>
   </div>
 
   <%= image_tag 'iox/logo_transp_150x150.png', class: 'iox-logo' %>
@@ -175,7 +167,7 @@
         </a>
       </div>
       <h1><%= t('webpage.structure') %></h1>
-      
+
       <div id="webbits-tree"></div>
 
       <div id="webbit-form">
@@ -290,7 +282,7 @@ function setupImageGalleryDraggable(){
               url: '<%= webpage_webbits_path(@webpage) %>/'+options.data.id,
               data: { webbit: { name: options.data.name,
                                 title: options.data.title,
-                                category: options.data.category } 
+                                category: options.data.category }
               },
               type: 'patch',
               dataType: 'json'
@@ -327,9 +319,9 @@ function setupImageGalleryDraggable(){
         $('#webbits-tree .k-item').each( function(e){
           newOrderIds.push( treeview.dataItem(this).id )
         });
-        $.ajax({ 
+        $.ajax({
           url: '<%= reorder_webpage_webbits_path(@webpage) %>',
-          data: { webbit_id: treeview.dataItem(e.sourceNode).id, 
+          data: { webbit_id: treeview.dataItem(e.sourceNode).id,
                   parent_id: (e.destinationNode && e.dropPosition === 'over' ? treeview.dataItem(e.destinationNode).id : null),
                   order: newOrderIds },
           type: 'post',
@@ -340,9 +332,9 @@ function setupImageGalleryDraggable(){
       },
       template: kendo.template( $('#webbit-template').html() )
   });
-  
+
   treeview = $('#webbits-tree').data('kendoTreeView');
-  
+
   $('#webbits-tree').on('click', '.k-item', function(e){
     e.stopPropagation();
     var wasSelected = $(this).hasClass('selected').length > 0;
@@ -538,7 +530,7 @@ function setupImageGalleryDraggable(){
     $.ajax({
       url: '<%= webpage_webbits_path(@webpage) %>/'+$form.find('.webbit_id').val(),
       type: 'patch',
-      data: { webbit: 
+      data: { webbit:
         { content: 'REPLACE this with text' }
       },
       type: 'patch',

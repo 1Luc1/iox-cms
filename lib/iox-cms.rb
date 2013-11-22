@@ -12,6 +12,7 @@ end
 
 require "iox/version"
 require "iox/enable_config_namespace"
+require "iox/document_schema"
 require "iox/engine"
 require "iox/file_object"
 require "iox/acts_as_document"

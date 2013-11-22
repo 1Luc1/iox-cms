@@ -19,6 +19,7 @@ de:
   really_delete: "Möchtest du dieses Dokument wirklich löschen?"
   saved: "Änderungen an &raquo;%{name}&laquo; wurden gespeichert"
   saving_failed: "Änderungen an &raquo;%{name}&laquo; konnten nicht gespeichert werden"
+  invalid_params: "Ungültige Parameter"
   close: "Schließen"
   delete: "Löschen"
   back: "Zurück"

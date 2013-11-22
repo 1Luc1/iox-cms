@@ -1,4 +1,4 @@
-<a class="dashboard<%= " active" if controller.controller_name == 'dashboard' %>" href="<%= dashboard_path %>" title="<%= t('dashboard.title') %>">
+<a class="dashboard<%= " active" if controller.controller_name == 'dashboard' %>" href="/iox/dashboard" title="<%= t('dashboard.title') %>">
   <span class="day"><%= Time.new.strftime "%d" %></span>
   <span class="month"><%= l Time.new, format: '%B' %></span>
 </a>

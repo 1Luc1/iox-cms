@@ -8,12 +8,10 @@ class IoxWebfiles < ActiveRecord::Migration
       t.string      :content_type
       t.string      :copyright
       t.datetime    :orig_date
-      t.boolean     :published, default: true
+      
       t.belongs_to  :webpage
 
-      t.datetime    :deleted_at
-      t.integer     :updated_by
-      t.integer     :created_by
+      t.iox_document_defaults
 
       t.timestamps
 

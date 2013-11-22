@@ -14,6 +14,7 @@ en:
   deletion_failed: "&raquo;%{name}&laquo; could not be removed"
   saved: "&raquo;%{name}&laquo; has been saved"
   saving_failed: "&raquo;%{name}&laquo; could not be saved"
+  invalid_params: "Invalid parameters"
   really_delete: "Really delete this document?"
   close: "Close"
   delete: "Delete"

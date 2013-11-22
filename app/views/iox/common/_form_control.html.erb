@@ -13,3 +13,17 @@
 <% end %>
 
 </div>
+
+<!-- ko if: !id || id.lenght < 1 -->
+<div class="pull-left">
+  <h3 style="margin: 0">
+  <span><%= t('webpage.new') %></span>
+  </h3>
+  <!-- ko if: typeof(_parent) === 'function' && _parent() && _parent().name -->
+  <h5 style="margin: 0">
+  in: 
+  <tt data-bind="text: _parent().name"></tt >
+  </h5>
+  <!-- /ko -->
+</div>
+<!-- /ko -->

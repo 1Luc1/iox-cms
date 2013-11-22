@@ -1,7 +1,7 @@
 <ul class="right-menu">
   <li class="user-menu dropdown">
-    <%= link_to current_user.username, user_path(current_user), class: 'username' %>
-    <a href="<%= user_path(current_user) %>" data-toggle="dropdown" class="user-menu-trigger">
+    <%= link_to current_user.username, "/iox/users/#{current_user.id}", class: 'username' %>
+    <a href="<%= "/iox/users/#{current_user.id}" %>" data-toggle="dropdown" class="user-menu-trigger">
       <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-thumb', 'data-user-id' => current_user.id %>
       <span class="caret"></span>
     </a>
@@ -12,20 +12,20 @@
         <br />
         <%= mail_to current_user.email, current_user.email, class: 'user-email' %>
         <br style="margin-bottom: 1.8em" />
-        <%= link_to t('change_password'), change_password_path( current_user ), :'data-xhr-win' => true %>
+        <%= link_to t('change_password'), "/iox/a/c_pwd/#{current_user.id}", :'data-xhr-win' => true %>
         &mdash;
-        <%= link_to t('activities.activities'), activities_path %>
+        <%= link_to t('activities.activities'), "/iox/activities" %>
         <br />
-        <a href="<%= user_path(current_user) %>" class="btn"><%= t('view_profile') %></a>
+        <a href="<%= "/iox/users/#{current_user.id}" %>" class="btn"><%= t('view_profile') %></a>
       </div>
       <% if current_user.is_admin? %>
-      <div class="usage" data-xhr-url="<%= dashboard_quota_path %>" data-xhr-wait-txt="<%= t('loading_quota') %>..."></div>
+      <div class="usage" data-xhr-url="/iox/dashboard/quota" data-xhr-wait-txt="<%= t('loading_quota') %>..."></div>
       <% end %>
       <div class="footer clearfix">
-        <a class="btn pull-right" href="<%= logout_path %>"><%= t('auth.logout') %></a>
+        <a class="btn pull-right" href="/iox/logout"><%= t('auth.logout') %></a>
       </div>
     </div>
   </li>
-  <li class="activities-dropdown dropdown hidden-phone" data-xhr-url="<%= activities_summary_path %>" data-xhr-wait-title="<%= t('activities.loading') %>" title="<%= t('activities.activities') %>">
+  <li class="activities-dropdown dropdown hidden-phone" data-xhr-url="/iox/activities/summary" data-xhr-wait-title="<%= t('activities.loading') %>" title="<%= t('activities.activities') %>">
   </li>
 </ul>

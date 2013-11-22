@@ -27,6 +27,10 @@ module Iox
       )
     end
 
+    if defined?( ActiveRecord )
+      ActiveRecord::Base.send( :include, Iox::DocumentSchema )
+    end
+
     initializer :append_migrations do |app|
       unless app.root.to_s.match root.to_s
         config.paths["db/migrate"].expanded.each do |expanded_path|

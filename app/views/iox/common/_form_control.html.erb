@@ -1,9 +1,9 @@
 <div class="iox-form-control">
 
-<% if can_write_plugin?( item_name ) %>
-  <a data-bind="attr: { href: '/iox/<%= item_name.demodulize.pluralize %>/'+id }, click: removeItem" class="btn" title="<%= t('delete') %>" data-confirm-proceed="<%= t('really_delete') %>"><span class="icon-trash-o"></span></a>
+<% if can_write_plugin?( item_url.split('/').last.singularize ) %>
+  <a data-bind="attr: { href: '<%= item_url %>/'+id }, click: removeItem" class="btn" title="<%= t('delete') %>" data-confirm-proceed="<%= t('really_delete') %>"><span class="icon-trash-o"></span></a>
   <% if defined? show_view_btn %>
-  <a href="/ens/<%= item_name %>" class="btn" title="<%= t('view') %>" target="_blank"><i class="icon-eye-open"></i></a>
+  <a href="<%= item_url %>" class="btn" title="<%= t('view') %>" target="_blank"><i class="icon-eye-open"></i></a>
   <% end %>
   <% if defined? pref_path %>
   <a href="#" data-xhr-win="true" data-bind="attr: { 'data-xhr-href': '<%= pref_path %>'}
@@ -17,7 +17,7 @@
 <!-- ko if: !id || id.lenght < 1 -->
 <div class="pull-left">
   <h3 style="margin: 0">
-  <span><%= t('webpage.new') %></span>
+  <span><%= t("#{ defined?(item_ns) ? item_ns : item_url.split('/').last.singularize}.new") %></span>
   </h3>
   <!-- ko if: typeof(_parent) === 'function' && _parent() && _parent().name -->
   <h5 style="margin: 0">

@@ -128,6 +128,10 @@ $(function(){
       $('.iox-content-container').show();
   });
 
+  $('body').on('click', '[data-role=switchBackContent]', function(e){
+    iox.switchContent('back');
+  });
+
   $(document).on('keyup', function(e){
     if( e.keyCode === 27 && $('.iox-win:visible').length )
       iox.Win.closeVisible();

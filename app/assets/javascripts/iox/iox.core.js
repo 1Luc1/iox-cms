@@ -58,4 +58,19 @@
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
   };
 
+  window.iox.switchContent = function( direction, callback ){
+    var $curContent = $('.iox-content:visible');
+    if( $curContent.length > 1 )
+      throw Error('more than one iox-content:visible were found. aborting');
+    if( $curContent.lenght < 1 )
+      throw Error('no iox-content:visible was found. aborting');
+    var $nextContent = direction === 'next' ? $curContent.next('.iox-content') : $curContent.prev('.iox-content');
+    if( $nextContent.lenght < 1 )
+      throw Error('no next/prev iox-content was found. aborting');
+    $curContent.hide();
+    $nextContent.show();
+    if( typeof( callback ) === 'function' )
+      callback( $nextContent );
+  }
+
 })();

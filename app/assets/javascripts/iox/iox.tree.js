@@ -395,7 +395,8 @@
       item._master._selectedItem = null;
       return;
     }
-    item.showForm( item, e );
+    if( item.showForm )
+      item.showForm( item, e );
     item._selected( true );
     if( item._master._selectedItem )
         item._master._selectedItem._selected( false );

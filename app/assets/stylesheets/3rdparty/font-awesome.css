@@ -277,6 +277,7 @@ a [class*=" icon-"] {
 .icon-check:before {
   content: "\f00c";
 }
+.icon-close:before,
 .icon-times:before {
   content: "\f00d";
 }
@@ -492,6 +493,7 @@ a [class*=" icon-"] {
 .icon-times-circle:before {
   content: "\f057";
 }
+.icon-ok-sign:before,
 .icon-check-circle:before {
   content: "\f058";
 }
@@ -510,6 +512,7 @@ a [class*=" icon-"] {
 .icon-check-circle-o:before {
   content: "\f05d";
 }
+.icon-ban-circle:before,
 .icon-ban:before {
   content: "\f05e";
 }

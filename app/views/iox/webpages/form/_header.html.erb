@@ -1,5 +1,6 @@
 <div class="webpage-head-control iox-form-control">
 
+  <% unless defined?(skip_lang_select) %>
   <div class="iox-simple-select select-lang">
     <span class="iox-simple-select-trigger"
       <span class="current-select" data-bind="text: translation().locale"></span>
@@ -11,6 +12,7 @@
       <% end %>
     </ul>
   </div>
+  <% end %>
 
   <% unless defined?(skip_template_select) %>
     <div class="iox-simple-select select-template">

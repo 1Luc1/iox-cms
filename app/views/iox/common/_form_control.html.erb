@@ -14,16 +14,18 @@
 
 </div>
 
-<!-- ko if: !id || id.lenght < 1 -->
-<div class="pull-left">
-  <h3 style="margin: 0">
-  <span><%= t("#{ defined?(item_ns) ? item_ns : item_url.split('/').last.singularize}.new") %></span>
-  </h3>
-  <!-- ko if: typeof(_parent) === 'function' && _parent() && _parent().name -->
-  <h5 style="margin: 0">
-  in: 
-  <tt data-bind="text: _parent().name"></tt >
-  </h5>
+<% unless defined?(skip_title) %>
+  <!-- ko if: !id || id.lenght < 1 -->
+  <div class="pull-left">
+    <h3 style="margin: 0">
+    <span><%= t("#{ defined?(item_ns) ? item_ns : item_url.split('/').last.singularize}.new") %></span>
+    </h3>
+    <!-- ko if: typeof(_parent) === 'function' && _parent() && _parent().name -->
+    <h5 style="margin: 0">
+    in: 
+    <tt data-bind="text: _parent().name"></tt >
+    </h5>
+    <!-- /ko -->
+  </div>
   <!-- /ko -->
-</div>
-<!-- /ko -->
+<% end %>

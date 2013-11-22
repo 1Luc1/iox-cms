@@ -143,25 +143,6 @@ module Iox
       langs
     end
 
-    #
-    # gets translation of this webbit or webpage
-    #
-    def get_translation( wb )
-      return '' if wb.nil?
-      l =  @webpage.translation && @webpage.translation.locale || I18n.default_locale
-      transl = wb.translations.where(locale: l).first
-      transl = wb.translations.create(locale: l, content: '<p>REPLACE ME</p>') unless transl
-      transl
-    end
-
-    def get_translation_content( wb )
-      return '' if wb.nil?
-      if t = get_translation( wb )
-        return t.content
-      end
-      ''
-    end
-
     def get_required_webbits
       arr = []
       @webpage.webbits.each do |wb|

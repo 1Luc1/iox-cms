@@ -51,7 +51,9 @@
           <p>
             <%= tr.label :locale, t('language') %>
 
-            <%= tr.select( :locale, available_webpage_langs( :translate ), { include_blank: false },
+            <%= tr.select( :locale, 
+                options_for_select( available_webpage_langs( :translate ), I18n.locale ),
+                  { include_blank: false },
                 {class: 'select2 select-lang', style: 'width: 280px', multiple: false} ) %>
 
           </p>

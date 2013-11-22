@@ -10,7 +10,7 @@
 <% if @webbit and controller.action_name == 'edit' %>
 
   <div class="<%= @webbit.css_classes %> webbit" id="wb_<%= @webbit.id %>" data-plugin-name='<%= @webbit.plugin_type %>'<%= " contenteditable=true" if @webbit.plugin_type.include?('text') %>>
-    <%= raw( get_translation_content(@webbit) ) %>
+    <%= raw @webbit.content %>
   </div>
 
   <div class="webbit-meta-info" style="display:none">
@@ -19,7 +19,7 @@
       <%# wb.hidden_field :plugin_type %>
       <%= wb.hidden_field :id %>
 
-      <% @translation = get_translation(@webbit) %>
+      <% @translation = @webbit.translation %>
       <%= fields_for "translation[]" do |tr| %>
         <%= tr.hidden_field :content, :class => "translation-content-#{@webbit.id}" %>
         <%= tr.hidden_field :id %>
@@ -31,6 +31,6 @@
 
 <% else %>
   <div class="<%= @webbit and @webbit.css_classes %>" id="wb_<%= @webbit and @webbit.id %>" data-plugin-name='text' <%= controller.action_name == 'edit' ? "contenteditable='true'" : '' %>>
-    <%= raw( get_translation_content(@webbit) ) %>
+    <%= raw( @webbit.content ) %>
   </div>
 <% end %>

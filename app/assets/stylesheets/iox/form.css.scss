@@ -31,6 +31,11 @@ textarea.error{
   box-shadow: none;
 }
 
+.iox-form textarea{
+  padding-bottom: 0;
+  min-height: 3em;
+}
+
 .iox-form input[type=text].k-invalid,
 .iox-form input[type=password].k-invalid,
 .iox-form textarea.k-invalid{
@@ -74,7 +79,7 @@ textarea.error{
 }
 
 .iox-form .field-box .label-offset{
-  margin-left: 120px;
+  margin-left: 140px;
 }
 
 .iox-simple-select{

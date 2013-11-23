@@ -14,6 +14,8 @@ $(function(){
 
     $tabsNav.find('li').on('click', function(e){
       e.preventDefault();
+      if( $(this).hasClass('disabled') )
+        return;
       $tabsNav.find('li').removeClass('active');
       $tabs.hide();
       $($tabs[$(this).index()]).show()

@@ -71,6 +71,24 @@ module Iox
       end
     end
 
+    # checks if current_user is owner of given object
+    # or if user can write to the object's application type
+    # or if user is admin.
+    #
+    # @return [boolean] if user can access
+    #
+    def can_modify?( obj )
+      unless obj.respond_to?( :created_by )
+        raise StandardError.new "obj does not respond to :created_by"
+      end
+      if !current_user.is_admin? && obj.created_by != current_user.id &&
+         !( !current_user.can_write_apps.blank? && current_user.can_write_apps.include?(obj.class.demodulize.singularize) )
+        flash.now.alert = t('insufficient_rights_you_cannot_save')
+        return false
+      end
+      true
+    end
+
     private
 
     def extract_locale_from_accept_language_header

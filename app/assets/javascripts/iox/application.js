@@ -129,7 +129,7 @@ $(function(){
   });
 
   $('body').on('click', '[data-role=switchBackContent]', function(e){
-    iox.switchContent('back');
+    iox.switchContent('prev');
   });
 
   $(document).on('keyup', function(e){

@@ -20,6 +20,23 @@
   //padding: 10px;
   //background-color: $iox-light-grey;
 }
+
+h3.iox-sidebar-title{
+  font-size: 16px;
+  font-weight: 100;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+  padding: 0 0 0 10px;
+  color: #777;
+}
+.iox-sidebar-frame.half-top{
+  bottom: 50%;
+}
+
+.iox-sidebar-frame.half-bottom{
+  top: 50%;
+}
+
 .iox-sidebar-arrow{
   border-color: transparent #aaa transparent transparent;
   border-style: inset;

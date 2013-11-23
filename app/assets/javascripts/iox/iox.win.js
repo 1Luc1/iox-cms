@@ -25,8 +25,12 @@
     title: 'parse',
 
     // close button
-    // default: '<i class="icon-close"></i>'
+    // default: '<i class="icon-remove"></i>'
     closeIcon: '<i class="icon-remove"></i>',
+
+    // save button
+    // default: '<i class="icon-save"></i>'
+    saveIcon: '<i class="icon-save"></i>',
 
     // where to append the win
     appendTo: 'body',
@@ -42,6 +46,11 @@
 
     // content. The html content object
     content: '',
+
+    // ajax content to load
+    // if you want to load the content from given url
+    // default: null
+    url: null,
 
     // height of the window
     height: null,
@@ -84,6 +93,8 @@
 
   function Win( _options ){
 
+    var self = this;
+
     // setup default options and override
     // with passed in options
     this.options = window.iox.Win.defaults;
@@ -94,6 +105,12 @@
       this.options.content = '<div class="content-padding">'+this.options.yesNoQuestion+'</div><div class="iox-win-footer"><button class="btn btn-danger answer-no">'+this.options.i18n.no+'</button><button class="btn btn-success answer-yes pull-right" data-close-win="true">'+this.options.i18n.yes+'</button></div>';
     }
 
+    if( this.options.url )
+      return $.get( self.options.url, function( html ){
+        self.options.content = html;
+        self.options.url = null;
+        new iox.Win( self.options );
+      });
     if( !(this.options.content instanceof jQuery) )
       this.options.content = $('<div>'+this.options.content+'</div>');
 
@@ -124,6 +141,9 @@
 
     $win.center();
     $win.find('[data-close-win]').on('click', closeWinEvent );
+    $win.find('[data-save-win-form]').on('click', function(){
+      $win.find('form:first').submit();
+    });
     $win.find('.js-get-focus').focus();
     $(document).on('click', checkCloseWin);
 
@@ -161,10 +181,19 @@
     var $closeBtn = $('<button/>')
       .addClass('close-btn')
       .attr('data-close-win', true)
-      .append( this.options.closeIcon )
+      .append( this.options.closeIcon );
+
+    var $saveBtn = $('<button/>')
+      .addClass('save-btn')
+      .attr('data-save-win-form', true)
+      .append( this.options.saveIcon );
+
     $header = $('<div/>')
       .addClass('iox-win-header')
       .append( $closeBtn );
+    if( this.options.saveFormBtn )
+      $header.append( $saveBtn );
+
     if( this.options.title ){
 
       var $title = $('<span/>')

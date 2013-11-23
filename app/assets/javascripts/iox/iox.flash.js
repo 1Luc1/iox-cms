@@ -41,7 +41,10 @@
     if( options.type === 'alert' )
       $flash.addClass('alert').removeClass('notice');
 
-    $(options.obj).html( $flash )
+    $( options.obj ).fadeOut( 200, function(){
+      $(options.obj).html( $flash );
+      $(options.obj).fadeIn( 500 );
+    });
 
   }
 

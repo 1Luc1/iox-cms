@@ -94,6 +94,10 @@ $(function(){
       var options = { content: htmlRes };
       if( $(self).attr('data-xhr-win-title') )
         options.title = $(self).attr('data-xhr-win-title');
+      if( $(self).attr('data-xhr-win-callback') )
+        options.completed = window[$(self).attr('data-xhr-win-callback')];
+      if( $(self).attr('data-xhr-win-save-form-button') )
+        options.saveFormBtn = true;
       new iox.Win( options );
     });
   });

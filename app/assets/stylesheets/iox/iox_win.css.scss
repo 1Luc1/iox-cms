@@ -29,6 +29,7 @@
   font-size: 0.9em;
   color: #777;
 }
+.iox-win-header .save-btn,
 .iox-win-header .close-btn{
   color: #999;
   position: absolute;
@@ -37,6 +38,15 @@
   font-size: 16px;
   border: none;
   background: none;
+}
+.iox-win-header .save-btn{
+  right: 40px;
+  background: #4E9C4E;
+  color: #fff;
+  padding: 3px 5px;
+  top: 9px;
+  border-radius: 2px;
+  font-size: 0.9em;
 }
 .iox-win-header .close-btn:hover{
   color: #333;

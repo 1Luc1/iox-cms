@@ -25,13 +25,41 @@
   font-size: 12px;
   padding: 5px;
   margin-right: 2em;
-  color: $iox-red;
+  color: #555;
+}
+
+.iox-tabs > ul > li.disabled a{
+  color: #bbb;
 }
 
 .iox-tabs > ul > li.active a{
   font-weight: 600;
+  color: $iox-red;
 }
 
 .iox-tabs > ul > li a:hover{
   text-decoration: none;
+}
+
+.iox-tabs.vertical > ul{
+  float: left;
+  width: 150px;
+}
+
+.iox-tabs.vertical > ul > li{
+  float: none;
+  margin: 5px 0;
+}
+
+.iox-tabs.vertical > ul > li > a{
+  border-left: 5px solid transparent;
+}
+
+.iox-tabs.vertical > ul > li.active > a{
+  border-color: $iox-red;
+}
+
+.iox-tabs.vertical > div{
+  margin-left: 200px;
+  min-width: 300px;
 }

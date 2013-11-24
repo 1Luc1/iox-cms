@@ -106,11 +106,22 @@ $(function(){
     e.preventDefault();
     $(this).closest('.iox-simple-select').find('.iox-simple-select-list').slideToggle(100);
     $(this).closest('.iox-simple-select').toggleClass('toggled');
-  })
+  });
 
   $(document).on('click', '[data-confirmation-win]', function(e){
     e.preventDefault();
     new iox.Win({ content: '<div class="content-padding">'+$(this).attr('data-confirmation-txt')+'</div><div class="iox-win-footer"><button class="btn" data-close-win="true">'+iox.Win.defaults.i18n.ok+'</button></div>' });
+  });
+
+  $(document).on('click', '[data-y-n-win]', function(e){
+    e.preventDefault();
+    options = { 
+      yesNoQuestion: $(this).attr('data-y-n-txt'),
+      trigger: e.target
+    };
+    if( $(this).attr('data-y-n-callback') )
+      options.completed = window[$(this).attr('data-y-n-callback')];
+    new iox.Win( options );
   });
 
   $('body').on('click', '[data-role=submit]', function(e){
@@ -137,8 +148,8 @@ $(function(){
   });
 
   $(document).on('keyup', function(e){
-    if( e.keyCode === 27 && $('.iox-win:visible').length )
-      iox.Win.closeVisible();
+    if( e.keyCode === 27 && $('.iox-win').length )
+      $('.iox-win:last').data('ioxWin').close();
   });
 
 

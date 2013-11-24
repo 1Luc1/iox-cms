@@ -10,6 +10,9 @@
  * iox.core
  * jquery.centerjs
  *
+ *
+ * version 0.2.0
+ *
  */
 
 ( function(){
@@ -60,6 +63,7 @@
 
     i18n: {
       ok: 'OK',
+      cancel: 'Cancel',
       yes: 'Yes',
       no: 'No'
     }
@@ -78,17 +82,10 @@
     });
   }
 
-  function checkCloseWin(e){
-    if( $(e.target).closest('.iox-win').length )
+  function checkCloseWin(){
+    if( $('.iox-win').length )
       return;
-    $(e.target).closest('.iox-win').find('[data-close-win]:first').click();
-  }
-
-  function closeWinEvent(e){
-    e.preventDefault();
-    $(this).closest('.iox-win').remove();
-    $(document).off('click', checkCloseWin);
-    $('.iox-win-overlay:last').remove();
+    $('.iox-win:last').data('ioxWin').close();
   }
 
   function Win( _options ){
@@ -97,12 +94,30 @@
 
     // setup default options and override
     // with passed in options
-    this.options = window.iox.Win.defaults;
+    this.options = {};
+    for( var i in window.iox.Win.defaults )
+      this.options[i] = window.iox.Win.defaults[i];
     for( var i in _options )
       this.options[i] = _options[i];
 
+    // events
+    this.on = {};
+
     if( this.options.yesNoQuestion ){
       this.options.content = '<div class="content-padding">'+this.options.yesNoQuestion+'</div><div class="iox-win-footer"><button class="btn btn-danger answer-no">'+this.options.i18n.no+'</button><button class="btn btn-success answer-yes pull-right" data-close-win="true">'+this.options.i18n.yes+'</button></div>';
+    }
+
+    if( this.options.prompt ){
+      this.options.content = $('<div/>');
+      var innerContent = $('<div/>').addClass('content-padding');
+      if( this.options.prompt.text )
+        innerContent.append('<p>'+this.options.prompt.text+'</p>');
+      innerContent.append('<input type="text" name="name" />')
+      this.options.content.append( innerContent )
+        .append( $('<div class="iox-win-footer"></div>')
+                    .append('<button class="btn cancel-btn">'+this.options.i18n.cancel+'</button>')
+                    .append('<button class="btn btn-success pull-right" data-close-win="true">'+this.options.i18n.ok+'</button>')
+                );
     }
 
     if( this.options.url )
@@ -140,7 +155,14 @@
     $(this.options.appendTo).append( $win );
 
     $win.center();
-    $win.find('[data-close-win]').on('click', closeWinEvent );
+    $win.find('[data-close-win]').on('click', function(e){
+      e.preventDefault();
+      self.close();
+    });
+    $win.find('.cancel-btn').on('click', function(e){
+      e.preventDefault();
+      self.close( true );
+    })
     $win.find('[data-save-win-form]').on('click', function(){
       $win.find('form:first').submit();
     });
@@ -150,6 +172,16 @@
     $win.find('form').on('submit', function(e){
       $win.block();
     });
+
+    $win.on('keyup', function(e){
+      if( e.keyCode === 13 && $win.find('.btn-success').length > 0 ){
+        e.preventDefault();
+        $win.find('.btn-success').click();
+      }
+    })
+
+    $win.data('ioxWin', this);
+    this.$win = $win;
 
     if( this.options.yesNoQuestion ){
       var self = this;
@@ -164,11 +196,40 @@
           self.options.onYes( e );
       });
     }
+
+    // deprecated
     if( this.options.completed && typeof(this.options.completed) === 'function' )
       this.options.completed( $win );
 
+    if( this.options.prompt )
+      $win.find('input[type=text]').focus();
+
+    if( typeof( this.on.completed ) === 'function' )
+      this.on.completed( $win );
+
   }
 
+  Win.prototype.close = function closeWin( noCallbacks, e ){
+    var self = this;
+    if( typeof( e ) === 'object' )
+      e.preventDefault();
+    self.$win.remove();
+    $(document).off('click', checkCloseWin);
+    $('.iox-win-overlay:last').remove();
+
+    if( noCallbacks )
+      return;
+
+    if( typeof( this.on.close ) === 'function' )
+      this.on.close();
+
+    if( this.options.prompt && typeof( this.options.prompt.callback ) === 'function' ){
+      self.$win.block();
+      this.options.prompt.callback( self.$win.find('input[name=name]').val(), self.$win, function(){
+        self.close( true );
+      });
+    }
+  }
 
   /**
    * renders a header if renderHeader option

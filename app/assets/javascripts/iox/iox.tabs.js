@@ -22,6 +22,8 @@ $(function(){
                             .addClass('active')
                             .find('.js-get-focus').focus();
       $(this).addClass('active');
+      if( options && typeof( options.activate ) === 'function' )
+        options.activate( $(this) );
     });
 
     // select either tab marked with 'active' or

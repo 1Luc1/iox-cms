@@ -62,5 +62,12 @@
     flash( { type: 'alert', message: msg } );
   }
 
+  flash.urge = function flashUrge( time ){
+    $(window.iox.flash.defaults.obj).css('z-index', 99000);
+    setTimeout( function(){
+      $(window.iox.flash.defaults.obj).css('z-index', 0);
+    }, time);
+  }
+
 
 })();

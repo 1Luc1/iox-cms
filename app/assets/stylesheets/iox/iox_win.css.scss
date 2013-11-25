@@ -9,7 +9,6 @@
   top: 0;
   left: 0;
   right: 0;
-  width: 100%;
 }
 .iox-win{
   position: absolute;
@@ -17,6 +16,8 @@
   border: 1px solid #ddd;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
   z-index: 11001;
+  max-height: 95%;
+  overflow: auto;
 }
 .iox-win-header{
   padding: 15px;

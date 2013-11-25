@@ -22,6 +22,8 @@ module Iox
         iox/activities.css
         3rdparty/password-generator.min.js
         3rdparty/jquery.fileupload
+        3rdparty/lens.png
+        3rdparty/Jcrop.gif
         iox/loader.gif
         iox/loader-horizontal.gif
       )

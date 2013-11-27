@@ -5,6 +5,8 @@
   <script type="text/javascript" src="/javascripts/iox/app-templates.js"></script>
 <% end %>
 <%= content_for :add_css do %>
+  <%= stylesheet_link_tag    "3rdparty/kendoui/kendo.common", media: "all" %>
+  <%= stylesheet_link_tag    "3rdparty/kendoui/kendo.silver", media: "all" %>
   <%= stylesheet_link_tag 'iox/webpages_ext' %>
 <% end %>
 

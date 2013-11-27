@@ -21,9 +21,6 @@ module Iox
         iox/dashboard.css
         iox/dashboard.js
         iox/activities.css
-        iox/Silver/sprite.png
-        iox/Silver/loading.gif
-        iox/Silver/loading-image.gif
         3rdparty/password-generator.min.js
         3rdparty/jquery.fileupload.js
         3rdparty/lens.png

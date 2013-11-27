@@ -9,6 +9,7 @@ module Iox
 
     initializer :assets do |config|
       Rails.application.config.assets.precompile << %w(
+        3rdparty/jquery.js
         iox/application.js
         iox/application.css
         iox/users.js
@@ -21,7 +22,7 @@ module Iox
         iox/dashboard.js
         iox/activities.css
         3rdparty/password-generator.min.js
-        3rdparty/jquery.fileupload
+        3rdparty/jquery.fileupload.js
         3rdparty/lens.png
         3rdparty/Jcrop.gif
         iox/loader.gif

@@ -1,6 +1,9 @@
-//= require jquery
 //= require jquery_ujs
+
 //= require select2
+
+//= require i18n
+//= require i18n/translations
 
 //= require 3rdparty/jquery.center
 //= require 3rdparty/jquery-ui-1.10.3.custom
@@ -22,9 +25,6 @@
 //= require iox/iox.tabs
 //= require iox/iox.tree
 //= require iox/iox.win
-
-//= require i18n
-//= require i18n/translations
 
 //= require_self
 

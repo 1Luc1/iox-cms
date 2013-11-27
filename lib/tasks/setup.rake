@@ -20,4 +20,9 @@ namespace :iox do
 
   end
 
+  desc "run initial install script"
+  task :install do
+    system 'rails g iox:install'
+  end
+
 end

@@ -7,6 +7,29 @@
 
     <%= stylesheet_link_tag    "iox/application", media: "all" %>
     <%= yield :add_css %>
+    <%= javascript_include_tag "3rdparty/jquery" %>
+    <script type="text/javascript">
+      $(function(){
+
+        moment.lang('<%= I18n.locale %>');
+        
+        I18n.defaultLocale = "<%= I18n.default_locale %>";
+        I18n.locale = "<%= I18n.locale %>";
+        
+        iox.Win.defaults.i18n = {
+          ok: '<%= t('ok') %>',
+          yes: '<%= t('yes') %>',
+          no: '<%= t('no') %>',
+          cancel: '<%= t('cancel') %>'
+        }
+
+        kendo.culture('<%= (I18n.locale.match(/en/) ? 'en-GB' : 'de-DE') %>');
+
+        if( typeof(CKEDITOR) !== 'undefined' )
+          CKEDITOR.basePath = '/javascripts/3rdparty/ckeditor/';
+
+      })
+    </script>
     <%= javascript_include_tag "iox/application" %>
     <%= yield :add_js %>
     <%= csrf_meta_tags %>
@@ -38,27 +61,5 @@
 
 </div><!-- ion main container wrapper -->
 
-  <script type="text/javascript">
-    $(function(){
-
-      moment.lang('<%= I18n.locale %>');
-      
-      I18n.defaultLocale = "<%= I18n.default_locale %>";
-      I18n.locale = "<%= I18n.locale %>";
-      
-      iox.Win.defaults.i18n = {
-        ok: '<%= t('ok') %>',
-        yes: '<%= t('yes') %>',
-        no: '<%= t('no') %>',
-        cancel: '<%= t('cancel') %>'
-      }
-
-      kendo.culture('<%= (I18n.locale.match(/en/) ? 'en-GB' : 'de-DE') %>');
-
-      if( typeof(CKEDITOR) !== 'undefined' )
-        CKEDITOR.basePath = '/javascripts/3rdparty/ckeditor/';
-
-    })
-  </script>
 </body>
 </html>

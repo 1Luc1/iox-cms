@@ -30,8 +30,6 @@ module Iox
 
         directory "avatar", "public/images/iox/avatar"
         directory "kendoui", "public/stylesheets/3rdparty/kendoui"
-        directory "javascripts/ckeditor", "public/javascritps/3rdparty/ckeditor"
-        directory "javascripts/ace-noconflict", "public/javascritps/3rdparty/ace-noconflict"
 
         remove_file "app/assets/stylesheets/application.css"
 
@@ -40,14 +38,16 @@ module Iox
         copy_file "whenever_schedule.rb", "config/schedule.rb"
         create_file "app/assets/stylesheets/iox/overrides.css.scss"
 
+        copy_file "i18n-js.yml", "config/i18n-js.yml"
+
         gem 'rails-i18n', '~> 4.0.0.pre'
         gem 'paperclip', '~> 3.0'
         # gem 'rails-i18n', '~> 0.7.4'
         # gem 'capistrano', group: :development
-        gem "capistrano", "~ 2", group: :development
+        gem "capistrano", "~> 2.15.5", group: :development
         # gem 'rvm-capistrano', group: :development
         # gem 'therubyracer', group: :production, platform: :ruby
-        gem 'select2-rails', '3.4.8'
+        gem 'select2-rails', '3.5.0'
         gem 'premailer-rails', '~> 1.5.1'
         gem 'i18n-js', "~> 2.1.2"
         # gem 'jquery-rails'
@@ -97,7 +97,12 @@ module Iox
           "\n"+
           "    config.action_mailer.default_options = { from: 'no-reply@#{domain_name}' }"+
           "\n"+
+          "\n"+
+          "\n"+
+          "    config.assets.initialize_on_precompile = true"+
+          "\n"+
           "\n"
+
         end
         application(nil, env: "production") do
           "\n"+

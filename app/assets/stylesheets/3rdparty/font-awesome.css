@@ -708,6 +708,7 @@ a [class*=" icon-"] {
 .icon-bullhorn:before {
   content: "\f0a1";
 }
+.icon-bell-alt:before,
 .icon-bell:before {
   content: "\f0f3";
 }

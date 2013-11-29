@@ -75,15 +75,22 @@
     padding: 2px 7px;
     &.k-grid-deletePE{
       padding: 0 5px 1px;
+      border-radius: 2px;
+      border: none;
       &:hover{
         background-color: #d55;
         color: #fff;
+        border: none;
       }
     }
     &.k-grid-editPE{
+      border-radius: 2px;
+      border: none;
+      padding: 0 5px 1px;
       &:hover{
         background-color: #333;
         color: #fff;
+        border: none;
       }
     }
     &:hover{

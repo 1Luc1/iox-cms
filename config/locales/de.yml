@@ -329,6 +329,7 @@ de:
     size: "Size"
     updated_by: "Updated by"
     updated_at: "Updated at"
+    type: "Typ"
     deleted: "Datei %{name} wurde gelöscht"
 
   webpage:

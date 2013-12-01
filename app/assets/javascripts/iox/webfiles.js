@@ -21,6 +21,7 @@ $( function(){
                         description: { type: "string" },
                         copyright: { type: "string" },
                         created_at: { type: 'date' },
+                        content_type: { type: 'string' },
                         size: { type: 'integer' },
                         updater_name: { type: 'string' },
                         updated_at: { type: 'date' }
@@ -51,6 +52,8 @@ $( function(){
                   width: 160,
                   title: I18n.t('webfile.updated_at'),
                   format: '{0:dd.MM.yyyy HH:mm}' },
+                { field: 'content_type',
+                  title: I18n.t('webfile.type') },
                 { field: 'size',
                   width: 100,
                   footerTemplate: "#: iox.formatHelper.Filesize( sum, true ) #",

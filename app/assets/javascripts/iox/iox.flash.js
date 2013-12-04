@@ -46,20 +46,24 @@
       $(options.obj).fadeIn( 500 );
     });
 
+    return flash;
   }
 
   flash.rails = function flashRails( msg_obj ){
     msg_obj.forEach( function( msg ){
       flash({ type: msg[0], message: msg[1] });
     });
+    return flash;
   }
 
   flash.notice = function flashNotice( msg ){
     flash( { type: 'notice', message: msg } );
+    return flash;
   }
 
   flash.alert = function flashAlert( msg ){
     flash( { type: 'alert', message: msg } );
+    return flash;
   }
 
   flash.urge = function flashUrge( time ){
@@ -67,6 +71,7 @@
     setTimeout( function(){
       $(window.iox.flash.defaults.obj).css('z-index', 0);
     }, time);
+    return flash;
   }
 
 

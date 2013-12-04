@@ -175,8 +175,17 @@ h2, h3{
 .btn.btn-success{
   color: #fff;
 }
+
 .btn.btn-success:hover{
   color: #fff;
+}
+
+.btn.btn-warning{
+  border-color: #FAA732;
+}
+
+.btn.btn-danger{
+  border-color: #DA4F49;
 }
 
 .desc{

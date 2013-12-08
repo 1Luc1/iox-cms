@@ -1,6 +1,8 @@
 <script id="iox-blog-form-template" type="text/html">
 
-  <%= render partial: '/iox/common/form_control', locals: { item_url: '/iox/webpages' } %>
+  <%= render partial: '/iox/common/form_control', locals: { item_url: '/iox/blogs' } %>
+
+  <%= render partial: '/iox/webpages/form/header', locals: { skip_lang_select: true, skip_template_select: true } %>
 
   <form data-bind="submit: saveBlogForm">
 
@@ -44,8 +46,6 @@
       </div>
 
     </div>
-
-    <%= render partial: '/iox/webpages/form/footer' %>
 
   </form>
 

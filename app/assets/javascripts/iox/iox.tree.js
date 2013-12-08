@@ -1,8 +1,8 @@
 /**
- * ionTable (jQuery plugin using knockoutjs)
+ * ioxTree (jQuery plugin using knockoutjs)
  *
  * written by thorsten zerha
- * (c) by TASTENWERK http://tastenwerk.com
+ * (c) 2013 TASTENWERK http://tastenwerk.com
  *
  * this plugin is free to use for open-source or commercial work
  *

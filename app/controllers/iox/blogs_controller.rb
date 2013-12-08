@@ -42,10 +42,12 @@ module Iox
           @tags[tag] += 1
         end
       end
+      @webpage = @frontpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
       render layout: 'application'
     end
 
     def tags
+      @webpage = @frontpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
       @blogs = Blog.includes(:translations).references(:iox_translations).where('iox_translations.meta_keywords LIKE ?',"%#{params[:tag]}%").order("iox_webpages.created_at DESC").load
       render layout: 'application'
     end
@@ -88,6 +90,7 @@ module Iox
     #
     def edit
       @webpage = @blog = Blog.find_by_id( params[:id] )
+      @frontpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
       return if !redirect_if_no_webpage(@blog)
       render layout: 'application'
     end
@@ -117,6 +120,7 @@ module Iox
     def show
       @blog = Blog.find_by_id( params[:id] )
       return if !redirect_if_no_webpage(@blog)
+      @webpage = @frontpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
       render layout: 'application'
     end
 

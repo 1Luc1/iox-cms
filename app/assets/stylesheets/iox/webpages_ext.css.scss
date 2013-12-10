@@ -133,6 +133,10 @@ ul.image-browser li{
     text-shadow: 0 0 5px black;
   }
 }
+ul.image-browser li img{
+  width: 50px;
+  height: 50px;
+}
 ul.image-browser li:hover .action-icon{ display: block; }
 ul.image-browser li:hover .action-icon:hover{ display: block; opacity: 1 }
 ul.image-browser li:hover .overlay{ display: block; }

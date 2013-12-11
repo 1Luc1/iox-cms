@@ -264,6 +264,7 @@ en:
     upload: "Upload file"
     deleted: "File '%{name}' has been deleted"
     saved: "File '%{name}' has been saved"
+    type: "Type"
     saving_failed: "File '%{name}' could not be updated (%{error})"
 
   webbit:

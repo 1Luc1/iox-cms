@@ -32,7 +32,7 @@ module Iox
           selected=nil if priority_countries.include?(selected)
         end
 
-        return country_options + options_for_select(Iox::Helper.CountrySelectHelper::countries[I18n.locale.to_sym], selected)
+        return country_options + options_for_select(Iox::Helpers::CountrySelectHelper::countries[I18n.locale.to_sym], selected)
       end
       # All the countries included in the country_options output.
     end

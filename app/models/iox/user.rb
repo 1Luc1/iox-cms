@@ -24,7 +24,9 @@ module Iox
     validates :username, presence: true,
                       uniqueness: true
 
-    before_create :gen_confirmation_key
+    before_create :gen_confirmation_key, :gen_auth_token
+
+    belongs_to :domain
 
     before_validation :gen_password_if_empty, on: :create
 
@@ -59,10 +61,13 @@ module Iox
       h
     end
 
-
     def gen_confirmation_key
       self.confirmation_key = Digest::SHA256::hexdigest( password || Time.now.to_f.to_s )
       self.confirmation_key_valid_until = 36.hours.from_now unless confirmation_key_valid_until
+    end
+
+    def gen_auth_token
+      self.auth_token = Digest::SHA256::hexdigest( password || Time.now.to_f.to_s )
     end
 
     def gen_password_if_empty

@@ -63,7 +63,7 @@ module Iox
       logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
       locale =  params[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
       locale = locale.to_sym
-      if Rails.configuration.iox.available_langs.include? locale
+      if get_available_langs.include? locale
         I18n.locale = locale
         logger.debug "* Locale set to '#{I18n.locale}'"
       else
@@ -94,6 +94,14 @@ module Iox
     def extract_locale_from_accept_language_header
       return unless request.env['HTTP_ACCEPT_LANGUAGE']
       request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    end
+
+    def get_available_langs
+      if Rails.configuration.iox && Rails.configuration.iox.available_langs
+        Rails.configuration.iox.available_langs
+      else
+        [ I18n.default_locale ]
+      end
     end
 
   end

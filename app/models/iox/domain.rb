@@ -29,7 +29,7 @@ module Iox
     end
 
     def gen_auth_token
-      self.auth_token = Digest::SHA256::hexdigest( password || Time.now.to_f.to_s )
+      self.auth_token = Digest::SHA256::hexdigest( Time.now.to_f.to_s )
     end
 
   end

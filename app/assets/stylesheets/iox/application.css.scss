@@ -18,10 +18,10 @@
  *= require_self
  */
 
-@import "common";
-@import "auth";
-@import "form";
-@import "panes";
+@import "common.css.scss";
+@import "auth.css.scss";
+@import "form.css.scss";
+@import "panes.css.scss";
 
 html,body{
   height: 100%;
@@ -204,6 +204,6 @@ h2, h3{
 }
 
 
-@import "top_nav";
-@import "app_nav";
-@import "sidebar";
+@import "top_nav.css.scss";
+@import "app_nav.css.scss";
+@import "sidebar.css.scss";

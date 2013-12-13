@@ -4,6 +4,7 @@ class IoxDomains < ActiveRecord::Migration
 
       t.string      :name, index: true
       t.integer     :holder_user_id
+      t.string      :auth_token, index: true
 
       t.timestamps
 

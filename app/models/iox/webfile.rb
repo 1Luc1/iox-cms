@@ -17,12 +17,12 @@ module Iox
                       :default_url => "/images/:style/missing.png",
                       :url => "/data/webfiles/:webpage_id/:style/:updated_at_:basename.:extension"
 
-    validates_attachment :file, content_type: { content_type: ["application/pdf", "image/jpg", "image/png", "image/jpeg", 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3'] }
+    validates_attachment :file, content_type: { content_type: ["application/pdf", "image/jpg", "image/png", "image/jpeg", 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3', 'video/mp4'] }
 
     before_post_process :skip_for_audio
 
     def skip_for_audio
-      ! %w(application/mp3 application/x-mp3 audio/mpeg audio/mp3 audio/ogg application/ogg).include?(file_content_type)
+      ! %w(application/mp3 application/x-mp3 audio/mpeg audio/mp3 audio/ogg application/ogg video/mp4).include?(file_content_type)
     end
 
     belongs_to :webpage

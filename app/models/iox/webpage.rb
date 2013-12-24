@@ -24,7 +24,7 @@ module Iox
     has_many :webbits, -> { order(:position) }, class_name: 'Iox::Webbit', dependent: :delete_all
     has_many :translations, dependent: :delete_all
 
-    has_many :children, -> { where("deleted_at IS NULL").order(:position) }, class_name: 'Iox::Webpage', foreign_key: 'parent_id', dependent: :destroy
+    has_many :children, -> { where("deleted_at IS NULL").where(published: true).order(:position) }, class_name: 'Iox::Webpage', foreign_key: 'parent_id', dependent: :destroy
     has_many :stats, class_name: 'Iox::WebpageStat', dependent: :delete_all
 
     belongs_to :parent, class_name: 'Iox::Webpage', foreign_key: 'parent_id', inverse_of: :children
@@ -69,7 +69,7 @@ module Iox
     def siblings( count_only=nil )
       conditions = {parent_id: nil}
       conditions = {parent_id: parent_id} unless parent_id.blank?
-      siblings = self.class.where("deleted_at IS NULL").where( conditions ).order(:position)
+      siblings = self.class.where("deleted_at IS NULL").where(published: true).where( conditions ).order(:position)
       return siblings.count if count_only == :count_only
       siblings.load
     end

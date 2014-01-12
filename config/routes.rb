@@ -59,7 +59,11 @@ Iox::Engine.routes.draw do
       delete 'delete_webbit_from'
     end
 
-    resources :privileges, controller: :webpage_privileges
+    resources :privileges, controller: :webpage_privileges do
+      collection do
+        get :csv
+      end
+    end
     
   end
 

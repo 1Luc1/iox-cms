@@ -26,8 +26,6 @@ module Iox
 
     before_create :gen_confirmation_key, :gen_auth_token
 
-    belongs_to :domain
-
     before_validation :gen_password_if_empty, on: :create
 
     scope :admins, ->{ where("roles LIKE '%admin%'") }

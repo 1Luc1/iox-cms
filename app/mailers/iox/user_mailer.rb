@@ -16,7 +16,7 @@ module Iox
       @user = user
       @url  = "http://#{Rails.configuration.iox.domain_name}/iox/welcome/#{user.id}?k=#{user.confirmation_key}"
       @site_title = Rails.configuration.iox.site_title
-      mail( to: @user.email, subject: "[#{Rails.configuration.iox.site_title}] #{I18n.t('user.registration_form.subject')}" )
+      mail( to: @user.email, bcc: admin_emails, subject: "[#{Rails.configuration.iox.site_title}] #{I18n.t('user.registration_form.subject')}" )
     end
 
     def confirmation_email(user)
@@ -29,6 +29,12 @@ module Iox
       @user = user
       @url = "http://#{Rails.configuration.iox.domain_name}/iox/reset_password/#{user.id}?k=#{user.confirmation_key}"
       mail( to: @user.email, subject: "[#{Rails.configuration.iox.site_title}] #{I18n.t('auth.forgot_password_request')}" )
+    end
+
+    private
+
+    def admin_emails
+      User.admins.map{ |u| u.email }
     end
 
   end

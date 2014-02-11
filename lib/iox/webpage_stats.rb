@@ -2,6 +2,7 @@ module Iox
 
   module WebpageStats
 
+    include ActionView::Helpers::TextHelper
 
     def update_stat
 
@@ -14,7 +15,9 @@ module Iox
         end
         day_stat.save!
       else
-        @webpage.stats.create!( ip_addr: request.remote_ip.to_s, day: Time.now.to_date, user_agent: request.env["HTTP_USER_AGENT"].to_s )
+        @webpage.stats.create!( ip_addr: request.remote_ip.to_s, 
+                                day: Time.now.to_date, 
+                                user_agent: truncate( request.env["HTTP_USER_AGENT"].to_s, length: 200 ) )
       end
 
     end

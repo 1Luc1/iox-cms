@@ -75,7 +75,7 @@ module Iox
     end
 
     def pos_within_siblings
-      pos = nil
+      pos = 0
       siblings.each_with_index do |sibling,i|
         pos = i if sibling.id == id
       end
@@ -86,8 +86,7 @@ module Iox
       conditions = {parent_id: nil}
       conditions = {parent_id: parent_id} unless parent_id.blank?
       cnt = siblings( :count_only )
-      puts "#{name} HAVING COUNT #{cnt} and position #{pos_within_siblings}"
-      if pos_within_siblings <= cnt
+      if cnt && pos_within_siblings <= cnt
         return siblings[pos_within_siblings+1]
       end
     end

@@ -24,7 +24,7 @@ module Iox
     validates :username, presence: true,
                       uniqueness: true
 
-    before_create :gen_confirmation_key, :gen_auth_token
+    before_create :gen_confirmation_key #, :gen_auth_token
 
     before_validation :gen_password_if_empty, on: :create
 

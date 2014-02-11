@@ -327,10 +327,12 @@ de:
     preview: "Preview"
     name: "Name"
     size: "Size"
-    updated_by: "Updated by"
-    updated_at: "Updated at"
+    updated_by: "Aktualisiert von"
+    updated_at: "Aktualisiert am"
     type: "Typ"
     deleted: "Datei %{name} wurde gelöscht"
+    copyright: "Bildrechte"
+    description: "Kurztext (255 Zeichen)"
 
   webpage:
     name: "Name"

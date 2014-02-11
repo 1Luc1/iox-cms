@@ -101,7 +101,7 @@
   }
 }
 
-#iox-content-details .select-files{
+.iox-content-frame .select-files{
   border: 1px solid #EEEEEE;
   color: #777777;
   float: right;
@@ -112,20 +112,20 @@
   padding: 7px 0;
   font-size: 12px;
 }
-#iox-content-details .select-files .icon-cloud-upload{
+.iox-content-frame .select-files .icon-cloud-upload{
   font-size: 16px;
 }
-#iox-content-details .select-files:hover{
+.iox-content-frame .select-files:hover{
   background: #333;
   color: #fff;
 }
-#iox-content-details .select-files .drop-here{ background: #08c; color: #fff; }
-#iox-content-details .select-files input[type=file]{
+.iox-content-frame .select-files .drop-here{ background: #08c; color: #fff; }
+.iox-content-frame .select-files input[type=file]{
   opacity: 0; position: absolute; top: 0; left: 0;
   width: 100px;
   height: 34px; z-index: 3; cursor: pointer;
 }
-#iox-content-details .select-files .progress{
+.iox-content-frame .select-files .progress{
   height: 5px;
   position: absolute;
   bottom: -20px;
@@ -136,12 +136,12 @@
   border: none;
   box-shadow: none;
 }
-#iox-content-details .select-files .progress .bar{
+.iox-content-frame .select-files .progress .bar{
   background-color: #3F95FF;
   height: 5px;
   width: 0;
 }
-#iox-content-details .select-files .progress-num{
+.iox-content-frame .select-files .progress-num{
   position: absolute;
   top: 0;
   right: 0;

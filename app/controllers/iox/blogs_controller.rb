@@ -32,23 +32,15 @@ module Iox
     end
 
     def list
-      offset = params[:page] || 0
-      @blogs = Blog.limit( 10 ).offset( offset ).order("created_at DESC").load
-      @tags = {}
-      Blog.where('').each do |blog|
-        next if blog.translation.meta_keywords.blank?
-        blog.translation.meta_keywords.split(',').each do |tag|
-          @tags[tag] ||= 0
-          @tags[tag] += 1
-        end
+      @page = params[:page].blank? ? 0 : params[:page].to_i
+      @tag = params[:tag] || nil
+      @blogs = Blog.where(published: true)
+      if @tag
+        @blogs = @blogs.includes(:translations).references(:iox_translations).where('iox_translations.meta_keywords LIKE ?',"%#{@tag}%")
       end
+      @total = @blogs.count
+      @blogs = @blogs.limit( 10 ).offset( @page * 10 ).order("iox_webpages.created_at DESC").load
       @webpage = @frontpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
-      render layout: 'application'
-    end
-
-    def tags
-      @webpage = @frontpage = Webpage.where( template: 'frontpage', deleted_at: nil ).first
-      @blogs = Blog.includes(:translations).references(:iox_translations).where('iox_translations.meta_keywords LIKE ?',"%#{params[:tag]}%").order("iox_webpages.created_at DESC").load
       render layout: 'application'
     end
 

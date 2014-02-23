@@ -14,9 +14,11 @@ module Iox
         "thumbnail_url" => instance_eval("#{name}.url(:thumb)"),
         "thumb_url" => instance_eval("#{name}.url(:thumb)"),
         "original_url" => instance_eval("#{name}.url(:original)"),
-        "updated_at" => instance_eval("updated_at"),
-        "updater_name" => instance_eval("updater ? updater.full_name : ''")
+        "updated_at" => instance_eval("updated_at")
       }
+      if respond_to?(:updater)
+        ret["updater_name"] = instance_eval("updater ? updater.full_name : ''")
+      end
       ret["description"] = description if defined?(description)
       ret["copyright"] = copyright if defined?(copyright)
       ret

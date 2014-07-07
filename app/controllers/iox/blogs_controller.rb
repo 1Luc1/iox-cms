@@ -14,7 +14,7 @@ module Iox
       if request.xhr?
         @num_blogs = Blog.count
         offset = params[:page] || 0
-        limit = params[:limit] || 20
+        limit = params[:limit] || 100
         if params[:parent].blank?
           query = "parent_id IS NULL"
         else

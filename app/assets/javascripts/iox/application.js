@@ -135,7 +135,7 @@ $(function(){
   });
 
   $('body').on('click', '[data-role=switch2content]', function(e){
-    var $prevContainer = $(this).closest('.iox-details-container').prev('.iox-details-container');
+    var $prevContainer = $(this).closest('.iox-details-container').prev('.iox-content');
     $(this).closest('.iox-details-container').remove();
     if( $prevContainer.length )
       $prevContainer.show();

@@ -31,6 +31,10 @@ module Iox
       render json: { items: @users, query: query }
     end
 
+    def export
+      @users = User.all.order(:lastname, :username, :email)
+    end
+
     #
     # show new user form
     #

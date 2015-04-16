@@ -52,6 +52,7 @@ de:
   settings: "Einstellungen"
   keep_open: "Dieses Fenster offen halten"
   refresh: "Aktualisieren"
+  export_to_xls: 'Als XLS exportieren'
   filter_results: "Ergebnisse filtern"
   filter_no_entries_found: "Für die angegebene Suche wurden keine Ergebnisse gefunden"
   please_fill_out_all_fields: "Bitte alle Felder ausfüllen"

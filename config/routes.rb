@@ -29,6 +29,7 @@ Iox::Engine.routes.draw do
     end
     collection do
       get 'register'
+      get 'export'
       post 'register'
     end
   end

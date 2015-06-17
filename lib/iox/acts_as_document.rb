@@ -45,9 +45,9 @@ module Iox
         self.save
       end
 
-      def create_slug( name=name )
+      def create_slug( _name=name )
         #strip the string
-        ret = name.strip
+        ret = _name.strip
 
         #blow away apostrophes
         ret.gsub! /['`]/,""

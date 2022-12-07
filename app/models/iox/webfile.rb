@@ -30,13 +30,14 @@ module Iox
     def as_json(options = { })
       h = super(options)
       thmb = nil
-      if file && !file.content_type.blank? 
+      if file && !file.content_type.blank?
         if file.content_type.include? 'image'
           thmb = file.url(:thumb)
         elsif file.content_type == 'application/pdf'
           thmb = file.url(:pdf_thumb)
         end
       end
+      puts "as json?"
       h[:file] = file
       h[:size] = file.size ? file.size / 1000.0 : 0.0
       h[:thumb_url] = thmb

@@ -10,6 +10,7 @@
       <% plugin.roles.each{ |role| pass = pass || current_user.roles.include?(role) } %>
     <% end %>
     <% next unless pass %>
+    <% next if plugin.name == 'tsp_spots' %>
     <li data-plugin-name="<%= plugin.name %>"<%= " class=active" if plugin.name == controller.controller_name %>>
       <a href="<%= plugin.path %>" title="<%= t("#{plugin.name}.title") %>">
         <span class="plugin-text"><%= t("#{plugin.name}.title") %></span>

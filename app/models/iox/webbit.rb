@@ -11,7 +11,7 @@ module Iox
       :content
 
     has_many :translations, dependent: :delete_all
-    has_many :children, class_name: 'Iox::Webbit', dependent: :destroy, foreign_key: :parent_id, dependent: :destroy
+    has_many :children, class_name: 'Iox::Webbit', dependent: :destroy, foreign_key: :parent_id
     belongs_to :webpage
     belongs_to :parent, class_name: 'Iox::Webbit', foreign_key: 'parent_id', inverse_of: :children
 

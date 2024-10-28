@@ -122,7 +122,7 @@ module Iox
       end
       tmpl_list.map! do |tmpl|
         filename = File.join( Rails.root, 'app', 'views', 'iox', 'webpages', 'templates', '_'+tmpl+'_form.html.erb' )
-        { file: (File::exists?( filename ) ? "/iox/webpages/templates/#{tmpl}_form" : "/iox/webpages/templates/default_form"),
+        { file: (File::exist?( filename ) ? "/iox/webpages/templates/#{tmpl}_form" : "/iox/webpages/templates/default_form"),
           name: tmpl }
       end
       tmpl_list

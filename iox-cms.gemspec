@@ -19,15 +19,14 @@ Gem::Specification.new do |spec|
   #spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
 
   spec.add_dependency "bcrypt-ruby", "~> 3.1.2"
   spec.add_dependency 'rails_warden'
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'select2-rails', '4.0.4'
-  spec.add_dependency 'sass-rails', "~> 6.0.0"
-  spec.add_dependency 'paperclip', '~> 3.0'
+  spec.add_dependency 'sass-rails', ">= 6"
+  spec.add_dependency 'kt-paperclip', '7.2.2'
   spec.add_dependency 'whenever'
 
   spec.add_dependency 'nokogiri', '1.16.7'

@@ -25,13 +25,13 @@ Gem::Specification.new do |spec|
   spec.add_dependency "bcrypt-ruby", "~> 3.1.2"
   spec.add_dependency 'rails_warden'
   spec.add_dependency 'jquery-rails'
-  spec.add_dependency 'select2-rails', '3.5.0'
-  spec.add_dependency 'sass-rails', "~> 5.0.7"
+  spec.add_dependency 'select2-rails', '4.0.4'
+  spec.add_dependency 'sass-rails', "~> 6.0.0"
   spec.add_dependency 'paperclip', '~> 3.0'
   spec.add_dependency 'whenever'
 
-  spec.add_dependency 'nokogiri', '1.10.10'
-  spec.add_dependency 'premailer-rails', '~> 1.9.7'
+  spec.add_dependency 'nokogiri', '1.16.7'
+  spec.add_dependency 'premailer-rails', '~> 1.10.3'
 
   spec.add_dependency 'rqrcode-rails3' # used in user qr code confirmation code generation
   spec.add_dependency 'mini_magick'

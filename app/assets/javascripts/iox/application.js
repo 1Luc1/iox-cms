@@ -1,6 +1,6 @@
 //= require jquery_ujs
 
-//= require select2
+//= require select2-full
 
 //= require i18n
 //= require i18n/translations

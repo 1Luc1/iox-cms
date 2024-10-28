@@ -1,4 +1,4 @@
-//= require select2
+//= require select2-full
 
 //= require 3rdparty/jquery-ui-1.10.3.custom
 //= require 3rdparty/bootstrap

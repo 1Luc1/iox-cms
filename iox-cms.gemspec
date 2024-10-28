@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'paperclip', '~> 3.0'
   spec.add_dependency 'whenever'
 
-  spec.add_dependency 'nokogiri', '~> 1.6.0'
+  spec.add_dependency 'nokogiri', '1.10.10'
   spec.add_dependency 'premailer-rails', '~> 1.5.1'
 
   spec.add_dependency 'rqrcode-rails3' # used in user qr code confirmation code generation

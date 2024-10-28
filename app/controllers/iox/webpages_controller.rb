@@ -6,7 +6,7 @@ module Iox
     include Iox::WebpagesHelper
     include Iox::WebpageStats
 
-    before_filter :authenticate!, except: [ :frontpage, :show, :by_slug ]
+    before_action :authenticate!, except: [ :frontpage, :show, :by_slug ]
 
     #
     # shows the frontpage

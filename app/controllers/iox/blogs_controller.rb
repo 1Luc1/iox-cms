@@ -5,7 +5,7 @@ module Iox
 
     include Iox::WebpagesHelper
 
-    before_filter :authenticate!, except: [ :list, :show, :tags ]
+    before_action :authenticate!, except: [ :list, :show, :tags ]
 
     #
     # list all blogs

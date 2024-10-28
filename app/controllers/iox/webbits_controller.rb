@@ -4,7 +4,7 @@ module Iox
 
   class WebbitsController < ApplicationController
 
-    before_filter :authenticate!
+    before_action :authenticate!
 
     def index
       return render json: '' unless current_user.is_editor?

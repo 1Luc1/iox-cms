@@ -3,7 +3,7 @@ require_dependency "iox/application_controller"
 module Iox
   class UsersController < ApplicationController
 
-    before_filter :authenticate!, except: [ :register ]
+    before_action :authenticate!, except: [ :register ]
 
     #
     # list all users

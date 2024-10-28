@@ -1,7 +1,7 @@
 module Iox
   class ActivitiesController < ApplicationController
 
-    before_filter :authenticate!
+    before_action :authenticate!
 
     def index
       @activities = Iox::Activity.where("user_id != ?", current_user.id).order("created_at DESC").limit(30).load

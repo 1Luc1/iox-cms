@@ -6,7 +6,7 @@ module Iox
 
     include Iox::WebpagesHelper
 
-    before_filter :authenticate!
+    before_action :authenticate!
 
     def show
       @translation = Translation.where( webpage_id: params[:webpage_id], locale: params[:id] ).first

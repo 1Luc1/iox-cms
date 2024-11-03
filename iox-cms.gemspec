@@ -19,22 +19,21 @@ Gem::Specification.new do |spec|
   #spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rake", "~> 10.4.2"
 
   spec.add_dependency "bcrypt-ruby", "~> 3.1.2"
-  spec.add_dependency 'rails_warden'
-  spec.add_dependency 'jquery-rails'
+  spec.add_dependency 'rails_warden', "~> 0.6.0"
+  spec.add_dependency 'jquery-rails', "~> 4.6.0"
   spec.add_dependency 'select2-rails', '3.5.0'
-  spec.add_dependency 'sass-rails', "~> 4.0.0"
+  spec.add_dependency 'sass-rails', "~> 4.0.2"
   spec.add_dependency 'paperclip', '~> 3.0'
-  spec.add_dependency 'whenever'
+  spec.add_dependency 'whenever', "~> 1.0.0"
 
-  spec.add_dependency 'nokogiri', '1.10.10'
+  spec.add_dependency 'nokogiri', '~> 1.10.10'
   spec.add_dependency 'premailer-rails', '~> 1.5.1'
 
-  spec.add_dependency 'rqrcode-rails3' # used in user qr code confirmation code generation
-  spec.add_dependency 'mini_magick'
-  spec.add_dependency 'vpim'
+  spec.add_dependency 'rqrcode-rails3', "~> 0.1.7" # used in user qr code confirmation code generation
+  spec.add_dependency 'mini_magick', "~> 5.0.1"
+  spec.add_dependency 'vpim', "~> 24.2.20"
 
 end

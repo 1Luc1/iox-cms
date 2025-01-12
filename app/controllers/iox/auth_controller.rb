@@ -5,7 +5,7 @@ module Iox
 
     layout 'iox/auth'
 
-    before_filter :authenticate!, except: [ :login, :forgot_password, :unauthenticated, :reset_password, :set_password ]
+    before_action :authenticate!, except: [ :login, :forgot_password, :unauthenticated, :reset_password, :set_password ]
 
     #
     # checks if the provided email address matches

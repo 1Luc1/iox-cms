@@ -4,7 +4,7 @@ module Iox
 
   class WebfilesController < ApplicationController
 
-    before_filter :authenticate!
+    before_action :authenticate!
 
     include WebpagesHelper
 

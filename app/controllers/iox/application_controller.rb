@@ -10,7 +10,7 @@ module Iox
 
     layout 'iox/application'
 
-    before_filter :set_locale
+    before_action :set_locale
 
   end
 end

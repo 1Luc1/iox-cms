@@ -112,9 +112,10 @@ module Iox
     def confirmation_qr
       return render_401 unless current_user.is_admin?
       @user = User.find_by_id( params[:id] )
+      qr = RQRCode::QRCode.new("http://#{Rails.configuration.iox.domain_name}/iox/welcome/#{@user.id}?k=#{@user.confirmation_key}")
       respond_to do |format|
         format.png  { 
-          render :qrcode => "http://#{Rails.configuration.iox.domain_name}/iox/welcome/#{@user.id}?k=#{@user.confirmation_key}", level: :m, offset: 20 
+           send_data qr.as_png(size:640, border_modules: 2)
         }
       end
     end

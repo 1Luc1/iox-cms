@@ -32,8 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'nokogiri', '~> 1.10.10'
   spec.add_dependency 'premailer-rails', '~> 1.9.7'
 
-  spec.add_dependency 'rqrcode-rails3', "~> 0.1.7" # used in user qr code confirmation code generation
-  spec.add_dependency 'mini_magick', "~> 5.0.1"
+  spec.add_dependency 'rqrcode', '~> 0.10.1'
   spec.add_dependency 'vpim', "~> 24.2.20"
-
 end

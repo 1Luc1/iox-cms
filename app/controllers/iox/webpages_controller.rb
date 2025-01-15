@@ -273,7 +273,7 @@ module Iox
       webbit_params.each_pair do |id,p|
         next if p[:global]
         if webbit = Webbit.where(id: id).first
-          unless webbit.update p
+          unless webbit.update p.permit(:id, :name, :category, :css_classes, :position, :plugin_type)
             flash.now.alert = "could not update webbit #{webbit.name}"
           end
         else
@@ -285,7 +285,7 @@ module Iox
     def save_translations
       translation_params.each_pair do |id,t|
         translation = Translation.where(id: id).first
-        unless translation.update t
+        unless translation.update t.permit(:name, :content, :id, :locale, :translation)
           flash.alert = "could not update webbit #{translation.id} #{translation.locale}"
         end
       end

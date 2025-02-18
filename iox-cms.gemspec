@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_warden', "~> 0.6.0"
   spec.add_dependency 'jquery-rails', "~> 4.6.0"
   spec.add_dependency 'select2-rails', '3.5.0'
-  spec.add_dependency 'sass-rails', "~> 5.0.7"
+  spec.add_dependency 'sass-rails', "~> 5.0.8"
   spec.add_dependency 'paperclip', '~> 4.0'
   spec.add_dependency 'whenever', "~> 1.0.0"
 

@@ -40,6 +40,14 @@ module Iox
         self.save
       end
 
+      def clean
+        self.deleted_at = Date.today
+        if defined?(children)
+          children.each{ |child| child.delete }
+        end
+        self.save
+      end
+
       def restore
         self.deleted_at = nil
         self.save

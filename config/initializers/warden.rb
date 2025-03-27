@@ -2,7 +2,7 @@ require 'rails_warden'
 
 Rails.configuration.middleware.use RailsWarden::Manager do |manager|
   manager.default_strategies :password #, :basic
-  manager.failure_app = Iox::AuthController
+  manager.failure_app = -> (env) { Iox::AuthController.action(:unauthenticated).call(env) }
 end
 
 Warden::Manager.serialize_into_session do |user|

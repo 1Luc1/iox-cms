@@ -140,7 +140,9 @@
       $('.select-roles').kendoMultiSelect();
       item._validator = $("#iox-user-details").kendoValidator().data("kendoValidator");
 
-      if( item.id )
+      if( item.id ) {
+        $('#send-welcome-msg-cbx').remove();
+        
         $('.user-upload-avatar').fileupload({
           dataType: 'json',
           formData: {
@@ -152,6 +154,15 @@
             $('.avatar[data-user-id='+item.id+']').attr('src', avatar.url);
           }
         });
+        
+        if (!item.registration_completed) {
+          $('.footer-controls > .label-warning').show();
+          $('.footer-controls > .label-success').hide();        
+        } else {
+          $('.footer-controls > .label-warning').hide();
+          $('.footer-controls > .label-success').show();       
+        }
+      }
 
     }
   });

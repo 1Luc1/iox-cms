@@ -222,6 +222,9 @@ en:
     last_time_online: "Last time online"
     registered_at: "Registered at"
     registration_completed: "Registration completed"
+    registration_completed_description: "The user has processed the registration email and successfully logged in."
+    registration_completed: "Registration not completed"
+    registration_completed_description: "The user has not processed the registration email and/or not successfully logged in."
     timezone: "Timezone"
     role: "Role"
     password: "Password"
@@ -238,7 +241,7 @@ en:
     created_and_mail_sent: "User &raquo;%{name}&laquo; has been created and email has been sent"
 
     mailer:
-      subject: "Welcome!"
+      subject: "Welcome! Please complete your registration"
       welcome: "Welcome"
       has_created_an_account: "%{name} has created an account for you. You can start by clicking the link below and set a password."
       login_and_start: "%{url} (follow instructions there)"

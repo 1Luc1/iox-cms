@@ -252,6 +252,7 @@ de:
       bye: "bis gleich,"
 
     saved: "Einstellungen für %{name} wurden gespeichert"
+    saved_and_mail_sent: "Einstellungen für &raquo;%{name}&laquo; wurden gespeichert und eine Email wurde versandt"
     creation_failed: "Benutzerkonto konnte nicht erstellt werden"
 
     suspend_user: "Benutzerkonto %{name} deaktivieren"
@@ -294,6 +295,9 @@ de:
     last_time_online: "Letztes Mal online"
     registered_at: "Registriert am"
     registration_completed: "Registrierung abgeschlossen"
+    registration_completed_description: "Der/die Benutzer*in hat den Registrierungs E-Mail bearbeitet und sich erfolgreich angemeldet."
+    registration_not_completed: "Registrierung nicht abgeschlossen"
+    registration_not_completed_description: "Der/die Benutzer*in hat den Registrierungs E-Mail nicht bearbeitet und/oder sich nicht angemeldet."
     timezone: "Zeitzone"
     role: "Rolle"
     password: "Passwort"
@@ -313,6 +317,7 @@ de:
       login_and_start: "Melde dich unter dem Link %{url} an und folge den Anweisungen"
       goodbye: "frohes Schaffen"
       your_team: "Dein %{name}-Team"
+      subject: "Willkommen! Bitte vervollständige deine Registrierung" 
 
   auto_generated: "Diese Email wurde automatisch erstellt. Bei Fragen und Problemen wende dich bitte an %{support_email}"
 

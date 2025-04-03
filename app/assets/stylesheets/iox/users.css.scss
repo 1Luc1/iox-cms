@@ -152,10 +152,20 @@
   h3{ font-size: 3em; font-weight: 100; color: #333; }
 }
 
-.send-welcome-msg{
-  float: right;
+.footer-controls{
   margin: 7px 20px;
   input{
     margin-right: 5px;
   }
+  .label-warning, .label-success {
+    display: none;
+  }
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
 }

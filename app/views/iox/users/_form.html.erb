@@ -107,12 +107,16 @@
 
       <div class="scrollable-content-footer">
         <button type="submit" class="pull-right btn-primary btn" data-bind="text: ( id ? '<%= t('save') %>' : '<%= t('create') %>' )"></button>
-        <span class="send-welcome-msg">
+        <span id="send-welcome-msg-cbx" class="footer-controls pull-right">
           <input type="checkbox" name="send_welcome_msg" data-bind="attr: {checked: !id}" /><%= t('user.send_welcome_msg') %>
         </span>
-        <span class="send-welcome-msg">
-          <input type="hidden" value="0" name="user[registration_completed]" />
-          <input type="checkbox" value="1" name="user[registration_completed]" data-bind="checked: registration_completed" /><%= t('user.registration_completed') %>
+        <span class="footer-controls pull-left">
+          <span class="label label-success" rel="tooltip" title="<%= t 'user.registration_completed_description' %>">
+            <i class="icon icon-ok-sign"></i> <%= t('user.registration_completed') %>
+          </span>
+          <span class="label label-warning" rel="tooltip" title="<%= t 'user.registration_not_completed_description' %>">
+            <i class="icon icon-warning-sign"></i> <%= t('user.registration_not_completed') %>
+          </span>
         </span>
       </div>
 

@@ -46,6 +46,12 @@ module Iox
     end
     alias_method :name, :full_name
 
+    def full_name_email
+      str = full_name
+      str << " (#{email})"
+      str
+    end
+
     def to_param
       [id, name.parameterize].join("-")
     end

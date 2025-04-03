@@ -15,6 +15,7 @@ module Iox
       limit = params[:limit] || 20
       order = params[:order] || 'lastname ASC, firstname ASC'
       query = params[:query].blank? ? nil : params[:query]
+      registrations_not_completed = params[:filter].blank? ? false : true
       #suspended = (params[:suspended] && params[:suspended] == 'true')
       # if suspended
       #   @users = User.where(suspended: true)
@@ -27,6 +28,7 @@ module Iox
                           "%#{query}%", 
                           "%#{query}%", 
                           "%#{query}%" ) if query
+      @users = @users.where("registration_completed = 0") if registrations_not_completed
       @users = @users.order(order).load
       render json: { items: @users, query: query }
     end

@@ -148,6 +148,24 @@
       });
   }
 
+  Tree.prototype.loadData2 = function loadData2( parent, query, callback ){
+    var self = this;
+    if( typeof(query) === 'function' && typeof(callback) === 'undefined' ){
+      callback = query;
+      query = '';
+    }
+    self.items.removeAll();
+    $(self.obj).find('li').remove();
+    if( !parent )
+      $.getJSON( this.options.url+'?parent=&filter=registration_not_completed', function( json ){
+        if( !json.items )
+          throw Error('[iox.tree] expected object key "items" in json response');
+        for( var i=0,item; item=json.items[i]; i++ )
+          self.items.push( new TreeItem( item, self ) );
+        callback.call( self );
+      });
+  }
+
   /**
    * render the tree to the document
    */
@@ -179,6 +197,14 @@
         e.preventDefault();
         self.loadData( null, self.render );
       });
+
+    var $registrationNotCompletedBtn = $control.find('[data-tree-role=registration-not-completed]')
+    if ($registrationNotCompletedBtn.length) {
+      $registrationNotCompletedBtn.off('click').on('click', function(e){
+        e.preventDefault();
+        self.loadData2( null, self.render );
+      });
+    }
 
     var $searchBtn = $control.find('[data-tree-role=search]')
     if( $searchBtn.length ){

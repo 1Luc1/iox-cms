@@ -163,6 +163,18 @@
           $('.footer-controls > .label-warning').hide();
           $('.footer-controls > .label-success').show();       
         }
+
+        $.getJSON( '/iox/users/'+item.id+'/connections' ).done( function( json ){
+          $.each(json, function(key, value){
+            if (value.length === 0) {
+                $("#" + key + "-list").append('<li class="ui-nestedSortable-no-nesting"><div class="item">' + I18n.t('entries.zero') + '</div></li>');
+            } else {
+              $.each(value, function (index, item) {
+                $("#" + key + "-list").append('<li class="ui-nestedSortable-no-nesting"><div class="item"><a href="/iox/' + key + '/' + item.id + '/edit' + '" target="_blank">'+item.name+'</a></div></li>');
+              });
+           }
+          });
+        });
       }
 
     }

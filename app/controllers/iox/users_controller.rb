@@ -37,6 +37,21 @@ module Iox
       @users = User.all.order(:lastname, :username, :email)
     end
 
+    def connections
+      return render_401 if !current_user.is_admin?
+      user_id = params[:id]
+      @persons = Person.where(creator: user_id)
+      @venues = Venue.where(creator: user_id)
+      @program_entries = ProgramEntry.where(creator: user_id)
+      @ensembles = Ensemble.where(creator: user_id)
+
+      render json: {:people => @persons.as_json(:only => [:id, :name], :simple => true, :simple_plus => true),
+                    :venues => @venues.as_json(:only => [:id, :name], :simple => true),
+                    :program_entries => @program_entries.as_json(:only => [:id, :title], :simple => true),
+                    :ensembles => @ensembles.as_json(:only => [:id, :name], :simple => true)
+      }
+    end
+
     #
     # show new user form
     #

@@ -60,6 +60,34 @@
         <% end %>
 
         <% if current_user.is_admin? %>
+        <div class="fields-header"><%= t('owner') + ' ' + t('of') %></div>
+        <div class="field-box">
+          <div class="container">
+            <div class="flex-item">
+              <div class="flex-item-title"><%= t('people.title') %></div>
+              <ul id="people-list" class="iox-tree">
+              </ul>
+            </div>
+            <div class="flex-item">
+              <div class="flex-item-title"><%= t('ensembles.title') %></div>
+              <ul id="ensembles-list" class="iox-tree">
+              </ul>
+            </div>
+            <div class="flex-item">
+              <div class="flex-item-title"><%= t('venues.title') %></div>
+              <ul id="venues-list" class="iox-tree">
+              </ul>
+            </div>
+            <div class="flex-item">
+              <div class="flex-item-title"><%= t('program_entries.title') %></div>
+              <ul id="program_entries-list" class="iox-tree">
+              </ul>
+            </div>
+          </div>
+        </div>
+        <% end %>
+
+        <% if current_user.is_admin? %>
 
           <div class="fields-header"><%= t('user.roles') %></div>
 

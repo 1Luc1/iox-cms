@@ -169,3 +169,27 @@
 .pull-left {
   float: left;
 }
+
+.container{
+  display:flex;
+  overflow-y: scroll;
+  max-height: 100px;
+  direction: rtl;
+}
+
+.flex-item{
+  flex-grow: 1;
+  direction: ltr;
+  .flex-item-title {
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    color: #aaa;
+    width: 90%;
+    margin-left: 5px;
+  }
+  .item a {
+    text-overflow: ellipsis;
+    display: inline-block;
+  }
+}

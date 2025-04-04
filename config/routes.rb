@@ -26,6 +26,7 @@ Iox::Engine.routes.draw do
       get 'confirm_delete'
       post 'upload_avatar'
       delete 'avatar'
+      get 'connections'
     end
     collection do
       get 'register'

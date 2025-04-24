@@ -239,6 +239,7 @@ de:
     unsuspending_failed: "Account %{name} konnte nicht aktiviert werden"
 
     setup_sync: "Synchronisation bearbeiten"
+    instagram_posts: "Instagram Posts"
 
     registration_almost_complete_title: "Deine Registrierung ist fast abgeschlossen!"
     registration_almost_complete: "Wir haben dir eine email geschickt. Bitte klick auf den Link in der email innerhalb der nächsten 30 Minuten um den Vorgang abzuschließen. Bis gleich!"

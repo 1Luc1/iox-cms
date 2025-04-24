@@ -20,7 +20,10 @@
     <%= link_to t('change_password'), change_password_path( current_user ), :'data-xhr-win' => true, class: 'pull-right' %>
     <%= link_to t('user.edit'), edit_user_path( current_user ), :'data-xhr-win' => true, class: 'pull-right', style: 'margin-right: 20px' %>
     <%= link_to t('user.setup_sync'), syncers_path, class: 'pull-right', style: 'margin-right: 20px' %>
-
+    <% if current_user.is_admin? %>    
+      <%= link_to t('user.instagram_posts'), instagram_posts_path, class: 'pull-right', style: 'margin-right: 20px' %>      
+    <% end %>
+    
     <div class="field-box">
       <h3><%= @user.username %></h3>
     </div>

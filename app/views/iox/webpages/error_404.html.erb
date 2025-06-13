@@ -5,15 +5,6 @@
   <div class="error-text-container">
     <h2><%= t('webpage.errors.oups_not_found') %></h2>
     <p><%= link_to( t('back_to_startpage'), '/' ) %></p>
-    <% if authenticated? and current_user and current_user.can_manage?(:webpages) %>
-
-      <%= form_for Iox::Webpage.new( name: params[:name] ) do |f| %>
-        <%= f.hidden_field :name, params[:name] %>
-        <%= f.hidden_field :template, 'default' %>
-        <%= f.submit t('webpage.errors.create_webpage'), class: 'btn primary' %>
-      <% end %>
-
-    <% end %>
   </div>
 
 </div>

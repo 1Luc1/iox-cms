@@ -67,7 +67,7 @@ module Iox
         I18n.locale = locale
         logger.debug "* Locale set to '#{I18n.locale}'"
       else
-        logger.warn "* Locale not included in #{Rails.configuration.iox.available_langs} could not set to '#{locale}'"
+        logger.debug "* Locale not included in #{Rails.configuration.iox.available_langs} could not set to '#{locale}'"
       end
     end
 

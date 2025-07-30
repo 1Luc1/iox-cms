@@ -37,7 +37,6 @@ module Iox
           thmb = file.url(:pdf_thumb)
         end
       end
-      puts "as json?"
       h[:file] = file
       h[:size] = file.size ? file.size / 1000.0 : 0.0
       h[:thumb_url] = thmb

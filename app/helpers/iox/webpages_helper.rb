@@ -50,7 +50,6 @@ module Iox
     def get_views
       from, to, views = get_from_to_visits
 
-      puts [from, to, views.inspect]
       Iox::WebpageStat.where( "day > '#{from.to_date}' AND day < '#{to.to_date}'" ).each do |page|
         if @page_stat_range.nil? || @page_stat_range == 'year'
           views[page.day.month-1][1] += page.views

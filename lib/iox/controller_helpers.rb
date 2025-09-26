@@ -89,6 +89,10 @@ module Iox
       true
     end
 
+    def quote_string(s)
+      s.gsub(/\\/, '\&\&').gsub(/'/, "''") # ' (for ruby-mode)
+    end
+
     private
 
     def extract_locale_from_accept_language_header
